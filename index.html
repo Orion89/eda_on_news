@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Eco de las Palabras: Radiografía del Periodismo en Hispanoamérica</title>
+    <!-- Google Fonts: Editorial Serif and Clean Sans-Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Header Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">Análisis de Datos & Periodismo</span>
+            <h1 class="hero-title">El Eco de las Palabras</h1>
+            <p class="hero-subtitle">Radiografía del Periodismo en Hispanoamérica</p>
+            <div class="hero-line"></div>
+            <div class="hero-countries">
+                <span class="country-tag tag-ar">Argentina</span>
+                <span class="country-tag tag-cl">Chile</span>
+                <span class="country-tag tag-es">España</span>
+                <span class="country-tag tag-mx">México</span>
+            </div>
+            <div class="scroll-indicator">
+                <span class="arrow">↓</span> Desliza para explorar
+            </div>
+        </div>
+    </header>
+
+    <!-- Introductory Section -->
+    <section class="intro-section">
+        <div class="container">
+            <p class="lead-text">
+                Cada día, millones de páginas de noticias narran los sucesos que dan forma a nuestra realidad. Pero detrás de la urgencia del reporte diario, las palabras elegidas revelan patrones invisibles: obsesiones nacionales, sesgos compartidos y diferencias sutiles que definen la identidad de cada país. ¿De qué hablamos cuando informamos? ¿Y cómo lo hacemos?
+            </p>
+            <p class="body-text">
+                Este proyecto explora un corpus masivo de noticias en español extraídas de los principales medios digitales de <strong>Argentina</strong>, <strong>Chile</strong>, <strong>España</strong> y <strong>México</strong>. Utilizando técnicas de procesamiento de lenguaje natural (NLP) y visualización de datos, analizamos cientos de miles de artículos para descubrir quién domina la pauta, cómo escriben las redacciones, cómo nos emocionan a través de sus palabras y hacia dónde dirigen la mirada nuestros países.
+            </p>
+            <p class="body-text">
+                Acompáñanos en este recorrido visual e interactivo. A medida que te deslices por las siguientes secciones, verás cómo los datos cobran vida en la pantalla, revelando las redes semánticas, los n-gramas más compartidos y las variaciones lingüísticas que hacen que la prensa de cada país tenga una voz única en el mapa hispanohablante.
+            </p>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section -->
+    <section id="scrolly">
+        <!-- Visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper">
+                <div id="d3-canvas" class="viz-canvas">
+                    <!-- Dynamic D3.js visualization will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización Interactiva</p>
+                        <p class="placeholder-subtitle">Los gráficos se cargarán dinámicamente al interactuar</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">01</span>
+                <h3>El pulso de las noticias</h3>
+                <p>
+                    Para comprender la agenda pública, primero debemos observar los temas recurrentes. Examinaremos las palabras más frecuentes en cada país, revelando las prioridades temáticas de cada sociedad.
+                </p>
+                <div id="storytelling-insights"></div>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">02</span>
+                <h3>¿Quién domina la pauta?</h3>
+                <p>
+                    ¿Se enfoca la prensa de manera similar ante los mismos eventos internacionales? Analizaremos las divergencias en la relevancia de tópicos clave como la economía, la política local y los sucesos globales.
+                </p>
+            </div>
+            
+            <div class="step" data-step="3">
+                <span class="step-num">03</span>
+                <h3>El tono emocional</h3>
+                <p>
+                    El periodismo no es solo información neutra; las palabras portan cargas afectivas. Evaluaremos los sentimientos expresados en las noticias para medir el nivel de optimismo o negatividad por región.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 2: Estilos de Escritura (Riqueza léxica vs Longitud de oración) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis Lingüístico</span>
+            <h2 class="section-title">Huellas Dactilares Estilísticas</h2>
+            <p class="section-intro-text">
+                ¿Cómo redactan los periodistas en cada país? ¿Predomina la brevedad directa o la complejidad de oraciones estructuradas y vocabulario rico? En esta sección analizamos el estilo de escritura cruzando la riqueza léxica (Type-Token Ratio) con la longitud promedio de las oraciones de cada medio.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-style">
+        <!-- Interactive visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Highlight Filter Buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">Destacar País:</span>
+                    <button class="filter-btn active" data-country="all">Todos</button>
+                    <button class="filter-btn" data-country="AR">Argentina</button>
+                    <button class="filter-btn" data-country="CL">Chile</button>
+                    <button class="filter-btn" data-country="ES">España</button>
+                    <button class="filter-btn" data-country="MX">México</button>
+                </div>
+                
+                <div id="d3-canvas-style" class="viz-canvas">
+                    <!-- Dynamic D3.js scatter plot will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización de Estilo</p>
+                        <p class="placeholder-subtitle">Se cargará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">02.1</span>
+                <h3>Complejidad vs Inmediatez</h3>
+                <p>
+                    Cada punto en el gráfico representa un medio de comunicación. El eje horizontal (X) indica la <strong>riqueza del vocabulario</strong> (a mayor TTR, mayor diversidad de términos usados) y el eje vertical (Y) muestra la <strong>longitud promedio de las oraciones</strong> (número de palabras).
+                </p>
+                <p>
+                    Las líneas discontinuas muestran las medianas globales. La intersección de ambas líneas define cuatro cuadrantes de estilos de escritura bien diferenciados.
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">02.2</span>
+                <h3>El Contraste de Estilos</h3>
+                <div id="storytelling-insights-style">
+                    <!-- Dynamic storytelling text will be generated here -->
+                </div>
+                <p>
+                    Prueba a presionar los botones superiores para filtrar y destacar a los medios de cada país y ver si las redacciones nacionales se agrupan en algún cuadrante de estilo particular.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 3: La Anatomía del Discurso (Adjetivos, Verbos y Sustantivos) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis Sintáctico (POS)</span>
+            <h2 class="section-title">La Anatomía del Discurso</h2>
+            <p class="section-intro-text">
+                ¿Qué tipo de palabras sostienen los textos noticiosos? Los sustantivos brindan la referencia de los hechos, los verbos expresan la acción y el movimiento, y los adjetivos cargan el texto de subjetividad y valoraciones. En esta sección analizamos el equilibrio gramatical de la prensa digital.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-pos">
+        <!-- Interactive visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Highlight Filter and Sorting Buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">País:</span>
+                    <button class="pos-filter-btn active" data-country="AR">Argentina</button>
+                    <button class="pos-filter-btn" data-country="CL">Chile</button>
+                    <button class="pos-filter-btn" data-country="ES">España</button>
+                    <button class="pos-filter-btn" data-country="MX">México</button>
+                    
+                    <span class="filter-separator">|</span>
+                    
+                    <button id="btn-sort-pos" class="action-btn">Ordenar por Subjetividad</button>
+                    <button id="btn-reset-pos" class="action-btn">Reestablecer Orden</button>
+                </div>
+
+                <!-- Interactive Legend -->
+                <div class="pos-legend">
+                    <span class="legend-item"><span class="legend-color color-adj"></span> Adjetivos (Subjetividad)</span>
+                    <span class="legend-item"><span class="legend-color color-verb"></span> Verbos (Acción)</span>
+                    <span class="legend-item"><span class="legend-color color-noun"></span> Sustantivos (Referencia)</span>
+                    <span class="legend-item"><span class="legend-color color-other"></span> Otros (Gramática)</span>
+                </div>
+                
+                <div id="d3-canvas-pos" class="viz-canvas">
+                    <!-- Dynamic D3.js 100% stacked bar chart will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización Sintáctica</p>
+                        <p class="placeholder-subtitle">Se cargará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">03.1</span>
+                <h3>El Esqueleto Sintáctico</h3>
+                <p>
+                    Cada barra horizontal representa la distribución de categorías gramaticales de un medio de comunicación. 
+                </p>
+                <p>
+                    El color <strong style="color: #ff7a00;">naranja</strong> representa los adjetivos (calificadores), el <strong style="color: #3b82f6;">azul</strong> los verbos (acción), el <strong style="color: #555555;">gris oscuro</strong> los sustantivos (referencias) y el <strong style="color: #d1d5db;">gris claro</strong> al resto de etiquetas gramaticales.
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">03.2</span>
+                <h3>Noticia o Editorial</h3>
+                <div id="storytelling-insights-pos">
+                    <!-- Dynamic storytelling text will be generated here -->
+                </div>
+                <p>
+                    Presiona el botón <strong>"Ordenar por Subjetividad"</strong> en la barra superior del gráfico para ordenar los medios de mayor a menor densidad de adjetivos, exponiendo qué redacciones adoptan un estilo de redacción más opinativo.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>El Eco de las Palabras</strong> | Proyecto de Análisis Lingüístico y Visual</p>
+            <p class="footer-sub">Creado con ❤️ usando D3.js, Scrollama.js y Vanilla CSS. 2026</p>
+        </div>
+    </footer>
+
+    <!-- Libraries CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="main.js"></script>
+</body>
+</html>

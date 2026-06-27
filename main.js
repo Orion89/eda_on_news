@@ -1,0 +1,1187 @@
+/**
+ * El Eco de las Palabras: Radiografía del Periodismo en Hispanoamérica
+ * main.js - D3 Scrollytelling Visualizations (Bubble, Scatter & Stacked Bar) with Scrollama
+ */
+
+// Initialize scrollama instances for the three sections
+const scroller = scrollama();
+const scrollerStyle = scrollama();
+const scrollerPos = scrollama();
+
+// --- Globals for Section 1 (Bubble Chart) ---
+let svg;
+let simulation;
+let width = 800;
+let height = 600;
+let rawNodes = [];
+let collapsedNodes = [];
+let radiusScale;
+let tooltip;
+
+let countryCenters = {
+    "AR": { x: 0, y: 0 },
+    "CL": { x: 0, y: 0 },
+    "ES": { x: 0, y: 0 },
+    "MX": { x: 0, y: 0 }
+};
+
+// --- Globals for Section 2 (Scatter Plot) ---
+let svgStyle;
+let widthStyle = 800;
+let heightStyle = 600;
+let allStyleData = [];
+let xScaleStyle, yScaleStyle;
+let globalMedianTTR = 0;
+let globalMedianSentLen = 0;
+let analyticMedia = null;
+let directMedia = null;
+let selectedStyleCountry = "all";
+
+const paddingStyle = { top: 50, right: 40, bottom: 60, left: 65 };
+
+// --- Globals for Section 3 (100% Stacked Bar Chart) ---
+let svgPos;
+let widthPos = 800;
+let heightPos = 600;
+let allPosData = [];
+let xScalePos, yScalePos;
+let selectedPosCountry = "AR";
+let isSortedBySubjectivity = false;
+let posCountryAverages = {};
+let maxAdjectiveMedia = null;
+let maxAdjectiveCountry = "";
+
+const paddingPos = { top: 30, right: 30, bottom: 40, left: 145 };
+
+// Map country codes to readable names
+const countryNames = {
+    "AR": "Argentina",
+    "CL": "Chile",
+    "ES": "España",
+    "MX": "México"
+};
+
+/**
+ * Accessor for node colors in Section 1 (Bubble Chart)
+ */
+function getNodeColor(d) {
+    if (d.isOthers) return "#b5b0aa";
+    switch (d.country) {
+        case "AR": return "var(--color-ar)";
+        case "CL": return "var(--color-cl)";
+        case "ES": return "var(--color-es)";
+        case "MX": return "var(--color-mx)";
+        default: return "#999";
+    }
+}
+
+/**
+ * Accessor for node colors in Section 2 (Scatter Plot)
+ */
+function getStyleColor(d) {
+    switch (d.country) {
+        case "AR": return "var(--color-ar)";
+        case "CL": return "var(--color-cl)";
+        case "ES": return "var(--color-es)";
+        case "MX": return "var(--color-mx)";
+        default: return "#999";
+    }
+}
+
+// ==========================================
+// SECTION 1: BUBBLE CHART (Concentration)
+// ==========================================
+
+/**
+ * Dynamic storytelling text generator for Section 1.
+ */
+function generateStorytellingText(datasets) {
+    const container = document.getElementById("storytelling-insights");
+    if (!container) return;
+
+    let html = '<div class="insights-grid">';
+
+    Object.keys(datasets).forEach(country => {
+        const data = datasets[country];
+        data.sort((a, b) => b.count - a.count);
+
+        const totalMedios = data.length;
+        const totalNoticias = d3.sum(data, d => d.count);
+
+        let runningSum = 0;
+        let x = 0;
+        for (let i = 0; i < data.length; i++) {
+            runningSum += data[i].count;
+            x++;
+            if (runningSum / totalNoticias >= 0.8) {
+                break;
+            }
+        }
+
+        const medioTop = data[0].media_name_normalized;
+        const countryName = countryNames[country];
+        const topPercentage = data[0].percentage;
+
+        html += `
+            <div class="insight-card country-border-${country.toLowerCase()}">
+                <h4 class="insight-country">${countryName}</h4>
+                <p class="insight-text">
+                    En <strong>${countryName}</strong>, el ecosistema parece plural con <strong>${totalMedios}</strong> medios, pero apenas <strong>${x}</strong> medios concentran el 80% de la información. El gigante indiscutido es <strong>${medioTop}</strong>.
+                </p>
+                <div class="insight-meta">
+                    Noticias totales: ${totalNoticias.toLocaleString()} | Domina: <strong>${medioTop}</strong> con ${topPercentage.toFixed(1)}%
+                </div>
+            </div>
+        `;
+    });
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+/**
+ * Loads CSV files for Section 1.
+ */
+function loadData() {
+    return Promise.all([
+        d3.csv("data/per_media_statistics/news_argentina_media_statistics.csv"),
+        d3.csv("data/per_media_statistics/news_chile_media_statistics.csv"),
+        d3.csv("data/per_media_statistics/news_espana_media_statistics.csv"),
+        d3.csv("data/per_media_statistics/news_mexico_media_statistics.csv")
+    ]).then(([arData, clData, esData, mxData]) => {
+        arData.forEach(d => d.country = "AR");
+        clData.forEach(d => d.country = "CL");
+        esData.forEach(d => d.country = "ES");
+        mxData.forEach(d => d.country = "MX");
+
+        const datasets = {
+            "AR": arData,
+            "CL": clData,
+            "ES": esData,
+            "MX": mxData
+        };
+
+        const allRawData = [...arData, ...clData, ...esData, ...mxData];
+
+        allRawData.forEach(d => {
+            d.count = +d.count;
+            d.percentage = +d.percentage;
+            d.percentage_cum_sum = +d.percentage_cum_sum;
+        });
+
+        rawNodes = allRawData.map(d => ({
+            id: `${d.country}_${d.media_name_normalized}`,
+            country: d.country,
+            name: d.media_name_normalized,
+            count: d.count,
+            percentage: d.percentage,
+            isOthers: false
+        }));
+
+        collapsedNodes = [];
+        Object.keys(datasets).forEach(country => {
+            const countryData = datasets[country];
+            const keep = [];
+            const collapse = [];
+
+            countryData.forEach(d => {
+                if (d.count >= 100) {
+                    keep.push(d);
+                } else {
+                    collapse.push(d);
+                }
+            });
+
+            keep.forEach(d => {
+                collapsedNodes.push({
+                    id: `${d.country}_${d.media_name_normalized}`,
+                    country: d.country,
+                    name: d.media_name_normalized,
+                    count: d.count,
+                    percentage: d.percentage,
+                    isOthers: false
+                });
+            });
+
+            if (collapse.length > 0) {
+                const totalCollapsedCount = d3.sum(collapse, d => d.count);
+                const totalCollapsedPercentage = d3.sum(collapse, d => d.percentage);
+                collapsedNodes.push({
+                    id: `${country}_Otros`,
+                    country: country,
+                    name: "Otros",
+                    count: totalCollapsedCount,
+                    percentage: totalCollapsedPercentage,
+                    isOthers: true
+                });
+            }
+        });
+
+        const maxCount = d3.max([...rawNodes, ...collapsedNodes], d => d.count);
+
+        radiusScale = d3.scaleSqrt()
+            .domain([1, maxCount])
+            .range([3, 42]);
+
+        rawNodes.forEach(d => d.radius = radiusScale(d.count));
+        collapsedNodes.forEach(d => d.radius = radiusScale(d.count));
+
+        generateStorytellingText(datasets);
+    });
+}
+
+function updateCenters() {
+    if (width > 600) {
+        countryCenters = {
+            "AR": { x: width * 0.28, y: height * 0.32 },
+            "CL": { x: width * 0.72, y: height * 0.32 },
+            "ES": { x: width * 0.28, y: height * 0.68 },
+            "MX": { x: width * 0.72, y: height * 0.68 }
+        };
+    } else {
+        countryCenters = {
+            "AR": { x: width * 0.28, y: height * 0.26 },
+            "CL": { x: width * 0.72, y: height * 0.26 },
+            "ES": { x: width * 0.28, y: height * 0.74 },
+            "MX": { x: width * 0.72, y: height * 0.74 }
+        };
+    }
+}
+
+function drawLabels(bgLayer, fgLayer) {
+    const countriesList = [
+        { code: "AR", name: "Argentina" },
+        { code: "CL", name: "Chile" },
+        { code: "ES", name: "España" },
+        { code: "MX", name: "México" }
+    ];
+
+    bgLayer.selectAll(".bg-country-label")
+        .data(countriesList, d => d.code)
+        .join("text")
+        .attr("class", "bg-country-label")
+        .attr("text-anchor", "middle")
+        .attr("font-family", "var(--font-heading)")
+        .attr("font-size", "min(6.5vw, 4rem)")
+        .attr("fill", "var(--color-text-main)")
+        .attr("opacity", 0.05)
+        .text(d => d.name.toUpperCase())
+        .attr("x", d => countryCenters[d.code].x)
+        .attr("y", d => countryCenters[d.code].y + 15);
+
+    fgLayer.selectAll(".country-label")
+        .data(countriesList, d => d.code)
+        .join("text")
+        .attr("class", "country-label")
+        .attr("text-anchor", "middle")
+        .attr("font-family", "var(--font-sans)")
+        .attr("font-size", "0.75rem")
+        .attr("font-weight", "700")
+        .attr("letter-spacing", "0.12em")
+        .attr("text-transform", "uppercase")
+        .attr("fill", "var(--color-text-muted)")
+        .text(d => d.name)
+        .attr("x", d => countryCenters[d.code].x)
+        .attr("y", d => countryCenters[d.code].y - 85);
+}
+
+function setupD3Canvas() {
+    const canvas = document.getElementById("d3-canvas");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+
+    svg = d3.select(canvas)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    const bgLayer = svg.append("g").attr("class", "background-labels-layer");
+    svg.append("g").attr("class", "nodes-layer");
+    const fgLayer = svg.append("g").attr("class", "foreground-labels-layer");
+
+    updateCenters();
+    drawLabels(bgLayer, fgLayer);
+    setupTooltip();
+
+    simulation = d3.forceSimulation()
+        .force("x", d3.forceX(d => countryCenters[d.country].x).strength(0.18))
+        .force("y", d3.forceY(d => countryCenters[d.country].y).strength(0.18))
+        .force("collide", d3.forceCollide(d => d.radius + 1.2).iterations(2))
+        .force("charge", d3.forceManyBody().strength(-1.5))
+        .on("tick", ticked);
+}
+
+function ticked() {
+    svg.selectAll(".bubble")
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
+}
+
+function setupTooltip() {
+    tooltip = d3.select("body")
+        .selectAll(".tooltip")
+        .data([null])
+        .join("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("z-index", "1000")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+}
+
+function handleMouseOver(event, d) {
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    
+    let titleText = d.name;
+    let subtitleHtml = "";
+    
+    if (d.isOthers) {
+        titleText = "Otros Medios";
+        subtitleHtml = `<div class="tooltip-row" style="color:#b5b0aa; font-size:0.75rem;"><em>Medios agrupados con &lt; 100 noticias</em></div>`;
+    }
+
+    tooltip.html(`
+        <div class="tooltip-title">${titleText}</div>
+        ${subtitleHtml}
+        <div class="tooltip-row"><strong>País:</strong> ${countryNames[d.country]}</div>
+        <div class="tooltip-row"><strong>Noticias:</strong> ${d.count.toLocaleString()}</div>
+        <div class="tooltip-row"><strong>Porcentaje:</strong> ${d.percentage.toFixed(2)}%</div>
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+function handleMouseMove(event) {
+    tooltip
+        .style("left", (event.pageX + 15) + "px")
+        .style("top", (event.pageY - 28) + "px");
+}
+
+function handleMouseLeave() {
+    tooltip.transition().duration(100).style("opacity", 0);
+}
+
+function updateVisualization(stepIndex) {
+    if (!svg || !simulation) return;
+
+    let targetNodes;
+    if (stepIndex === 0) {
+        targetNodes = JSON.parse(JSON.stringify(rawNodes));
+    } else {
+        targetNodes = JSON.parse(JSON.stringify(collapsedNodes));
+    }
+
+    const activeNodesMap = new Map();
+    simulation.nodes().forEach(node => {
+        activeNodesMap.set(node.id, { x: node.x, y: node.y, vx: node.vx, vy: node.vy });
+    });
+
+    targetNodes.forEach(node => {
+        if (activeNodesMap.has(node.id)) {
+            const cached = activeNodesMap.get(node.id);
+            node.x = cached.x;
+            node.y = cached.y;
+            node.vx = cached.vx;
+            node.vy = cached.vy;
+        } else {
+            node.x = countryCenters[node.country].x + (Math.random() - 0.5) * 15;
+            node.y = countryCenters[node.country].y + (Math.random() - 0.5) * 15;
+        }
+    });
+
+    simulation.nodes(targetNodes);
+    simulation.force("x", d3.forceX(d => countryCenters[d.country].x).strength(0.18))
+        .force("y", d3.forceY(d => countryCenters[d.country].y).strength(0.18))
+        .force("collide", d3.forceCollide(d => d.radius + 1.2).iterations(2));
+    simulation.alpha(0.85).restart();
+
+    const bubbleSelection = svg.select(".nodes-layer")
+        .selectAll(".bubble")
+        .data(targetNodes, d => d.id);
+
+    bubbleSelection.enter()
+        .append("circle")
+        .attr("class", "bubble")
+        .attr("fill", d => getNodeColor(d))
+        .attr("cx", d => countryCenters[d.country].x)
+        .attr("cy", d => countryCenters[d.country].y)
+        .attr("r", 0)
+        .style("opacity", 0)
+        .on("mouseover", handleMouseOver)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleMouseLeave)
+        .transition()
+        .duration(600)
+        .attr("r", d => d.radius)
+        .style("opacity", 1);
+
+    bubbleSelection
+        .transition()
+        .duration(600)
+        .attr("fill", d => getNodeColor(d))
+        .attr("r", d => d.radius);
+
+    bubbleSelection.exit()
+        .transition()
+        .duration(400)
+        .attr("r", 0)
+        .style("opacity", 0)
+        .remove();
+}
+
+// ==========================================
+// SECTION 2: SCATTER PLOT (Stylistics)
+// ==========================================
+
+/**
+ * Dynamic storytelling text generator for Section 2 (Style).
+ */
+function generateStyleStorytellingText() {
+    const container = document.getElementById("storytelling-insights-style");
+    if (!container) return;
+
+    const ttrExtent = d3.extent(allStyleData, d => d.ttr);
+    const sentLenExtent = d3.extent(allStyleData, d => d.sentLen);
+
+    allStyleData.forEach(d => {
+        d.xNorm = (d.ttr - ttrExtent[0]) / (ttrExtent[1] - ttrExtent[0]);
+        d.yNorm = (d.sentLen - sentLenExtent[0]) / (sentLenExtent[1] - sentLenExtent[0]);
+        d.score = d.xNorm + d.yNorm;
+    });
+
+    const analyticalCandidates = allStyleData.filter(d => d.ttr > globalMedianTTR && d.sentLen > globalMedianSentLen);
+    const directCandidates = allStyleData.filter(d => d.ttr < globalMedianTTR && d.sentLen < globalMedianSentLen);
+
+    analyticMedia = analyticalCandidates.reduce((prev, curr) => (prev.score > curr.score) ? prev : curr, analyticalCandidates[0]);
+    directMedia = directCandidates.reduce((prev, curr) => (prev.score < curr.score) ? prev : curr, directCandidates[0]);
+
+    if (!analyticMedia || !directMedia) return;
+
+    container.innerHTML = `
+        <p>
+            El estilo de escritura varía drásticamente. Mientras <strong>${analyticMedia.media_name_normalized}</strong> 
+            (de ${countryNames[analyticMedia.country]}) exige alta concentración con oraciones de promedio 
+            <strong>${analyticMedia.sentLen.toFixed(1)}</strong> palabras y vocabulario rico, medios como 
+            <strong>${directMedia.media_name_normalized}</strong> (de ${countryNames[directMedia.country]}) 
+            apuestan por la inmediatez y el consumo rápido.
+        </p>
+    `;
+}
+
+/**
+ * Loads CSV files for Section 2.
+ */
+function loadStyleData() {
+    return Promise.all([
+        d3.csv("data/linguistic_characteristics/per_country_and_media_name/news_argentina_features_per_media.csv"),
+        d3.csv("data/linguistic_characteristics/per_country_and_media_name/news_chile_features_per_media.csv"),
+        d3.csv("data/linguistic_characteristics/per_country_and_media_name/news_espana_features_per_media.csv"),
+        d3.csv("data/linguistic_characteristics/per_country_and_media_name/news_mexico_features_per_media.csv")
+    ]).then(([arData, clData, esData, mxData]) => {
+        arData.forEach(d => d.country = "AR");
+        clData.forEach(d => d.country = "CL");
+        esData.forEach(d => d.country = "ES");
+        mxData.forEach(d => d.country = "MX");
+
+        allStyleData = [...arData, ...clData, ...esData, ...mxData];
+
+        allStyleData.forEach(d => {
+            d.ttr = +(d.type_token_ratio || d.mean_ttr);
+            d.sentLen = +(d.avg_sentence_len || d.mean_sent_len);
+            d.id = `${d.country}_${d.media_name_normalized}`;
+        });
+
+        globalMedianTTR = d3.median(allStyleData, d => d.ttr);
+        globalMedianSentLen = d3.median(allStyleData, d => d.sentLen);
+
+        generateStyleStorytellingText();
+    });
+}
+
+function handleStyleMouseOver(event, d) {
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    tooltip.html(`
+        <div class="tooltip-title">${d.media_name_normalized}</div>
+        <div class="tooltip-row"><strong>País:</strong> ${countryNames[d.country]}</div>
+        <div class="tooltip-row"><strong>Riqueza Léxica (TTR):</strong> ${d.ttr.toFixed(3)}</div>
+        <div class="tooltip-row"><strong>Longitud Oración:</strong> ${d.sentLen.toFixed(1)} palabras</div>
+        <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.4rem;">
+            Artículos analizados: ${parseInt(d.num_samples).toLocaleString()}
+        </div>
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+/**
+ * Draw/Redraw D3 Scatter Plot structure.
+ */
+function setupD3StyleCanvas() {
+    const canvas = document.getElementById("d3-canvas-style");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    widthStyle = canvas.clientWidth;
+    heightStyle = canvas.clientHeight;
+
+    svgStyle = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthStyle)
+        .attr("height", heightStyle)
+        .attr("viewBox", `0 0 ${widthStyle} ${heightStyle}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    const ttrExtent = d3.extent(allStyleData, d => d.ttr);
+    const sentLenExtent = d3.extent(allStyleData, d => d.sentLen);
+
+    const ttrPadding = (ttrExtent[1] - ttrExtent[0]) * 0.06;
+    const sentLenPadding = (sentLenExtent[1] - sentLenExtent[0]) * 0.06;
+
+    xScaleStyle = d3.scaleLinear()
+        .domain([ttrExtent[0] - ttrPadding, ttrExtent[1] + ttrPadding])
+        .range([paddingStyle.left, widthStyle - paddingStyle.right]);
+
+    yScaleStyle = d3.scaleLinear()
+        .domain([sentLenExtent[0] - sentLenPadding, sentLenExtent[1] + sentLenPadding])
+        .range([heightStyle - paddingStyle.bottom, paddingStyle.top]);
+
+    svgStyle.append("g").attr("class", "quadrants-layer");
+    svgStyle.append("g").attr("class", "x-axis axis");
+    svgStyle.append("g").attr("class", "y-axis axis");
+    svgStyle.append("g").attr("class", "dots-layer");
+    svgStyle.append("g").attr("class", "labels-layer");
+
+    drawStyleGrid();
+    renderStylePlot();
+}
+
+function drawStyleGrid() {
+    const qGroup = svgStyle.select(".quadrants-layer");
+    const lGroup = svgStyle.select(".labels-layer");
+    qGroup.selectAll("*").remove();
+    lGroup.selectAll("*").remove();
+
+    svgStyle.select(".x-axis")
+        .attr("transform", `translate(0, ${heightStyle - paddingStyle.bottom})`)
+        .call(d3.axisBottom(xScaleStyle).ticks(5).tickFormat(d3.format(".2f")));
+
+    svgStyle.select(".y-axis")
+        .attr("transform", `translate(${paddingStyle.left}, 0)`)
+        .call(d3.axisLeft(yScaleStyle).ticks(5));
+
+    svgStyle.select(".x-axis-label").remove();
+    svgStyle.append("text")
+        .attr("class", "axis-label x-axis-label")
+        .attr("text-anchor", "middle")
+        .attr("x", paddingStyle.left + (widthStyle - paddingStyle.left - paddingStyle.right) / 2)
+        .attr("y", heightStyle - 15)
+        .text("Riqueza Léxica (TTR)");
+
+    svgStyle.select(".y-axis-label").remove();
+    svgStyle.append("text")
+        .attr("class", "axis-label y-axis-label")
+        .attr("text-anchor", "middle")
+        .attr("transform", `rotate(-90)`)
+        .attr("x", -(paddingStyle.top + (heightStyle - paddingStyle.top - paddingStyle.bottom) / 2))
+        .attr("y", 20)
+        .text("Longitud de Oración Promedio (palabras)");
+
+    qGroup.append("line")
+        .attr("class", "quadrant-line")
+        .attr("x1", paddingStyle.left)
+        .attr("y1", yScaleStyle(globalMedianSentLen))
+        .attr("x2", widthStyle - paddingStyle.right)
+        .attr("y2", yScaleStyle(globalMedianSentLen));
+
+    qGroup.append("line")
+        .attr("class", "quadrant-line")
+        .attr("x1", xScaleStyle(globalMedianTTR))
+        .attr("y1", paddingStyle.top)
+        .attr("x2", xScaleStyle(globalMedianTTR))
+        .attr("y2", heightStyle - paddingStyle.bottom);
+
+    const labels = [
+        { text: "Complejo/Analítico", x: widthStyle - paddingStyle.right - 10, y: paddingStyle.top + 20, anchor: "end" },
+        { text: "Simple/Directo", x: paddingStyle.left + 10, y: heightStyle - paddingStyle.bottom - 15, anchor: "start" },
+        { text: "Oraciones Largas", x: paddingStyle.left + 10, y: paddingStyle.top + 20, anchor: "start" },
+        { text: "Vocabulario Rico", x: widthStyle - paddingStyle.right - 10, y: heightStyle - paddingStyle.bottom - 15, anchor: "end" }
+    ];
+
+    lGroup.selectAll(".quadrant-label")
+        .data(labels)
+        .join("text")
+        .attr("class", "quadrant-label")
+        .attr("x", d => d.x)
+        .attr("y", d => d.y)
+        .attr("text-anchor", d => d.anchor)
+        .text(d => d.text);
+}
+
+function renderStylePlot() {
+    const dotsLayer = svgStyle.select(".dots-layer");
+
+    dotsLayer.selectAll(".style-dot")
+        .data(allStyleData, d => d.id)
+        .join("circle")
+        .attr("class", "style-dot")
+        .attr("cx", d => xScaleStyle(d.ttr))
+        .attr("cy", d => yScaleStyle(d.sentLen))
+        .attr("r", 5.5)
+        .attr("fill", d => getStyleColor(d))
+        .style("fill-opacity", d => {
+            if (selectedStyleCountry === "all") return 0.75;
+            return d.country === selectedStyleCountry ? 0.9 : 0.1;
+        })
+        .style("stroke-opacity", d => {
+            if (selectedStyleCountry === "all") return 0.8;
+            return d.country === selectedStyleCountry ? 1.0 : 0.15;
+        })
+        .on("mouseover", handleStyleMouseOver)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleMouseLeave);
+}
+
+function updateStyleVisualization(stepIndex) {
+    if (!svgStyle || !analyticMedia || !directMedia) return;
+
+    if (stepIndex === 1) {
+        svgStyle.selectAll(".style-dot")
+            .transition()
+            .duration(450)
+            .attr("r", d => {
+                if (d.id === analyticMedia.id || d.id === directMedia.id) return 10.5;
+                return 4.5;
+            })
+            .style("fill-opacity", d => {
+                if (d.id === analyticMedia.id || d.id === directMedia.id) return 1.0;
+                if (selectedStyleCountry === "all") return 0.25;
+                return d.country === selectedStyleCountry ? 0.35 : 0.05;
+            })
+            .style("stroke", d => {
+                if (d.id === analyticMedia.id || d.id === directMedia.id) return "#1f1e1d";
+                return "rgba(255, 255, 255, 0.8)";
+            })
+            .style("stroke-width", d => {
+                if (d.id === analyticMedia.id || d.id === directMedia.id) return "2.5px";
+                return "0.75px";
+            });
+    } else {
+        svgStyle.selectAll(".style-dot")
+            .transition()
+            .duration(450)
+            .attr("r", 5.5)
+            .style("fill-opacity", d => {
+                if (selectedStyleCountry === "all") return 0.75;
+                return d.country === selectedStyleCountry ? 0.9 : 0.1;
+            })
+            .style("stroke", "rgba(255, 255, 255, 0.8)")
+            .style("stroke-width", "0.75px");
+    }
+}
+
+function highlightStyleCountry(country) {
+    selectedStyleCountry = country;
+    const activeStep = document.querySelector("#scrolly-style article .step.is-active");
+    const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step")) - 1 : 0;
+    updateStyleVisualization(stepIndex);
+}
+
+function bindFilterEvents() {
+    const buttons = document.querySelectorAll(".filter-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            const country = this.getAttribute("data-country");
+            highlightStyleCountry(country);
+        });
+    });
+}
+
+// ==========================================
+// SECTION 3: STACKED BAR CHART (POS Tags)
+// ==========================================
+
+/**
+ * Auxiliary POS JSON parser function.
+ */
+function parsePosJson(jsonData, countryCode) {
+    const parsed = [];
+    Object.keys(jsonData).forEach(mediaName => {
+        const counts = jsonData[mediaName];
+        const total = d3.sum(Object.values(counts));
+        if (total === 0) return;
+
+        const adjCount = (counts.JJ || 0) + (counts.JJR || 0) + (counts.JJS || 0);
+        const verbCount = (counts.VB || 0) + (counts.VBD || 0) + (counts.VBG || 0) + 
+                          (counts.VBN || 0) + (counts.VBP || 0) + (counts.VBZ || 0);
+        const nounCount = (counts.NN || 0) + (counts.NNS || 0) + (counts.NNP || 0) + (counts.NNPS || 0);
+        
+        const adjPct = (adjCount / total) * 100;
+        const verbPct = (verbCount / total) * 100;
+        const nounPct = (nounCount / total) * 100;
+        const otrosPct = 100 - (adjPct + verbPct + nounPct);
+
+        parsed.push({
+            id: `${countryCode}_${mediaName}`,
+            media: mediaName,
+            country: countryCode,
+            adjetivos: adjPct,
+            verbos: verbPct,
+            sustantivos: nounPct,
+            otros: otrosPct,
+            totalTokens: total
+        });
+    });
+    return parsed;
+}
+
+/**
+ * Computes descriptive statistics for Section 3.
+ */
+function calculatePosStorytelling() {
+    const countries = ["AR", "CL", "ES", "MX"];
+    let maxAdjPct = -1;
+    let maxCountryAvg = -1;
+    let topCountry = "";
+
+    countries.forEach(c => {
+        const countryNodes = allPosData.filter(d => d.country === c);
+        const avgAdj = d3.mean(countryNodes, d => d.adjetivos);
+        posCountryAverages[c] = avgAdj;
+
+        if (avgAdj > maxCountryAvg) {
+            maxCountryAvg = avgAdj;
+            topCountry = c;
+        }
+
+        countryNodes.forEach(node => {
+            if (node.adjetivos > maxAdjPct) {
+                maxAdjPct = node.adjetivos;
+                maxAdjectiveMedia = node;
+            }
+        });
+    });
+
+    maxAdjectiveCountry = topCountry;
+    generatePosStorytellingText();
+}
+
+function generatePosStorytellingText() {
+    const container = document.getElementById("storytelling-insights-pos");
+    if (!container) return;
+
+    const countryName = countryNames[maxAdjectiveCountry];
+    container.innerHTML = `
+        <p>
+            <strong>¿Noticia o Editorial?</strong> En promedio, <strong>${countryName}</strong> lidera la carga de adjetivos en Hispanoamérica. 
+            Destaca el medio <strong>${maxAdjectiveMedia.media}</strong> donde el <strong>${maxAdjectiveMedia.adjetivos.toFixed(1)}%</strong> 
+            del contenido principal son calificaciones de la realidad.
+        </p>
+    `;
+}
+
+/**
+ * Loads JSON files for Section 3.
+ */
+function loadPosData() {
+    return Promise.all([
+        d3.json("data/pos_tagging/top_pos_tags_per_country_and_media/news_argentina_top_pos_per_media.json"),
+        d3.json("data/pos_tagging/top_pos_tags_per_country_and_media/news_chile_top_pos_per_media.json"),
+        d3.json("data/pos_tagging/top_pos_tags_per_country_and_media/news_espana_top_pos_per_media.json"),
+        d3.json("data/pos_tagging/top_pos_tags_per_country_and_media/news_mexico_top_pos_per_media.json")
+    ]).then(([arPos, clPos, esPos, mxPos]) => {
+        const arParsed = parsePosJson(arPos, "AR");
+        const clParsed = parsePosJson(clPos, "CL");
+        const esParsed = parsePosJson(esPos, "ES");
+        const mxParsed = parsePosJson(mxPos, "MX");
+
+        allPosData = [...arParsed, ...clParsed, ...esParsed, ...mxParsed];
+
+        calculatePosStorytelling();
+    });
+}
+
+function handlePosMouseOver(event, d, key) {
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    
+    const labelNames = {
+        "adjetivos": "Adjetivos (Subjetividad)",
+        "verbos": "Verbos (Acción)",
+        "sustantivos": "Sustantivos (Referencia)",
+        "otros": "Otros elementos gramaticales"
+    };
+
+    const value = d[1] - d[0];
+
+    tooltip.html(`
+        <div class="tooltip-title">${d.data.media}</div>
+        <div class="tooltip-row"><strong>Categoría:</strong> ${labelNames[key]}</div>
+        <div class="tooltip-row"><strong>Proporción:</strong> ${value.toFixed(2)}%</div>
+        <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.4rem;">
+            País: ${countryNames[d.data.country]} | Total tokens: ${d.data.totalTokens.toLocaleString()}
+        </div>
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+/**
+ * Initializes the D3 100% Stacked Bar Chart canvas structure.
+ */
+function setupD3PosCanvas() {
+    const canvas = document.getElementById("d3-canvas-pos");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    widthPos = canvas.clientWidth;
+    heightPos = canvas.clientHeight;
+
+    svgPos = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthPos)
+        .attr("height", heightPos)
+        .attr("viewBox", `0 0 ${widthPos} ${heightPos}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    xScalePos = d3.scaleLinear()
+        .domain([0, 100])
+        .range([paddingPos.left, widthPos - paddingPos.right]);
+
+    yScalePos = d3.scaleBand()
+        .range([paddingPos.top, heightPos - paddingPos.bottom])
+        .padding(0.22);
+
+    svgPos.append("g").attr("class", "bars-layer");
+    svgPos.append("g").attr("class", "x-axis axis");
+    svgPos.append("g").attr("class", "y-axis axis");
+
+    renderPosPlot();
+}
+
+/**
+ * Renders the 100% stacked horizontal bars, applying transitions.
+ */
+function renderPosPlot() {
+    if (!svgPos) return;
+
+    // Filter visible items
+    let visiblePosData = allPosData.filter(d => d.country === selectedPosCountry);
+
+    // Apply sorting
+    if (isSortedBySubjectivity) {
+        visiblePosData.sort((a, b) => b.adjetivos - a.adjetivos);
+    } else {
+        visiblePosData.sort((a, b) => a.media.localeCompare(b.media));
+    }
+
+    const mediaNames = visiblePosData.map(d => d.media);
+    yScalePos.domain(mediaNames);
+
+    // Render / Update Axes
+    svgPos.select(".y-axis")
+        .attr("transform", `translate(${paddingPos.left}, 0)`)
+        .transition()
+        .duration(600)
+        .call(d3.axisLeft(yScalePos))
+        .selectAll("text")
+        .style("font-family", "var(--font-sans)")
+        .style("font-size", "0.72rem")
+        .style("fill", "var(--color-text-muted)");
+
+    svgPos.select(".x-axis")
+        .attr("transform", `translate(0, ${heightPos - paddingPos.bottom})`)
+        .transition()
+        .duration(600)
+        .call(d3.axisBottom(xScalePos).ticks(5).tickFormat(d => d + "%"));
+
+    // Set keys and stack
+    const keys = ["adjetivos", "verbos", "sustantivos", "otros"];
+    const stackedData = d3.stack().keys(keys)(visiblePosData);
+
+    const posColors = d3.scaleOrdinal()
+        .domain(keys)
+        .range(["#ff7a00", "#3b82f6", "#555555", "#e5e7eb"]);
+
+    // Series join
+    const series = svgPos.select(".bars-layer")
+        .selectAll(".series")
+        .data(stackedData, d => d.key);
+
+    const seriesEnter = series.enter()
+        .append("g")
+        .attr("class", "series")
+        .attr("fill", d => posColors(d.key));
+
+    const seriesGroup = seriesEnter.merge(series);
+
+    // Rect join
+    const rects = seriesGroup.selectAll("rect")
+        .data(d => d, d => d.data.id);
+
+    rects.exit()
+        .transition()
+        .duration(400)
+        .attr("width", 0)
+        .remove();
+
+    const rectsEnter = rects.enter()
+        .append("rect")
+        .attr("class", "pos-rect")
+        .attr("y", d => yScalePos(d.data.media))
+        .attr("x", d => xScalePos(d[0]))
+        .attr("height", yScalePos.bandwidth())
+        .attr("width", 0)
+        .on("mouseover", function(event, d) {
+            const key = d3.select(this.parentNode).datum().key;
+            handlePosMouseOver(event, d, key);
+        })
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleMouseLeave);
+
+    rectsEnter.merge(rects)
+        .transition()
+        .duration(750)
+        .attr("y", d => yScalePos(d.data.media))
+        .attr("x", d => xScalePos(d[0]))
+        .attr("height", yScalePos.bandwidth())
+        .attr("width", d => xScalePos(d[1]) - xScalePos(d[0]));
+}
+
+/**
+ * Handles active step updates in Section 3 (POS).
+ * Fades out other bars in step 2 to highlight the most adjectivized media.
+ */
+function updatePosVisualization(stepIndex) {
+    if (!svgPos || allPosData.length === 0) return;
+
+    if (stepIndex === 1) {
+        const visibleData = allPosData.filter(d => d.country === selectedPosCountry);
+        if (visibleData.length === 0) return;
+        
+        const topMediaInCountry = visibleData.reduce((prev, curr) => (prev.adjetivos > curr.adjetivos) ? prev : curr, visibleData[0]);
+
+        svgPos.selectAll(".pos-rect")
+            .transition()
+            .duration(450)
+            .style("fill-opacity", d => {
+                if (d.data.id === topMediaInCountry.id) return 1.0;
+                return 0.2;
+            });
+    } else {
+        svgPos.selectAll(".pos-rect")
+            .transition()
+            .duration(450)
+            .style("fill-opacity", 1.0);
+    }
+}
+
+/**
+ * Binds click events to the POS filter country tabs and action buttons.
+ */
+function bindPosEvents() {
+    const buttons = document.querySelectorAll(".pos-filter-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            selectedPosCountry = this.getAttribute("data-country");
+            renderPosPlot();
+
+            const activeStep = document.querySelector("#scrolly-pos article .step.is-active");
+            const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step").split(".")[1]) - 1 : 0;
+            updatePosVisualization(stepIndex);
+        });
+    });
+
+    const sortBtn = document.getElementById("btn-sort-pos");
+    const resetBtn = document.getElementById("btn-reset-pos");
+
+    if (sortBtn) {
+        sortBtn.addEventListener("click", function() {
+            isSortedBySubjectivity = true;
+            this.classList.add("active");
+            if (resetBtn) resetBtn.classList.remove("active");
+            renderPosPlot();
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", function() {
+            isSortedBySubjectivity = false;
+            if (sortBtn) sortBtn.classList.remove("active");
+            renderPosPlot();
+        });
+    }
+}
+
+// ==========================================
+// COMPONENT BOOTSTRAPPER & EVENT MANAGERS
+// ==========================================
+
+function initScrollama1() {
+    scroller
+        .setup({
+            step: "#scrolly article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const steps = document.querySelectorAll("#scrolly article .step");
+            steps.forEach((step, idx) => {
+                step.classList.toggle("is-active", idx === stepIndex);
+            });
+            updateVisualization(stepIndex);
+        });
+    updateVisualization(0);
+}
+
+function initScrollama2() {
+    scrollerStyle
+        .setup({
+            step: "#scrolly-style article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const steps = document.querySelectorAll("#scrolly-style article .step");
+            steps.forEach((step, idx) => {
+                step.classList.toggle("is-active", idx === stepIndex);
+            });
+            updateStyleVisualization(stepIndex);
+        });
+    updateStyleVisualization(0);
+}
+
+function initScrollama3() {
+    scrollerPos
+        .setup({
+            step: "#scrolly-pos article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const steps = document.querySelectorAll("#scrolly-pos article .step");
+            steps.forEach((step, idx) => {
+                step.classList.toggle("is-active", idx === stepIndex);
+            });
+            updatePosVisualization(stepIndex);
+        });
+    updatePosVisualization(0);
+}
+
+/**
+ * Handle window resizing to keep all charts responsive
+ */
+function handleResize() {
+    // 1. Resize Section 1 (Bubble Chart)
+    const canvas = document.getElementById("d3-canvas");
+    if (canvas && svg) {
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        svg.attr("width", width)
+           .attr("height", height)
+           .attr("viewBox", `0 0 ${width} ${height}`);
+
+        updateCenters();
+        const bgLayer = svg.select(".background-labels-layer");
+        const fgLayer = svg.select(".foreground-labels-layer");
+        drawLabels(bgLayer, fgLayer);
+
+        if (simulation) {
+            simulation.force("x", d3.forceX(d => countryCenters[d.country].x).strength(0.18));
+            simulation.force("y", d3.forceY(d => countryCenters[d.country].y).strength(0.18));
+            simulation.alpha(0.5).restart();
+        }
+    }
+
+    // 2. Resize Section 2 (Scatter Plot)
+    const canvasStyle = document.getElementById("d3-canvas-style");
+    if (canvasStyle && svgStyle) {
+        widthStyle = canvasStyle.clientWidth;
+        heightStyle = canvasStyle.clientHeight;
+        svgStyle.attr("width", widthStyle)
+                .attr("height", heightStyle)
+                .attr("viewBox", `0 0 ${widthStyle} ${heightStyle}`);
+
+        xScaleStyle.range([paddingStyle.left, widthStyle - paddingStyle.right]);
+        yScaleStyle.range([heightStyle - paddingStyle.bottom, paddingStyle.top]);
+
+        drawStyleGrid();
+        renderStylePlot();
+        
+        const activeStep = document.querySelector("#scrolly-style article .step.is-active");
+        const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step").split(".")[1]) - 1 : 0;
+        updateStyleVisualization(stepIndex);
+    }
+
+    // 3. Resize Section 3 (POS Stacked Bar Chart)
+    const canvasPos = document.getElementById("d3-canvas-pos");
+    if (canvasPos && svgPos) {
+        widthPos = canvasPos.clientWidth;
+        heightPos = canvasPos.clientHeight;
+        svgPos.attr("width", widthPos)
+              .attr("height", heightPos)
+              .attr("viewBox", `0 0 ${widthPos} ${heightPos}`);
+
+        xScalePos.range([paddingPos.left, widthPos - paddingPos.right]);
+        yScalePos.range([paddingPos.top, heightPos - paddingPos.bottom]);
+
+        renderPosPlot();
+
+        const activeStep = document.querySelector("#scrolly-pos article .step.is-active");
+        const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step").split(".")[1]) - 1 : 0;
+        updatePosVisualization(stepIndex);
+    }
+
+    // 4. Inform Scrollama instances
+    scroller.resize();
+    scrollerStyle.resize();
+    scrollerPos.resize();
+}
+
+/**
+ * Main bootstrapper function.
+ */
+function init() {
+    // Load datasets for all sections in parallel
+    Promise.all([
+        loadData(),
+        loadStyleData(),
+        loadPosData()
+    ]).then(() => {
+        // Initialize Section 1
+        setupD3Canvas();
+        initScrollama1();
+
+        // Initialize Section 2
+        setupD3StyleCanvas();
+        bindFilterEvents();
+        initScrollama2();
+
+        // Initialize Section 3
+        setupD3PosCanvas();
+        bindPosEvents();
+        initScrollama3();
+
+        // Window resize event handler
+        window.addEventListener("resize", handleResize);
+
+        console.log("[Init] Scrollytelling visualizers fully initialized.");
+    }).catch(error => {
+        console.error("[Init Error] Failed to load data or initialize visualizers:", error);
+    });
+}
+
+// Bind initialization to DOM ready event
+window.addEventListener("DOMContentLoaded", init);
