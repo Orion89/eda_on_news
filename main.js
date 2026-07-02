@@ -1,12 +1,13 @@
 /**
  * El Eco de las Palabras: Radiografía del Periodismo en Hispanoamérica
- * main.js - D3 Scrollytelling Visualizations (Bubble, Scatter & Stacked Bar) with Scrollama
+ * main.js - D3 Scrollytelling Visualizations (Bubble, Scatter, Stacked Bar & Ridgeline)
  */
 
-// Initialize scrollama instances for the three sections
+// Initialize scrollama instances for all sections
 const scroller = scrollama();
 const scrollerStyle = scrollama();
 const scrollerPos = scrollama();
+const scrollerEmotions = scrollama();
 
 // --- Globals for Section 1 (Bubble Chart) ---
 let svg;
@@ -53,12 +54,32 @@ let maxAdjectiveCountry = "";
 
 const paddingPos = { top: 30, right: 30, bottom: 40, left: 145 };
 
+// --- Globals for Section 5 (Ridgeline Joyplot) ---
+let svgEmotions;
+let widthEmotions = 800;
+let heightEmotions = 600;
+let allEmotionsRawData = [];
+let allEmotionsAggregatedData = [];
+let xScaleEmotions, yScaleIntensityEmotions;
+let selectedEmotion = "alegría";
+let emotionsStorytellingData = {};
+
+const paddingEmotions = { top: 50, right: 30, bottom: 50, left: 100 };
+
 // Map country codes to readable names
 const countryNames = {
     "AR": "Argentina",
     "CL": "Chile",
     "ES": "España",
     "MX": "México"
+};
+
+// Map country names from dataset to standard country codes
+const countryMappingEmotions = {
+    "argentina": "AR",
+    "chile": "CL",
+    "espana": "ES",
+    "mexico": "MX"
 };
 
 /**
@@ -687,7 +708,7 @@ function updateStyleVisualization(stepIndex) {
 function highlightStyleCountry(country) {
     selectedStyleCountry = country;
     const activeStep = document.querySelector("#scrolly-style article .step.is-active");
-    const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step")) - 1 : 0;
+    const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step").split(".")[1]) - 1 : 0;
     updateStyleVisualization(stepIndex);
 }
 
@@ -871,10 +892,8 @@ function setupD3PosCanvas() {
 function renderPosPlot() {
     if (!svgPos) return;
 
-    // Filter visible items
     let visiblePosData = allPosData.filter(d => d.country === selectedPosCountry);
 
-    // Apply sorting
     if (isSortedBySubjectivity) {
         visiblePosData.sort((a, b) => b.adjetivos - a.adjetivos);
     } else {
@@ -884,7 +903,6 @@ function renderPosPlot() {
     const mediaNames = visiblePosData.map(d => d.media);
     yScalePos.domain(mediaNames);
 
-    // Render / Update Axes
     svgPos.select(".y-axis")
         .attr("transform", `translate(${paddingPos.left}, 0)`)
         .transition()
@@ -901,7 +919,6 @@ function renderPosPlot() {
         .duration(600)
         .call(d3.axisBottom(xScalePos).ticks(5).tickFormat(d => d + "%"));
 
-    // Set keys and stack
     const keys = ["adjetivos", "verbos", "sustantivos", "otros"];
     const stackedData = d3.stack().keys(keys)(visiblePosData);
 
@@ -909,7 +926,6 @@ function renderPosPlot() {
         .domain(keys)
         .range(["#ff7a00", "#3b82f6", "#555555", "#e5e7eb"]);
 
-    // Series join
     const series = svgPos.select(".bars-layer")
         .selectAll(".series")
         .data(stackedData, d => d.key);
@@ -921,7 +937,6 @@ function renderPosPlot() {
 
     const seriesGroup = seriesEnter.merge(series);
 
-    // Rect join
     const rects = seriesGroup.selectAll("rect")
         .data(d => d, d => d.data.id);
 
@@ -954,10 +969,6 @@ function renderPosPlot() {
         .attr("width", d => xScalePos(d[1]) - xScalePos(d[0]));
 }
 
-/**
- * Handles active step updates in Section 3 (POS).
- * Fades out other bars in step 2 to highlight the most adjectivized media.
- */
 function updatePosVisualization(stepIndex) {
     if (!svgPos || allPosData.length === 0) return;
 
@@ -982,9 +993,6 @@ function updatePosVisualization(stepIndex) {
     }
 }
 
-/**
- * Binds click events to the POS filter country tabs and action buttons.
- */
 function bindPosEvents() {
     const buttons = document.querySelectorAll(".pos-filter-btn");
     buttons.forEach(btn => {
@@ -1020,6 +1028,380 @@ function bindPosEvents() {
             renderPosPlot();
         });
     }
+}
+
+// ==========================================
+// SECTION 5: RIDGELINE PLOT (Emotions)
+// ==========================================
+
+/**
+ * Groups and aggregates emotions data monthly for clean, organic peaks.
+ */
+function aggregateMonthly(rawData) {
+    const rolled = d3.rollups(
+        rawData,
+        v => d3.mean(v, d => d.intensity),
+        d => countryMappingEmotions[d.country],
+        d => d.emotion,
+        d => d3.timeMonth(d.date)
+    );
+    
+    const aggregated = [];
+    rolled.forEach(([country, emotionsMap]) => {
+        emotionsMap.forEach(([emotion, monthsMap]) => {
+            monthsMap.forEach(([monthDate, meanIntensity]) => {
+                aggregated.push({
+                    country: country,
+                    emotion: emotion,
+                    date: monthDate,
+                    intensity: meanIntensity
+                });
+            });
+        });
+    });
+    
+    aggregated.sort((a, b) => a.date - b.date);
+    return aggregated;
+}
+
+/**
+ * Calculates emotional text metrics for storytelling in Section 5.
+ */
+function calculateEmotionsStorytelling() {
+    const countries = ["AR", "CL", "ES", "MX"];
+    const countryNamesSpanish = {
+        "AR": "Argentina",
+        "CL": "Chile",
+        "ES": "España",
+        "MX": "México"
+    };
+    const emotionsList = ["alegría", "miedo", "ira", "tristeza"];
+
+    countries.forEach(cCode => {
+        const countryData = allEmotionsRawData.filter(d => countryMappingEmotions[d.country] === cCode);
+        if (countryData.length === 0) return;
+
+        const averages = {};
+        emotionsList.forEach(emotion => {
+            const emotionData = countryData.filter(d => d.emotion === emotion);
+            averages[emotion] = d3.mean(emotionData, d => d.intensity) || 0;
+        });
+
+        let topEmotion = emotionsList[0];
+        let maxAvg = averages[topEmotion];
+        emotionsList.forEach(emotion => {
+            if (averages[emotion] > maxAvg) {
+                maxAvg = averages[emotion];
+                topEmotion = emotion;
+            }
+        });
+
+        const topEmotionData = countryData.filter(d => d.emotion === topEmotion);
+        let peakRecord = topEmotionData[0];
+        topEmotionData.forEach(d => {
+            if (d.intensity > peakRecord.intensity) {
+                peakRecord = d;
+            }
+        });
+
+        const formattedDate = peakRecord.date.toLocaleDateString('es-ES', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        emotionsStorytellingData[cCode] = {
+            countryName: countryNamesSpanish[cCode],
+            topEmotion: topEmotion.charAt(0).toUpperCase() + topEmotion.slice(1),
+            peakDate: formattedDate,
+            peakIntensity: peakRecord.intensity
+        };
+    });
+
+    generateEmotionsStorytellingText();
+}
+
+function generateEmotionsStorytellingText() {
+    const container = document.getElementById("storytelling-insights-emotions");
+    if (!container) return;
+
+    let html = '<div class="insights-grid">';
+    Object.keys(emotionsStorytellingData).forEach(cCode => {
+        const d = emotionsStorytellingData[cCode];
+        html += `
+            <div class="insight-card country-border-${cCode.toLowerCase()}">
+                <h4 class="insight-country">${d.countryName}</h4>
+                <p class="insight-text">
+                    El negocio de la ansiedad: Al observar el año, la emoción predominante que moviliza las portadas en <strong>${d.countryName}</strong> es <strong>${d.topEmotion}</strong>. Notablemente, en <strong>${d.peakDate}</strong>, los índices rompieron récords.
+                </p>
+            </div>
+        `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+/**
+ * Loads JSON files for Section 5.
+ */
+function loadEmotionsData() {
+    return Promise.all([
+        d3.json("data/emotions/news_argentina_emotions_per_media.json"),
+        d3.json("data/emotions/news_chile_emotions_per_media.json"),
+        d3.json("data/emotions/news_espana_emotions_per_media.json"),
+        d3.json("data/emotions/news_mexico_emotions_per_media.json")
+    ]).then(([arEm, clEm, esEm, mxEm]) => {
+        arEm.forEach(d => d.country = "argentina");
+        clEm.forEach(d => d.country = "chile");
+        esEm.forEach(d => d.country = "espana");
+        mxEm.forEach(d => d.country = "mexico");
+
+        allEmotionsRawData = [...arEm, ...clEm, ...esEm, ...mxEm];
+        
+        const dateParser = d3.timeParse("%Y-%m-%d");
+        allEmotionsRawData.forEach(d => {
+            d.date = dateParser(d.date);
+            d.intensity = +d.intensity;
+            d.country = d.country.toLowerCase();
+        });
+
+        calculateEmotionsStorytelling();
+        allEmotionsAggregatedData = aggregateMonthly(allEmotionsRawData);
+    });
+}
+
+/**
+ * Initializes the Ridgeline plot canvas structure.
+ */
+function setupD3EmotionsCanvas() {
+    const canvas = document.getElementById("d3-canvas-emotions");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    widthEmotions = canvas.clientWidth;
+    heightEmotions = canvas.clientHeight;
+
+    svgEmotions = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthEmotions)
+        .attr("height", heightEmotions)
+        .attr("viewBox", `0 0 ${widthEmotions} ${heightEmotions}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    const dateExtent = d3.extent(allEmotionsAggregatedData, d => d.date);
+    xScaleEmotions = d3.scaleTime()
+        .domain(dateExtent)
+        .range([paddingEmotions.left, widthEmotions - paddingEmotions.right]);
+
+    svgEmotions.append("g").attr("class", "baselines-layer");
+    svgEmotions.append("g").attr("class", "areas-layer");
+    svgEmotions.append("g").attr("class", "strokes-layer");
+    svgEmotions.append("g").attr("class", "labels-layer");
+    svgEmotions.append("g").attr("class", "x-axis axis");
+
+    renderEmotionsPlot();
+}
+
+/**
+ * Renders Ridgelines and transitions curves based on the selected emotion.
+ */
+function renderEmotionsPlot() {
+    if (!svgEmotions) return;
+
+    const visibleEmotionsData = allEmotionsAggregatedData.filter(d => d.emotion === selectedEmotion);
+    const maxVal = d3.max(visibleEmotionsData, d => d.intensity) || 0.05;
+    const ySpacing = (heightEmotions - paddingEmotions.top - paddingEmotions.bottom) / 3.8;
+
+    yScaleIntensityEmotions = d3.scaleLinear()
+        .domain([0, maxVal])
+        .range([0, ySpacing * 1.45]); // Overlap factor
+
+    // Share X axis only at the bottom baseline (México)
+    const xAxis = d3.axisBottom(xScaleEmotions).ticks(6).tickFormat(d3.timeFormat("%Y"));
+    svgEmotions.select(".x-axis")
+        .attr("transform", `translate(0, ${paddingEmotions.top + 3 * ySpacing + ySpacing * 0.7})`)
+        .transition()
+        .duration(800)
+        .call(xAxis)
+        .selectAll("text")
+        .style("font-family", "var(--font-sans)")
+        .style("font-size", "0.75rem")
+        .style("fill", "var(--color-text-muted)");
+
+    const countries = ["AR", "CL", "ES", "MX"];
+    const countryBaselines = {};
+    countries.forEach((c, i) => {
+        countryBaselines[c] = paddingEmotions.top + i * ySpacing + ySpacing * 0.7;
+    });
+
+    // Draw straight baselines
+    svgEmotions.select(".baselines-layer").selectAll(".ridgeline-baseline")
+        .data(countries)
+        .join("line")
+        .attr("class", "ridgeline-baseline")
+        .attr("x1", paddingEmotions.left)
+        .attr("y1", c => countryBaselines[c])
+        .attr("x2", widthEmotions - paddingEmotions.right)
+        .attr("y2", c => countryBaselines[c]);
+
+    // Area and Line generators using d3.curveBasis (Suavizado orgánico)
+    const area = d3.area()
+        .curve(d3.curveBasis)
+        .x(d => xScaleEmotions(d.date))
+        .y0(d => countryBaselines[d.country])
+        .y1(d => countryBaselines[d.country] - yScaleIntensityEmotions(d.intensity));
+
+    const line = d3.line()
+        .curve(d3.curveBasis)
+        .x(d => xScaleEmotions(d.date))
+        .y(d => countryBaselines[d.country] - yScaleIntensityEmotions(d.intensity));
+
+    // Area path joining
+    svgEmotions.select(".areas-layer").selectAll(".ridgeline-area")
+        .data(countries)
+        .join("path")
+        .attr("class", "ridgeline-area")
+        .attr("fill", c => {
+            switch(c) {
+                case "AR": return "var(--color-ar)";
+                case "CL": return "var(--color-cl)";
+                case "ES": return "var(--color-es)";
+                case "MX": return "var(--color-mx)";
+            }
+        })
+        .transition()
+        .duration(800)
+        .attr("d", c => {
+            const countryPoints = visibleEmotionsData.filter(d => d.country === c);
+            return area(countryPoints);
+        });
+
+    // Outline stroke path joining
+    svgEmotions.select(".strokes-layer").selectAll(".ridgeline-stroke")
+        .data(countries)
+        .join("path")
+        .attr("class", "ridgeline-stroke")
+        .attr("stroke", c => {
+            switch(c) {
+                case "AR": return "var(--color-ar)";
+                case "CL": return "var(--color-cl)";
+                case "ES": return "var(--color-es)";
+                case "MX": return "var(--color-mx)";
+            }
+        })
+        .transition()
+        .duration(800)
+        .attr("d", c => {
+            const countryPoints = visibleEmotionsData.filter(d => d.country === c);
+            return line(countryPoints);
+        });
+
+    // Draw row baseline labels on the left
+    const countryNamesSpanish = {
+        "AR": "Argentina",
+        "CL": "Chile",
+        "ES": "España",
+        "MX": "México"
+    };
+
+    svgEmotions.select(".labels-layer").selectAll(".ridgeline-country-label")
+        .data(countries)
+        .join("text")
+        .attr("class", "ridgeline-country-label")
+        .attr("x", paddingEmotions.left - 15)
+        .attr("y", c => countryBaselines[c] - 5)
+        .attr("text-anchor", "end")
+        .text(c => countryNamesSpanish[c]);
+}
+
+/**
+ * Interactively highlights peak intensity coordinates in Step 2.
+ */
+function updateEmotionsVisualization(stepIndex) {
+    if (!svgEmotions || allEmotionsAggregatedData.length === 0) return;
+
+    const visibleEmotionsData = allEmotionsAggregatedData.filter(d => d.emotion === selectedEmotion);
+    const countries = ["AR", "CL", "ES", "MX"];
+    const ySpacing = (heightEmotions - paddingEmotions.top - paddingEmotions.bottom) / 3.8;
+    const countryBaselines = {};
+    countries.forEach((c, i) => {
+        countryBaselines[c] = paddingEmotions.top + i * ySpacing + ySpacing * 0.7;
+    });
+
+    if (stepIndex === 1) {
+        // Step 2: Calculate and highlight max peaks
+        const peaks = [];
+        countries.forEach(c => {
+            const countryPoints = visibleEmotionsData.filter(d => d.country === c);
+            if (countryPoints.length > 0) {
+                const peak = countryPoints.reduce((prev, curr) => (curr.intensity > prev.intensity) ? curr : prev, countryPoints[0]);
+                peaks.push(peak);
+            }
+        });
+
+        // Vertical guide line
+        svgEmotions.select(".labels-layer").selectAll(".peak-guide")
+            .data(peaks, d => d.country)
+            .join("line")
+            .attr("class", "peak-guide")
+            .attr("x1", d => xScaleEmotions(d.date))
+            .attr("y1", d => countryBaselines[d.country])
+            .attr("x2", d => xScaleEmotions(d.date))
+            .attr("y2", d => countryBaselines[d.country] - yScaleIntensityEmotions(d.intensity))
+            .attr("stroke", "#1f1e1d")
+            .attr("stroke-width", "1.2px")
+            .attr("stroke-dasharray", "2,2")
+            .style("opacity", 0)
+            .transition()
+            .duration(500)
+            .style("opacity", 0.7);
+
+        // Peak target dot
+        svgEmotions.select(".labels-layer").selectAll(".peak-dot")
+            .data(peaks, d => d.country)
+            .join("circle")
+            .attr("class", "peak-dot")
+            .attr("cx", d => xScaleEmotions(d.date))
+            .attr("cy", d => countryBaselines[d.country] - yScaleIntensityEmotions(d.intensity))
+            .attr("r", 5)
+            .attr("fill", "#1f1e1d")
+            .attr("stroke", "#ffffff")
+            .attr("stroke-width", "1.5px")
+            .style("opacity", 0)
+            .transition()
+            .duration(500)
+            .style("opacity", 1.0);
+    } else {
+        // Step 1: Remove guides
+        svgEmotions.selectAll(".peak-guide")
+            .transition()
+            .duration(300)
+            .style("opacity", 0)
+            .remove();
+
+        svgEmotions.selectAll(".peak-dot")
+            .transition()
+            .duration(300)
+            .style("opacity", 0)
+            .remove();
+    }
+}
+
+function bindEmotionsEvents() {
+    const buttons = document.querySelectorAll(".emotion-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            selectedEmotion = this.getAttribute("data-emotion");
+            renderEmotionsPlot();
+
+            const activeStep = document.querySelector("#scrolly-emotions article .step.is-active");
+            const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step").split(".")[1]) - 1 : 0;
+            updateEmotionsVisualization(stepIndex);
+        });
+    });
 }
 
 // ==========================================
@@ -1078,6 +1460,24 @@ function initScrollama3() {
             updatePosVisualization(stepIndex);
         });
     updatePosVisualization(0);
+}
+
+function initScrollamaEmotions() {
+    scrollerEmotions
+        .setup({
+            step: "#scrolly-emotions article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const steps = document.querySelectorAll("#scrolly-emotions article .step");
+            steps.forEach((step, idx) => {
+                step.classList.toggle("is-active", idx === stepIndex);
+            });
+            updateEmotionsVisualization(stepIndex);
+        });
+    updateEmotionsVisualization(0);
 }
 
 /**
@@ -1144,10 +1544,29 @@ function handleResize() {
         updatePosVisualization(stepIndex);
     }
 
-    // 4. Inform Scrollama instances
+    // 4. Resize Section 5 (Ridgeline Chart)
+    const canvasEmotions = document.getElementById("d3-canvas-emotions");
+    if (canvasEmotions && svgEmotions) {
+        widthEmotions = canvasEmotions.clientWidth;
+        heightEmotions = canvasEmotions.clientHeight;
+        svgEmotions.attr("width", widthEmotions)
+                   .attr("height", heightEmotions)
+                   .attr("viewBox", `0 0 ${widthEmotions} ${heightEmotions}`);
+
+        xScaleEmotions.range([paddingEmotions.left, widthEmotions - paddingEmotions.right]);
+
+        renderEmotionsPlot();
+
+        const activeStep = document.querySelector("#scrolly-emotions article .step.is-active");
+        const stepIndex = activeStep ? parseInt(activeStep.getAttribute("data-step").split(".")[1]) - 1 : 0;
+        updateEmotionsVisualization(stepIndex);
+    }
+
+    // 5. Inform Scrollama instances
     scroller.resize();
     scrollerStyle.resize();
     scrollerPos.resize();
+    scrollerEmotions.resize();
 }
 
 /**
@@ -1158,7 +1577,8 @@ function init() {
     Promise.all([
         loadData(),
         loadStyleData(),
-        loadPosData()
+        loadPosData(),
+        loadEmotionsData()
     ]).then(() => {
         // Initialize Section 1
         setupD3Canvas();
@@ -1173,6 +1593,11 @@ function init() {
         setupD3PosCanvas();
         bindPosEvents();
         initScrollama3();
+
+        // Initialize Section 5
+        setupD3EmotionsCanvas();
+        bindEmotionsEvents();
+        initScrollamaEmotions();
 
         // Window resize event handler
         window.addEventListener("resize", handleResize);

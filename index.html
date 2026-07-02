@@ -228,6 +228,68 @@
         </article>
     </section>
 
+    <!-- Section 5: El Termómetro Emocional (Ridgeline Plot / Joyplot) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis de Sentimiento Temporal</span>
+            <h2 class="section-title">El Termómetro Emocional</h2>
+            <p class="section-intro-text">
+                ¿Cómo evolucionan los sentimientos en las noticias a lo largo de las décadas? Analizamos la intensidad de las emociones básicas en la prensa digital para evaluar el clima emocional del periodismo hispanohablante.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-emotions">
+        <!-- Interactive visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Emotion Selector Buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">Emoción:</span>
+                    <button class="emotion-btn active" data-emotion="alegría">Alegría</button>
+                    <button class="emotion-btn" data-emotion="miedo">Miedo</button>
+                    <button class="emotion-btn" data-emotion="ira">Ira</button>
+                    <button class="emotion-btn" data-emotion="tristeza">Tristeza</button>
+                </div>
+                
+                <div id="d3-canvas-emotions" class="viz-canvas">
+                    <!-- Dynamic D3.js Ridgeline Plot will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización de Emociones</p>
+                        <p class="placeholder-subtitle">Se cargará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">05.1</span>
+                <h3>Montañas de Sentimiento</h3>
+                <p>
+                    Este gráfico de tipo <strong>Joyplot (Ridgeline Plot)</strong> muestra la fluctuación de la emoción seleccionada en las portadas de noticias desde el año 2007 hasta 2026.
+                </p>
+                <p>
+                    Cada montaña representa un país, ordenados verticalmente (Argentina, Chile, España y México). Las áreas se superponen suavemente y están coloreadas según el país correspondiente para facilitar su contraste visual.
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">05.2</span>
+                <h3>El negocio de la ansiedad</h3>
+                <div id="storytelling-insights-emotions">
+                    <!-- Dynamic storytelling text will be generated here -->
+                </div>
+                <p>
+                    Utiliza el panel de botones superiores para alternar entre "Alegría", "Miedo", "Ira" y "Tristeza" y observa cómo muta el oleaje emocional en la historia reciente de la prensa.
+                </p>
+            </div>
+        </article>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <p><strong>El Eco de las Palabras</strong> | Proyecto de Análisis Lingüístico y Visual</p>

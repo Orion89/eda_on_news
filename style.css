@@ -910,4 +910,119 @@ body {
     }
 }
 
+/* --- Section 5 Container Layout --- */
+#scrolly-emotions {
+    position: relative;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+#scrolly-emotions figure.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55vh;
+    margin: 0;
+    background-color: var(--color-bg-alt);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#d3-canvas-emotions {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Emotion Selector Buttons --- */
+.emotion-btn {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    background-color: #ffffff;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+.emotion-btn:hover {
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-main);
+    border-color: var(--color-text-muted);
+}
+
+.emotion-btn:active {
+    transform: scale(0.97);
+}
+
+.emotion-btn.active {
+    background-color: var(--color-text-main);
+    color: #ffffff;
+    border-color: var(--color-text-main);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Ridgeline Chart Visuals --- */
+.ridgeline-area {
+    fill-opacity: 0.75; /* SUPERPOSICIÓN SUAVE */
+    transition: fill-opacity 0.2s ease;
+}
+
+.ridgeline-area:hover {
+    fill-opacity: 0.9;
+}
+
+.ridgeline-stroke {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
+.ridgeline-baseline {
+    stroke: var(--color-border);
+    stroke-width: 1px;
+    opacity: 0.8;
+}
+
+.ridgeline-country-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    fill: var(--color-text-muted);
+}
+
+/* Dynamic storytelling card for Section 5 */
+#storytelling-insights-emotions {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+/* Desktop layout override for Section 5 */
+@media (min-width: 992px) {
+    #scrolly-emotions {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #scrolly-emotions figure.sticky {
+        width: 55%;
+        height: 100vh;
+        top: 0;
+        border-bottom: none;
+        border-left: 1px solid var(--color-border);
+    }
+}
+
 
