@@ -290,6 +290,79 @@
         </article>
     </section>
 
+    <!-- Section 6: El Mapa del Poder (NER Bubble Map) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis de Entidades Nombradas (NER)</span>
+            <h2 class="section-title">El Mapa del Poder</h2>
+            <p class="section-intro-text">
+                ¿Qué lugares existen en la mente informativa de cada país? Mapeamos las localidades más mencionadas por la prensa digital para revelar el centralismo geográfico del periodismo latinoamericano.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-map">
+        <!-- Sticky map canvas -->
+        <figure class="sticky" id="map-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Country filter buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">País:</span>
+                    <button class="map-country-btn active" data-country="all">Todos</button>
+                    <button class="map-country-btn" data-country="AR">Argentina</button>
+                    <button class="map-country-btn" data-country="CL">Chile</button>
+                    <button class="map-country-btn" data-country="ES">España</button>
+                    <button class="map-country-btn" data-country="MX">México</button>
+                </div>
+                <div id="d3-canvas-map" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Cargando Mapa…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+                <!-- Floating storytelling overlay -->
+                <div id="map-storytelling-overlay" class="map-overlay hidden"></div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">06.1</span>
+                <h3>El Mapa Completo</h3>
+                <p>
+                    Cada burbuja representa una localidad mencionada por los principales medios digitales. El <strong>tamaño</strong> codifica la cantidad de menciones y el <strong>color</strong> identifica el país cuya prensa la menciona.
+                </p>
+                <p>
+                    Lo que verás no es solo un mapa geográfico: es un <em>mapa de la atención periodística</em>, donde algunas ciudades son gigantes y vastas regiones resultan invisibles.
+                </p>
+            </div>
+
+            <div class="step" data-step="2">
+                <span class="step-num">06.2</span>
+                <h3>El Centralismo Chileno</h3>
+                <div id="map-insight-CL" class="map-insight-text"><!-- JS --></div>
+                <p>Observa cómo la cobertura geográfica de la prensa chilena se concentra en la capital y apenas unas pocas ciudades del corredor central.</p>
+            </div>
+
+            <div class="step" data-step="3">
+                <span class="step-num">06.3</span>
+                <h3>El Centralismo Argentino</h3>
+                <div id="map-insight-AR" class="map-insight-text"><!-- JS --></div>
+                <p>Buenos Aires y su área metropolitana dominan la agenda geográfica argentina, dejando a las provincias del sur y el norte casi sin voz.</p>
+            </div>
+
+            <div class="step" data-step="4">
+                <span class="step-num">06.4</span>
+                <h3>México y España</h3>
+                <div id="map-insight-MX" class="map-insight-text"><!-- JS --></div>
+                <p>Examina si el patrón centralista se repite en México y España, o si existe una mayor distribución geográfica de la cobertura.</p>
+            </div>
+        </article>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <p><strong>El Eco de las Palabras</strong> | Proyecto de Análisis Lingüístico y Visual</p>
@@ -298,6 +371,7 @@
     </footer>
 
     <!-- Libraries CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
     

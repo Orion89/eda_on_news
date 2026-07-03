@@ -1,0 +1,460 @@
+country,city,lat,lon,mentions
+Argentina,Neuquén,-38.8502546,-69.832275,8416
+Argentina,Buenos Aires,-34.6095579,-58.3887904,8345
+Argentina,Estados Unidos,-25.7195559,-62.652508,7367
+Argentina,Córdoba,-31.4166867,-64.1834193,6875
+Argentina,Bariloche,-41.1334781,-71.3101474,6345
+Argentina,Brasil,-28.6680373,-49.3383467,5872
+Argentina,España,-27.4439414,-59.0178715,4665
+Argentina,Río Negro,-40.4811973,-67.6145911,4477
+Argentina,Provincia De Buenos Aires,-36.3789925,-60.3855889,4142
+Argentina,Israel,-31.5536915,-68.6158269,3553
+Argentina,Chile,-33.0473517,-71.4731364,3364
+Argentina,Mendoza,-34.5970325,-68.7304797,3305
+Argentina,México,27.0854542,-109.1412408,3240
+Argentina,Gobierno Nacional,-31.2467635,-59.7498679,3233
+Argentina,La Libertad Avanza,-32.9218083,-60.8073897,3167
+Argentina,Europa,-34.6560444,-58.5349753,2936
+Argentina,China,-34.5788554,-58.4772206,2925
+Argentina,América,-35.4891187,-62.9756868,2854
+Argentina,Ciudad De Buenos Aires,-34.6095579,-58.3887904,2764
+Argentina,Viedma,-40.8084274,-62.994722,2446
+Argentina,Casa Rosada,-34.6080692,-58.3702762,2441
+Argentina,Vaca Muerta,-27.2251995,-64.1614471,2425
+Argentina,Uruguay,-34.604043,-58.3870845,2394
+Argentina,Indec,-34.610219,-58.37523,2363
+Argentina,Irán,-24.8340677,-65.3811253,2259
+Argentina,Ucrania,-31.4076503,-64.1542518,2249
+Argentina,Santa Fe,-30.3154739,-61.1645076,2233
+Argentina,Provincia,-46.7959922,-67.9641808,2119
+Argentina,Chubut,-43.7128356,-68.7461817,2103
+Argentina,Rusia,-34.6063102,-58.4829826,2098
+Argentina,Gabinete,-34.6285857,-58.4272769,2068
+Argentina,Misiones,-26.737224,-54.4315257,2024
+Argentina,Rosario,-32.9593609,-60.6617024,2015
+Argentina,Francia,-33.2825351,-66.3408239,1977
+Argentina,Italia,43.9593221,7.8201585,1966
+Argentina,Tierra Del Fuego,-54.3815213,-67.5678997,1938
+Argentina,Ciudad,-34.6095579,-58.3887904,1888
+Argentina,La Ley,-31.418555,-64.1863938,1873
+Argentina,Venezuela,-34.6152097,-58.404737,1837
+Argentina,Mar Del Plata,-37.9976168,-57.5482079,1836
+Argentina,Patagonia,-51.6538867,-69.2921939,1818
+Argentina,Colombia,4.9037037,-75.5025961,1738
+Argentina,Nueva York,-25.2483317,-62.769643,1657
+Argentina,Centro,-31.5368544,-68.5218006,1636
+Argentina,Ushuaia,-54.807306,-68.3084133,1613
+Argentina,Paraguay,-34.58435,-58.4246382,1538
+Argentina,La Pampa,-37.1789623,-65.704912,1524
+Argentina,Salta,-25.2269908,-64.5911956,1492
+Argentina,Gaza,-26.8139976,-65.3231471,1431
+Argentina,Fuente,-34.6129157,-68.330491,1416
+Argentina,Río Grande,-53.7858275,-67.7018562,1364
+Argentina,Tucumán,-27.0448424,-65.3657954,1353
+Argentina,Miami,-41.1484278,-71.267382,1345
+Argentina,Corrientes,-29.0177384,-57.8869739,1301
+Argentina,Madrid,-34.6340432,-58.5276583,1239
+Argentina,Alemania,-34.5801199,-58.505129,1236
+Argentina,Bolivia,-34.5767416,-58.505542,1236
+Argentina,Perú,-34.6085776,-58.3745001,1230
+Argentina,La Plata,-34.9206797,-57.9537638,1222
+Argentina,Canadá,-31.5270494,-68.5364956,1220
+Argentina,Washington,-33.8723584,-64.6884445,1209
+Argentina,Municipio,-28.5076818,-59.0443876,1200
+Argentina,Los Estados Unidos,-34.5766628,-58.4187655,1193
+Argentina,Aries,-29.461101,-66.8652722,1177
+Argentina,Jujuy,-23.1546219,-66.1110913,1157
+Argentina,Caba,-34.6161231,-58.4356212,1156
+Argentina,Lla,-12.0479852,-77.093931,1150
+Argentina,Tauro,-29.4582323,-66.8700229,1142
+Argentina,Ecuador,-2.2350434,-79.0899754,1124
+Argentina,San Martín De Los Andes,-40.1568791,-71.3525588,1102
+Argentina,La Luna,-24.3084066,-63.5571317,1100
+Argentina,La Bombonera,-34.6355171,-58.3649163,1076
+Argentina,Tolhuin,-54.5113492,-67.1954004,1069
+Argentina,Barcelona,-34.6602809,-58.4384433,1060
+Argentina,París,-34.6325444,-58.5223153,1042
+Argentina,Provincia De Neuquén,-38.8502546,-69.832275,995
+Argentina,Palermo,-34.5803362,-58.4245236,976
+Argentina,La Tierra,-24.8443001,-65.4931042,976
+Argentina,Londres,-27.7126212,-67.1355516,972
+Argentina,San Lorenzo,-32.7454865,-60.743091,962
+Argentina,La Rioja,-29.7824554,-67.1147124,949
+Argentina,Latinoamérica,-30.9907865,-64.0906859,948
+Argentina,Lam,-6.7525573,-79.8429745,940
+Argentina,Santa Cruz,-49.0468648,-70.27054,937
+Argentina,Entre Ríos,-32.1290686,-59.5077664,928
+Argentina,Chaco,-26.3829647,-60.8816092,911
+Argentina,Posadas,-27.3664824,-55.894295,890
+Argentina,Formosa,-24.5955306,-60.4289718,873
+Argentina,Florida,-34.5322058,-58.4937312,872
+Argentina,Qatar,-24.8335499,-65.4180888,870
+Argentina,San Martín,-34.5771577,-58.5377237,848
+Argentina,San Juan,-30.7054363,-69.1988222,838
+Argentina,Estado Nacional,-38.7502818,-68.1022921,837
+Argentina,Japón,-24.8342979,-65.3807163,831
+Argentina,Villa La Angostura,-40.7620693,-71.6472306,825
+Argentina,Santiago Del Estero,-27.6431016,-63.5408542,803
+Argentina,Provincia De Río Negro,-40.4811973,-67.6145911,784
+Argentina,Lanús,-34.7073871,-58.3905998,784
+Argentina,Reino Unido,51.512283,-0.1486868,766
+Argentina,Inglaterra,-31.5142821,-68.4591808,764
+Argentina,Roma,-31.642912,-60.7255422,753
+Argentina,San Luis,-33.8985562,-66.0614179,751
+Argentina,Ee.Uu.,-34.6071454,-58.9708142,750
+Argentina,Cipolletti,-38.931342,-67.9905921,749
+Argentina,Australia,-34.6451291,-58.3797221,732
+Argentina,República Argentina,-29.5349499,-62.2661501,729
+Argentina,Corte Suprema,-34.6029082,-58.3844234,727
+Argentina,Bahía Blanca,-38.7176522,-62.2654871,713
+Argentina,El Bolsón,-41.9649027,-71.5348197,706
+Argentina,Ciudad De,-34.6095579,-58.3887904,694
+Argentina,Ezeiza,-34.8168141,-58.5474234,693
+Argentina,Tigre,-34.4235341,-58.5817628,688
+Argentina,Acá,-32.6190045,-60.7654858,671
+Argentina,Catamarca,-27.7758659,-67.171292,656
+Argentina,California,-31.4510961,-64.2055231,651
+Argentina,Zapala,-38.9006215,-70.0668573,645
+Argentina,Provincia De Córdoba,-32.022249,-63.9698736,643
+Argentina,Municipalidad,-31.6497893,-60.7117945,632
+Argentina,Moscú,-28.4467991,-65.7192984,618
+Argentina,Centro Cívico,-41.1337056,-71.3103263,616
+Argentina,Sudamérica,-31.7323765,-60.5114149,614
+Argentina,Banco Central,-34.6048076,-58.3727355,613
+Argentina,Covid-19,-24.2428149,-65.2624543,612
+Argentina,Añelo,-38.35428,-68.7875804,595
+Argentina,San Carlos De Bariloche,-41.1334781,-71.3101474,594
+Argentina,Río De Janeiro,-34.6152413,-58.429492,585
+Argentina,Géminis,-38.7112286,-62.2677286,568
+Argentina,Plottier,-38.9523098,-68.2270197,565
+Argentina,El Cordillerano,-31.5925799,-68.577803,558
+Argentina,Casa Blanca,-24.3735601,-66.2496185,551
+Argentina,Malvinas,-27.4681694,-59.0090906,548
+Argentina,Poder Judicial,-32.895348,-68.8445239,538
+Argentina,Provincia Del Neuquén,-38.8502546,-69.832275,526
+Argentina,Hollywood,-33.0306859,-60.6875762,519
+Argentina,La Matanza,-26.5723825,-60.1650583,511
+Argentina,Centenario,-38.8301384,-68.1215201,508
+Argentina,Antártida,-27.7994726,-64.2725339,501
+Argentina,Los Ángeles,-34.456031,-60.178984,501
+Argentina,Eldorado,-26.4048555,-54.6262079,488
+Argentina,Cuba,-34.5381402,-58.4498322,484
+Argentina,Capital,-24.9721002,-65.2038658,483
+Argentina,Monumental,-34.5452932,-58.4497385,476
+Argentina,Mercado Libre,-34.5474439,-58.4890518,469
+Argentina,Líbano,-37.532088,-61.285195,468
+Argentina,Río Cuarto,-33.1237585,-64.3489782,463
+Argentina,Islas Malvinas,-32.9013031,-60.7783281,463
+Argentina,Montevideo,-24.5662505,-62.1510371,463
+Argentina,Capital Federal,-34.6161231,-58.4356212,462
+Argentina,El Salvador,-25.063558,-65.4376514,449
+Argentina,Capital Humano,-34.9164655,-57.9453323,446
+Argentina,Casa De Gobierno,-34.6080692,-58.3702762,443
+Argentina,Meta,4.1206507,-73.5268805,440
+Argentina,Sudáfrica,-37.9441675,-57.5969843,438
+Argentina,Texas,-31.4674893,-64.2286101,436
+Argentina,India,-24.8335295,-65.3819592,430
+Argentina,Wall Street,-34.5620547,-58.4569654,427
+Argentina,Suiza,-27.0578696,-55.2421403,422
+Argentina,Luna,-34.5945487,-59.11071,419
+Argentina,Mercado Pago,-32.9397509,-60.6696598,417
+Argentina,Marte,-34.4570137,-58.5351583,415
+Argentina,Portugal,-34.6099085,-58.433166,410
+Argentina,Turquía,-34.6559029,-58.4131777,407
+Argentina,Países Bajos,-37.8822498,-67.7905543,407
+Argentina,Corte Suprema De Justicia,-34.6029082,-58.3844234,404
+Argentina,Roca,-45.8756699,-67.5155969,401
+Argentina,Unidos,-27.0104728,-54.465005,398
+Argentina,Gran Buenos Aires,-37.3868819,-68.9246464,397
+Argentina,Educación,-24.1984335,-65.2883315,393
+Argentina,Eeuu,-27.3634972,-55.8893291,392
+Argentina,Rincón De Los Sauces,-37.390188,-68.9252566,390
+Argentina,Asia,-34.6369157,-58.4403946,390
+Argentina,Tesoro,-27.0901255,-66.1562725,385
+Argentina,General Roca,-39.0268342,-67.5754674,379
+Argentina,Santa Rosa,-36.6203503,-64.2905765,376
+Argentina,Morón,-34.6510527,-58.6217416,368
+Argentina,Alto Valle,-38.9631402,-67.8664957,365
+Argentina,Plaza De Mayo,-34.6084453,-58.3721787,363
+Argentina,Escorpio,-29.4584361,-66.8702891,360
+Argentina,África,-31.4277725,-64.2628587,353
+Argentina,Teherán,-34.8153681,-58.2389287,352
+Argentina,Movistar Arena,-34.5942604,-58.4481368,348
+Argentina,Arabia Saudita,-24.833614,-65.4136054,347
+Argentina,Punta Del Este,-31.3528815,-64.2848307,347
+Argentina,Nueva Zelanda,-31.414658,-64.1550038,347
+Argentina,Lomas De Zamora,-34.7572582,-58.4026638,341
+Argentina,Kiev,-34.9045603,-57.9633725,339
+Argentina,De Colombia,-34.5919798,-58.3814036,336
+Argentina,Chos Malal,-37.3785324,-70.2719127,335
+Argentina,Mercurio,-31.4314422,-64.2097757,335
+Argentina,Virgo,-29.4571127,-66.8696304,331
+Argentina,Mirá,-31.9030235,-61.2781105,331
+Argentina,Conurbano,-34.4242834,-58.5786913,326
+Argentina,Vaticano,-32.9558699,-68.8624753,326
+Argentina,Congreso Nacional,-54.8246245,-68.3350867,324
+Argentina,Suecia,-34.6437236,-58.5009568,320
+Argentina,Info,-32.885071,-68.8550303,318
+Argentina,Ciudad De México,19.4556899,-99.2065654,311
+Argentina,Avellaneda,-34.6648394,-58.3628061,309
+Argentina,San Francisco,-31.4249815,-62.0840299,309
+Argentina,Chicago,-34.7578656,-58.3614091,306
+Argentina,Recoleta,-34.587358,-58.39157,306
+Argentina,Venus,-27.73069,-62.4479463,305
+Argentina,Junín De Los Andes,-39.9508663,-71.0708883,305
+Argentina,Egipto,-24.8354373,-65.3792405,303
+Argentina,Florencia,-28.0405521,-59.2181955,302
+Argentina,Panamá,-34.6030656,-58.431192,301
+Argentina,Acuario,-28.4717565,-65.8218581,300
+Argentina,Lima,-34.6091227,-58.3826462,296
+Argentina,Pacífico,-38.7106853,-62.2865141,290
+Argentina,Valencia,-27.385523,-57.7335556,288
+Argentina,Noticiasnet,-40.8087477,-62.9901034,286
+Argentina,Quilmes,-34.7244434,-58.2588168,284
+Argentina,Belgrano,-31.6376037,-60.6870912,279
+Argentina,Las Grutas,-40.9938214,-65.476336,277
+Argentina,Oeste,-43.2475106,-65.3202119,274
+Argentina,General,-34.5406452,-58.4606874,274
+Argentina,Santiago,-27.6431016,-63.5408542,272
+Argentina,Oberá,-27.4849798,-55.1202965,272
+Argentina,Retiro,-34.5911503,-58.3746803,269
+Argentina,Godoy Cruz,-32.9283499,-68.9050558,269
+Argentina,Gendarmería Nacional,-42.9048106,-71.310569,269
+Argentina,San Pablo,-26.8705501,-65.3112549,268
+Argentina,Kremlin,-34.6207349,-58.4798227,268
+Argentina,Central,-39.0362504,-67.5459813,268
+Argentina,Unrn,-40.8298784,-62.9738304,265
+Argentina,Sur,-31.662588,-64.4300667,265
+Argentina,Covid,-24.2428149,-65.2624543,262
+Argentina,Sena,-26.3697432,-60.6105573,257
+Argentina,Dina Huapi,-41.0761031,-71.1720318,257
+Argentina,Barracas Central,-34.6475867,-58.3967688,257
+Argentina,Núñez,-34.5484856,-58.4627415,254
+Argentina,Guatemala,15.0002251,-92.0141888,253
+Argentina,Piscis,-29.456492,-66.8682117,253
+Argentina,Siria,-34.5692486,-60.9390538,251
+Argentina,General Pico,-35.6591085,-63.7576103,251
+Argentina,Beijing,-34.5889113,-58.3911371,250
+Argentina,Costa Rica,-25.5970478,-60.694054,250
+Argentina,Corea Del Sur,37.5361344,126.9873598,249
+Argentina,Comodoro Rivadavia,-45.8632024,-67.4752615,248
+Argentina,Puerto Madero,-34.6103764,-58.3622067,247
+Argentina,Sol,-37.6751332,-59.8189084,246
+Argentina,Conicet,-34.5826124,-58.4291436,243
+Argentina,Gobernador,-32.8318687,-68.7954466,243
+Argentina,Parques Nacionales,-41.139254,-71.3096955,243
+Argentina,Aluminé,-39.2384508,-70.9158947,242
+Argentina,Salud,-34.6121936,-58.3814863,241
+Argentina,Las Vegas,-31.6761089,-60.7932794,240
+Argentina,Aduana,-32.9162662,-60.7716457,240
+Argentina,Junín,-34.5934412,-60.9461678,238
+Argentina,Aeroparque,-34.5594554,-58.4143637,237
+Argentina,Provincia De Santa Fe,-30.3154739,-61.1645076,234
+Argentina,Caracas,-34.5760901,-58.5008146,233
+Argentina,Gran Bretaña,-31.4288042,-64.5113544,231
+Argentina,Sagitario,-36.2743435,-62.9322728,231
+Argentina,Talleres,-34.5766826,-60.9438732,229
+Argentina,San Isidro,-34.4739792,-58.5264866,229
+Argentina,Plaza Huincul,-38.9304191,-69.200246,227
+Argentina,Norte,-28.4431336,-65.7742935,224
+Argentina,Teatro Colón,-34.6010855,-58.3831869,223
+Argentina,San Antonio Oeste,-40.7302125,-64.9389955,222
+Argentina,Tandil,-37.3282887,-59.1356957,220
+Argentina,Patagones,-34.6373248,-58.4002814,219
+Argentina,Bélgica,-34.6036934,-58.4776921,218
+Argentina,Gobierno Argentino,-38.9513794,-68.0636767,214
+Argentina,Paraná,-27.4210173,-56.6011693,214
+Argentina,Caribe,-37.9776195,-57.6251779,214
+Argentina,Capricornio,-31.3604533,-58.0509746,214
+Argentina,La Rural,-33.9028387,-60.5335842,213
+Argentina,Costa Atlántica,-45.8133548,-67.4352105,212
+Argentina,Hospital Italiano,-34.6078588,-58.4236777,210
+Argentina,Bogotá,-34.6321142,-58.4872898,209
+Argentina,Atlántico,-46.4685411,-67.5169178,207
+Argentina,Indiana,-54.347025,-67.422838,206
+Argentina,Galicia,-34.5837044,-58.4033154,206
+Argentina,Liverpool,-34.5827482,-58.4822684,205
+Argentina,Noticias Argentinas,-33.6751142,-65.4631811,205
+Argentina,Pilar,-34.4570918,-58.9141609,205
+Argentina,City,-34.5588324,-58.4591794,204
+Argentina,Dinamarca,-34.609682,-58.4520658,203
+Argentina,Occidente,5.7796133,-74.1602698,202
+Argentina,Colón,-32.2182804,-58.1356171,202
+Argentina,Parque Nacional Nahuel Huapi,-40.872513,-71.4684593,201
+Argentina,Argentinos,-34.6389831,-58.3613682,201
+Argentina,Municipalidad De Ushuaia,-54.8140946,-68.3362999,201
+Argentina,Leo,-34.6434236,-58.50359,200
+Argentina,Gobierno De Río Negro,-40.8093554,-62.9954495,198
+Argentina,Villa Gesell,-37.2556627,-56.9679411,196
+Argentina,Estadio Monumental,-34.5452932,-58.4497385,196
+Argentina,Las Heras,-34.5875522,-58.3972196,195
+Argentina,Concejo,-34.6095411,-58.3745037,194
+Argentina,Estado.,-34.6100671,-58.3676496,194
+Argentina,Cáncer,-40.81372,-63.0015519,193
+Argentina,Municipio De Río Grande,-53.7858275,-67.7018562,191
+Argentina,Concejo Deliberante,-34.6095411,-58.3745037,191
+Argentina,Grecia,-34.5401667,-58.467999,190
+Argentina,Sevilla,-38.7017971,-62.2933059,188
+Argentina,Santiago De Chile,-34.6430704,-58.5174459,187
+Argentina,Cerro Catedral,-33.3135822,-69.9828887,186
+Argentina,Ituzaingó,-34.6583293,-58.6671441,186
+Argentina,Resistencia,-27.6048829,-59.1932003,186
+Argentina,Jefatura De Gabinete,-38.9515656,-68.0640856,185
+Argentina,Chelsea,-39.027655,-67.571855,179
+Argentina,Neuquén.-,-38.8502546,-69.832275,179
+Argentina,Bruselas,-34.6261594,-58.5235633,177
+Argentina,Provincia De Misiones,-26.737224,-54.4315257,176
+Argentina,Rosario Central,-32.9055953,-60.6803375,175
+Argentina,Pinamar,-37.1099492,-56.8539007,174
+Argentina,San Nicolás,-33.3277089,-60.2165909,171
+Argentina,Noruega,-34.6116435,-58.4955603,171
+Argentina,Vialidad Nacional,-33.2878089,-66.3183197,168
+Argentina,La Paz,-30.7422896,-59.6439325,168
+Argentina,Esquel,-42.9173055,-71.3216508,168
+Argentina,Cuyo,-34.6580875,-58.4803816,167
+Argentina,Puerto Iguazú,-25.6107508,-54.5764199,167
+Argentina,Ushuaia.-,-54.807306,-68.3084133,167
+Argentina,Caballito,-34.6205897,-58.4413922,165
+Argentina,Villa Regina,-39.0987435,-67.0852996,165
+Argentina,Municipalidad De Neuquén,-38.93322,-68.1175746,165
+Argentina,Davos,-30.9749332,-64.1053381,164
+Argentina,Sierra Grande,-41.605351,-65.3568775,164
+Argentina,Polonia,-26.4067458,-54.6221207,164
+Argentina,Austria,-34.5876134,-58.4034767,164
+Argentina,Feria Del Libro,-26.8272467,-65.2054232,162
+Argentina,Noa,-32.90002,-68.8296139,160
+Argentina,Berlín,-32.6382178,-70.0214276,160
+Argentina,Saturno,-36.916221,-62.6804394,159
+Argentina,Obelisco,-34.6037093,-58.3816296,159
+Argentina,Central Córdoba,-31.2573191,-61.4798914,159
+Argentina,Georgia,-31.4863959,-64.2378562,159
+Argentina,América Del Sur,-31.4830653,-64.2267055,159
+Argentina,Irlanda,-34.541728,-58.464904,158
+Argentina,Libra,-41.1238171,-71.3970565,157
+Argentina,Tres Arroyos,-38.3770014,-60.2755685,157
+Argentina,Rivadavia,-31.5465955,-68.6505443,157
+Argentina,Anses,-37.9866593,-57.5702922,154
+Argentina,Federal,-30.9558743,-58.7797943,154
+Argentina,Río Colorado,-38.7312132,-66.2069607,154
+Argentina,Rio Negro,-40.4811973,-67.6145911,154
+Argentina,Cataluña,-31.4348831,-64.1540506,154
+Argentina,Incaa,-34.6088882,-58.3896252,153
+Argentina,Puerto Madryn,-42.7673414,-65.0365942,152
+Argentina,Libertad,-34.7003704,-58.6834869,150
+Argentina,Maracaná,-27.3012376,-54.1935963,150
+Argentina,Barracas,-34.6452854,-58.3875619,149
+Argentina,Río Neuquén,-37.9685333,-69.795589,149
+Argentina,Dallas,-31.4708038,-64.2315907,148
+Argentina,Merlo,-34.6604988,-58.7321695,146
+Argentina,Emiratos Árabes Unidos,-24.8342256,-65.413009,145
+Argentina,Guayaquil,-34.6207403,-58.4362204,144
+Argentina,Prefectura Naval Argentina,-37.9815532,-57.5842038,143
+Argentina,El Niño,-31.3917299,-64.1337503,142
+Argentina,Gobierno Provincial,-27.3651736,-55.8939918,142
+Argentina,Gobierno De La Provincia,-31.2467635,-59.7498679,142
+Argentina,La Patagonia,-38.5173056,-69.7255898,141
+Argentina,Islas Del Atlántico Sur,-31.3301662,-64.2404427,141
+Argentina,Transporte,-31.5983025,-60.6961911,141
+Argentina,Río De La Plata,-28.6177672,-65.5094398,141
+Argentina,Necochea,-38.5545494,-58.7392624,140
+Argentina,Villa Mascardi,-41.3504752,-71.5106159,139
+Argentina,Justicia Federal,-40.8087714,-62.9931968,139
+Argentina,Asunción,-27.4479463,-58.970579,138
+Argentina,Virginia,-30.7395488,-61.3402394,138
+Argentina,Júpiter,-34.4369507,-58.727467,137
+Argentina,Tailandia,-46.4284831,-67.5349528,136
+Argentina,Talleres De Córdoba,-31.3936035,-64.1665003,136
+Argentina,Luna Park,-34.6024261,-58.3686914,136
+Argentina,Hotel Hilton,-34.4333223,-58.9747345,135
+Argentina,El Vaticano,-31.4050091,-64.5023191,135
+Argentina,Patagonia Argentina,-40.7999494,-63.0003119,134
+Argentina,Atlántico Sur,-27.4332797,-58.976193,134
+Argentina,Palestina,-31.3995306,-64.1947608,134
+Argentina,Corea Del Norte,39.0317271,125.7358472,133
+Argentina,Plutón,-31.7058433,-64.4261372,133
+Argentina,Banco Provincia,-34.2441423,-59.4742956,133
+Argentina,Tokio,-34.6129818,-58.491271,133
+Argentina,El Sol,-36.7603082,-59.8524403,133
+Argentina,Cabo Verde,-27.3805897,-55.9098304,132
+Argentina,Este,-34.652821,-59.424042,131
+Argentina,Alem,-53.7663805,-67.7164716,130
+Argentina,Pensilvania,-31.4746872,-64.2355768,130
+Argentina,Medellín,-28.651611,-63.7846096,129
+Argentina,Senillosa,-39.0134511,-68.4267867,128
+Argentina,Estado Provincial,-34.6093463,-58.3761415,128
+Argentina,Chascomús,-35.5786869,-58.0138252,127
+Argentina,Foto,-34.640386,-58.5266683,127
+Argentina,Luján,-34.5661734,-59.1152598,127
+Argentina,Aten,-38.8291183,-68.1363078,126
+Argentina,Pakistán,-34.5640968,-58.4234137,126
+Argentina,Quinta De Olivos,-34.5151079,-58.4831004,125
+Argentina,Mercadona,36.6841796,-4.4575963,125
+Argentina,Catedral,-34.60757,-58.3742905,125
+Argentina,Cinco Saltos,-38.8275693,-68.0661786,124
+Argentina,Quito,-34.617056,-58.4265965,123
+Argentina,Trelew,-43.2531242,-65.3094407,123
+Argentina,Río Gallegos,-51.6268852,-69.105804,123
+Argentina,Provincia De Mendoza,-34.5970325,-68.7304797,122
+Argentina,Beirut,-34.8123839,-58.249729,121
+Argentina,Maipú,-32.9846171,-68.7882043,120
+Argentina,Unco,-38.9394882,-68.0503365,119
+Argentina,Confluencia,-38.9625705,-68.0313581,119
+Argentina,Zona A,-31.5920816,-64.3498546,117
+Argentina,Olivos,-34.5110708,-58.4901197,117
+Argentina,Manhattan,-34.6085926,-58.4058773,117
+Argentina,Chapelco,-40.2271964,-71.2547613,117
+Argentina,Tren Patagónico,-41.1308315,-71.2794813,117
+Argentina,Reserva Federal,-27.3965483,-55.649989,115
+Argentina,Urano,-29.4007971,-66.7859216,115
+Argentina,La Ribera,-39.0794914,-67.5743045,114
+Argentina,Amia,-38.9711526,-67.8201541,114
+Argentina,Mar Negro,-24.8302128,-65.4145587,110
+Argentina,Falta,-34.0861717,-59.0323773,110
+Argentina,Gobierno De La Ciudad,-31.6581416,-60.7107039,110
+Argentina,Villa María,-32.4106245,-63.2435809,109
+Argentina,La Boca,-34.6335103,-58.3590424,109
+Argentina,Puerto Rico,-26.8167893,-55.0266912,108
+Argentina,Villa Pehuenia,-38.8813069,-71.1740024,108
+Argentina,Jerusalén,-31.5866538,-68.5614775,108
+Argentina,Cordillera De Los Andes,-31.5046017,-68.4853983,108
+Argentina,Boedo,-34.6254799,-58.4161163,108
+Argentina,Vista Alegre,-38.7177463,-62.3129938,107
+Argentina,San Pedro,-33.6760716,-59.6629342,106
+Argentina,Sinaloa,24.7775362,-107.4056855,106
+Argentina,Parque Nacional Los Alerces,-42.842119,-71.8763961,106
+Argentina,San Patricio Del Chañar,-38.6312548,-68.2971527,105
+Argentina,Finlandia,-34.6532829,-58.5156011,104
+Argentina,Catriel,-37.8792422,-67.7919078,104
+Argentina,Estambul,-36.6208257,-64.2858519,104
+Argentina,Tenerife,-31.4614644,-64.206782,103
+Argentina,Honduras,-34.5931134,-58.4239945,103
+Argentina,Norteamérica,-34.6317396,-58.5671025,103
+Argentina,Allen,-38.9795062,-67.8280092,102
+Argentina,Río Paraná,-27.4210173,-56.6011693,102
+Argentina,Na).-,-28.6680373,-49.3383467,101
+Argentina,Singapur,-32.9361957,-60.8024185,101
+Argentina,Moreno,-34.6396556,-58.7898326,100
+Argentina,Móvil,-37.5086349,-61.8509425,100
+Argentina,República Dominicana,-34.5909094,-58.4136448,99
+Argentina,Manzana,-34.610524,-58.3747376,98
+Argentina,Mar Rojo,-24.8275948,-65.425639,98
+Argentina,Fit,-34.5956906,-58.3943958,98
+Argentina,Jordania,-24.834016,-65.4147766,98
+Argentina,Policía De Río Negro,-41.12207,-71.2355667,98
+Argentina,Damasco,-31.5886194,-68.5621005,97
+Argentina,Provincia De Tierra Del Fuego,-34.5947225,-58.3816995,97
+Argentina,Nueva Jersey,-31.4678412,-64.2284524,96
+Argentina,Legislatura De Río Negro,-37.8842818,-67.8009837,96
+Argentina,Lago Nahuel Huapi,-40.9202836,-71.520956,96
+Argentina,Choel,-39.2932355,-65.6615828,96
+Argentina,Gobierno De La Ciudad De Buenos Aires,-34.6399289,-58.4059321,96
+Argentina,Escocia,-32.9261081,-60.7314616,95
+Argentina,Porto Alegre,-34.9334429,-58.6152682,95
+Argentina,Tel Aviv,-34.6404466,-58.7119916,95
+Argentina,Indonesia,-27.4600221,-58.7965525,95
+Argentina,Unter,31.951381,34.8609717,94
+Argentina,Wanda,-25.9693011,-54.5696922,94
+Argentina,Recorrido,-30.0855026,-67.9235122,93
+Argentina,Estado Argentino,-49.3288963,-72.8895536,93
+Argentina,Arroyito,-31.4192409,-63.0509405,92
+Argentina,Atlanta,-34.5942673,-58.4486027,92

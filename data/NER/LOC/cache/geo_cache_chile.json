@@ -1,0 +1,2002 @@
+{
+  "Chile, Chile": [
+    -33.4376995,
+    -70.6510671
+  ],
+  "Santiago, Chile": [
+    -33.4376995,
+    -70.6510671
+  ],
+  "Valparaíso, Chile": [
+    -33.0458456,
+    -71.6196749
+  ],
+  "Estados Unidos, Chile": [
+    -33.0332734,
+    -71.4849602
+  ],
+  "Argentina, Chile": [
+    -33.0473517,
+    -71.4731364
+  ],
+  "Antofagasta, Chile": [
+    -23.6463741,
+    -70.3980033
+  ],
+  "Coquimbo, Chile": [
+    -30.7546652,
+    -70.9005536
+  ],
+  "La Araucanía, Chile": [
+    -40.9071314,
+    -73.157326
+  ],
+  "Brasil, Chile": [
+    -4.8828067,
+    -38.4541111
+  ],
+  "La Serena, Chile": [
+    -29.902705,
+    -71.2519575
+  ],
+  "Israel, Chile": [
+    -33.0525929,
+    -71.6306813
+  ],
+  "Biobío, Chile": [
+    -37.3391407,
+    -72.4106825
+  ],
+  "Región Metropolitana, Chile": [
+    -33.5739341,
+    -70.6205518
+  ],
+  "España, Chile": [
+    -53.1480496,
+    -70.9038227
+  ],
+  "Europa, Chile": [
+    -34.1585204,
+    -70.7079283
+  ],
+  "Temuco, Chile": [
+    -38.7358908,
+    -72.590538
+  ],
+  "Perú, Chile": [
+    -13.5514799,
+    -70.8915621
+  ],
+  "México, Chile": [
+    25.735557,
+    -100.2345427
+  ],
+  "O’Higgins, Chile": [
+    -48.4730258,
+    -72.8474931
+  ],
+  "Concepción, Chile": [
+    -36.8270698,
+    -73.0502064
+  ],
+  "Viña Del Mar, Chile": [
+    -33.0244535,
+    -71.5517636
+  ],
+  "Rancagua, Chile": [
+    -34.1702433,
+    -70.740718
+  ],
+  "Ñuble, Chile": [
+    -36.6331577,
+    -71.9384821
+  ],
+  "Centro, Chile": [
+    1.2027023,
+    -77.2690283
+  ],
+  "Venezuela, Chile": [
+    7.3086069,
+    -61.8485138
+  ],
+  "Corte Suprema, Chile": [
+    -33.4390491,
+    -70.6531176
+  ],
+  "China, Chile": [
+    -33.026189,
+    -71.4779637
+  ],
+  "Valdivia, Chile": [
+    -39.8141262,
+    -73.2459859
+  ],
+  "Colombia, Chile": [
+    1.2027023,
+    -77.2690283
+  ],
+  "Los Ríos, Chile": [
+    -39.9742747,
+    -72.6677006
+  ],
+  "Ucrania, Chile": [
+    -33.490349,
+    -70.7303066
+  ],
+  "Calama, Chile": [
+    -22.4623917,
+    -68.9272181
+  ],
+  "Magallanes, Chile": [
+    -53.3527518,
+    -71.5547782
+  ],
+  "Latinoamérica, Chile": [
+    -33.5152332,
+    -70.6283376
+  ],
+  "América, Chile": [
+    -38.9777352,
+    -72.6430312
+  ],
+  "Región De Coquimbo, Chile": [
+    -30.7546652,
+    -70.9005536
+  ],
+  "Iquique, Chile": [
+    -20.2140657,
+    -70.1524646
+  ],
+  "La Moneda, Chile": [
+    -33.442821,
+    -70.6542125
+  ],
+  "Rusia, Chile": [
+    -34.975538,
+    -71.2241752
+  ],
+  "Francia, Chile": [
+    -33.0438726,
+    -71.6129921
+  ],
+  "Ovalle, Chile": [
+    -30.6030819,
+    -71.2029894
+  ],
+  "Bolivia, Chile": [
+    -33.0250144,
+    -71.47998
+  ],
+  "Atacama, Chile": [
+    -24.5563029,
+    -69.4226479
+  ],
+  "Maule, Chile": [
+    -35.5972284,
+    -71.48868
+  ],
+  "La Ley, Chile": [
+    -33.6215966,
+    -70.6255511
+  ],
+  "Región De Valparaíso, Chile": [
+    -32.5976089,
+    -70.8529753
+  ],
+  "Los Lagos, Chile": [
+    -42.300844,
+    -73.105387
+  ],
+  "Chillán, Chile": [
+    -36.6066616,
+    -72.1033194
+  ],
+  "Ecuador, Chile": [
+    -33.4559226,
+    -70.6997325
+  ],
+  "Coquimbo Unido, Chile": [
+    null,
+    null
+  ],
+  "En Estados Unidos, Chile": [
+    null,
+    null
+  ],
+  "Punta Arenas, Chile": [
+    -53.1625688,
+    -70.907822
+  ],
+  "Alemania, Chile": [
+    -33.0532209,
+    -71.6266704
+  ],
+  "Tarapacá, Chile": [
+    -20.1636672,
+    -69.5463448
+  ],
+  "Irán, Chile": [
+    -33.4805212,
+    -70.5870403
+  ],
+  "Gobierno Regional, Chile": [
+    -36.8303799,
+    -73.0593678
+  ],
+  "Arica, Chile": [
+    -18.4785288,
+    -70.3211394
+  ],
+  "Gaza, Chile": [
+    -34.0704941,
+    -70.7343337
+  ],
+  "Indap, Chile": [
+    -33.4411348,
+    -70.6573746
+  ],
+  "Copiapó, Chile": [
+    -27.3664685,
+    -70.3322753
+  ],
+  "Curicó, Chile": [
+    -34.985368,
+    -71.2393705
+  ],
+  "Obras Públicas, Chile": [
+    -33.4429641,
+    -70.652976
+  ],
+  "Madrid, Chile": [
+    -33.4555455,
+    -70.6361495
+  ],
+  "Italia, Chile": [
+    -33.0318861,
+    -71.4858033
+  ],
+  "Angol, Chile": [
+    -37.798787,
+    -72.7086097
+  ],
+  "Quilpué, Chile": [
+    -33.0498135,
+    -71.4415282
+  ],
+  "Paraguay, Chile": [
+    -37.2017657,
+    -72.2456217
+  ],
+  "Región Del Biobío, Chile": [
+    -37.3391407,
+    -72.4106825
+  ],
+  "La Tierra, Chile": [
+    -29.8799155,
+    -71.2517861
+  ],
+  "Canadá, Chile": [
+    -38.0527209,
+    -72.2014833
+  ],
+  "Uruguay, Chile": [
+    -34.8805364,
+    -56.2511626
+  ],
+  "Parinacota, Chile": [
+    -18.2019873,
+    -69.2681691
+  ],
+  "Los Ángeles, Chile": [
+    -37.4707455,
+    -72.351686
+  ],
+  "Síguenos, Chile": [
+    null,
+    null
+  ],
+  "Puerto Montt, Chile": [
+    -41.471798,
+    -72.9395915
+  ],
+  "Seremi De Salud, Chile": [
+    -38.7389957,
+    -72.5879833
+  ],
+  "San Felipe, Chile": [
+    -32.750687,
+    -70.7252688
+  ],
+  "Barcelona, Chile": [
+    -33.0502121,
+    -71.5793631
+  ],
+  "Puerto Varas, Chile": [
+    -41.317802,
+    -72.9829073
+  ],
+  "Región De Ñuble, Chile": [
+    -36.6331577,
+    -71.9384821
+  ],
+  "Nueva York, Chile": [
+    -33.4423865,
+    -70.6509267
+  ],
+  "Interior, Chile": [
+    -36.6023958,
+    -72.0662713
+  ],
+  "Conaf, Chile": [
+    -32.4609837,
+    -71.2287407
+  ],
+  "Deportes, Chile": [
+    -33.4253977,
+    -70.6123536
+  ],
+  "Maipú, Chile": [
+    -33.5094409,
+    -70.756182
+  ],
+  "Buenos Aires, Chile": [
+    -35.5944366,
+    -71.3797296
+  ],
+  "Congreso Nacional, Chile": [
+    -41.31495,
+    -73.005137
+  ],
+  "París, Chile": [
+    -38.3569423,
+    -72.1131527
+  ],
+  "Covid-19, Chile": [
+    -33.5194857,
+    -70.6011046
+  ],
+  "Linares, Chile": [
+    -35.8452905,
+    -71.5977173
+  ],
+  "Aysén, Chile": [
+    -46.1434629,
+    -74.2127886
+  ],
+  "Talcahuano, Chile": [
+    -36.7144863,
+    -73.1141087
+  ],
+  "Sudamérica, Chile": [
+    -33.4762577,
+    -70.5118399
+  ],
+  "Región De Antofagasta, Chile": [
+    -23.6041314,
+    -69.0842783
+  ],
+  "Ee.Uu., Chile": [
+    37.7685066,
+    -122.4710436
+  ],
+  "Las Condes, Chile": [
+    -33.4084548,
+    -70.5671489
+  ],
+  "Talca, Chile": [
+    -35.4265343,
+    -71.6660322
+  ],
+  "Pucón, Chile": [
+    -39.2731173,
+    -71.9777605
+  ],
+  "Concejo Municipal, Chile": [
+    -33.045491,
+    -71.374066
+  ],
+  "Estadio Nacional, Chile": [
+    -33.4623809,
+    -70.6062176
+  ],
+  "San Pedro De Atacama, Chile": [
+    -23.3545489,
+    -67.9026571
+  ],
+  "Los Andes, Chile": [
+    -32.8336867,
+    -70.5981609
+  ],
+  "Región, Chile": [
+    -30.7546652,
+    -70.9005536
+  ],
+  "Región De O’Higgins, Chile": [
+    -33.4420638,
+    -70.6456647
+  ],
+  "Franja De Gaza, Chile": [
+    null,
+    null
+  ],
+  "Reino Unido, Chile": [
+    -33.6754201,
+    -71.1800648
+  ],
+  "Recoleta, Chile": [
+    -33.4020744,
+    -70.6428912
+  ],
+  "Quillota, Chile": [
+    -32.879997,
+    -71.2473555
+  ],
+  "Japón, Chile": [
+    -33.0514578,
+    -71.6412399
+  ],
+  "Estadio Monumental, Chile": [
+    -33.5064372,
+    -70.6059468
+  ],
+  "Washington, Chile": [
+    -32.9987415,
+    -71.5058973
+  ],
+  "Huachipato, Chile": [
+    -33.4872107,
+    -70.5950721
+  ],
+  "Australia, Chile": [
+    -29.970027,
+    -71.3176299
+  ],
+  "Villarrica, Chile": [
+    -39.2780911,
+    -72.2274364
+  ],
+  "Canal 13, Chile": [
+    -33.4274573,
+    -70.6269196
+  ],
+  "Mop, Chile": [
+    -20.2134414,
+    -70.1538192
+  ],
+  "Bío Bío, Chile": [
+    -37.3391407,
+    -72.4106825
+  ],
+  "Provincia De Neuquén, Chile": [
+    -38.960362,
+    -68.0621824
+  ],
+  "Eeuu, Chile": [
+    -33.3749401,
+    -70.633128
+  ],
+  "Región De La Araucanía, Chile": [
+    -38.6678955,
+    -72.2610066
+  ],
+  "Inglaterra, Chile": [
+    -33.0537804,
+    -71.5676004
+  ],
+  "Sernac, Chile": [
+    -33.4433109,
+    -70.6546155
+  ],
+  "Cuba, Chile": [
+    20.2566632,
+    -75.8819298
+  ],
+  "Londres, Chile": [
+    -33.445111,
+    -70.64816
+  ],
+  "La Luna, Chile": [
+    -41.4132131,
+    -72.1126846
+  ],
+  "Municipio, Chile": [
+    -33.0296651,
+    -71.639505
+  ],
+  "Tocopilla, Chile": [
+    -22.0887189,
+    -70.1960657
+  ],
+  "Providencia, Chile": [
+    -33.4288379,
+    -70.6113373
+  ],
+  "Florida, Chile": [
+    -36.8253041,
+    -72.6614469
+  ],
+  "Biobiochile, Chile": [
+    null,
+    null
+  ],
+  "El Salvador, Chile": [
+    -26.2462114,
+    -69.6259658
+  ],
+  "La Florida, Chile": [
+    -33.5204181,
+    -70.6006178
+  ],
+  "Municipalidad, Chile": [
+    -33.9535899,
+    -71.8304105
+  ],
+  "Región Del Maule, Chile": [
+    -35.5972284,
+    -71.48868
+  ],
+  "San Fernando, Chile": [
+    -34.583791,
+    -70.989122
+  ],
+  "Malleco, Chile": [
+    -37.7960595,
+    -72.6516866
+  ],
+  "Bomberos, Chile": [
+    -33.6939356,
+    -70.335373
+  ],
+  "Miami, Chile": [
+    -29.9791676,
+    -71.3304432
+  ],
+  "Alto Hospicio, Chile": [
+    -20.2700478,
+    -70.1009162
+  ],
+  "Región De Los Ríos, Chile": [
+    -39.9742747,
+    -72.6677006
+  ],
+  "Osorno, Chile": [
+    -40.5736955,
+    -73.1358091
+  ],
+  "Acá, Chile": [
+    -23.0278571,
+    -67.7547777
+  ],
+  "Roma, Chile": [
+    -34.5785199,
+    -70.9093281
+  ],
+  "Lima, Chile": [
+    -42.6994201,
+    -73.5729955
+  ],
+  "Cañete, Chile": [
+    -37.8004074,
+    -73.3990802
+  ],
+  "Villa Alemana, Chile": [
+    -33.0441903,
+    -71.3725464
+  ],
+  "Tren De Aragua, Chile": [
+    null,
+    null
+  ],
+  "El Mercurio, Chile": [
+    -33.0635988,
+    -71.5892558
+  ],
+  "Monte Patria, Chile": [
+    -30.6944769,
+    -70.9579593
+  ],
+  "África, Chile": [
+    -29.9711811,
+    -71.3193685
+  ],
+  "Puente Alto, Chile": [
+    -33.6095279,
+    -70.5754736
+  ],
+  "Moscú, Chile": [
+    -33.4887662,
+    -70.7341967
+  ],
+  "Santa Cruz, Chile": [
+    -34.6403243,
+    -71.3661297
+  ],
+  "Victoria, Chile": [
+    -38.2339494,
+    -72.3316568
+  ],
+  "Estado De Chile, Chile": [
+    -33.4400154,
+    -70.6495139
+  ],
+  "La Calera, Chile": [
+    -32.788981,
+    -71.203546
+  ],
+  "Poder Judicial, Chile": [
+    -45.573282,
+    -72.071762
+  ],
+  "California, Chile": [
+    -34.2190758,
+    -70.9272822
+  ],
+  "Cesfam, Chile": [
+    -33.0273484,
+    -71.524657
+  ],
+  "Metropolitana, Chile": [
+    -33.5739341,
+    -70.6205518
+  ],
+  "Región De Atacama, Chile": [
+    -27.5571783,
+    -70.0156882
+  ],
+  "Asia, Chile": [
+    -29.9707136,
+    -71.3188444
+  ],
+  "Ind, Chile": [
+    -33.465598,
+    -70.6118539
+  ],
+  "Monumental, Chile": [
+    -34.7154448,
+    -71.2526904
+  ],
+  "Casa Blanca, Chile": [
+    -35.8334681,
+    -71.6871026
+  ],
+  "San Antonio, Chile": [
+    -33.5808615,
+    -71.6132377
+  ],
+  "Gore, Chile": [
+    -32.8843383,
+    -71.236775
+  ],
+  "Ñuñoa, Chile": [
+    -33.4543164,
+    -70.5936358
+  ],
+  "Seremi De Las Culturas, Chile": [
+    null,
+    null
+  ],
+  "Festival De Viña Del Mar, Chile": [
+    null,
+    null
+  ],
+  "Medio Ambiente, Chile": [
+    -33.4432206,
+    -70.6572593
+  ],
+  "Patagonia, Chile": [
+    -33.0162058,
+    -71.5219219
+  ],
+  "Vivienda Y Urbanismo, Chile": [
+    -45.5726993,
+    -72.07768
+  ],
+  "Plaza De Armas, Chile": [
+    -33.4374154,
+    -70.6512777
+  ],
+  "Collipulli, Chile": [
+    -37.9566312,
+    -72.4374375
+  ],
+  "Suiza, Chile": [
+    -36.9910619,
+    -71.7333627
+  ],
+  "Coyhaique, Chile": [
+    -45.5711804,
+    -72.0684863
+  ],
+  "Suecia, Chile": [
+    -33.0328604,
+    -71.4834846
+  ],
+  "Palestina, Chile": [
+    -23.8783333,
+    -69.7350087
+  ],
+  "Sevilla, Chile": [
+    -33.1240498,
+    -71.5748449
+  ],
+  "Seremi De Educación, Chile": [
+    -41.4658706,
+    -72.9334234
+  ],
+  "Región De Los Lagos, Chile": [
+    -42.300844,
+    -73.105387
+  ],
+  "Los Vilos, Chile": [
+    -31.9121725,
+    -71.5138659
+  ],
+  "Estados, Chile": [
+    -33.0332734,
+    -71.4849602
+  ],
+  "Aconcagua, Chile": [
+    -33.0438372,
+    -71.5662246
+  ],
+  "Quinta Vergara, Chile": [
+    -33.0327984,
+    -71.5530965
+  ],
+  "Hollywood, Chile": [
+    -33.0171396,
+    -71.5588143
+  ],
+  "Mercado Financiero, Chile": [
+    -33.4441024,
+    -70.6565951
+  ],
+  "Líbano, Chile": [
+    -33.0306706,
+    -71.4826713
+  ],
+  "Meta, Chile": [
+    -33.4527978,
+    -70.6416589
+  ],
+  "Portugal, Chile": [
+    -33.1181595,
+    -71.5509803
+  ],
+  "Curicó Unido, Chile": [
+    null,
+    null
+  ],
+  "Limache, Chile": [
+    -33.0018741,
+    -71.2657315
+  ],
+  "Festival De Viña, Chile": [
+    null,
+    null
+  ],
+  "Hermosilla, Chile": [
+    -33.5237765,
+    -70.6787824
+  ],
+  "Taiwán, Chile": [
+    -20.2588353,
+    -70.1289796
+  ],
+  "Lago Ranco, Chile": [
+    -40.3216708,
+    -72.4813502
+  ],
+  "Minsal, Chile": [
+    -23.5852776,
+    -68.3827744
+  ],
+  "Concón, Chile": [
+    -32.9220036,
+    -71.5159565
+  ],
+  "Vicuña, Chile": [
+    -30.0340482,
+    -70.7126702
+  ],
+  "Arauco, Chile": [
+    -37.246248,
+    -73.3176399
+  ],
+  "Santiago De Chile, Chile": [
+    -33.4376995,
+    -70.6510671
+  ],
+  "Tongoy, Chile": [
+    -30.2572163,
+    -71.492858
+  ],
+  "Aries, Chile": [
+    -33.0404992,
+    -71.4801451
+  ],
+  "Panguipulli, Chile": [
+    -39.6419909,
+    -72.3333801
+  ],
+  "Vitacura, Chile": [
+    -33.3871062,
+    -70.5764516
+  ],
+  "San Fabián De Alico, Chile": [
+    -36.556603,
+    -71.5499036
+  ],
+  "Mejillones, Chile": [
+    -23.1002342,
+    -70.4483076
+  ],
+  "Paso Minas Ñuble, Chile": [
+    -36.8956436,
+    -71.1397201
+  ],
+  "Las Ovejas, Chile": [
+    -34.2784352,
+    -71.1880725
+  ],
+  "Provincia Del Neuquén, Chile": [
+    -38.960362,
+    -68.0621824
+  ],
+  "Minas-Ñuble, Chile": [
+    -36.8956436,
+    -71.1397201
+  ],
+  "Chiloé, Chile": [
+    -42.5978086,
+    -73.959118
+  ],
+  "Neuquén Informa, Chile": [
+    null,
+    null
+  ],
+  "Corea Del Sur, Chile": [
+    37.5609333,
+    126.9826234
+  ],
+  "Puerto Natales, Chile": [
+    -51.7262003,
+    -72.5059982
+  ],
+  "Colchagua, Chile": [
+    -34.548228,
+    -71.4013194
+  ],
+  "Paillaco, Chile": [
+    -40.0706633,
+    -72.8726695
+  ],
+  "Salud, Chile": [
+    -33.4364906,
+    -70.6470553
+  ],
+  "Valencia, Chile": [
+    -33.0401664,
+    -71.4688252
+  ],
+  "Cauquenes, Chile": [
+    -35.9671286,
+    -72.315427
+  ],
+  "Illapel, Chile": [
+    -31.6326932,
+    -71.1683039
+  ],
+  "Ministro De Agricultura, Chile": [
+    null,
+    null
+  ],
+  "Estrecho De Ormuz, Chile": [
+    null,
+    null
+  ],
+  "Taltal, Chile": [
+    -25.4078293,
+    -70.4858424
+  ],
+  "Coltauco, Chile": [
+    -34.2862794,
+    -71.0825729
+  ],
+  "Antártica Chilena, Chile": [
+    -36.607697,
+    -72.1341694
+  ],
+  "Leo, Chile": [
+    -33.5569438,
+    -70.5942513
+  ],
+  "Seremi De Desarrollo Social Y Familia, Chile": [
+    null,
+    null
+  ],
+  "Antártica, Chile": [
+    -23.6401968,
+    -70.3841312
+  ],
+  "Quintero, Chile": [
+    -32.7840217,
+    -71.5283361
+  ],
+  "Senapred, Chile": [
+    -33.4688187,
+    -70.6642353
+  ],
+  "Países Bajos, Chile": [
+    -33.6755285,
+    -71.1804321
+  ],
+  "Cámara Baja, Chile": [
+    null,
+    null
+  ],
+  "Bélgica, Chile": [
+    -33.1155077,
+    -71.5523677
+  ],
+  "Fndr, Chile": [
+    null,
+    null
+  ],
+  "Estadio Santa Laura, Chile": [
+    -33.4043378,
+    -70.6590666
+  ],
+  "Panamá, Chile": [
+    -33.4580608,
+    -70.6255464
+  ],
+  "Manchester City, Chile": [
+    null,
+    null
+  ],
+  "San Carlos, Chile": [
+    -36.3792284,
+    -72.0179525
+  ],
+  "Kiev, Chile": [
+    -33.4163825,
+    -70.7294917
+  ],
+  "Coronel, Chile": [
+    -37.0164712,
+    -73.1561953
+  ],
+  "Macul, Chile": [
+    -33.4821635,
+    -70.5991929
+  ],
+  "Caracas, Chile": [
+    -33.0499024,
+    -71.647034
+  ],
+  "Caldera, Chile": [
+    -27.0675545,
+    -70.8222047
+  ],
+  "De Santiago, Chile": [
+    -33.4376995,
+    -70.6510671
+  ],
+  "Costa Rica, Chile": [
+    9.8837264,
+    -84.3165885
+  ],
+  "Traiguén, Chile": [
+    -38.250816,
+    -72.6668798
+  ],
+  "Padre Las Casas, Chile": [
+    -38.7674245,
+    -72.5956312
+  ],
+  "Palacio De La Moneda, Chile": [
+    -33.442821,
+    -70.6542125
+  ],
+  "De Colombia, Chile": [
+    -33.4542098,
+    -70.6741345
+  ],
+  "Estación Central, Chile": [
+    -33.4536375,
+    -70.6898654
+  ],
+  "India, Chile": [
+    -33.0261739,
+    -71.4785417
+  ],
+  "Gran Concepción, Chile": [
+    14.6607538,
+    121.1058436
+  ],
+  "Minvu, Chile": [
+    -23.6398879,
+    -70.3957722
+  ],
+  "Turquía, Chile": [
+    -37.2307238,
+    -72.6521373
+  ],
+  "Limarí, Chile": [
+    -30.6382918,
+    -71.283904
+  ],
+  "Macrozona Sur, Chile": [
+    -38.1442981,
+    -72.3118013
+  ],
+  "Mendoza, Chile": [
+    -34.3776583,
+    -70.8404875
+  ],
+  "Educación, Chile": [
+    -33.4156802,
+    -70.7613704
+  ],
+  "Viña, Chile": [
+    -33.0244535,
+    -71.5517636
+  ],
+  "Corea Del Norte, Chile": [
+    null,
+    null
+  ],
+  "Egipto, Chile": [
+    -33.0302417,
+    -71.4825051
+  ],
+  "Vallenar, Chile": [
+    -28.5750438,
+    -70.7616398
+  ],
+  "Región De Magallanes, Chile": [
+    -49.2101477,
+    -73.2194413
+  ],
+  "Bruselas, Chile": [
+    -33.0579012,
+    -71.6412671
+  ],
+  "Seremi De Agricultura, Chile": [
+    -18.4852773,
+    -70.3049667
+  ],
+  "Ciudad De México, Chile": [
+    -33.5093294,
+    -70.7367131
+  ],
+  "Sao Paulo, Chile": [
+    -34.1791468,
+    -70.7275278
+  ],
+  "Pacífico, Chile": [
+    -33.0328538,
+    -71.6411978
+  ],
+  "Región De Tarapacá, Chile": [
+    -20.1636672,
+    -69.5463448
+  ],
+  "Sudáfrica, Chile": [
+    -33.4776819,
+    -70.7374963
+  ],
+  "Gobierno Del Presidente Gabriel Boric, Chile": [
+    null,
+    null
+  ],
+  "La Higuera, Chile": [
+    -29.511595,
+    -71.2015007
+  ],
+  "Chillán Viejo, Chile": [
+    -36.6230032,
+    -72.1317093
+  ],
+  "Siria, Chile": [
+    -33.4732832,
+    -70.6687696
+  ],
+  "Tierra Amarilla, Chile": [
+    -27.4680505,
+    -70.2649307
+  ],
+  "Seremi De Gobierno, Chile": [
+    -34.1706132,
+    -70.7402676
+  ],
+  "Marte, Chile": [
+    -33.1176244,
+    -71.6859086
+  ],
+  "Gobierno Regional De La Araucanía, Chile": [
+    -38.7392622,
+    -72.5894134
+  ],
+  "Liverpool, Chile": [
+    -34.1505766,
+    -70.729536
+  ],
+  "Barranquilla, Chile": [
+    -27.5148646,
+    -70.8917399
+  ],
+  "Panamericanos, Chile": [
+    null,
+    null
+  ],
+  "Teatro Municipal, Chile": [
+    -33.4892526,
+    -70.7734258
+  ],
+  "Estado., Chile": [
+    -33.4394952,
+    -70.6495351
+  ],
+  "Río De Janeiro, Chile": [
+    -33.0281758,
+    -71.5660182
+  ],
+  "Pichilemu, Chile": [
+    -34.3851693,
+    -72.0046606
+  ],
+  "Subdere, Chile": [
+    -33.4428491,
+    -70.6550218
+  ],
+  "Ministro De Justicia, Chile": [
+    null,
+    null
+  ],
+  "Seremi De La Mujer, Chile": [
+    null,
+    null
+  ],
+  "Dideco, Chile": [
+    -38.7319196,
+    -72.5877171
+  ],
+  "San Bernardo, Chile": [
+    -33.5922859,
+    -70.7045838
+  ],
+  "Educación Superior, Chile": [
+    -33.4443843,
+    -70.6555618
+  ],
+  "Parapanamericanos, Chile": [
+    null,
+    null
+  ],
+  "Putaendo, Chile": [
+    -32.6260768,
+    -70.7167642
+  ],
+  "Río Bueno, Chile": [
+    -40.3336678,
+    -72.9567617
+  ],
+  "Superintendencia De Electricidad Y Combustibles, Chile": [
+    -33.4441584,
+    -70.6569787
+  ],
+  "Municipalidad De Valparaíso, Chile": [
+    -33.0524083,
+    -71.6024481
+  ],
+  "Las Vegas, Chile": [
+    -37.4141241,
+    -72.407198
+  ],
+  "Sala, Chile": [
+    -26.4725634,
+    -105.3615838
+  ],
+  "Serviu, Chile": [
+    -36.8310627,
+    -73.0584619
+  ],
+  "Sierra Gorda, Chile": [
+    -22.8916766,
+    -69.3200101
+  ],
+  "La Pintana, Chile": [
+    -33.5833594,
+    -70.629827
+  ],
+  "Relaciones Exteriores, Chile": [
+    -33.4414895,
+    -70.6551961
+  ],
+  "Bogotá, Chile": [
+    -33.0487975,
+    -71.5730396
+  ],
+  "Graneros, Chile": [
+    -34.0644743,
+    -70.7262983
+  ],
+  "Rengo, Chile": [
+    -34.4088744,
+    -70.8616583
+  ],
+  "San Pedro De La Paz, Chile": [
+    -36.8414183,
+    -73.1039909
+  ],
+  "Deporte, Chile": [
+    -38.6838782,
+    -72.0049128
+  ],
+  "Marsella, Chile": [
+    -33.4672817,
+    -70.6642641
+  ],
+  "Quito, Chile": [
+    -36.1788043,
+    -71.7888093
+  ],
+  "Nueva Zelanda, Chile": [
+    -33.0277663,
+    -71.4804272
+  ],
+  "Rapa Nui, Chile": [
+    -27.1259317,
+    -109.3495887
+  ],
+  "Metro, Chile": [
+    -33.0472963,
+    -71.4444892
+  ],
+  "Machalí, Chile": [
+    -34.182453,
+    -70.6511584
+  ],
+  "Transportes Y Telecomunicaciones, Chile": [
+    -34.1666794,
+    -70.7409447
+  ],
+  "Gobierno De Chile, Chile": [
+    -33.4424228,
+    -70.6542697
+  ],
+  "Qatar, Chile": [
+    -39.8511834,
+    -73.216607
+  ],
+  "Grecia, Chile": [
+    -33.4695344,
+    -70.5765034
+  ],
+  "Guayaquil, Chile": [
+    -33.4429388,
+    -70.642932
+  ],
+  "Daem, Chile": [
+    -37.5044949,
+    -72.6737459
+  ],
+  "Ercilla, Chile": [
+    -38.0609055,
+    -72.3754686
+  ],
+  "Alcaldía Ciudadana, Chile": [
+    null,
+    null
+  ],
+  "Corral, Chile": [
+    -39.8877399,
+    -73.4314543
+  ],
+  "Arabia Saudita, Chile": [
+    -39.850644,
+    -73.2141728
+  ],
+  "Gobierno Del Presidente, Chile": [
+    null,
+    null
+  ],
+  "Teherán, Chile": [
+    -32.8804153,
+    -71.2364397
+  ],
+  "Ministro De Educación, Chile": [
+    null,
+    null
+  ],
+  "Haití, Chile": [
+    -33.0387488,
+    -71.6448531
+  ],
+  "Caribe, Chile": [
+    -33.5224916,
+    -70.7645949
+  ],
+  "Provincia De Malleco, Chile": [
+    -38.2457408,
+    -72.4447682
+  ],
+  "Ruta 5 Sur, Chile": [
+    -33.4483679,
+    -70.660091
+  ],
+  "Dinamarca, Chile": [
+    -38.6044544,
+    -73.219285
+  ],
+  "El Loa, Chile": [
+    -40.5743116,
+    -73.1727402
+  ],
+  "Gobierno Regional Del Biobío, Chile": [
+    -36.8303799,
+    -73.0593678
+  ],
+  "Chaitén, Chile": [
+    -42.9165335,
+    -72.7084192
+  ],
+  "Tierra Brava, Chile": [
+    null,
+    null
+  ],
+  "Lo Barnechea, Chile": [
+    -33.3616012,
+    -70.5051957
+  ],
+  "Los Estados Unidos, Chile": [
+    -23.6575804,
+    -70.3955594
+  ],
+  "Gobernador, Chile": [
+    -34.1845191,
+    -70.7535184
+  ],
+  "Palena, Chile": [
+    -43.6178268,
+    -71.8039587
+  ],
+  "Yemen, Chile": [
+    -39.8499404,
+    -73.214138
+  ],
+  "Pozo Almonte, Chile": [
+    -20.2597061,
+    -69.7861372
+  ],
+  "Vivienda, Chile": [
+    -45.5726993,
+    -72.07768
+  ],
+  "Longaví, Chile": [
+    -35.9659749,
+    -71.6846723
+  ],
+  "Lonquimay, Chile": [
+    -38.454068,
+    -71.3706282
+  ],
+  "Berlín, Chile": [
+    -33.0582819,
+    -71.640486
+  ],
+  "Ipom, Chile": [
+    null,
+    null
+  ],
+  "Ministro De Desarrollo Social, Chile": [
+    null,
+    null
+  ],
+  "Rafah, Chile": [
+    null,
+    null
+  ],
+  "Seremi Del Trabajo Y Previsión Social, Chile": [
+    -23.6529023,
+    -70.4020823
+  ],
+  "El Niño, Chile": [
+    19.361439,
+    -69.8490186
+  ],
+  "Nicaragua, Chile": [
+    11.9583058,
+    -84.6159087
+  ],
+  "Tigre, Chile": [
+    -34.4355022,
+    -58.5804734
+  ],
+  "La Paz, Chile": [
+    -39.4096736,
+    -72.7107181
+  ],
+  "O´Higgins, Chile": [
+    -48.4730258,
+    -72.8474931
+  ],
+  "Placilla, Chile": [
+    -34.6385927,
+    -71.1173651
+  ],
+  "Albania, Chile": [
+    -33.5457342,
+    -70.5718594
+  ],
+  "Fenfur, Chile": [
+    null,
+    null
+  ],
+  "Curacautín, Chile": [
+    -38.4372985,
+    -71.8883419
+  ],
+  "Estadio De Tongoy, Chile": [
+    -30.2646647,
+    -71.4868761
+  ],
+  "Colegio De Profesores, Chile": [
+    -34.9911632,
+    -71.2396372
+  ],
+  "Futrono, Chile": [
+    -40.131196,
+    -72.3826602
+  ],
+  "Estadio Francisco Sánchez Rumoroso, Chile": [
+    -29.9651916,
+    -71.3384145
+  ],
+  "Araucanía, Chile": [
+    -38.6678955,
+    -72.2610066
+  ],
+  "Cali, Chile": [
+    -37.4873318,
+    -72.3294094
+  ],
+  "La Granja, Chile": [
+    -33.5431234,
+    -70.6332426
+  ],
+  "Lumaco, Chile": [
+    -38.1653241,
+    -72.9063975
+  ],
+  "Desierto De Atacama, Chile": [
+    -24.5563029,
+    -69.4226479
+  ],
+  "Carahue, Chile": [
+    -38.7115844,
+    -73.1651699
+  ],
+  "Olympique, Chile": [
+    null,
+    null
+  ],
+  "Reserva Federal, Chile": [
+    null,
+    null
+  ],
+  "Cooperativa, Chile": [
+    -34.1505076,
+    -70.7433965
+  ],
+  "Cáncer, Chile": [
+    -33.4610222,
+    -71.6571533
+  ],
+  "Río Cachapoal, Chile": [
+    -34.2119334,
+    -70.7291672
+  ],
+  "Texas, Chile": [
+    -41.7559366,
+    -73.1526572
+  ],
+  "Vialidad, Chile": [
+    -45.372998,
+    -71.9773471
+  ],
+  "Hualpén, Chile": [
+    -36.7927608,
+    -73.0943414
+  ],
+  "Santa Laura, Chile": [
+    -20.2120119,
+    -69.8129923
+  ],
+  "Chañaral, Chile": [
+    -26.347934,
+    -70.6223617
+  ],
+  "Lanco, Chile": [
+    -39.4522225,
+    -72.7754222
+  ],
+  "La Pampilla, Chile": [
+    -29.9588195,
+    -71.3530266
+  ],
+  "Franja, Chile": [
+    -23.6681883,
+    -70.3912389
+  ],
+  "Algarrobo, Chile": [
+    -33.369172,
+    -71.6680533
+  ],
+  "Movistar Arena, Chile": [
+    -33.4627265,
+    -70.661944
+  ],
+  "San Valentín, Chile": [
+    -36.8079876,
+    -72.9782939
+  ],
+  "Kremlin, Chile": [
+    -33.4871373,
+    -70.7333796
+  ],
+  "Radio Bío Bío, Chile": [
+    -33.42505,
+    -70.6184709
+  ],
+  "Tomé, Chile": [
+    -36.6170801,
+    -72.9575043
+  ],
+  "Trinidad, Chile": [
+    -33.5462943,
+    -70.5881027
+  ],
+  "Seremi De Vivienda De Antofagasta, Chile": [
+    null,
+    null
+  ],
+  "Austria, Chile": [
+    -33.0316644,
+    -71.4827513
+  ],
+  "Seremi De Energía, Chile": [
+    -53.1606383,
+    -70.9004456
+  ],
+  "Región De Aysén, Chile": [
+    -46.4711556,
+    -73.5206714
+  ],
+  "Purén, Chile": [
+    -38.0332836,
+    -73.0725938
+  ],
+  "Hungría, Chile": [
+    -33.0349413,
+    -71.5483964
+  ],
+  "Canela, Chile": [
+    -31.4643996,
+    -71.4349157
+  ],
+  "Salamanca, Chile": [
+    -31.7804674,
+    -70.9649896
+  ],
+  "Región De O´Higgins, Chile": [
+    -33.4420638,
+    -70.6456647
+  ],
+  "Provincia De Arauco, Chile": [
+    -37.8197853,
+    -73.3057648
+  ],
+  "Universidad San Sebastián, Chile": [
+    -36.8130912,
+    -73.0434022
+  ],
+  "Combarbalá, Chile": [
+    -31.1781518,
+    -71.0024382
+  ],
+  "Temucuicui, Chile": [
+    -38.0940763,
+    -72.4334387
+  ],
+  "Colchane, Chile": [
+    -19.275822,
+    -68.6389471
+  ],
+  "Córdoba, Chile": [
+    -31.4304074,
+    -64.1878253
+  ],
+  "Nueva Imperial, Chile": [
+    -38.7453101,
+    -72.9519984
+  ],
+  "San Juan, Chile": [
+    -29.9732958,
+    -71.325784
+  ],
+  "Godoy Cruz, Chile": [
+    -32.9358382,
+    -68.8704333
+  ],
+  "Pudahuel, Chile": [
+    -33.4194044,
+    -70.8632814
+  ],
+  "Municipio Abierto De Quilpué, Chile": [
+    null,
+    null
+  ],
+  "Montes, Chile": [
+    -40.6825122,
+    -72.5979415
+  ],
+  "Exsubsecretario Del Interior, Chile": [
+    null,
+    null
+  ],
+  "Tierras Blancas, Chile": [
+    -29.9658782,
+    -71.2558692
+  ],
+  "Tauro, Chile": [
+    -33.0407014,
+    -71.4804746
+  ],
+  "Los Sauces, Chile": [
+    -37.9829562,
+    -72.8291829
+  ],
+  "Seremi De Vivienda, Chile": [
+    -45.5726993,
+    -72.07768
+  ],
+  "Metro De Santiago, Chile": [
+    -33.4531512,
+    -70.6439666
+  ],
+  "Inacap, Chile": [
+    -33.44352,
+    -70.6623106
+  ],
+  "Reconstrucción Nacional, Chile": [
+    null,
+    null
+  ],
+  "Putre, Chile": [
+    -18.1963825,
+    -69.5592242
+  ],
+  "Norteamérica, Chile": [
+    -29.8795661,
+    -71.2428285
+  ],
+  "Minería, Chile": [
+    -30.2545771,
+    -71.4989353
+  ],
+  "Banco Central, Chile": [
+    -32.6628247,
+    -70.7194456
+  ],
+  "São Paulo, Chile": [
+    -33.0496312,
+    -71.5733911
+  ],
+  "Sernapesca, Chile": [
+    -33.0491924,
+    -71.606067
+  ],
+  "La Cisterna, Chile": [
+    -33.5346265,
+    -70.6644024
+  ],
+  "Chelsea, Chile": [
+    null,
+    null
+  ],
+  "Senama, Chile": [
+    -33.4376673,
+    -70.6594157
+  ],
+  "Marruecos, Chile": [
+    -33.0317426,
+    -71.4818752
+  ],
+  "Estadio Sausalito, Chile": [
+    -33.0144473,
+    -71.5341445
+  ],
+  "Patrimonio, Chile": [
+    -34.0843739,
+    -70.3828385
+  ],
+  "San Luis, Chile": [
+    20.2566632,
+    -75.8819298
+  ],
+  "Santo Domingo, Chile": [
+    -33.7863748,
+    -71.6756251
+  ],
+  "La Libertad Avanza, Chile": [
+    null,
+    null
+  ],
+  "Seúl, Chile": [
+    -33.4309853,
+    -70.6427364
+  ],
+  "Cisjordania, Chile": [
+    31.9096608,
+    35.2080099
+  ],
+  "San Carlos De Apoquindo, Chile": [
+    -33.4012621,
+    -70.5172896
+  ],
+  "Puerto Williams, Chile": [
+    -54.9357749,
+    -67.6062504
+  ],
+  "Polonia, Chile": [
+    -34.5331071,
+    -70.9399919
+  ],
+  "Puchuncaví, Chile": [
+    -32.7259856,
+    -71.4150065
+  ],
+  "Bielorrusia, Chile": [
+    null,
+    null
+  ],
+  "Parlamento, Chile": [
+    -38.4876534,
+    -72.5251789
+  ],
+  "Medellín, Chile": [
+    -38.7098834,
+    -72.5462315
+  ],
+  "Quiénes, Chile": [
+    -52.645628,
+    -71.4687874
+  ],
+  "Dmc, Chile": [
+    null,
+    null
+  ],
+  "El Caribe, Chile": [
+    -35.9683479,
+    -71.6805833
+  ],
+  "Las Cabras, Chile": [
+    -34.2917304,
+    -71.3098439
+  ],
+  "Toro, Chile": [
+    -33.0497204,
+    -71.3582486
+  ],
+  "Prigozhin, Chile": [
+    null,
+    null
+  ],
+  "Centro Cultural, Chile": [
+    -42.4826034,
+    -73.7618995
+  ],
+  "Choapa, Chile": [
+    -31.7274282,
+    -71.208991
+  ],
+  "Constanza, Chile": [
+    -36.8216703,
+    -72.8761125
+  ],
+  "Vivienda De Antofagasta, Chile": [
+    -23.6465179,
+    -70.3993758
+  ],
+  "Sala Del Senado, Chile": [
+    null,
+    null
+  ],
+  "Paihuano, Chile": [
+    -30.0290417,
+    -70.5164414
+  ],
+  "La Argentina, Chile": [
+    -33.4392082,
+    -70.6452899
+  ],
+  "Futaleufú, Chile": [
+    -43.185771,
+    -71.866702
+  ],
+  "Licantén, Chile": [
+    -34.9856892,
+    -71.9845873
+  ],
+  "Chileatiende, Chile": [
+    -33.4318741,
+    -70.6461269
+  ],
+  "Punitaqui, Chile": [
+    -30.8337532,
+    -71.2573637
+  ],
+  "Chimbarongo, Chile": [
+    -34.708953,
+    -71.0403642
+  ],
+  "Subsecretaría De Desarrollo Regional Y Administrativo, Chile": [
+    -33.4428491,
+    -70.6550218
+  ],
+  "Tailandia, Chile": [
+    -33.0341076,
+    -71.4894253
+  ],
+  "Deportes La Serena, Chile": [
+    -29.915144,
+    -71.2413407
+  ],
+  "General, Chile": [
+    -33.543538,
+    -70.601855
+  ],
+  "Provincia De Limarí, Chile": [
+    -30.8214372,
+    -70.9871076
+  ],
+  "La Ligua, Chile": [
+    -32.4496375,
+    -71.2316695
+  ],
+  "Pensilvania, Chile": [
+    -33.0426612,
+    -71.4486928
+  ],
+  "Tokio, Chile": [
+    -33.0505412,
+    -71.5764845
+  ],
+  "San Francisco, Chile": [
+    -33.9770596,
+    -70.713281
+  ],
+  "San Nicolás, Chile": [
+    -36.4855033,
+    -72.208646
+  ],
+  "Cedida, Chile": [
+    null,
+    null
+  ],
+  "Castillo, Chile": [
+    -33.4317006,
+    -70.6741376
+  ],
+  "Covid, Chile": [
+    -39.8324015,
+    -73.2165967
+  ],
+  "Georgia, Chile": [
+    -33.3885807,
+    -70.5508898
+  ],
+  "Cerrillos, Chile": [
+    -33.5023396,
+    -70.7158417
+  ],
+  "Seguridad Pública, Chile": [
+    -33.4423612,
+    -70.6535623
+  ],
+  "Ee.Uu, Chile": [
+    37.7685066,
+    -122.4710436
+  ],
+  "Níger, Chile": [
+    -32.8804272,
+    -71.2384354
+  ],
+  "Ranco, Chile": [
+    -38.705406,
+    -73.313097
+  ],
+  "Melipilla, Chile": [
+    -33.6855134,
+    -71.2145796
+  ],
+  "Olmué, Chile": [
+    -32.9956184,
+    -71.186211
+  ],
+  "Gobierno Regional De Los Ríos, Chile": [
+    -39.8141935,
+    -73.2464755
+  ],
+  "El Reino Unido, Chile": [
+    null,
+    null
+  ],
+  "Guatemala, Chile": [
+    -33.4904671,
+    -70.5932399
+  ],
+  "Municipalidad De Rancagua, Chile": [
+    -34.168223,
+    -70.7400678
+  ],
+  "Lampa, Chile": [
+    -33.2895953,
+    -70.8705255
+  ],
+  "La Cruz, Chile": [
+    -32.8279116,
+    -71.2271534
+  ],
+  "Salar De Atacama, Chile": [
+    -23.3836226,
+    -68.2566721
+  ],
+  "Montevideo, Chile": [
+    -20.316667,
+    -69.866667
+  ],
+  "República Dominicana, Chile": [
+    -33.046452,
+    -71.6503905
+  ],
+  "Doñihue, Chile": [
+    -34.226074,
+    -70.9648916
+  ],
+  "La Estrella, Chile": [
+    -34.2052857,
+    -71.6546039
+  ],
+  "Universidad De Antofagasta, Chile": [
+    -23.7029973,
+    -70.4222161
+  ],
+  "Ruta 5, Chile": [
+    -36.2042522,
+    -71.8238712
+  ],
+  "Baquedano, Chile": [
+    -45.5711804,
+    -72.0684863
+  ],
+  "Colina, Chile": [
+    -33.202472,
+    -70.6749147
+  ],
+  "Colbún, Chile": [
+    -35.6960057,
+    -71.4060907
+  ],
+  "Noruega, Chile": [
+    -33.0536377,
+    -71.5855427
+  ],
+  "La Portada, Chile": [
+    -30.6033168,
+    -71.1399543
+  ]
+}
