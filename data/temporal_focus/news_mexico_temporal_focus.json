@@ -1,0 +1,306 @@
+[
+  {
+    "country": "Mexico",
+    "date": "2022-10",
+    "score": 0.2258,
+    "past_mentions": 72,
+    "future_mentions": 114,
+    "article_count": 60
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-01",
+    "score": 0.2338,
+    "past_mentions": 118,
+    "future_mentions": 190,
+    "article_count": 86
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-02",
+    "score": -0.0582,
+    "past_mentions": 200,
+    "future_mentions": 178,
+    "article_count": 135
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-03",
+    "score": 0.2388,
+    "past_mentions": 349,
+    "future_mentions": 568,
+    "article_count": 297
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-04",
+    "score": 0.3184,
+    "past_mentions": 305,
+    "future_mentions": 590,
+    "article_count": 332
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-05",
+    "score": 0.2428,
+    "past_mentions": 407,
+    "future_mentions": 668,
+    "article_count": 404
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-06",
+    "score": 0.2143,
+    "past_mentions": 1102,
+    "future_mentions": 1703,
+    "article_count": 894
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-07",
+    "score": 0.1761,
+    "past_mentions": 20062,
+    "future_mentions": 28639,
+    "article_count": 18798
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-08",
+    "score": 0.2019,
+    "past_mentions": 10275,
+    "future_mentions": 15475,
+    "article_count": 9619
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-09",
+    "score": 0.0967,
+    "past_mentions": 495,
+    "future_mentions": 601,
+    "article_count": 358
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-10",
+    "score": 0.1757,
+    "past_mentions": 772,
+    "future_mentions": 1101,
+    "article_count": 634
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-11",
+    "score": 0.2318,
+    "past_mentions": 7695,
+    "future_mentions": 12340,
+    "article_count": 7019
+  },
+  {
+    "country": "Mexico",
+    "date": "2023-12",
+    "score": 0.1689,
+    "past_mentions": 3092,
+    "future_mentions": 4349,
+    "article_count": 2440
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-01",
+    "score": 0.1733,
+    "past_mentions": 9268,
+    "future_mentions": 13155,
+    "article_count": 7990
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-02",
+    "score": 0.213,
+    "past_mentions": 9076,
+    "future_mentions": 13988,
+    "article_count": 8301
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-03",
+    "score": 0.1676,
+    "past_mentions": 9909,
+    "future_mentions": 13900,
+    "article_count": 8572
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-04",
+    "score": 0.1877,
+    "past_mentions": 5335,
+    "future_mentions": 7801,
+    "article_count": 4638
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-05",
+    "score": 0.2293,
+    "past_mentions": 6309,
+    "future_mentions": 10063,
+    "article_count": 5438
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-06",
+    "score": 0.2122,
+    "past_mentions": 5803,
+    "future_mentions": 8930,
+    "article_count": 4700
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-07",
+    "score": 0.2805,
+    "past_mentions": 1479,
+    "future_mentions": 2632,
+    "article_count": 1320
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-08",
+    "score": 0.2115,
+    "past_mentions": 5036,
+    "future_mentions": 7738,
+    "article_count": 4280
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-09",
+    "score": 0.1629,
+    "past_mentions": 8689,
+    "future_mentions": 12072,
+    "article_count": 6570
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-10",
+    "score": 0.1834,
+    "past_mentions": 9734,
+    "future_mentions": 14105,
+    "article_count": 7693
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-11",
+    "score": 0.2416,
+    "past_mentions": 5762,
+    "future_mentions": 9434,
+    "article_count": 4219
+  },
+  {
+    "country": "Mexico",
+    "date": "2024-12",
+    "score": 0.2179,
+    "past_mentions": 15262,
+    "future_mentions": 23768,
+    "article_count": 11331
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-04",
+    "score": 0.1535,
+    "past_mentions": 91,
+    "future_mentions": 124,
+    "article_count": 53
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-06",
+    "score": 0.4012,
+    "past_mentions": 103,
+    "future_mentions": 241,
+    "article_count": 76
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-07",
+    "score": 0.1184,
+    "past_mentions": 108,
+    "future_mentions": 137,
+    "article_count": 99
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-08",
+    "score": 0.3385,
+    "past_mentions": 86,
+    "future_mentions": 174,
+    "article_count": 75
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-09",
+    "score": 0.3923,
+    "past_mentions": 55,
+    "future_mentions": 126,
+    "article_count": 71
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-10",
+    "score": 0.2202,
+    "past_mentions": 170,
+    "future_mentions": 266,
+    "article_count": 117
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-11",
+    "score": -0.0259,
+    "past_mentions": 376,
+    "future_mentions": 357,
+    "article_count": 126
+  },
+  {
+    "country": "Mexico",
+    "date": "2025-12",
+    "score": 0.0826,
+    "past_mentions": 261,
+    "future_mentions": 308,
+    "article_count": 143
+  },
+  {
+    "country": "Mexico",
+    "date": "2026-01",
+    "score": 0.2026,
+    "past_mentions": 250,
+    "future_mentions": 377,
+    "article_count": 178
+  },
+  {
+    "country": "Mexico",
+    "date": "2026-02",
+    "score": 0.3057,
+    "past_mentions": 226,
+    "future_mentions": 425,
+    "article_count": 180
+  },
+  {
+    "country": "Mexico",
+    "date": "2026-03",
+    "score": 0.2477,
+    "past_mentions": 653,
+    "future_mentions": 1083,
+    "article_count": 451
+  },
+  {
+    "country": "Mexico",
+    "date": "2026-04",
+    "score": 0.2973,
+    "past_mentions": 1783,
+    "future_mentions": 3292,
+    "article_count": 1427
+  },
+  {
+    "country": "Mexico",
+    "date": "2026-05",
+    "score": 0.248,
+    "past_mentions": 6761,
+    "future_mentions": 11221,
+    "article_count": 5241
+  }
+]

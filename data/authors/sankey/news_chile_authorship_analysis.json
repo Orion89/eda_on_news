@@ -34,32 +34,32 @@
     {
       "source": 0,
       "target": 1,
-      "value": 12163
+      "value": 6944
     },
     {
       "source": 0,
       "target": 2,
-      "value": 113063
+      "value": 90464
     },
     {
       "source": 0,
       "target": 3,
-      "value": 61755
+      "value": 52847
     },
     {
       "source": 3,
       "target": 4,
-      "value": 24819
+      "value": 21904
     },
     {
       "source": 3,
       "target": 5,
-      "value": 14129
+      "value": 12527
     },
     {
       "source": 3,
       "target": 6,
-      "value": 22807
+      "value": 18416
     }
   ]
 }

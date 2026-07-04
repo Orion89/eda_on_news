@@ -1,0 +1,330 @@
+[
+  {
+    "country": "Argentina",
+    "date": "2022-07",
+    "score": 0.3448,
+    "past_mentions": 57,
+    "future_mentions": 117,
+    "article_count": 54
+  },
+  {
+    "country": "Argentina",
+    "date": "2022-08",
+    "score": 0.3034,
+    "past_mentions": 93,
+    "future_mentions": 174,
+    "article_count": 55
+  },
+  {
+    "country": "Argentina",
+    "date": "2022-10",
+    "score": 0.3069,
+    "past_mentions": 96,
+    "future_mentions": 181,
+    "article_count": 69
+  },
+  {
+    "country": "Argentina",
+    "date": "2022-11",
+    "score": 0.3771,
+    "past_mentions": 109,
+    "future_mentions": 241,
+    "article_count": 88
+  },
+  {
+    "country": "Argentina",
+    "date": "2022-12",
+    "score": 0.2184,
+    "past_mentions": 102,
+    "future_mentions": 159,
+    "article_count": 73
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-01",
+    "score": 0.4444,
+    "past_mentions": 90,
+    "future_mentions": 234,
+    "article_count": 77
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-02",
+    "score": 0.2494,
+    "past_mentions": 149,
+    "future_mentions": 248,
+    "article_count": 96
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-03",
+    "score": 0.2827,
+    "past_mentions": 151,
+    "future_mentions": 270,
+    "article_count": 102
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-04",
+    "score": 0.4941,
+    "past_mentions": 151,
+    "future_mentions": 446,
+    "article_count": 157
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-05",
+    "score": 0.3039,
+    "past_mentions": 599,
+    "future_mentions": 1122,
+    "article_count": 402
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-06",
+    "score": 0.2671,
+    "past_mentions": 4285,
+    "future_mentions": 7409,
+    "article_count": 3273
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-07",
+    "score": 0.284,
+    "past_mentions": 15806,
+    "future_mentions": 28347,
+    "article_count": 13124
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-08",
+    "score": 0.3097,
+    "past_mentions": 12288,
+    "future_mentions": 23314,
+    "article_count": 10496
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-09",
+    "score": 0.3696,
+    "past_mentions": 492,
+    "future_mentions": 1069,
+    "article_count": 387
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-10",
+    "score": 0.2769,
+    "past_mentions": 1803,
+    "future_mentions": 3184,
+    "article_count": 1160
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-11",
+    "score": 0.2839,
+    "past_mentions": 11522,
+    "future_mentions": 20656,
+    "article_count": 8984
+  },
+  {
+    "country": "Argentina",
+    "date": "2023-12",
+    "score": 0.2432,
+    "past_mentions": 4653,
+    "future_mentions": 7644,
+    "article_count": 3231
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-01",
+    "score": 0.2704,
+    "past_mentions": 12842,
+    "future_mentions": 22360,
+    "article_count": 10422
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-02",
+    "score": 0.2329,
+    "past_mentions": 14018,
+    "future_mentions": 22531,
+    "article_count": 10622
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-03",
+    "score": 0.2157,
+    "past_mentions": 15291,
+    "future_mentions": 23700,
+    "article_count": 11093
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-04",
+    "score": 0.2266,
+    "past_mentions": 9282,
+    "future_mentions": 14721,
+    "article_count": 6424
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-05",
+    "score": 0.2114,
+    "past_mentions": 10613,
+    "future_mentions": 16302,
+    "article_count": 6969
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-06",
+    "score": 0.1612,
+    "past_mentions": 7710,
+    "future_mentions": 10673,
+    "article_count": 4576
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-07",
+    "score": 0.2116,
+    "past_mentions": 5119,
+    "future_mentions": 7866,
+    "article_count": 3143
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-08",
+    "score": 0.2831,
+    "past_mentions": 8752,
+    "future_mentions": 15664,
+    "article_count": 6700
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-09",
+    "score": 0.2807,
+    "past_mentions": 11528,
+    "future_mentions": 20527,
+    "article_count": 8347
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-10",
+    "score": 0.3027,
+    "past_mentions": 11535,
+    "future_mentions": 21551,
+    "article_count": 8406
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-11",
+    "score": 0.2911,
+    "past_mentions": 6503,
+    "future_mentions": 11845,
+    "article_count": 4405
+  },
+  {
+    "country": "Argentina",
+    "date": "2024-12",
+    "score": 0.2492,
+    "past_mentions": 17716,
+    "future_mentions": 29476,
+    "article_count": 11636
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-05",
+    "score": 0.2454,
+    "past_mentions": 123,
+    "future_mentions": 203,
+    "article_count": 64
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-06",
+    "score": 0.411,
+    "past_mentions": 91,
+    "future_mentions": 218,
+    "article_count": 51
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-08",
+    "score": 0.5008,
+    "past_mentions": 148,
+    "future_mentions": 445,
+    "article_count": 105
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-09",
+    "score": 0.3792,
+    "past_mentions": 194,
+    "future_mentions": 431,
+    "article_count": 96
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-10",
+    "score": 0.3341,
+    "past_mentions": 309,
+    "future_mentions": 619,
+    "article_count": 168
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-11",
+    "score": 0.2916,
+    "past_mentions": 328,
+    "future_mentions": 598,
+    "article_count": 159
+  },
+  {
+    "country": "Argentina",
+    "date": "2025-12",
+    "score": 0.3398,
+    "past_mentions": 372,
+    "future_mentions": 755,
+    "article_count": 217
+  },
+  {
+    "country": "Argentina",
+    "date": "2026-01",
+    "score": 0.2992,
+    "past_mentions": 527,
+    "future_mentions": 977,
+    "article_count": 320
+  },
+  {
+    "country": "Argentina",
+    "date": "2026-02",
+    "score": 0.3366,
+    "past_mentions": 753,
+    "future_mentions": 1517,
+    "article_count": 457
+  },
+  {
+    "country": "Argentina",
+    "date": "2026-03",
+    "score": 0.3032,
+    "past_mentions": 1724,
+    "future_mentions": 3224,
+    "article_count": 890
+  },
+  {
+    "country": "Argentina",
+    "date": "2026-04",
+    "score": 0.3245,
+    "past_mentions": 7417,
+    "future_mentions": 14543,
+    "article_count": 4413
+  },
+  {
+    "country": "Argentina",
+    "date": "2026-05",
+    "score": 0.284,
+    "past_mentions": 31773,
+    "future_mentions": 56975,
+    "article_count": 22161
+  }
+]
