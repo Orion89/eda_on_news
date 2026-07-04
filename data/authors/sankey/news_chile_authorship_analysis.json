@@ -1,0 +1,65 @@
+{
+  "country": "Chile",
+  "nodes": [
+    {
+      "node": 0,
+      "name": "Total Noticias"
+    },
+    {
+      "node": 1,
+      "name": "Agencias"
+    },
+    {
+      "node": 2,
+      "name": "Redacci\u00f3n / An\u00f3nimo"
+    },
+    {
+      "node": 3,
+      "name": "Periodista Firmante"
+    },
+    {
+      "node": 4,
+      "name": "Hombre"
+    },
+    {
+      "node": 5,
+      "name": "Mujer"
+    },
+    {
+      "node": 6,
+      "name": "No Identificado"
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 1,
+      "value": 12163
+    },
+    {
+      "source": 0,
+      "target": 2,
+      "value": 113063
+    },
+    {
+      "source": 0,
+      "target": 3,
+      "value": 61755
+    },
+    {
+      "source": 3,
+      "target": 4,
+      "value": 24819
+    },
+    {
+      "source": 3,
+      "target": 5,
+      "value": 14129
+    },
+    {
+      "source": 3,
+      "target": 6,
+      "value": 22807
+    }
+  ]
+}
