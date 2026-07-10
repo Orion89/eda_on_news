@@ -275,9 +275,61 @@ test.describe('El Eco de las Palabras — Suite de Pruebas Completa', () => {
   });
 
   // ══════════════════════════════════════════════════
-  // TEST 6: RESPONSIVE — Resize a móvil
+  // TEST 6: SECCIÓN 6 — EL MAPA DEL PODER (NER Map)
   // ══════════════════════════════════════════════════
-  test('6. Responsive — Visualizaciones se adaptan en móvil (375px)', async ({ page }) => {
+  test('6. Sección 6 — El Mapa del Poder (NER Bubble Map)', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForTimeout(4500);
+
+    // Scroll to section 6
+    await page.evaluate(() => document.querySelector('#scrolly-map')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(1500);
+
+    // SVG and components check
+    await expect(page.locator('#d3-canvas-map svg')).toBeVisible();
+    
+    const landPaths = await page.locator('#d3-canvas-map .map-land').count();
+    expect(landPaths).toBeGreaterThan(100);
+    
+    const activeCountries = await page.locator('#d3-canvas-map .map-land.active-country').count();
+    expect(activeCountries).toBe(4);
+
+    const bubbles = await page.locator('#d3-canvas-map .map-bubble').count();
+    expect(bubbles).toBeGreaterThan(40);
+    expect(bubbles).toBeLessThanOrEqual(60);
+
+    // Manual buttons check
+    await page.click('.map-country-btn[data-country="AR"]');
+    await page.waitForTimeout(1000);
+    await expect(page.locator('.map-country-btn[data-country="AR"]')).toHaveClass(/active/);
+
+    await page.click('.map-country-btn[data-country="all"]');
+    await page.waitForTimeout(800);
+
+    // Scroll step zooms
+    await page.evaluate(() => {
+      const steps = document.querySelectorAll('#scrolly-map article .step');
+      if (steps[1]) steps[1].scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+    await page.waitForTimeout(1500);
+    await expect(page.locator('.map-country-btn[data-country="CL"]')).toHaveClass(/active/);
+    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '06a-sec6-map-chile.png'), fullPage: false });
+
+    await page.evaluate(() => {
+      const steps = document.querySelectorAll('#scrolly-map article .step');
+      if (steps[2]) steps[2].scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+    await page.waitForTimeout(1500);
+    await expect(page.locator('.map-country-btn[data-country="AR"]')).toHaveClass(/active/);
+    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '06b-sec6-map-argentina.png'), fullPage: false });
+
+    console.log(`✅ Sección 6 OK — Mapa cargado, ${landPaths} países, ${bubbles} burbujas y zoom de scroll en orden`);
+  });
+
+  // ══════════════════════════════════════════════════
+  // TEST 7: RESPONSIVE — Resize a móvil
+  // ══════════════════════════════════════════════════
+  test('7. Responsive — Visualizaciones se adaptan en móvil (375px)', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(BASE_URL);
     await page.waitForTimeout(4500);
@@ -289,12 +341,17 @@ test.describe('El Eco de las Palabras — Suite de Pruebas Completa', () => {
     // Navegar a sección 5 en móvil
     await page.evaluate(() => document.querySelector('#scrolly-emotions')?.scrollIntoView({ behavior: 'instant' }));
     await page.waitForTimeout(1500);
-
     const emotionSvg = await page.locator('#d3-canvas-emotions svg').isVisible();
     expect(emotionSvg).toBe(true);
 
-    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '06-mobile-375.png'), fullPage: false });
-    console.log('✅ Responsive OK — Visualizaciones visibles en 375px');
+    // Navegar a sección 6 en móvil
+    await page.evaluate(() => document.querySelector('#scrolly-map')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(1500);
+    const mapSvg = await page.locator('#d3-canvas-map svg').isVisible();
+    expect(mapSvg).toBe(true);
+
+    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '07-mobile-375.png'), fullPage: false });
+    console.log('✅ Responsive OK — Visualizaciones (incluido mapa) visibles en 375px');
   });
 
 });

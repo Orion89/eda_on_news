@@ -1025,4 +1025,154 @@ body {
     }
 }
 
+/* --- Section 6 Container Layout --- */
+#scrolly-map {
+    position: relative;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+#scrolly-map figure.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55vh;
+    margin: 0;
+    background-color: var(--color-bg-alt);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#d3-canvas-map {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Map Country Buttons --- */
+.map-country-btn {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    background-color: #ffffff;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+.map-country-btn:hover {
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-main);
+    border-color: var(--color-text-muted);
+}
+
+.map-country-btn:active {
+    transform: scale(0.97);
+}
+
+.map-country-btn.active {
+    background-color: var(--color-text-main);
+    color: #ffffff;
+    border-color: var(--color-text-main);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Map Elements --- */
+.map-land {
+    fill: #e8e7e5;
+    stroke: #ffffff;
+    stroke-width: 0.5px;
+    transition: fill 0.3s;
+}
+
+.map-land.active-country {
+    fill: #dad7d4;
+}
+
+.map-bubble {
+    stroke: #ffffff;
+    stroke-width: 1px;
+    fill-opacity: 0.7;
+    transition: fill-opacity 0.2s, stroke-width 0.2s;
+    cursor: pointer;
+}
+
+.map-bubble:hover {
+    fill-opacity: 0.95;
+    stroke-width: 1.5px;
+}
+
+/* Storytelling text style */
+.map-insight-text {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.015);
+    border-left: 4px solid var(--color-text-main);
+}
+
+.map-insight-text p {
+    font-size: 1rem !important;
+    line-height: 1.65 !important;
+    color: var(--color-text-main) !important;
+    margin: 0 !important;
+}
+
+.map-insight-text strong {
+    font-weight: 700;
+}
+
+/* Floating overlay for mobile/desktop */
+.map-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 0.8rem;
+    color: var(--color-text-main);
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.map-overlay.hidden {
+    display: none;
+}
+
+/* Desktop layout override for Section 6 */
+@media (min-width: 992px) {
+    #scrolly-map {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #scrolly-map figure.sticky {
+        width: 55%;
+        height: 100vh;
+        top: 0;
+        border-bottom: none;
+        border-left: 1px solid var(--color-border);
+    }
+}
+
 

@@ -8,6 +8,7 @@ const scroller = scrollama();
 const scrollerStyle = scrollama();
 const scrollerPos = scrollama();
 const scrollerEmotions = scrollama();
+const scrollerMap = scrollama();
 
 // --- Globals for Section 1 (Bubble Chart) ---
 let svg;
@@ -65,6 +66,26 @@ let selectedEmotion = "alegría";
 let emotionsStorytellingData = {};
 
 const paddingEmotions = { top: 50, right: 30, bottom: 50, left: 100 };
+
+// --- Globals for Section 6 (NER Map) ---
+let svgMap;
+let gMap;
+let widthMap = 800;
+let heightMap = 600;
+let allMapData = [];
+let mapStorytellingData = {};
+let projectionMap, pathGeneratorMap, zoomBehaviorMap;
+let worldGeoData;
+let selectedMapCountry = "all";
+let mapCycleInterval = null;
+
+const countryCentersMap = {
+    "all": { center: [-45, -5], zoom: 1.35 },
+    "CL": { center: [-71.5, -35], zoom: 4.8 },
+    "AR": { center: [-65, -38], zoom: 3.5 },
+    "MX": { center: [-102, 23], zoom: 3.6 },
+    "ES": { center: [-3.7, 40], zoom: 5.2 }
+};
 
 // Map country codes to readable names
 const countryNames = {
@@ -1562,11 +1583,27 @@ function handleResize() {
         updateEmotionsVisualization(stepIndex);
     }
 
-    // 5. Inform Scrollama instances
+    // 5. Resize Section 6 (NER Map)
+    const canvasMap = document.getElementById("d3-canvas-map");
+    if (canvasMap && svgMap) {
+        widthMap = canvasMap.clientWidth;
+        heightMap = canvasMap.clientHeight;
+        svgMap.attr("width", widthMap)
+              .attr("height", heightMap)
+              .attr("viewBox", `0 0 ${widthMap} ${heightMap}`);
+
+        projectionMap.scale(widthMap * 0.28).translate([widthMap / 2, heightMap / 2]);
+        renderMapPlot();
+        
+        zoomToCountry(selectedMapCountry);
+    }
+
+    // 6. Inform Scrollama instances
     scroller.resize();
     scrollerStyle.resize();
     scrollerPos.resize();
     scrollerEmotions.resize();
+    scrollerMap.resize();
 }
 
 /**
@@ -1578,7 +1615,8 @@ function init() {
         loadData(),
         loadStyleData(),
         loadPosData(),
-        loadEmotionsData()
+        loadEmotionsData(),
+        loadMapData()
     ]).then(() => {
         // Initialize Section 1
         setupD3Canvas();
@@ -1599,6 +1637,11 @@ function init() {
         bindEmotionsEvents();
         initScrollamaEmotions();
 
+        // Initialize Section 6
+        setupD3MapCanvas();
+        bindMapEvents();
+        initScrollamaMap();
+
         // Window resize event handler
         window.addEventListener("resize", handleResize);
 
@@ -1606,6 +1649,318 @@ function init() {
     }).catch(error => {
         console.error("[Init Error] Failed to load data or initialize visualizers:", error);
     });
+}
+
+// ==========================================
+// SECTION 6: NER BUBBLE MAP
+// ==========================================
+
+function loadMapData() {
+    return Promise.all([
+        d3.json("data/NER/world-110m.json"),
+        d3.csv("data/NER/LOC/argentina_loc_ents_with_geoloc.csv"),
+        d3.csv("data/NER/LOC/chile_loc_ents_with_geoloc.csv"),
+        d3.csv("data/NER/LOC/españa_loc_ents_with_geoloc.csv"),
+        d3.csv("data/NER/LOC/mexico_loc_ents_with_geoloc.csv")
+    ]).then(([worldMap, arCSV, clCSV, esCSV, mxCSV]) => {
+        worldGeoData = worldMap;
+
+        const areSimilar = (name1, name2) => {
+            const n1 = name1.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            const n2 = name2.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            
+            if (n1 === n2) return true;
+            if (n1.length > 4 && n2.length > 4) {
+                if (n1.includes(n2) || n2.includes(n1)) return true;
+            }
+            return false;
+        };
+
+        const filterTop15 = (data) => {
+            const result = [];
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i];
+                if (+item.mentions <= 0) continue;
+                
+                let isDuplicate = false;
+                for (let j = 0; j < result.length; j++) {
+                    if (areSimilar(item.city, result[j].city)) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (!isDuplicate) {
+                    result.push(item);
+                }
+                if (result.length === 15) {
+                    break;
+                }
+            }
+            return result;
+        };
+
+        const processCSV = (csv, cCode) => {
+            csv.forEach(d => {
+                d.mentions = +d.mentions;
+                d.lat = +d.lat;
+                d.lon = +d.lon;
+                d.countryCode = cCode;
+            });
+
+            const totalMentions = d3.sum(csv, d => d.mentions) || 1;
+            const topCity = csv[0];
+            const topCityName = topCity ? topCity.city : "Capital";
+            const topCityMentions = topCity ? topCity.mentions : 0;
+            const percentage = (topCityMentions / totalMentions) * 100;
+
+            mapStorytellingData[cCode] = {
+                total: totalMentions,
+                topCity: topCityName,
+                topCityMentions: topCityMentions,
+                percentage: percentage
+            };
+
+            const filtered = filterTop15(csv);
+            allMapData = allMapData.concat(filtered);
+        };
+
+        allMapData = [];
+        processCSV(arCSV, "AR");
+        processCSV(clCSV, "CL");
+        processCSV(esCSV, "ES");
+        processCSV(mxCSV, "MX");
+
+        updateMapStorytellingHTML();
+    });
+}
+
+function updateMapStorytellingHTML() {
+    const containerCL = document.getElementById("map-insight-CL");
+    const containerAR = document.getElementById("map-insight-AR");
+    const containerMX = document.getElementById("map-insight-MX");
+
+    if (containerCL && mapStorytellingData["CL"]) {
+        const d = mapStorytellingData["CL"];
+        containerCL.innerHTML = `<p>El hiper-centralismo informativo: En <strong>Chile</strong>, de todas las localidades mencionadas, solo <strong>${d.topCity}</strong> acapara el <strong>${d.percentage.toFixed(1)}%</strong> de la pauta. El interior del país es invisible para los principales medios.</p>`;
+    }
+    if (containerAR && mapStorytellingData["AR"]) {
+        const d = mapStorytellingData["AR"];
+        containerAR.innerHTML = `<p>El hiper-centralismo informativo: En <strong>Argentina</strong>, de todas las localidades mencionadas, solo <strong>${d.topCity}</strong> acapara el <strong>${d.percentage.toFixed(1)}%</strong> de la pauta. El interior del país es invisible para los principales medios.</p>`;
+    }
+    if (containerMX && mapStorytellingData["MX"] && mapStorytellingData["ES"]) {
+        const dMX = mapStorytellingData["MX"];
+        const dES = mapStorytellingData["ES"];
+        containerMX.innerHTML = `
+            <p>El hiper-centralismo informativo: En <strong>México</strong>, la atención en <strong>${dMX.topCity}</strong> representa el <strong>${dMX.percentage.toFixed(1)}%</strong> de la pauta. En <strong>España</strong>, <strong>${dES.topCity}</strong> acapara el <strong>${dES.percentage.toFixed(1)}%</strong>. En ambos casos, las capitales concentran la cobertura noticiosa, atenuando el resto de las regiones.</p>
+        `;
+    }
+}
+
+function handleMapMouseOver(event, d) {
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    tooltip.html(`
+        <div class="tooltip-title">${d.city}</div>
+        <div class="tooltip-row"><strong>País:</strong> ${countryNames[d.countryCode]}</div>
+        <div class="tooltip-row"><strong>Menciones (NER):</strong> ${d.mentions.toLocaleString()}</div>
+        <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.4rem;">
+            Coordenadas: ${d.lat.toFixed(2)}, ${d.lon.toFixed(2)}
+        </div>
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+function handleMapMouseLeave() {
+    tooltip.transition().duration(100).style("opacity", 0);
+}
+
+function setupD3MapCanvas() {
+    const canvas = document.getElementById("d3-canvas-map");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    widthMap = canvas.clientWidth;
+    heightMap = canvas.clientHeight;
+
+    svgMap = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthMap)
+        .attr("height", heightMap)
+        .attr("viewBox", `0 0 ${widthMap} ${heightMap}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    projectionMap = d3.geoMercator()
+        .center([-45, -5])
+        .scale(widthMap * 0.28)
+        .translate([widthMap / 2, heightMap / 2]);
+
+    pathGeneratorMap = d3.geoPath().projection(projectionMap);
+
+    gMap = svgMap.append("g").attr("class", "map-zoomable-group");
+
+    zoomBehaviorMap = d3.zoom()
+        .scaleExtent([1, 15])
+        .on("zoom", (event) => {
+            gMap.attr("transform", event.transform);
+        });
+
+    svgMap.call(zoomBehaviorMap);
+
+    renderMapPlot();
+}
+
+function renderMapPlot() {
+    if (!svgMap || !worldGeoData) return;
+
+    const countriesGeoJSON = topojson.feature(worldGeoData, worldGeoData.objects.countries).features;
+
+    gMap.selectAll(".map-land")
+        .data(countriesGeoJSON)
+        .join("path")
+        .attr("class", "map-land")
+        .attr("d", pathGeneratorMap)
+        .classed("active-country", d => {
+            const id = +d.id;
+            return [32, 152, 724, 484].includes(id);
+        });
+
+    const maxMentions = d3.max(allMapData, d => d.mentions) || 1000;
+    const radiusScaleMap = d3.scaleSqrt()
+        .domain([1, maxMentions])
+        .range([3, 26]);
+
+    const validBubbles = allMapData.filter(d => {
+        const coords = projectionMap([d.lon, d.lat]);
+        return coords && !isNaN(coords[0]) && !isNaN(coords[1]) && d.mentions > 0;
+    });
+
+    gMap.selectAll(".map-bubble")
+        .data(validBubbles, d => d.city + "_" + d.countryCode)
+        .join("circle")
+        .attr("class", "map-bubble")
+        .attr("cx", d => projectionMap([d.lon, d.lat])[0])
+        .attr("cy", d => projectionMap([d.lon, d.lat])[1])
+        .attr("r", d => radiusScaleMap(d.mentions))
+        .attr("fill", d => {
+            switch(d.countryCode) {
+                case "AR": return "var(--color-ar)";
+                case "CL": return "var(--color-cl)";
+                case "ES": return "var(--color-es)";
+                case "MX": return "var(--color-mx)";
+                default: return "#999";
+            }
+        })
+        .on("mouseover", handleMapMouseOver)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleMapMouseLeave);
+}
+
+function zoomToCountry(countryCode) {
+    if (!svgMap || !projectionMap) return;
+
+    const config = countryCentersMap[countryCode] || countryCentersMap["all"];
+    const [lon, lat] = config.center;
+    const k = config.zoom;
+
+    const [x, y] = projectionMap([lon, lat]);
+
+    const transform = d3.zoomIdentity
+        .translate(widthMap / 2 - k * x, heightMap / 2 - k * y)
+        .scale(k);
+
+    svgMap.transition()
+        .duration(1000)
+        .call(zoomBehaviorMap.transform, transform);
+
+    svgMap.selectAll(".map-bubble")
+        .transition()
+        .duration(800)
+        .style("opacity", d => {
+            if (countryCode === "all" || d.countryCode === countryCode) return 0.85;
+            return 0.15;
+        });
+}
+
+function bindMapEvents() {
+    const buttons = document.querySelectorAll(".map-country-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            // Clear cycle if user clicks manually
+            if (mapCycleInterval) {
+                clearInterval(mapCycleInterval);
+                mapCycleInterval = null;
+            }
+
+            selectedMapCountry = this.getAttribute("data-country");
+            zoomToCountry(selectedMapCountry);
+        });
+    });
+}
+
+function initScrollamaMap() {
+    scrollerMap
+        .setup({
+            step: "#scrolly-map article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const steps = document.querySelectorAll("#scrolly-map article .step");
+            steps.forEach((step, idx) => {
+                step.classList.toggle("is-active", idx === stepIndex);
+            });
+            updateMapVisualization(stepIndex);
+        });
+    updateMapVisualization(0);
+}
+
+function updateMapVisualization(stepIndex) {
+    if (!svgMap) return;
+
+    if (mapCycleInterval) {
+        clearInterval(mapCycleInterval);
+        mapCycleInterval = null;
+    }
+
+    let targetCountry = "all";
+    if (stepIndex === 1) targetCountry = "CL";
+    else if (stepIndex === 2) targetCountry = "AR";
+    else if (stepIndex === 3) {
+        targetCountry = "MX";
+        
+        // Highlight MX button immediately on step enter
+        const buttons = document.querySelectorAll(".map-country-btn");
+        buttons.forEach(btn => {
+            btn.classList.toggle("active", btn.getAttribute("data-country") === "MX");
+        });
+
+        let isES = false;
+        mapCycleInterval = setInterval(() => {
+            isES = !isES;
+            const nextCountry = isES ? "ES" : "MX";
+            
+            const buttons = document.querySelectorAll(".map-country-btn");
+            buttons.forEach(btn => {
+                btn.classList.toggle("active", btn.getAttribute("data-country") === nextCountry);
+            });
+            
+            zoomToCountry(nextCountry);
+        }, 4500);
+    }
+
+    if (stepIndex !== 3) {
+        const buttons = document.querySelectorAll(".map-country-btn");
+        buttons.forEach(btn => {
+            btn.classList.toggle("active", btn.getAttribute("data-country") === targetCountry);
+        });
+    }
+
+    selectedMapCountry = targetCountry;
+    zoomToCountry(targetCountry);
 }
 
 // Bind initialization to DOM ready event
