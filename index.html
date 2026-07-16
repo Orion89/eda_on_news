@@ -363,6 +363,164 @@
         </article>
     </section>
 
+    <!-- Section 7: La Barrera de Cristal (Beeswarm Plot) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Legibilidad y Acceso Informativo</span>
+            <h2 class="section-title">La Barrera de Cristal</h2>
+            <p class="section-intro-text">
+                ¿A quién le habla realmente la prensa? Medimos los años de escolaridad formal que exige cada medio de comunicación para comprender sus noticias, revelando una barrera invisible entre el periodismo y la ciudadanía.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-beeswarm">
+        <!-- Sticky beeswarm canvas -->
+        <figure class="sticky" id="beeswarm-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Zone Legend -->
+                <div id="beeswarm-legend" class="beeswarm-legend">
+                    <span class="beeswarm-legend-item basica">Educación Básica (6–9 años)</span>
+                    <span class="beeswarm-legend-item media">Educación Media (9–12 años)</span>
+                    <span class="beeswarm-legend-item univ">Educación Universitaria (12+ años)</span>
+                </div>
+                <!-- D3 canvas -->
+                <div id="d3-canvas-beeswarm" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Calculando legibilidad…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+                <!-- Storytelling panel -->
+                <div id="storytelling-insights-beeswarm" class="storytelling-insights">
+                    <!-- JS generated content -->
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">07.1</span>
+                <h3>El Panorama Global</h3>
+                <p>
+                    Cada círculo representa un medio de comunicación. Su posición en el eje vertical indica cuántos años de escolaridad formal exige para ser comprendido. El color identifica el país.
+                </p>
+                <p>
+                    Las tres zonas de fondo revelan el nivel educativo implícito: básica, media y universitaria. ¿Dónde se concentra la prensa de tu país?
+                </p>
+            </div>
+
+            <div class="step" data-step="2">
+                <span class="step-num">07.2</span>
+                <h3>Chile vs. Argentina</h3>
+                <p>
+                    Comparamos dos países vecinos. La prensa chilena y argentina difieren en sus exigencias de legibilidad. Observa la distribución de sus medios en el eje educativo.
+                </p>
+                <div id="beeswarm-insight-CL-AR" class="map-insight-text"><!-- JS --></div>
+            </div>
+
+            <div class="step" data-step="3">
+                <span class="step-num">07.3</span>
+                <h3>España vs. México</h3>
+                <p>
+                    El español ibérico frente al mexicano. ¿Existe diferencia en la complejidad lingüística entre ambas prensas?
+                </p>
+                <div id="beeswarm-insight-ES-MX" class="map-insight-text"><!-- JS --></div>
+            </div>
+
+            <div class="step" data-step="4">
+                <span class="step-num">07.4</span>
+                <h3>La Zona Universitaria</h3>
+                <p>
+                    Los medios en la zona roja exigen más de 12 años de escolaridad formal. Pasa el cursor sobre ellos para leer textos reales de sus noticias y experimentar la barrera en primera persona.
+                </p>
+                <div class="inflesz-explainer">
+                    <p class="inflesz-title">¿Qué es el puntaje INFLESZ?</p>
+                    <p>Índice de legibilidad adaptado al español, derivado de la fórmula de Flesch:</p>
+                    <code class="inflesz-formula">INFLESZ = 206.835 − 60 × (sílabas/palabras) − 1.02 × (palabras/frases)</code>
+                    <p>100 = muy fácil · 0 = muy difícil · &lt;40 = nivel especializado</p>
+                </div>
+            </div>
+        </article>
+
+    <!-- Section 8: El Rostro de la Noticia (Sankey Diagram) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Auditoría de Firmas y Género</span>
+            <h2 class="section-title">El Rostro de la Noticia</h2>
+            <p class="section-intro-text">
+                ¿Quién escribe lo que leemos? Analizamos la autoría de las noticias para descubrir la tasa de anonimato y dependencia de agencias (periodismo de escritorio), así como la brecha de género entre periodistas firmantes.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-sankey">
+        <!-- Sticky sankey canvas -->
+        <figure class="sticky" id="sankey-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Country Selector inside figure -->
+                <div class="sankey-controls">
+                    <button class="sankey-country-btn active" data-country="AR">Argentina</button>
+                    <button class="sankey-country-btn" data-country="CL">Chile</button>
+                    <button class="sankey-country-btn" data-country="ES">España</button>
+                    <button class="sankey-country-btn" data-country="MX">México</button>
+                </div>
+                <!-- D3 canvas -->
+                <div id="d3-canvas-sankey" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Calculando flujos de autoría…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+                <!-- Storytelling panel -->
+                <div id="storytelling-insights-sankey" class="storytelling-insights">
+                    <!-- JS generated content -->
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1" data-country="AR">
+                <span class="step-num">08.1</span>
+                <h3>Argentina</h3>
+                <p>
+                    Observa cómo se distribuye el volumen informativo en Argentina. La corriente se bifurca rápidamente entre contenidos institucionales/anónimos y notas firmadas.
+                </p>
+                <div id="sankey-insight-AR" class="map-insight-text"><!-- JS --></div>
+            </div>
+            <div class="step" data-step="2" data-country="CL">
+                <span class="step-num">08.2</span>
+                <h3>Chile</h3>
+                <p>
+                    El flujo de Chile expone sus particularidades. ¿Qué proporción de noticias recae sobre los hombros de las agencias o del anonimato corporativo en la redacción?
+                </p>
+                <div id="sankey-insight-CL" class="map-insight-text"><!-- JS --></div>
+            </div>
+            <div class="step" data-step="3" data-country="ES">
+                <span class="step-num">08.3</span>
+                <h3>España</h3>
+                <p>
+                    España presenta un volumen considerable de firmas propias, pero la proporción entre géneros de firmas revela patrones estructurales persistentes.
+                </p>
+                <div id="sankey-insight-ES" class="map-insight-text"><!-- JS --></div>
+            </div>
+            <div class="step" data-step="4" data-country="MX">
+                <span class="step-num">08.4</span>
+                <h3>México</h3>
+                <p>
+                    Analizamos el mapa de firmas de México. ¿Logran los periodistas firmantes (hombres y mujeres) ganar espacio frente a las corrientes automatizadas?
+                </p>
+                <div id="sankey-insight-MX" class="map-insight-text"><!-- JS --></div>
+            </div>
+        </article>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <p><strong>El Eco de las Palabras</strong> | Proyecto de Análisis Lingüístico y Visual</p>
@@ -373,6 +531,7 @@
     <!-- Libraries CDN -->
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
     
     <!-- Main Script -->

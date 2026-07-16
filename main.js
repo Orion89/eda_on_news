@@ -9,6 +9,8 @@ const scrollerStyle = scrollama();
 const scrollerPos = scrollama();
 const scrollerEmotions = scrollama();
 const scrollerMap = scrollama();
+const scrollerBeeswarm = scrollama();
+const scrollerSankey = scrollama();
 
 // --- Globals for Section 1 (Bubble Chart) ---
 let svg;
@@ -94,6 +96,25 @@ const countryNames = {
     "ES": "España",
     "MX": "México"
 };
+
+// --- Globals for Section 7 (Beeswarm Plot) ---
+let svgBeeswarm;
+let widthBeeswarm = 800;
+let heightBeeswarm = 600;
+let allBeeswarmData = [];
+let beeswarmMedianByCountry = {};
+let beeswarmStorytellingData = {};
+let yScaleBeeswarm;
+
+const paddingBeeswarm = { top: 55, right: 50, bottom: 55, left: 68 };
+
+// --- Globals for Section 8 (Sankey) ---
+let svgSankey;
+let widthSankey = 800;
+let heightSankey = 600;
+let allSankeyData = {};
+let selectedSankeyCountry = "AR";
+
 
 // Map country names from dataset to standard country codes
 const countryMappingEmotions = {
@@ -1598,12 +1619,36 @@ function handleResize() {
         zoomToCountry(selectedMapCountry);
     }
 
-    // 6. Inform Scrollama instances
+    // 6. Resize Section 7 (Beeswarm)
+    const canvasBeeswarm = document.getElementById("d3-canvas-beeswarm");
+    if (canvasBeeswarm && svgBeeswarm) {
+        widthBeeswarm = canvasBeeswarm.clientWidth;
+        heightBeeswarm = canvasBeeswarm.clientHeight;
+        svgBeeswarm.attr("width", widthBeeswarm)
+                   .attr("height", heightBeeswarm)
+                   .attr("viewBox", `0 0 ${widthBeeswarm} ${heightBeeswarm}`);
+        setupD3BeeswarmCanvas();
+    }
+
+    // 7. Resize Section 8 (Sankey)
+    const canvasSankey = document.getElementById("d3-canvas-sankey");
+    if (canvasSankey && svgSankey) {
+        widthSankey = canvasSankey.clientWidth;
+        heightSankey = canvasSankey.clientHeight || 450;
+        svgSankey.attr("width", widthSankey)
+                 .attr("height", heightSankey)
+                 .attr("viewBox", `0 0 ${widthSankey} ${heightSankey}`);
+        setupD3SankeyCanvas();
+    }
+
+    // 8. Inform Scrollama instances
     scroller.resize();
     scrollerStyle.resize();
     scrollerPos.resize();
     scrollerEmotions.resize();
     scrollerMap.resize();
+    scrollerBeeswarm.resize();
+    scrollerSankey.resize();
 }
 
 /**
@@ -1616,7 +1661,9 @@ function init() {
         loadStyleData(),
         loadPosData(),
         loadEmotionsData(),
-        loadMapData()
+        loadMapData(),
+        loadBeeswarmData(),
+        loadSankeyData()
     ]).then(() => {
         // Initialize Section 1
         setupD3Canvas();
@@ -1641,6 +1688,15 @@ function init() {
         setupD3MapCanvas();
         bindMapEvents();
         initScrollamaMap();
+
+        // Initialize Section 7
+        setupD3BeeswarmCanvas();
+        initScrollamaBeeswarm();
+
+        // Initialize Section 8
+        setupD3SankeyCanvas();
+        bindSankeyEvents();
+        initScrollamaSankey();
 
         // Window resize event handler
         window.addEventListener("resize", handleResize);
@@ -1965,3 +2021,695 @@ function updateMapVisualization(stepIndex) {
 
 // Bind initialization to DOM ready event
 window.addEventListener("DOMContentLoaded", init);
+
+
+// ==========================================
+// SECTION 8: EL ROSTRO DE LA NOTICIA (Sankey)
+// ==========================================
+
+function getNodeColor(nodeIndex) {
+    const colors = {
+        0: "#64748b", // Total Noticias (grey slate)
+        1: "#94a3b8", // Agencias (light slate)
+        2: "#64748b", // Redacción / Anónimo (slate)
+        3: "#475569", // Periodista Firmante (dark slate)
+        4: "#3a86c8", // Hombre (vivid blue)
+        5: "#db2777", // Mujer (vivid pink)
+        6: "#cbd5e1"  // No Identificado (neutral gray)
+    };
+    return colors[nodeIndex] || "#94a3b8";
+}
+
+function loadSankeyData() {
+    const urls = {
+        "AR": "data/authors/sankey/news_argentina_authorship_analysis.json",
+        "CL": "data/authors/sankey/news_chile_authorship_analysis.json",
+        "ES": "data/authors/sankey/news_espana_authorship_analysis.json",
+        "MX": "data/authors/sankey/news_mexico_authorship_analysis.json"
+    };
+
+    const keys = Object.keys(urls);
+    return Promise.all(keys.map(k => d3.json(urls[k])))
+        .then(results => {
+            results.forEach((data, index) => {
+                allSankeyData[keys[index]] = data;
+            });
+            generateSankeyStorytelling();
+        });
+}
+
+function generateSankeyStorytelling() {
+    ["AR", "CL", "ES", "MX"].forEach(code => {
+        const data = allSankeyData[code];
+        if (!data) return;
+
+        // Calculate values from links
+        let total = 0;
+        let agencias = 0;
+        let anonimo = 0;
+        let firmado = 0;
+        let mujer = 0;
+        let hombre = 0;
+
+        data.links.forEach(l => {
+            if (l.source === 0 && l.target === 1) agencias = l.value;
+            if (l.source === 0 && l.target === 2) anonimo = l.value;
+            if (l.source === 0 && l.target === 3) firmado = l.value;
+            if (l.source === 3 && l.target === 5) mujer = l.value;
+            if (l.source === 3 && l.target === 4) hombre = l.value;
+        });
+
+        total = agencias + anonimo + firmado;
+
+        const industrialPct = ((agencias + anonimo) / total * 100).toFixed(1);
+        const anonimoPct = (anonimo / total * 100).toFixed(1);
+        const agenciasPct = (agencias / total * 100).toFixed(1);
+        const womenPct = (mujer / firmado * 100).toFixed(1);
+
+        const countryFull = countryNames[code];
+
+        const insightEl = document.getElementById(`sankey-insight-${code}`);
+        if (insightEl) {
+            insightEl.innerHTML = `
+                <div class="insight-card country-border-${code.toLowerCase()}">
+                    <h4 class="insight-country" style="color: var(--color-${code.toLowerCase()})">${countryFull}</h4>
+                    <p class="insight-text">
+                        El periodismo industrial en <strong>${countryFull}</strong>: El <strong>${industrialPct}%</strong> de la información es anónima o refrito de agencia (donde el <strong>${anonimoPct}%</strong> es redacción/anónimo y el <strong>${agenciasPct}%</strong> proviene de agencias). 
+                        En los reportajes que llevan firma propia, la brecha de género es evidente: solo el <strong>${womenPct}%</strong> de las firmas corresponde a periodistas mujeres.
+                    </p>
+                    <div class="insight-meta">
+                        Firmas Hombre: ${hombre.toLocaleString()} | Firmas Mujer: ${mujer.toLocaleString()}
+                    </div>
+                </div>
+            `;
+        }
+    });
+
+    // Also populate a general card in the sticky panel
+    const panel = document.getElementById("storytelling-insights-sankey");
+    if (panel) {
+        const cards = ["AR", "CL", "ES", "MX"].map(code => {
+            const data = allSankeyData[code];
+            if (!data) return "";
+            
+            let firmado = 1, mujer = 0;
+            data.links.forEach(l => {
+                if (l.source === 0 && l.target === 3) firmado = l.value;
+                if (l.source === 3 && l.target === 5) mujer = l.value;
+            });
+            const womenPct = (mujer / firmado * 100).toFixed(1);
+            const color = `var(--color-${code.toLowerCase()})`;
+            return `<div class="insight-card country-border-${code.toLowerCase()}">
+                <div class="insight-country" style="color:${color}">${countryNames[code]}</div>
+                <div class="insight-stat">${womenPct}%</div>
+                <div class="insight-label">Firmas de Mujeres</div>
+            </div>`;
+        }).join("");
+        panel.innerHTML = `<div class="insights-grid">${cards}</div>`;
+    }
+}
+
+function setupD3SankeyCanvas() {
+    const canvas = document.getElementById("d3-canvas-sankey");
+    if (!canvas || Object.keys(allSankeyData).length === 0) return;
+
+    canvas.innerHTML = "";
+    widthSankey = canvas.clientWidth;
+    heightSankey = canvas.clientHeight || 450;
+
+    svgSankey = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthSankey)
+        .attr("height", heightSankey)
+        .attr("viewBox", `0 0 ${widthSankey} ${heightSankey}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    renderSankeyPlot(selectedSankeyCountry);
+}
+
+function renderSankeyPlot(countryCode) {
+    if (!svgSankey || !allSankeyData[countryCode]) return;
+
+    svgSankey.selectAll("*").remove();
+
+    const rawData = allSankeyData[countryCode];
+    const graph = {
+        nodes: rawData.nodes.map(d => Object.assign({}, d)),
+        links: rawData.links.map(d => Object.assign({}, d))
+    };
+
+    const sankeyLayout = d3.sankey()
+        .nodeWidth(16)
+        .nodePadding(24)
+        .extent([[40, 30], [widthSankey - 40, heightSankey - 35]]);
+
+    let nodes, links;
+    try {
+        const result = sankeyLayout(graph);
+        nodes = result.nodes;
+        links = result.links;
+    } catch(e) {
+        console.error("[Sankey] Layout failed:", e);
+        return;
+    }
+
+    // Gradient definitions
+    const defs = svgSankey.append("defs");
+    links.forEach((l, i) => {
+        const gradId = `sankey-grad-${countryCode}-${i}`;
+        const grad = defs.append("linearGradient")
+            .attr("id", gradId)
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", l.source.x1)
+            .attr("x2", l.target.x0);
+
+        grad.append("stop").attr("offset", "0%").attr("stop-color", getNodeColor(l.source.node));
+        grad.append("stop").attr("offset", "100%").attr("stop-color", getNodeColor(l.target.node));
+    });
+
+    // Draw links
+    const linkPaths = svgSankey.append("g")
+        .selectAll("path")
+        .data(links)
+        .join("path")
+        .attr("class", "sankey-link")
+        .attr("d", d3.sankeyLinkHorizontal())
+        .attr("stroke", (l, i) => `url(#sankey-grad-${countryCode}-${i})`)
+        .attr("stroke-width", l => Math.max(1.5, l.width))
+        .attr("fill", "none")
+        .on("mouseover", handleSankeyLinkMouseOver)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleSankeyLinkMouseLeave);
+
+    // Draw nodes
+    const nodeGroups = svgSankey.append("g")
+        .selectAll("g")
+        .data(nodes)
+        .join("g");
+
+    nodeGroups.append("rect")
+        .attr("class", "sankey-node")
+        .attr("x", n => n.x0)
+        .attr("y", n => n.y0)
+        .attr("width", n => n.x1 - n.x0)
+        .attr("height", n => Math.max(3, n.y1 - n.y0))
+        .attr("fill", n => getNodeColor(n.node))
+        .on("mouseover", handleSankeyNodeMouseOver)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleSankeyNodeMouseLeave);
+
+    // Draw node labels
+    nodeGroups.append("text")
+        .attr("class", "sankey-node-label")
+        .attr("x", n => n.x0 < widthSankey / 2 ? n.x1 + 6 : n.x0 - 6)
+        .attr("y", n => (n.y0 + n.y1) / 2)
+        .attr("dy", "0.35em")
+        .attr("text-anchor", n => n.x0 < widthSankey / 2 ? "start" : "end")
+        .text(n => `${n.name} (${Math.round(n.value).toLocaleString()})`);
+}
+
+function handleSankeyLinkMouseOver(event, d) {
+    // Dim all links and highlight hovered
+    svgSankey.selectAll(".sankey-link").classed("dimmed", true);
+    d3.select(event.currentTarget).classed("active", true).classed("dimmed", false);
+
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    
+    // Percentage relative to source
+    const pct = (d.value / d.source.value * 100).toFixed(1);
+    
+    tooltip.html(`
+        <div class="tooltip-title">Flujo de Autoría</div>
+        <div class="tooltip-row"><strong>Origen:</strong> ${d.source.name}</div>
+        <div class="tooltip-row"><strong>Destino:</strong> ${d.target.name}</div>
+        <div class="tooltip-row"><strong>Volumen:</strong> ${Math.round(d.value).toLocaleString()} noticias</div>
+        <div class="tooltip-row"><strong>Proporción:</strong> ${pct}% del origen</div>
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+function handleSankeyLinkMouseLeave() {
+    svgSankey.selectAll(".sankey-link").classed("dimmed", false).classed("active", false);
+    tooltip.transition().duration(100).style("opacity", 0);
+}
+
+function handleSankeyNodeMouseOver(event, d) {
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    
+    // Find percentage relative to root node (Total Noticias)
+    const rootVal = svgSankey.selectAll(".sankey-node").data().find(n => n.node === 0)?.value || d.value;
+    const pct = (d.value / rootVal * 100).toFixed(1);
+
+    tooltip.html(`
+        <div class="tooltip-title">${d.name}</div>
+        <div class="tooltip-row"><strong>Total:</strong> ${Math.round(d.value).toLocaleString()} noticias</div>
+        ${d.node !== 0 ? `<div class="tooltip-row"><strong>Proporción del total:</strong> ${pct}%</div>` : ''}
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+function handleSankeyNodeMouseLeave() {
+    tooltip.transition().duration(100).style("opacity", 0);
+}
+
+function bindSankeyEvents() {
+    const buttons = document.querySelectorAll(".sankey-country-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const country = btn.getAttribute("data-country");
+            if (!country || country === selectedSankeyCountry) return;
+
+            buttons.forEach(b => b.classList.toggle("active", b === btn));
+            selectedSankeyCountry = country;
+            renderSankeyPlot(country);
+        });
+    });
+}
+
+function updateSankeyVisualization(stepIndex) {
+    const countries = ["AR", "CL", "ES", "MX"];
+    const targetCountry = countries[stepIndex];
+    if (!targetCountry) return;
+
+    selectedSankeyCountry = targetCountry;
+
+    // Sync button state
+    const buttons = document.querySelectorAll(".sankey-country-btn");
+    buttons.forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-country") === targetCountry);
+    });
+
+    renderSankeyPlot(targetCountry);
+}
+
+function initScrollamaSankey() {
+    scrollerSankey
+        .setup({
+            step: "#scrolly-sankey article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            document.querySelectorAll("#scrolly-sankey article .step")
+                .forEach((step, idx) => step.classList.toggle("is-active", idx === stepIndex));
+            updateSankeyVisualization(stepIndex);
+        });
+    updateSankeyVisualization(0);
+}
+
+
+
+// ==========================================
+// SECTION 7: LA BARRERA DE CRISTAL (Beeswarm)
+// ==========================================
+
+/**
+ * Derive ISO country code from the country string in the data.
+ */
+function getCountryCode(countryStr) {
+    const map = { "Chile": "CL", "Argentina": "AR", "Espana": "ES", "España": "ES", "Mexico": "MX", "México": "MX" };
+    return map[countryStr] || countryStr.substring(0, 2).toUpperCase();
+}
+
+/**
+ * Load and aggregate readability data. Files are double-serialized JSON strings.
+ * Aggregates to one data point per media_name (median years_education + inflesz).
+ */
+function loadBeeswarmData() {
+    const files = [
+        "data/linguistic_characteristics/readability_per_country_and_media/news_chile_readability_per_media.json",
+        "data/linguistic_characteristics/readability_per_country_and_media/news_argentina_readability_per_media.json",
+        "data/linguistic_characteristics/readability_per_country_and_media/news_espana_readability_per_media.json",
+        "data/linguistic_characteristics/readability_per_country_and_media/news_mexico_readability_per_media.json"
+    ];
+
+    return Promise.all(files.map(url => d3.text(url)))
+        .then(rawTexts => {
+            allBeeswarmData = [];
+
+            rawTexts.forEach(raw => {
+                // Double-parse: file contains a JSON-encoded string
+                let data;
+                try {
+                    const firstParse = JSON.parse(raw);
+                    data = typeof firstParse === "string" ? JSON.parse(firstParse) : firstParse;
+                } catch(e) {
+                    console.error("[Beeswarm] Failed to parse JSON:", e);
+                    return;
+                }
+
+                // Group by media_name and aggregate
+                const byMedia = d3.group(data, d => d.media_name);
+
+                byMedia.forEach((records, mediaName) => {
+                    // Filter valid numeric records
+                    const validRecords = records.filter(d =>
+                        d.years_education != null && !isNaN(+d.years_education) &&
+                        d.inflesz_score != null && !isNaN(+d.inflesz_score)
+                    );
+                    if (validRecords.length === 0) return;
+
+                    const sortedYears = validRecords.map(d => +d.years_education).sort(d3.ascending);
+                    const sortedInflesz = validRecords.map(d => +d.inflesz_score).sort(d3.ascending);
+                    const medianYears = d3.median(sortedYears);
+                    const medianInflesz = d3.median(sortedInflesz);
+
+                    // Pick the sample_text from the hardest-to-read article (highest years)
+                    const hardest = validRecords.reduce((a, b) =>
+                        +a.years_education >= +b.years_education ? a : b
+                    );
+
+                    const cCode = getCountryCode(records[0].country);
+
+                    allBeeswarmData.push({
+                        media_name: mediaName,
+                        country: records[0].country,
+                        countryCode: cCode,
+                        years_education: medianYears,
+                        inflesz_score: medianInflesz,
+                        sample_text: hardest.sample_text || ""
+                    });
+                });
+            });
+
+            // Compute median years by country
+            const byCountry = d3.group(allBeeswarmData, d => d.countryCode);
+            byCountry.forEach((nodes, code) => {
+                beeswarmMedianByCountry[code] = d3.median(nodes, d => d.years_education);
+            });
+
+            // Pre-compute storytelling text
+            generateBeeswarmStorytelling();
+        });
+}
+
+/**
+ * Generate dynamic storytelling text for each country pair.
+ */
+function generateBeeswarmStorytelling() {
+    const avgEducation = { "CL": 9.5, "AR": 9.5, "ES": 9.6, "MX": 9.8 }; // Approx national averages in years
+
+    ["CL", "AR", "ES", "MX"].forEach(code => {
+        const med = beeswarmMedianByCountry[code];
+        if (!med) return;
+        const countryFull = countryNames[code];
+        const avg = avgEducation[code];
+        const diff = (med - avg).toFixed(1);
+        beeswarmStorytellingData[code] = {
+            median: med.toFixed(1),
+            countryFull,
+            diff,
+            text: `Noticias para pocos: La escolaridad promedio en ${countryFull} es de ~${avg} años, pero la prensa exige <strong>${med.toFixed(1)} años</strong> de educación formal para ser comprendida. Eso es <strong>${diff} años más</strong> de los que tiene la mayoría de la población. Una barrera invisible de lenguaje separa la información de quienes más la necesitan.`
+        };
+    });
+
+    // Inject CL vs AR insight
+    const elCL = document.getElementById("beeswarm-insight-CL-AR");
+    if (elCL && beeswarmStorytellingData["CL"] && beeswarmStorytellingData["AR"]) {
+        const cl = beeswarmStorytellingData["CL"];
+        const ar = beeswarmStorytellingData["AR"];
+        elCL.innerHTML = `
+            <p><strong>Chile</strong>: ${cl.text}</p>
+            <p style="margin-top:0.8rem"><strong>Argentina</strong>: ${ar.text}</p>
+        `;
+    }
+
+    // Inject ES vs MX insight
+    const elES = document.getElementById("beeswarm-insight-ES-MX");
+    if (elES && beeswarmStorytellingData["ES"] && beeswarmStorytellingData["MX"]) {
+        const es = beeswarmStorytellingData["ES"];
+        const mx = beeswarmStorytellingData["MX"];
+        elES.innerHTML = `
+            <p><strong>España</strong>: ${es.text}</p>
+            <p style="margin-top:0.8rem"><strong>México</strong>: ${mx.text}</p>
+        `;
+    }
+
+    // Inject storytelling cards in the sticky panel
+    const panel = document.getElementById("storytelling-insights-beeswarm");
+    if (panel) {
+        const cards = ["CL", "AR", "ES", "MX"].map(code => {
+            const d = beeswarmStorytellingData[code];
+            if (!d) return "";
+            const color = { CL: "var(--color-cl)", AR: "var(--color-ar)", ES: "var(--color-es)", MX: "var(--color-mx)" }[code];
+            return `<div class="insight-card country-border-${code.toLowerCase()}">
+                <div class="insight-country" style="color:${color}">${d.countryFull}</div>
+                <div class="insight-stat">${d.median} años</div>
+                <div class="insight-label">de escolaridad exigidos (mediana)</div>
+            </div>`;
+        }).join("");
+        panel.innerHTML = `<div class="insights-grid">${cards}</div>`;
+    }
+}
+
+/**
+ * Set up SVG, draw background zones, axis, and render the pre-cooled beeswarm.
+ */
+function setupD3BeeswarmCanvas() {
+    const canvas = document.getElementById("d3-canvas-beeswarm");
+    if (!canvas || allBeeswarmData.length === 0) return;
+
+    canvas.innerHTML = "";
+    widthBeeswarm = canvas.clientWidth;
+    heightBeeswarm = canvas.clientHeight;
+
+    svgBeeswarm = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthBeeswarm)
+        .attr("height", heightBeeswarm)
+        .attr("viewBox", `0 0 ${widthBeeswarm} ${heightBeeswarm}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // Y scale: 6 (bottom) → 20 (top)
+    yScaleBeeswarm = d3.scaleLinear()
+        .domain([6, 20])
+        .range([heightBeeswarm - paddingBeeswarm.bottom, paddingBeeswarm.top]);
+
+    // Background zones
+    const zones = [
+        { class: "beeswarm-zone-basica", label: "BÁSICA",       yMin: 6,  yMax: 9 },
+        { class: "beeswarm-zone-media",  label: "MEDIA",        yMin: 9,  yMax: 12 },
+        { class: "beeswarm-zone-univ",   label: "UNIVERSITARIA", yMin: 12, yMax: 20 }
+    ];
+
+    zones.forEach(z => {
+        const yTop    = yScaleBeeswarm(z.yMax);
+        const yBottom = yScaleBeeswarm(z.yMin);
+        svgBeeswarm.append("rect")
+            .attr("class", z.class)
+            .attr("x", paddingBeeswarm.left)
+            .attr("y", yTop)
+            .attr("width", widthBeeswarm - paddingBeeswarm.left - paddingBeeswarm.right)
+            .attr("height", yBottom - yTop);
+
+        svgBeeswarm.append("text")
+            .attr("class", "beeswarm-zone-label")
+            .attr("x", widthBeeswarm - paddingBeeswarm.right - 4)
+            .attr("y", yTop + 14)
+            .attr("text-anchor", "end")
+            .text(z.label);
+    });
+
+    // Y Axis
+    const yAxis = d3.axisLeft(yScaleBeeswarm)
+        .ticks(8)
+        .tickFormat(d => `${d} años`);
+
+    svgBeeswarm.append("g")
+        .attr("class", "beeswarm-axis")
+        .attr("transform", `translate(${paddingBeeswarm.left}, 0)`)
+        .call(yAxis);
+
+    // Axis label
+    svgBeeswarm.append("text")
+        .attr("class", "beeswarm-zone-label")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -(heightBeeswarm / 2))
+        .attr("y", 14)
+        .attr("text-anchor", "middle")
+        .text("AÑOS DE EDUCACIÓN REQUERIDOS");
+
+    renderBeeswarmPlot();
+}
+
+/**
+ * Run the force simulation offline (pre-cool), then render circles at final positions.
+ */
+function renderBeeswarmPlot() {
+    if (!svgBeeswarm || allBeeswarmData.length === 0) return;
+
+    // Remove existing circles and median elements
+    svgBeeswarm.selectAll(".bee-circle").remove();
+    svgBeeswarm.selectAll(".beeswarm-median-line").remove();
+    svgBeeswarm.selectAll(".beeswarm-median-label").remove();
+
+    const cx = (widthBeeswarm + paddingBeeswarm.left) / 2;
+
+    // Clone nodes to avoid mutating allBeeswarmData
+    const nodes = allBeeswarmData.map(d => Object.assign({}, d));
+
+    // Pre-cool the simulation — 300 ticks before DOM insertion
+    const sim = d3.forceSimulation(nodes)
+        .force("y", d3.forceY(d => yScaleBeeswarm(d.years_education)).strength(1.0))
+        .force("x", d3.forceX(cx).strength(0.04))
+        .force("collide", d3.forceCollide(7.5).strength(1))
+        .stop();
+
+    for (let i = 0; i < 300; i++) sim.tick();
+
+    // Clamp circles within canvas bounds
+    const r = 7;
+    nodes.forEach(d => {
+        d.x = Math.max(paddingBeeswarm.left + r, Math.min(widthBeeswarm - paddingBeeswarm.right - r, d.x));
+        d.y = Math.max(paddingBeeswarm.top + r, Math.min(heightBeeswarm - paddingBeeswarm.bottom - r, d.y));
+    });
+
+    // Draw circles
+    svgBeeswarm.selectAll(".bee-circle")
+        .data(nodes, d => d.media_name + "_" + d.countryCode)
+        .join("circle")
+        .attr("class", "bee-circle")
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y)
+        .attr("r", r)
+        .attr("fill", d => {
+            switch (d.countryCode) {
+                case "AR": return "var(--color-ar)";
+                case "CL": return "var(--color-cl)";
+                case "ES": return "var(--color-es)";
+                case "MX": return "var(--color-mx)";
+                default:   return "#999";
+            }
+        })
+        .style("opacity", 0.82)
+        .on("mouseover", handleBeeswarmMouseOver)
+        .on("mousemove", handleMouseMove)
+        .on("mouseleave", handleBeeswarmMouseLeave);
+
+    // Draw median lines (one per country, hidden by default)
+    ["CL", "AR", "ES", "MX"].forEach(code => {
+        const med = beeswarmMedianByCountry[code];
+        if (!med) return;
+        const y = yScaleBeeswarm(med);
+        const color = { CL: "var(--color-cl)", AR: "var(--color-ar)", ES: "var(--color-es)", MX: "var(--color-mx)" }[code];
+
+        svgBeeswarm.append("line")
+            .attr("class", "beeswarm-median-line")
+            .attr("data-country", code)
+            .attr("x1", paddingBeeswarm.left + 4)
+            .attr("x2", widthBeeswarm - paddingBeeswarm.right - 4)
+            .attr("y1", y)
+            .attr("y2", y)
+            .attr("stroke", color);
+
+        svgBeeswarm.append("text")
+            .attr("class", "beeswarm-median-label")
+            .attr("data-country", code)
+            .attr("x", widthBeeswarm - paddingBeeswarm.right - 6)
+            .attr("y", y - 4)
+            .attr("text-anchor", "end")
+            .attr("fill", color)
+            .text(`${countryNames[code]}: ${med.toFixed(1)} años`);
+    });
+
+    // Apply initial state (step 0 = all visible)
+    updateBeeswarmVisualization(0);
+}
+
+/**
+ * Tooltip mouse-over handler for beeswarm circles.
+ */
+function handleBeeswarmMouseOver(event, d) {
+    tooltip.transition().duration(100).style("opacity", 0.96);
+    const isUniv = d.years_education >= 12;
+    const sampleHtml = isUniv && d.sample_text
+        ? `<div class="tooltip-sample-text">"${d.sample_text.substring(0, 260)}…"</div>`
+        : "";
+    tooltip.html(`
+        <div class="tooltip-title">${d.media_name}</div>
+        <div class="tooltip-row"><strong>País:</strong> ${countryNames[d.countryCode] || d.country}</div>
+        <div class="tooltip-row"><strong>Años requeridos:</strong> ${d.years_education.toFixed(1)}</div>
+        <div class="tooltip-row"><strong>INFLESZ:</strong> ${d.inflesz_score.toFixed(1)}</div>
+        ${sampleHtml}
+    `)
+    .style("left", (event.pageX + 15) + "px")
+    .style("top", (event.pageY - 28) + "px");
+}
+
+function handleBeeswarmMouseLeave() {
+    tooltip.transition().duration(100).style("opacity", 0);
+}
+
+/**
+ * Update beeswarm visualization state based on scrollama step index.
+ */
+function updateBeeswarmVisualization(stepIndex) {
+    if (!svgBeeswarm) return;
+
+    const circles = svgBeeswarm.selectAll(".bee-circle");
+    const medianLines = svgBeeswarm.selectAll(".beeswarm-median-line");
+    const medianLabels = svgBeeswarm.selectAll(".beeswarm-median-label");
+
+    if (stepIndex === 0) {
+        // Overview: all visible, no median lines
+        circles.classed("dimmed", false).classed("highlighted", false)
+               .style("opacity", 0.82);
+        medianLines.classed("visible", false);
+        medianLabels.classed("visible", false);
+
+    } else if (stepIndex === 1) {
+        // Chile vs Argentina
+        const focus = new Set(["CL", "AR"]);
+        circles
+            .style("opacity", d => focus.has(d.countryCode) ? 0.88 : 0.07)
+            .classed("dimmed", d => !focus.has(d.countryCode))
+            .classed("highlighted", d => focus.has(d.countryCode));
+        medianLines
+            .classed("visible", function() { return focus.has(d3.select(this).attr("data-country")); });
+        medianLabels
+            .classed("visible", function() { return focus.has(d3.select(this).attr("data-country")); });
+
+    } else if (stepIndex === 2) {
+        // España vs México
+        const focus = new Set(["ES", "MX"]);
+        circles
+            .style("opacity", d => focus.has(d.countryCode) ? 0.88 : 0.07)
+            .classed("dimmed", d => !focus.has(d.countryCode))
+            .classed("highlighted", d => focus.has(d.countryCode));
+        medianLines
+            .classed("visible", function() { return focus.has(d3.select(this).attr("data-country")); });
+        medianLabels
+            .classed("visible", function() { return focus.has(d3.select(this).attr("data-country")); });
+
+    } else if (stepIndex === 3) {
+        // University zone only
+        circles
+            .style("opacity", d => d.years_education >= 12 ? 0.92 : 0.06)
+            .classed("dimmed", d => d.years_education < 12)
+            .classed("highlighted", d => d.years_education >= 12);
+        medianLines.classed("visible", true);
+        medianLabels.classed("visible", true);
+    }
+}
+
+/**
+ * Initialize Scrollama for Section 7.
+ */
+function initScrollamaBeeswarm() {
+    scrollerBeeswarm
+        .setup({
+            step: "#scrolly-beeswarm article .step",
+            offset: 0.5,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            document.querySelectorAll("#scrolly-beeswarm article .step")
+                .forEach((step, idx) => step.classList.toggle("is-active", idx === stepIndex));
+            updateBeeswarmVisualization(stepIndex);
+        });
+    updateBeeswarmVisualization(0);
+}

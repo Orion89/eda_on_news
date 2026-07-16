@@ -350,8 +350,189 @@ test.describe('El Eco de las Palabras — Suite de Pruebas Completa', () => {
     const mapSvg = await page.locator('#d3-canvas-map svg').isVisible();
     expect(mapSvg).toBe(true);
 
+    // Navegar a sección 7 en móvil
+    await page.evaluate(() => document.querySelector('#scrolly-beeswarm')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(1500);
+    const beeswarmSvg = await page.locator('#d3-canvas-beeswarm svg').isVisible();
+    expect(beeswarmSvg).toBe(true);
+
+    // Navegar a sección 8 en móvil
+    await page.evaluate(() => document.querySelector('#scrolly-sankey')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(1500);
+    const sankeySvg = await page.locator('#d3-canvas-sankey svg').isVisible();
+    expect(sankeySvg).toBe(true);
+
     await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '07-mobile-375.png'), fullPage: false });
-    console.log('✅ Responsive OK — Visualizaciones (incluido mapa) visibles en 375px');
+    console.log('✅ Responsive OK — Visualizaciones (incluido mapa, beeswarm y sankey) visibles en 375px');
+  });
+
+  // ══════════════════════════════════════════════════
+  // TEST 8: SECCIÓN 7 — LA BARRERA DE CRISTAL (Beeswarm)
+  // ══════════════════════════════════════════════════
+  test('8. Sección 7 — La Barrera de Cristal (Beeswarm Plot)', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', err => errors.push(err.message));
+    page.on('console', msg => { if (msg.type() === 'error') errors.push(msg.text()); });
+
+    await page.goto(BASE_URL);
+    await page.waitForTimeout(6000); // Extra time: 4 large JSONs to double-parse
+
+    await page.evaluate(() => document.querySelector('#scrolly-beeswarm')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(2000);
+
+    // 1. SVG present
+    await expect(page.locator('#d3-canvas-beeswarm svg')).toBeVisible();
+
+    // 2. Three background zones
+    const zones = await page.locator('#d3-canvas-beeswarm .beeswarm-zone-basica, #d3-canvas-beeswarm .beeswarm-zone-media, #d3-canvas-beeswarm .beeswarm-zone-univ').count();
+    expect(zones).toBe(3);
+
+    // 3. 100 bee circles (25 media × 4 countries)
+    const beeCount = await page.locator('#d3-canvas-beeswarm .bee-circle').count();
+    expect(beeCount).toBe(100);
+    console.log(`  Bee circles rendered: ${beeCount}`);
+
+    // 4. Four median lines
+    const medianLines = await page.locator('#d3-canvas-beeswarm .beeswarm-median-line').count();
+    expect(medianLines).toBe(4);
+
+    // 5. Storytelling cards
+    const storyCards = await page.locator('#storytelling-insights-beeswarm .insight-card').count();
+    expect(storyCards).toBe(4);
+
+    // 6. CL/AR insight text generated
+    const clArText = await page.locator('#beeswarm-insight-CL-AR').innerText();
+    expect(clArText.length).toBeGreaterThan(20);
+
+    // 7. Step 1 → Chile / Argentina focus
+    await page.evaluate(() => {
+      const steps = document.querySelectorAll('#scrolly-beeswarm article .step');
+      if (steps[1]) steps[1].scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+    await page.waitForTimeout(1200);
+
+    // Median lines for CL and AR should become visible
+    const clMedianVisible = await page.evaluate(() => {
+      const line = document.querySelector('.beeswarm-median-line[data-country="CL"]');
+      return line ? line.classList.contains('visible') : false;
+    });
+    expect(clMedianVisible).toBe(true);
+
+    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '08a-sec7-beeswarm-cl-ar.png'), fullPage: false });
+
+    // 8. Step 2 → Spain / Mexico focus
+    await page.evaluate(() => {
+      const steps = document.querySelectorAll('#scrolly-beeswarm article .step');
+      if (steps[2]) steps[2].scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+    await page.waitForTimeout(1200);
+
+    const esMedianVisible = await page.evaluate(() => {
+      const line = document.querySelector('.beeswarm-median-line[data-country="ES"]');
+      return line ? line.classList.contains('visible') : false;
+    });
+    expect(esMedianVisible).toBe(true);
+
+    // 9. Step 3 → university zone
+    await page.evaluate(() => {
+      const steps = document.querySelectorAll('#scrolly-beeswarm article .step');
+      if (steps[3]) steps[3].scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+    await page.waitForTimeout(1500);
+
+    // University circles should be highlighted
+    const highlightedCount = await page.locator('#d3-canvas-beeswarm .bee-circle.highlighted').count();
+    expect(highlightedCount).toBeGreaterThan(0);
+    console.log(`  University zone circles highlighted: ${highlightedCount}`);
+
+    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '08b-sec7-beeswarm-univ.png'), fullPage: false });
+
+    // 10. Hover on a university-zone circle → tooltip with sample_text
+    const univCircle = page.locator('#d3-canvas-beeswarm .bee-circle.highlighted').first();
+    await univCircle.hover();
+    await page.waitForTimeout(500);
+    const tooltipVisible = await page.locator('.tooltip').evaluate(el => parseFloat((el as HTMLElement).style.opacity) > 0);
+    expect(tooltipVisible).toBe(true);
+
+    // 11. No JS errors
+    expect(errors.length).toBe(0);
+    console.log('✅ Sección 7 OK — Beeswarm con 100 abejas, 3 zonas, 4 medianas, tooltips funcionando');
+  });
+
+  // ══════════════════════════════════════════════════
+  // TEST 9: SECCIÓN 8 — EL ROSTRO DE LA NOTICIA (Sankey)
+  // ══════════════════════════════════════════════════
+  test('9. Sección 8 — El Rostro de la Noticia (Sankey Plot)', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', err => errors.push(err.message));
+    page.on('console', msg => { if (msg.type() === 'error') errors.push(msg.text()); });
+
+    await page.goto(BASE_URL);
+    await page.waitForTimeout(6000); // Allow data loads
+
+    await page.evaluate(() => document.querySelector('#scrolly-sankey')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(2000);
+
+    // 1. SVG present
+    await expect(page.locator('#d3-canvas-sankey svg')).toBeVisible();
+
+    // 2. Exactly 7 nodes (Total, Agencia, Anónimo, Firmante, Hombre, Mujer, No Identificado)
+    const nodeCount = await page.locator('#d3-canvas-sankey .sankey-node').count();
+    expect(nodeCount).toBe(7);
+    console.log(`  Sankey nodes rendered: ${nodeCount}`);
+
+    // 3. Exactly 6 links (Total->Agencias, Total->Anónimo, Total->Firmante, Firmante->Hombre, Firmante->Mujer, Firmante->NoIdentificado)
+    const linkCount = await page.locator('#d3-canvas-sankey .sankey-link').count();
+    expect(linkCount).toBe(6);
+    console.log(`  Sankey links rendered: ${linkCount}`);
+
+    // 4. Initial active country button is Argentina (AR)
+    await expect(page.locator('.sankey-country-btn.active')).toHaveAttribute('data-country', 'AR');
+
+    // 5. Dynamic text in steps is rendered
+    const arInsightText = await page.locator('#sankey-insight-AR').innerText();
+    expect(arInsightText.length).toBeGreaterThan(20);
+
+    // 6. Test manual button click (Chile)
+    await page.locator('.sankey-country-btn[data-country="CL"]').click();
+    await page.waitForTimeout(1000);
+    await expect(page.locator('.sankey-country-btn.active')).toHaveAttribute('data-country', 'CL');
+
+    // 7. Scrollama step triggering: Scroll to step 2 (España)
+    await page.evaluate(() => {
+      const steps = document.querySelectorAll('#scrolly-sankey article .step');
+      if (steps[2]) steps[2].scrollIntoView({ behavior: 'instant', block: 'center' });
+    });
+    await page.waitForTimeout(1200);
+
+    // Button should automatically update to España (ES)
+    await expect(page.locator('.sankey-country-btn.active')).toHaveAttribute('data-country', 'ES');
+    await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '09a-sec8-sankey-es.png'), fullPage: false });
+
+    // 8. Hover over a link path → highlights link and displays tooltip
+    const testLink = page.locator('#d3-canvas-sankey .sankey-link').first();
+    await testLink.hover();
+    await page.waitForTimeout(500);
+
+    const tooltipVisible = await page.locator('.tooltip').evaluate(el => parseFloat((el as HTMLElement).style.opacity) > 0);
+    expect(tooltipVisible).toBe(true);
+
+    const tooltipText = await page.locator('.tooltip').innerText();
+    expect(tooltipText).toContain('Flujo de Autoría');
+    expect(tooltipText).toContain('noticias');
+
+    // 9. Hover over a node rectangle → displays node value and percentage
+    const testNode = page.locator('#d3-canvas-sankey .sankey-node').first();
+    await testNode.hover();
+    await page.waitForTimeout(500);
+
+    const nodeTooltipText = await page.locator('.tooltip').innerText();
+    expect(nodeTooltipText).toContain('Total Noticias');
+
+    // 10. Check if there are no errors in page execution
+    expect(errors.length).toBe(0);
+    console.log('✅ Sección 8 OK — Sankey Diagram con 7 nodos y 6 links, Scrollama e interacciones pasando tests');
   });
 
 });
+
