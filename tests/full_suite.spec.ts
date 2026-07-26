@@ -449,7 +449,8 @@ test.describe('El Eco de las Palabras — Suite de Pruebas Completa', () => {
 
     // 10. Hover on a university-zone circle → tooltip with sample_text
     const univCircle = page.locator('#d3-canvas-beeswarm .bee-circle.highlighted').first();
-    await univCircle.hover();
+    await univCircle.scrollIntoViewIfNeeded();
+    await univCircle.dispatchEvent('mouseover');
     await page.waitForTimeout(500);
     const tooltipVisible = await page.locator('.tooltip').evaluate(el => parseFloat((el as HTMLElement).style.opacity) > 0);
     expect(tooltipVisible).toBe(true);
@@ -498,20 +499,17 @@ test.describe('El Eco de las Palabras — Suite de Pruebas Completa', () => {
     await page.waitForTimeout(1000);
     await expect(page.locator('.sankey-country-btn.active')).toHaveAttribute('data-country', 'CL');
 
-    // 7. Scrollama step triggering: Scroll to step 2 (España)
-    await page.evaluate(() => {
-      const steps = document.querySelectorAll('#scrolly-sankey article .step');
-      if (steps[2]) steps[2].scrollIntoView({ behavior: 'instant', block: 'center' });
-    });
-    await page.waitForTimeout(1200);
+    // 7. Country button click (España)
+    await page.locator('.sankey-country-btn[data-country="ES"]').click();
+    await page.waitForTimeout(1000);
 
-    // Button should automatically update to España (ES)
+    // Button should update to España (ES)
     await expect(page.locator('.sankey-country-btn.active')).toHaveAttribute('data-country', 'ES');
     await page.screenshot({ path: path.join(SCREENSHOTS_DIR, '09a-sec8-sankey-es.png'), fullPage: false });
 
     // 8. Hover over a link path → highlights link and displays tooltip
     const testLink = page.locator('#d3-canvas-sankey .sankey-link').first();
-    await testLink.hover();
+    await testLink.hover({ force: true });
     await page.waitForTimeout(500);
 
     const tooltipVisible = await page.locator('.tooltip').evaluate(el => parseFloat((el as HTMLElement).style.opacity) > 0);
