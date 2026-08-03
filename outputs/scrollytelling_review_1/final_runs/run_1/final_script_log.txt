@@ -1,0 +1,105 @@
+step 0 params: url=http://localhost:8090/
+step 1 action: loading page
+step 2 action: identified 14 steps
+step 1 action: scroll to step 0
+step 1 action: captured screenshot final_execution_1_scroll.png
+step 1 action: text found: Cada día, millones de páginas de noticias narran los sucesos que dan forma a nuestra realidad. Pero ...
+step 2 action: scroll to step 1
+step 2 action: captured screenshot final_execution_2_scroll.png
+step 2 action: text found: ARGENTINACHILEESPAÑAMÉXICOArgentinaChileEspañaMéxico
+01
+El pulso de las noticias
+
+Para comprender la...
+step 3 action: scroll to step 2
+step 3 action: captured screenshot final_execution_3_scroll.png
+step 3 action: text found: ANÁLISIS LINGÜÍSTICO
+Huellas Dactilares Estilísticas
+
+¿Cómo redactan los periodistas en cada país? ¿...
+step 4 action: scroll to step 3
+step 4 action: captured screenshot final_execution_4_scroll.png
+step 4 action: text found: DESTACAR PAÍS:
+Todos
+Argentina
+Chile
+España
+México
+0.440.460.480.500.52253035404550COMPLEJO/ANALÍTIC...
+step 5 action: scroll to step 4
+step 5 action: captured screenshot final_execution_5_scroll.png
+step 5 action: text found: ANÁLISIS SINTÁCTICO (POS)
+La Anatomía del Discurso
+
+¿Qué tipo de palabras sostienen los textos notic...
+step 6 action: scroll to step 5
+step 6 action: captured screenshot final_execution_6_scroll.png
+step 6 action: text found: PAÍS:
+Argentina
+Chile
+España
+México
+|
+Ordenar por Subjetividad
+Reestablecer Orden
+Adjetivos (Subjeti...
+step 7 action: scroll to step 6
+step 7 action: captured screenshot final_execution_7_scroll.png
+step 7 action: text found: ANÁLISIS DE SENTIMIENTO TEMPORAL
+El Termómetro Emocional
+
+¿Cómo evolucionan los sentimientos en las ...
+step 8 action: scroll to step 7
+step 8 action: captured screenshot final_execution_8_scroll.png
+step 8 action: text found: EMOCIÓN:
+Alegría
+Miedo
+Ira
+Tristeza
+ARGENTINACHILEESPAÑAMÉXICO20052010201520202025
+05.1
+Montañas de ...
+step 9 action: scroll to step 8
+step 9 action: captured screenshot final_execution_9_scroll.png
+step 9 action: text found: ANÁLISIS DE ENTIDADES NOMBRADAS (NER)
+El Mapa del Poder
+
+¿Qué lugares existen en la mente informativ...
+step 10 action: scroll to step 9
+step 10 action: captured screenshot final_execution_10_scroll.png
+step 10 action: text found: PAÍS:
+Todos
+Argentina
+Chile
+España
+México
+06.1
+El Mapa Completo
+
+Cada burbuja representa una localid...
+step 11 action: scroll to step 10
+step 11 action: captured screenshot final_execution_11_scroll.png
+step 11 action: text found: LEGIBILIDAD Y ACCESO INFORMATIVO
+La Barrera de Cristal
+
+¿A quién le habla realmente la prensa? Medim...
+step 12 action: scroll to step 11
+step 12 action: captured screenshot final_execution_12_scroll.png
+step 12 action: text found: Educación Básica (6–9 años)
+Educación Media (9–12 años)
+Educación Universitaria (12+ años)
+BÁSICAMED...
+step 13 action: scroll to step 12
+step 13 action: captured screenshot final_execution_13_scroll.png
+step 13 action: text found: AUDITORÍA DE FIRMAS Y GÉNERO
+El Rostro de la Noticia
+
+¿Quién escribe lo que leemos? Analizamos la au...
+step 14 action: scroll to step 13
+step 14 action: captured screenshot final_execution_14_scroll.png
+step 14 action: text found: Argentina
+Chile
+España
+México
+Total Noticias (204,016)Agencias (12,174)Redacción / Anónimo (116,063)...
+final datum: Review complete. Check screenshots for visual/textual coherence.

@@ -1,0 +1,590 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Eco de las Palabras: Radiografía del Periodismo en Hispanoamérica</title>
+    <!-- Google Fonts: Editorial Serif and Clean Sans-Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Source+Sans+3:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Header Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">Análisis de Datos &amp; Periodismo</span>
+            <h1 class="hero-title">El Eco de las Palabras</h1>
+            <p class="hero-subtitle">Radiografía del Periodismo en Hispanoamérica</p>
+            <div class="hero-line"></div>
+            <div class="hero-countries">
+                <span class="country-tag tag-ar">Argentina</span>
+                <span class="country-tag tag-cl">Chile</span>
+                <span class="country-tag tag-es">España</span>
+                <span class="country-tag tag-mx">México</span>
+            </div>
+            <div class="scroll-indicator">
+                <span class="arrow">↓</span> Desliza para explorar
+            </div>
+        </div>
+    </header>
+
+    <!-- Introductory Section -->
+    <section class="intro-section">
+        <div class="container">
+            <p class="lead-text">
+                Cada día, millones de páginas de noticias narran los sucesos que dan forma a nuestra realidad. Pero detrás de la urgencia del reporte diario, las palabras elegidas revelan patrones invisibles: obsesiones nacionales, sesgos compartidos y diferencias sutiles que definen la identidad de cada país. ¿De qué hablamos cuando informamos? ¿Y cómo lo hacemos?
+            </p>
+            <p class="body-text">
+                Este proyecto explora un corpus masivo de noticias en español extraídas de los principales medios digitales de <strong>Argentina</strong>, <strong>Chile</strong>, <strong>España</strong> y <strong>México</strong>. Utilizando técnicas de procesamiento de lenguaje natural (NLP) y visualización de datos, analizamos cientos de miles de artículos para descubrir quién domina la pauta, cómo escriben las redacciones, cómo nos emocionan a través de sus palabras y hacia dónde dirigen la mirada nuestros países.
+            </p>
+            <p class="body-text">
+                Acompáñanos en este recorrido visual e interactivo. A medida que te deslices por las siguientes secciones, verás cómo los datos cobran vida en la pantalla, revelando las redes semánticas, los n-gramas más compartidos y las variaciones lingüísticas que hacen que la prensa de cada país tenga una voz única en el mapa hispanohablante.
+            </p>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section -->
+    <section id="scrolly">
+        <!-- Visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper">
+                <div id="d3-canvas" class="viz-canvas">
+                    <!-- Dynamic D3.js visualization will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización Interactiva</p>
+                        <p class="placeholder-subtitle">Los gráficos se cargarán dinámicamente al interactuar</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">01</span>
+                <h3>El pulso de las noticias</h3>
+                <p>
+                    Para comprender la agenda pública, primero debemos observar los temas recurrentes. Examinaremos las palabras más frecuentes en cada país, revelando las prioridades temáticas de cada sociedad.
+                </p>
+                <div id="storytelling-insights"><div class="insights-grid">
+            <div class="insight-card country-border-ar">
+                <h4 class="insight-country">Argentina</h4>
+                <p class="insight-text">
+                    En <strong>Argentina</strong>, el ecosistema parece plural con <strong>219</strong> medios, pero apenas <strong>42</strong> medios concentran el 80% de la información. El gigante indiscutido es <strong>elle.clarin.com</strong>.
+                </p>
+                <div class="insight-meta">
+                    Noticias totales: 181,608 | Domina: <strong>elle.clarin.com</strong> con 14.6%
+                </div>
+            </div>
+        
+            <div class="insight-card country-border-cl">
+                <h4 class="insight-country">Chile</h4>
+                <p class="insight-text">
+                    En <strong>Chile</strong>, el ecosistema parece plural con <strong>375</strong> medios, pero apenas <strong>71</strong> medios concentran el 80% de la información. El gigante indiscutido es <strong>www.biobiochile.cl</strong>.
+                </p>
+                <div class="insight-meta">
+                    Noticias totales: 139,996 | Domina: <strong>www.biobiochile.cl</strong> con 5.9%
+                </div>
+            </div>
+        
+            <div class="insight-card country-border-es">
+                <h4 class="insight-country">España</h4>
+                <p class="insight-text">
+                    En <strong>España</strong>, el ecosistema parece plural con <strong>308</strong> medios, pero apenas <strong>29</strong> medios concentran el 80% de la información. El gigante indiscutido es <strong>elespanol.com</strong>.
+                </p>
+                <div class="insight-meta">
+                    Noticias totales: 420,780 | Domina: <strong>elespanol.com</strong> con 25.6%
+                </div>
+            </div>
+        
+            <div class="insight-card country-border-mx">
+                <h4 class="insight-country">México</h4>
+                <p class="insight-text">
+                    En <strong>México</strong>, el ecosistema parece plural con <strong>324</strong> medios, pero apenas <strong>46</strong> medios concentran el 80% de la información. El gigante indiscutido es <strong>heraldodexalapa.com.mx</strong>.
+                </p>
+                <div class="insight-meta">
+                    Noticias totales: 133,080 | Domina: <strong>heraldodexalapa.com.mx</strong> con 11.3%
+                </div>
+            </div>
+        </div></div>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">02</span>
+                <h3>¿Quién domina la pauta?</h3>
+                <p>
+                    ¿Se enfoca la prensa de manera similar ante los mismos eventos internacionales? Analizaremos las divergencias en la relevancia de tópicos clave como la economía, la política local y los sucesos globales.
+                </p>
+            </div>
+            
+            <div class="step" data-step="3">
+                <span class="step-num">03</span>
+                <h3>El tono emocional</h3>
+                <p>
+                    El periodismo no es solo información neutra; las palabras portan cargas afectivas. Evaluaremos los sentimientos expresados en las noticias para medir el nivel de optimismo o negatividad por región.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 2: Estilos de Escritura (Riqueza léxica vs Longitud de oración) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis Lingüístico</span>
+            <h2 class="section-title">Huellas Dactilares Estilísticas</h2>
+            <p class="section-intro-text">
+                ¿Cómo redactan los periodistas en cada país? ¿Predomina la brevedad directa o la complejidad de oraciones estructuradas y vocabulario rico? En esta sección analizamos el estilo de escritura cruzando la riqueza léxica (Type-Token Ratio) con la longitud promedio de las oraciones de cada medio.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-style">
+        <!-- Interactive visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Highlight Filter Buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">Destacar País:</span>
+                    <button class="filter-btn active" data-country="all">Todos</button>
+                    <button class="filter-btn" data-country="AR">Argentina</button>
+                    <button class="filter-btn" data-country="CL">Chile</button>
+                    <button class="filter-btn" data-country="ES">España</button>
+                    <button class="filter-btn" data-country="MX">México</button>
+                </div>
+                
+                <div id="d3-canvas-style" class="viz-canvas">
+                    <!-- Dynamic D3.js scatter plot will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización de Estilo</p>
+                        <p class="placeholder-subtitle">Se cargará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">02.1</span>
+                <h3>Complejidad vs Inmediatez</h3>
+                <p>
+                    Cada punto en el gráfico representa un medio de comunicación. El eje horizontal (X) indica la <strong>riqueza del vocabulario</strong> (a mayor TTR, mayor diversidad de términos usados) y el eje vertical (Y) muestra la <strong>longitud promedio de las oraciones</strong> (número de palabras).
+                </p>
+                <p>
+                    Las líneas discontinuas muestran las medianas globales. La intersección de ambas líneas define cuatro cuadrantes de estilos de escritura bien diferenciados.
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">02.2</span>
+                <h3>El Contraste de Estilos</h3>
+                <div id="storytelling-insights-style">
+        <p>
+            El estilo de escritura varía drásticamente. Mientras <strong>lasnoticiasdemalleco.cl</strong> 
+            (de Chile) exige alta concentración con oraciones de promedio 
+            <strong>49.4</strong> palabras y vocabulario rico, medios como 
+            <strong>www.clarin.com</strong> (de Argentina) 
+            apuestan por la inmediatez y el consumo rápido.
+        </p>
+    </div>
+                <p>
+                    Prueba a presionar los botones superiores para filtrar y destacar a los medios de cada país y ver si las redacciones nacionales se agrupan en algún cuadrante de estilo particular.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 3: La Anatomía del Discurso (Adjetivos, Verbos y Sustantivos) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis Sintáctico (POS)</span>
+            <h2 class="section-title">La Anatomía del Discurso</h2>
+            <p class="section-intro-text">
+                ¿Qué tipo de palabras sostienen los textos noticiosos? Los sustantivos brindan la referencia de los hechos, los verbos expresan la acción y el movimiento, y los adjetivos cargan el texto de subjetividad y valoraciones. En esta sección analizamos el equilibrio gramatical de la prensa digital.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-pos">
+        <!-- Interactive visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Highlight Filter and Sorting Buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">País:</span>
+                    <button class="pos-filter-btn active" data-country="AR">Argentina</button>
+                    <button class="pos-filter-btn" data-country="CL">Chile</button>
+                    <button class="pos-filter-btn" data-country="ES">España</button>
+                    <button class="pos-filter-btn" data-country="MX">México</button>
+                    
+                    <span class="filter-separator">|</span>
+                    
+                    <button id="btn-sort-pos" class="action-btn">Ordenar por Subjetividad</button>
+                    <button id="btn-reset-pos" class="action-btn">Reestablecer Orden</button>
+                </div>
+
+                <!-- Interactive Legend -->
+                <div class="pos-legend">
+                    <span class="legend-item"><span class="legend-color color-adj"></span> Adjetivos (Subjetividad)</span>
+                    <span class="legend-item"><span class="legend-color color-verb"></span> Verbos (Acción)</span>
+                    <span class="legend-item"><span class="legend-color color-noun"></span> Sustantivos (Referencia)</span>
+                    <span class="legend-item"><span class="legend-color color-other"></span> Otros (Gramática)</span>
+                </div>
+                
+                <div id="d3-canvas-pos" class="viz-canvas">
+                    <!-- Dynamic D3.js 100% stacked bar chart will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización Sintáctica</p>
+                        <p class="placeholder-subtitle">Se cargará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">03.1</span>
+                <h3>El Esqueleto Sintáctico</h3>
+                <p>
+                    Cada barra horizontal representa la distribución de categorías gramaticales de un medio de comunicación. 
+                </p>
+                <p>
+                    El color <strong style="color: #ff7a00;">naranja</strong> representa los adjetivos (calificadores), el <strong style="color: #3b82f6;">azul</strong> los verbos (acción), el <strong style="color: #555555;">gris oscuro</strong> los sustantivos (referencias) y el <strong style="color: #d1d5db;">gris claro</strong> al resto de etiquetas gramaticales.
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">03.2</span>
+                <h3>Noticia o Editorial</h3>
+                <div id="storytelling-insights-pos">
+        <p>
+            <strong>¿Noticia o Editorial?</strong> En promedio, <strong>España</strong> lidera la carga de adjetivos en Hispanoamérica. 
+            Destaca el medio <strong>www.iprofesional.com/turismo</strong> donde el <strong>10.4%</strong> 
+            del contenido principal son calificaciones de la realidad.
+        </p>
+    </div>
+                <p>
+                    Presiona el botón <strong>"Ordenar por Subjetividad"</strong> en la barra superior del gráfico para ordenar los medios de mayor a menor densidad de adjetivos, exponiendo qué redacciones adoptan un estilo de redacción más opinativo.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 5: El Termómetro Emocional (Ridgeline Plot / Joyplot) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis de Sentimiento Temporal</span>
+            <h2 class="section-title">El Termómetro Emocional</h2>
+            <p class="section-intro-text">
+                ¿Cómo evolucionan los sentimientos en las noticias a lo largo de las décadas? Analizamos la intensidad de las emociones básicas en la prensa digital para evaluar el clima emocional del periodismo hispanohablante.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-emotions">
+        <!-- Interactive visual canvas sticky to the viewport -->
+        <figure class="sticky">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Emotion Selector Buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">Emoción:</span>
+                    <button class="emotion-btn active" data-emotion="alegría">Alegría</button>
+                    <button class="emotion-btn" data-emotion="miedo">Miedo</button>
+                    <button class="emotion-btn" data-emotion="ira">Ira</button>
+                    <button class="emotion-btn" data-emotion="tristeza">Tristeza</button>
+                </div>
+                
+                <div id="d3-canvas-emotions" class="viz-canvas">
+                    <!-- Dynamic D3.js Ridgeline Plot will go here -->
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Visualización de Emociones</p>
+                        <p class="placeholder-subtitle">Se cargará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">05.1</span>
+                <h3>Montañas de Sentimiento</h3>
+                <p>
+                    Este gráfico de tipo <strong>Joyplot (Ridgeline Plot)</strong> muestra la fluctuación de la emoción seleccionada en las portadas de noticias desde el año 2007 hasta 2026.
+                </p>
+                <p>
+                    Cada montaña representa un país, ordenados verticalmente (Argentina, Chile, España y México). Las áreas se superponen suavemente y están coloreadas según el país correspondiente para facilitar su contraste visual.
+                </p>
+            </div>
+            
+            <div class="step" data-step="2">
+                <span class="step-num">05.2</span>
+                <h3>El negocio de la ansiedad</h3>
+                <div id="storytelling-insights-emotions">
+                    <!-- Dynamic storytelling text will be generated here -->
+                </div>
+                <p>
+                    Utiliza el panel de botones superiores para alternar entre "Alegría", "Miedo", "Ira" y "Tristeza" y observa cómo muta el oleaje emocional en la historia reciente de la prensa.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 6: El Mapa del Poder (NER Bubble Map) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Análisis de Entidades Nombradas (NER)</span>
+            <h2 class="section-title">El Mapa del Poder</h2>
+            <p class="section-intro-text">
+                ¿Qué lugares existen en la mente informativa de cada país? Mapeamos las localidades más mencionadas por la prensa digital para revelar el centralismo geográfico del periodismo latinoamericano.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-map">
+        <!-- Sticky map canvas -->
+        <figure class="sticky" id="map-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Country filter buttons -->
+                <div class="filter-container">
+                    <span class="filter-label">País:</span>
+                    <button class="map-country-btn active" data-country="all">Todos</button>
+                    <button class="map-country-btn" data-country="AR">Argentina</button>
+                    <button class="map-country-btn" data-country="CL">Chile</button>
+                    <button class="map-country-btn" data-country="ES">España</button>
+                    <button class="map-country-btn" data-country="MX">México</button>
+                </div>
+                <div id="d3-canvas-map" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Cargando Mapa…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+                <!-- Floating storytelling overlay -->
+                <div id="map-storytelling-overlay" class="map-overlay hidden"></div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">06.1</span>
+                <h3>El Mapa Completo</h3>
+                <p>
+                    Cada burbuja representa una localidad mencionada por los principales medios digitales. El <strong>tamaño</strong> codifica la cantidad de menciones y el <strong>color</strong> identifica el país cuya prensa la menciona.
+                </p>
+                <p>
+                    Lo que verás no es solo un mapa geográfico: es un <em>mapa de la atención periodística</em>, donde algunas ciudades son gigantes y vastas regiones resultan invisibles.
+                </p>
+            </div>
+
+            <div class="step" data-step="2">
+                <span class="step-num">06.2</span>
+                <h3>El Centralismo Chileno</h3>
+                <div id="map-insight-CL" class="map-insight-text"><!-- JS --></div>
+                <p>Observa cómo la cobertura geográfica de la prensa chilena se concentra en la capital y apenas unas pocas ciudades del corredor central.</p>
+            </div>
+
+            <div class="step" data-step="3">
+                <span class="step-num">06.3</span>
+                <h3>El Centralismo Argentino</h3>
+                <div id="map-insight-AR" class="map-insight-text"><!-- JS --></div>
+                <p>Buenos Aires y su área metropolitana dominan la agenda geográfica argentina, dejando a las provincias del sur y el norte casi sin voz.</p>
+            </div>
+
+            <div class="step" data-step="4">
+                <span class="step-num">06.4</span>
+                <h3>México y España</h3>
+                <div id="map-insight-MX" class="map-insight-text"><!-- JS --></div>
+                <p>Examina si el patrón centralista se repite en México y España, o si existe una mayor distribución geográfica de la cobertura.</p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 7: La Barrera de Cristal (Beeswarm Plot) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Legibilidad y Acceso Informativo</span>
+            <h2 class="section-title">La Barrera de Cristal</h2>
+            <p class="section-intro-text">
+                ¿A quién le habla realmente la prensa? Medimos los años de escolaridad formal que exige cada medio de comunicación para comprender sus noticias, revelando una barrera invisible entre el periodismo y la ciudadanía.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-beeswarm">
+        <!-- Sticky beeswarm canvas -->
+        <figure class="sticky" id="beeswarm-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Zone Legend -->
+                <div id="beeswarm-legend" class="beeswarm-legend">
+                    <span class="beeswarm-legend-item basica">Educación Básica (6–9 años)</span>
+                    <span class="beeswarm-legend-item media">Educación Media (9–12 años)</span>
+                    <span class="beeswarm-legend-item univ">Educación Universitaria (12+ años)</span>
+                </div>
+                <!-- D3 canvas -->
+                <div id="d3-canvas-beeswarm" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Calculando legibilidad…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+                <!-- Storytelling panel -->
+                <div id="storytelling-insights-beeswarm" class="storytelling-insights">
+                    <!-- JS generated content -->
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1">
+                <span class="step-num">07.1</span>
+                <h3>El Panorama Global</h3>
+                <p>
+                    Cada círculo representa un medio de comunicación. Su posición en el eje vertical indica cuántos años de escolaridad formal exige para ser comprendido. El color identifica el país.
+                </p>
+                <p>
+                    Las tres zonas de fondo revelan el nivel educativo implícito: básica, media y universitaria. ¿Dónde se concentra la prensa de tu país?
+                </p>
+            </div>
+
+            <div class="step" data-step="2">
+                <span class="step-num">07.2</span>
+                <h3>Chile vs. Argentina</h3>
+                <p>
+                    Comparamos dos países vecinos. La prensa chilena y argentina difieren en sus exigencias de legibilidad. Observa la distribución de sus medios en el eje educativo.
+                </p>
+                <div id="beeswarm-insight-CL-AR" class="map-insight-text"><!-- JS --></div>
+            </div>
+
+            <div class="step" data-step="3">
+                <span class="step-num">07.3</span>
+                <h3>España vs. México</h3>
+                <p>
+                    El español ibérico frente al mexicano. ¿Existe diferencia en la complejidad lingüística entre ambas prensas?
+                </p>
+                <div id="beeswarm-insight-ES-MX" class="map-insight-text"><!-- JS --></div>
+            </div>
+
+            <div class="step" data-step="4">
+                <span class="step-num">07.4</span>
+                <h3>La Zona Universitaria</h3>
+                <p>
+                    Los medios en la zona roja exigen más de 12 años de escolaridad formal. Pasa el cursor sobre ellos para leer textos reales de sus noticias y experimentar la barrera en primera persona.
+                </p>
+                <div class="inflesz-explainer">
+                    <p class="inflesz-title">¿Qué es el puntaje INFLESZ?</p>
+                    <p>Índice de legibilidad adaptado al español, derivado de la fórmula de Flesch:</p>
+                    <code class="inflesz-formula">INFLESZ = 206.835 − 60 × (sílabas/palabras) − 1.02 × (palabras/frases)</code>
+                    <p>100 = muy fácil · 0 = muy difícil · &lt;40 = nivel especializado</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Section 8: El Rostro de la Noticia (Sankey Diagram) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Auditoría de Firmas y Género</span>
+            <h2 class="section-title">El Rostro de la Noticia</h2>
+            <p class="section-intro-text">
+                ¿Quién escribe lo que leemos? Analizamos la autoría de las noticias para descubrir la tasa de anonimato y dependencia de agencias (periodismo de escritorio), así como la brecha de género entre periodistas firmantes.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-sankey">
+        <!-- Sticky sankey canvas -->
+        <figure class="sticky" id="sankey-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Country Selector inside figure -->
+                <div class="sankey-controls">
+                    <button class="sankey-country-btn active" data-country="AR">Argentina</button>
+                    <button class="sankey-country-btn" data-country="CL">Chile</button>
+                    <button class="sankey-country-btn" data-country="ES">España</button>
+                    <button class="sankey-country-btn" data-country="MX">México</button>
+                </div>
+                <!-- D3 canvas -->
+                <div id="d3-canvas-sankey" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Calculando flujos de autoría…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+                <!-- Storytelling panel -->
+                <div id="storytelling-insights-sankey" class="storytelling-insights">
+                    <!-- JS generated content -->
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1" data-country="AR">
+                <span class="step-num">08.1</span>
+                <h3>Argentina</h3>
+                <p>
+                    Observa cómo se distribuye el volumen informativo en Argentina. La corriente se bifurca rápidamente entre contenidos institucionales/anónimos y notas firmadas.
+                </p>
+                <div id="sankey-insight-AR" class="map-insight-text"><!-- JS --></div>
+            </div>
+            <div class="step" data-step="2" data-country="CL">
+                <span class="step-num">08.2</span>
+                <h3>Chile</h3>
+                <p>
+                    El flujo de Chile expone sus particularidades. ¿Qué proporción de noticias recae sobre los hombros de las agencias o del anonimato corporativo en la redacción?
+                </p>
+                <div id="sankey-insight-CL" class="map-insight-text"><!-- JS --></div>
+            </div>
+            <div class="step" data-step="3" data-country="ES">
+                <span class="step-num">08.3</span>
+                <h3>España</h3>
+                <p>
+                    España presenta un volumen considerable de firmas propias, pero la proporción entre géneros de firmas revela patrones estructurales persistentes.
+                </p>
+                <div id="sankey-insight-ES" class="map-insight-text"><!-- JS --></div>
+            </div>
+            <div class="step" data-step="4" data-country="MX">
+                <span class="step-num">08.4</span>
+                <h3>México</h3>
+                <p>
+                    Analizamos el mapa de firmas de México. ¿Logran los periodistas firmantes (hombres y mujeres) ganar espacio frente a las corrientes automatizadas?
+                </p>
+                <div id="sankey-insight-MX" class="map-insight-text"><!-- JS --></div>
+            </div>
+        </article>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>El Eco de las Palabras</strong> | Proyecto de Análisis Lingüístico y Visual</p>
+            <p class="footer-sub">Creado con ❤️ usando D3.js, Scrollama.js y Vanilla CSS. 2026</p>
+        </div>
+    </footer>
+
+    <!-- Libraries CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="main.js"></script>
+
+
+</body></html>

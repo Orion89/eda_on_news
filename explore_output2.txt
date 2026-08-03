@@ -1,0 +1,140 @@
+URL: http://localhost:8090/
+TITLE: El Eco de las Palabras: Radiografía del Periodismo en Hispanoamérica
+
+CLASSES (74 total):
+  - action-btn
+  - active
+  - arrow
+  - basica
+  - beeswarm-legend
+  - beeswarm-legend-item
+  - body-text
+  - color-adj
+  - color-noun
+  - color-other
+  - color-verb
+  - container
+  - country-border-ar
+  - country-border-cl
+  - country-border-es
+  - country-border-mx
+  - country-tag
+  - emotion-btn
+  - filter-btn
+  - filter-container
+  - filter-label
+  - filter-separator
+  - flex-column-layout
+  - footer
+  - footer-sub
+  - hero
+  - hero-content
+  - hero-countries
+  - hero-eyebrow
+  - hero-line
+  - hero-subtitle
+  - hero-title
+  - hidden
+  - inflesz-explainer
+  - inflesz-formula
+  - inflesz-title
+  - insight-card
+  - insight-country
+  - insight-label
+  - insight-meta
+  - insight-stat
+  - insight-text
+  - insights-grid
+  - intro-section
+  - lead-text
+  - legend-color
+  - legend-item
+  - map-country-btn
+  - map-insight-text
+  - map-overlay
+  - media
+  - pos-filter-btn
+  - pos-legend
+  - sankey-controls
+  - sankey-country-btn
+  - scroll-indicator
+  - section-divider
+  - section-divider-line
+  - section-eyebrow
+  - section-intro-text
+  - section-title
+  - step
+  - step-num
+  - steps-container
+  - sticky
+  - storytelling-insights
+  - tag-ar
+  - tag-cl
+  - tag-es
+  - tag-mx
+  - tooltip
+  - univ
+  - viz-canvas
+  - viz-wrapper
+
+SECTIONS: 14
+  [0] cls='intro-section' heading='None' svg=0 p=3
+  [1] cls='None' heading='El pulso de las noticias' svg=1 p=7
+  [2] cls='section-divider' heading='Huellas Dactilares Estilísticas' svg=0 p=1
+  [3] cls='None' heading='Complejidad vs Inmediatez' svg=1 p=4
+  [4] cls='section-divider' heading='La Anatomía del Discurso' svg=0 p=1
+  [5] cls='None' heading='El Esqueleto Sintáctico' svg=1 p=4
+  [6] cls='section-divider' heading='El Termómetro Emocional' svg=0 p=1
+  [7] cls='None' heading='Montañas de Sentimiento' svg=1 p=7
+  [8] cls='section-divider' heading='El Mapa del Poder' svg=0 p=1
+  [9] cls='None' heading='El Mapa Completo' svg=1 p=8
+  [10] cls='section-divider' heading='La Barrera de Cristal' svg=0 p=1
+  [11] cls='None' heading='El Panorama Global' svg=1 p=12
+  [12] cls='section-divider' heading='El Rostro de la Noticia' svg=0 p=1
+  [13] cls='None' heading='Argentina' svg=1 p=8
+
+VIS TECH: ['d3', 'svg']
+
+LAYOUT:
+  scrollHeight: 40750
+  windowHeight: 1800
+  scrollWidth: 1280
+  windowWidth: 1280
+  scrollTop: 0
+
+BUTTONS: 24
+  [0] 'Todos' role='' aria='' cls=['filter-btn', 'active']
+  [1] 'Argentina' role='' aria='' cls=['filter-btn']
+  [2] 'Chile' role='' aria='' cls=['filter-btn']
+  [3] 'España' role='' aria='' cls=['filter-btn']
+  [4] 'México' role='' aria='' cls=['filter-btn']
+  [5] 'Argentina' role='' aria='' cls=['pos-filter-btn', 'active']
+  [6] 'Chile' role='' aria='' cls=['pos-filter-btn']
+  [7] 'España' role='' aria='' cls=['pos-filter-btn']
+  [8] 'México' role='' aria='' cls=['pos-filter-btn']
+  [9] 'Ordenar por Subjetividad' role='' aria='' cls=['action-btn']
+  [10] 'Reestablecer Orden' role='' aria='' cls=['action-btn']
+  [11] 'Alegría' role='' aria='' cls=['emotion-btn', 'active']
+  [12] 'Miedo' role='' aria='' cls=['emotion-btn']
+  [13] 'Ira' role='' aria='' cls=['emotion-btn']
+  [14] 'Tristeza' role='' aria='' cls=['emotion-btn']
+
+LINKS: 0
+
+SCREENSHOT: 30% scroll
+SCREENSHOT: 60% scroll
+SCREENSHOT: 90% scroll
+
+FIRST SECTION ARIA (first 2000 chars):
+- paragraph: "Cada día, millones de páginas de noticias narran los sucesos que dan forma a nuestra realidad. Pero detrás de la urgencia del reporte diario, las palabras elegidas revelan patrones invisibles: obsesiones nacionales, sesgos compartidos y diferencias sutiles que definen la identidad de cada país. ¿De qué hablamos cuando informamos? ¿Y cómo lo hacemos?"
+- paragraph:
+  - text: Este proyecto explora un corpus masivo de noticias en español extraídas de los principales medios digitales de
+  - strong: Argentina
+  - text: ","
+  - strong: Chile
+  - text: ","
+  - strong: España
+  - text: "y"
+  - strong: México
+  - text: . Utilizando técnicas de procesamiento de lenguaje natural (NLP) y visualización de datos, analizamos cientos de miles de artículos para descubrir quién domina la pauta, cómo escriben las redacciones, cómo nos emocionan a través de sus palabras y hacia dónde dirigen la mirada nuestros países.
+- paragraph: Acompáñanos en este recorrido visual e interactivo. A medida que te deslices por las siguientes secciones, verás cómo los datos cobran vida en la pantalla, revelando las redes semánticas, los n-gramas más compartidos y las variaciones lingüísticas que hacen que la prensa de cada país tenga una voz única en el mapa hispanohablante.

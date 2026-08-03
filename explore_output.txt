@@ -1,0 +1,105 @@
+﻿URL: http://localhost:8090/
+TITLE: El Eco de las Palabras: RadiografÝa del Periodismo en HispanoamÚrica
+
+CLASSES (74 total):
+  - action-btn
+  - active
+  - arrow
+  - basica
+  - beeswarm-legend
+  - beeswarm-legend-item
+  - body-text
+  - color-adj
+  - color-noun
+  - color-other
+  - color-verb
+  - container
+  - country-border-ar
+  - country-border-cl
+  - country-border-es
+  - country-border-mx
+  - country-tag
+  - emotion-btn
+  - filter-btn
+  - filter-container
+  - filter-label
+  - filter-separator
+  - flex-column-layout
+  - footer
+  - footer-sub
+  - hero
+  - hero-content
+  - hero-countries
+  - hero-eyebrow
+  - hero-line
+  - hero-subtitle
+  - hero-title
+  - hidden
+  - inflesz-explainer
+  - inflesz-formula
+  - inflesz-title
+  - insight-card
+  - insight-country
+  - insight-label
+  - insight-meta
+  - insight-stat
+  - insight-text
+  - insights-grid
+  - intro-section
+  - lead-text
+  - legend-color
+  - legend-item
+  - map-country-btn
+  - map-insight-text
+  - map-overlay
+  - media
+  - pos-filter-btn
+  - pos-legend
+  - sankey-controls
+  - sankey-country-btn
+  - scroll-indicator
+  - section-divider
+  - section-divider-line
+  - section-eyebrow
+  - section-intro-text
+  - section-title
+  - step
+  - step-num
+  - steps-container
+  - sticky
+  - storytelling-insights
+  - tag-ar
+  - tag-cl
+  - tag-es
+  - tag-mx
+  - tooltip
+  - univ
+  - viz-canvas
+  - viz-wrapper
+
+SCROLL/STORY ELEMENTS: 3
+  [0] <DIV> class='scroll-indicator'
+python : Traceback (most recent call last):
+En línea: 1 Carácter: 1
++ python "C:\Users\leomo\coder\ejercicios\nlp\eda_and_w2v_on_news\explo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\leomo\coder\ejercicios\nlp\eda_and_w2v_on_news\explore_page2.py", line 97, in <module>
+    asyncio.run(main())
+  File "C:\Users\leomo\anaconda3\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\leomo\anaconda3\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leomo\anaconda3\Lib\asyncio\base_events.py", line 686, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\leomo\coder\ejercicios\nlp\eda_and_w2v_on_news\explore_page2.py", line 50, in main
+    print(f"      text: {text[:200]}")
+  File "C:\Users\leomo\anaconda3\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2193' in position 12: character maps to <undefined>

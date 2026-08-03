@@ -982,11 +982,7 @@ function renderPosPlot() {
     const rects = seriesGroup.selectAll("rect")
         .data(d => d, d => d.data.id);
 
-    rects.exit()
-        .transition()
-        .duration(400)
-        .attr("width", 0)
-        .remove();
+    rects.exit().remove();
 
     const rectsEnter = rects.enter()
         .append("rect")
@@ -1021,16 +1017,12 @@ function updatePosVisualization(stepIndex) {
         const topMediaInCountry = visibleData.reduce((prev, curr) => (prev.adjetivos > curr.adjetivos) ? prev : curr, visibleData[0]);
 
         svgPos.selectAll(".pos-rect")
-            .transition()
-            .duration(450)
             .style("fill-opacity", d => {
                 if (d.data.id === topMediaInCountry.id) return 1.0;
                 return 0.2;
             });
     } else {
         svgPos.selectAll(".pos-rect")
-            .transition()
-            .duration(450)
             .style("fill-opacity", 1.0);
     }
 }
