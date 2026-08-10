@@ -547,19 +547,26 @@ function generateStyleStorytellingText() {
     const analyticalCandidates = allStyleData.filter(d => d.ttr > globalMedianTTR && d.sentLen > globalMedianSentLen);
     const directCandidates = allStyleData.filter(d => d.ttr < globalMedianTTR && d.sentLen < globalMedianSentLen);
 
-    analyticMedia = analyticalCandidates.reduce((prev, curr) => (prev.score > curr.score) ? prev : curr, analyticalCandidates[0]);
-    directMedia = directCandidates.reduce((prev, curr) => (prev.score < curr.score) ? prev : curr, directCandidates[0]);
+    analyticalCandidates.sort((a, b) => b.score - a.score);
+    directCandidates.sort((a, b) => a.score - b.score);
+
+    analyticMedia = analyticalCandidates[0];
+    directMedia = directCandidates[0];
 
     if (!analyticMedia || !directMedia) return;
 
     container.innerHTML = `
-        <p>
-            El estilo de escritura varía drásticamente. Mientras <strong>${analyticMedia.media_name_normalized}</strong> 
-            (de ${countryNames[analyticMedia.country]}) exige alta concentración con oraciones de promedio 
-            <strong>${analyticMedia.sentLen.toFixed(1)}</strong> palabras y vocabulario rico, medios como 
-            <strong>${directMedia.media_name_normalized}</strong> (de ${countryNames[directMedia.country]}) 
-            apuestan por la inmediatez y el consumo rápido.
-        </p>
+        <div class="insights-grid" style="grid-template-columns: 1fr; margin-bottom: 1rem;">
+            <div class="insight-card country-border-${analyticMedia.country.toLowerCase()}">
+                <h4 class="insight-country">El Espectro de la Redacción</h4>
+                <p class="insight-text">
+                    El análisis estilístico contrapone dos filosofías periodísticas. En el extremo analítico, <strong>${analyticMedia.media_name_normalized}</strong> (${countryNames[analyticMedia.country]}) requiere mayor concentración con oraciones de promedio <strong>${analyticMedia.sentLen.toFixed(1)} palabras</strong> y vocabulario diverso (TTR: ${analyticMedia.ttr.toFixed(3)}). En el polo opuesto, <strong>${directMedia.media_name_normalized}</strong> (${countryNames[directMedia.country]}) apuesta por la inmediatez sintáctica con oraciones de apenas <strong>${directMedia.sentLen.toFixed(1)} palabras</strong>.
+                </p>
+                <div class="insight-meta">
+                    Mediana de oraciones: <strong>${globalMedianSentLen.toFixed(1)} palabras</strong> | Mediana Riqueza Léxica: <strong>${globalMedianTTR.toFixed(3)}</strong>
+                </div>
+            </div>
+        </div>
     `;
 }
 
