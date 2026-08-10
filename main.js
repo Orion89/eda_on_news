@@ -162,6 +162,29 @@ function generateStorytellingText(datasets) {
     const container = document.getElementById("storytelling-insights");
     if (!container) return;
 
+    const countryNarratives = {
+        "AR": {
+            subtitle: "Dominio de Grandes Cadenas",
+            text: (name, totalMedios, x, pctX, medioTop, topPct, total) => 
+                `En <strong>${name}</strong> (${total.toLocaleString()} noticias), el mapa muestra una marcada concentración: apenas <strong>${x}</strong> medios (el ${pctX}%) abarcan el 80% de la prensa nacional. El portal <strong>${medioTop}</strong> encabeza la pauta con el <strong>${topPct}%</strong> del volumen total.`
+        },
+        "CL": {
+            subtitle: "El Ecosistema Más Plural",
+            text: (name, totalMedios, x, pctX, medioTop, topPct, total) => 
+                `En <strong>${name}</strong> (${total.toLocaleString()} noticias), encontramos la agenda más distribuida de la región: se requieren <strong>${x}</strong> medios para reunir el 80% del volumen. Su portal líder, <strong>${medioTop}</strong>, encabeza con un moderado <strong>${topPct}%</strong>.`
+        },
+        "ES": {
+            subtitle: "Alta Concentración Digital",
+            text: (name, totalMedios, x, pctX, medioTop, topPct, total) => 
+                `En <strong>${name}</strong> (${total.toLocaleString()} noticias), la prensa exhibe la mayor concentración del estudio: solo <strong>${x}</strong> medios (el ${pctX}%) producen el 80% del contenido nacional. El gigante <strong>${medioTop}</strong> lidera con un <strong>${topPct}%</strong>.`
+        },
+        "MX": {
+            subtitle: "Fuerza Digital y Regional",
+            text: (name, totalMedios, x, pctX, medioTop, topPct, total) => 
+                `En <strong>${name}</strong> (${total.toLocaleString()} noticias), <strong>${x}</strong> medios concentran el 80% del flujo informativo. El ecosistema destaca por la presencia de portales digitales como <strong>${medioTop}</strong>, que reúne el <strong>${topPct}%</strong> de las noticias.`
+        }
+    };
+
     let html = '<div class="insights-grid">';
 
     Object.keys(datasets).forEach(country => {
@@ -184,12 +207,16 @@ function generateStorytellingText(datasets) {
         const medioTop = data[0].media_name_normalized;
         const countryName = countryNames[country];
         const topPercentage = data[0].percentage;
+        const pctX = ((x / totalMedios) * 100).toFixed(1);
+
+        const narrative = countryNarratives[country];
+        const narrativeText = narrative ? narrative.text(countryName, totalMedios, x, pctX, medioTop, topPercentage.toFixed(1), totalNoticias) : '';
 
         html += `
             <div class="insight-card country-border-${country.toLowerCase()}">
                 <h4 class="insight-country">${countryName}</h4>
                 <p class="insight-text">
-                    En <strong>${countryName}</strong>, el ecosistema parece plural con <strong>${totalMedios}</strong> medios, pero apenas <strong>${x}</strong> medios concentran el 80% de la información. El gigante indiscutido es <strong>${medioTop}</strong>.
+                    ${narrativeText}
                 </p>
                 <div class="insight-meta">
                     Noticias totales: ${totalNoticias.toLocaleString()} | Domina: <strong>${medioTop}</strong> con ${topPercentage.toFixed(1)}%

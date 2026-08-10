@@ -45,13 +45,25 @@
         </div>
     </section>
 
-    <!-- Scrollytelling Section -->
+    <!-- Section 1: La Huella de Concentración Mediática -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Volumen y Ecosistema Digital</span>
+            <h2 class="section-title">La Huella de Concentración Mediática</h2>
+            <p class="section-intro-text">
+                Exploramos un corpus masivo de más de 1 millón de noticias en Argentina, Chile, España y México. Cada esfera representa la presencia de un medio digital; su tamaño es proporcional al volumen total de publicaciones. ¿Está la agenda pública distribuida de manera plural o concentrada en pocas manos?
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section 1 -->
     <section id="scrolly">
         <!-- Visual canvas sticky to the viewport -->
         <figure class="sticky">
             <div class="viz-wrapper">
                 <div id="d3-canvas" class="viz-canvas">
-                    <!-- Dynamic D3.js visualization will go here -->
+                    <!-- Dynamic D3.js visualization -->
                     <div class="viz-placeholder">
                         <div class="spinner"></div>
                         <p class="placeholder-title">Visualización Interactiva</p>
@@ -64,27 +76,19 @@
         <!-- Scrolling narrative steps -->
         <article class="steps-container">
             <div class="step" data-step="1">
-                <span class="step-num">01</span>
-                <h3>El pulso de las noticias</h3>
+                <span class="step-num">01.1</span>
+                <h3>El Ecosistema de la Prensa</h3>
                 <p>
-                    Para comprender la agenda pública, primero debemos observar los temas recurrentes. Examinaremos las palabras más frecuentes en cada país, revelando las prioridades temáticas de cada sociedad.
+                    Cada esfera representa un medio digital. Al descender, exploramos el volumen de publicaciones por país y la concentración de la pauta noticiosa en el panorama hispanohablante.
                 </p>
                 <div id="storytelling-insights"></div>
             </div>
             
             <div class="step" data-step="2">
-                <span class="step-num">02</span>
-                <h3>¿Quién domina la pauta?</h3>
+                <span class="step-num">01.2</span>
+                <h3>La Regla del 80%</h3>
                 <p>
-                    ¿Se enfoca la prensa de manera similar ante los mismos eventos internacionales? Analizaremos las divergencias en la relevancia de tópicos clave como la economía, la política local y los sucesos globales.
-                </p>
-            </div>
-            
-            <div class="step" data-step="3">
-                <span class="step-num">03</span>
-                <h3>El tono emocional</h3>
-                <p>
-                    El periodismo no es solo información neutra; las palabras portan cargas afectivas. Evaluaremos los sentimientos expresados en las noticias para medir el nivel de optimismo o negatividad por región.
+                    Agrupamos los medios con menor producción (&lt; 100 noticias) en la categoría <em>"Otros Medios"</em>. Observa cómo en la mayoría de los países un puñado reducido de publicaciones domina la inmensa mayoría del flujo noticioso.
                 </p>
             </div>
         </article>
