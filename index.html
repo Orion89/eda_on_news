@@ -238,7 +238,7 @@
             <span class="section-eyebrow">Análisis de Sentimiento Temporal</span>
             <h2 class="section-title">El Termómetro Emocional</h2>
             <p class="section-intro-text">
-                ¿Cómo evolucionan los sentimientos en las noticias a lo largo de las décadas? Analizamos la intensidad de las emociones básicas en la prensa digital para evaluar el clima emocional del periodismo hispanohablante.
+                ¿Cómo evoluciona el clima emocional de las noticias a lo largo de las décadas? Mediante modelos Transformers de NLP (*pysentimiento*), analizamos la intensidad de la alegría, el miedo, la ira y la tristeza en cientos de miles de artículos, revelando las mareas emocionales de la prensa hispanohablante.
             </p>
             <div class="section-divider-line"></div>
         </div>
@@ -258,7 +258,7 @@
                 </div>
                 
                 <div id="d3-canvas-emotions" class="viz-canvas">
-                    <!-- Dynamic D3.js Ridgeline Plot will go here -->
+                    <!-- Dynamic D3.js Ridgeline Plot -->
                     <div class="viz-placeholder">
                         <div class="spinner"></div>
                         <p class="placeholder-title">Visualización de Emociones</p>
@@ -274,21 +274,18 @@
                 <span class="step-num">05.1</span>
                 <h3>Montañas de Sentimiento</h3>
                 <p>
-                    Este gráfico de tipo <strong>Joyplot (Ridgeline Plot)</strong> muestra la fluctuación de la emoción seleccionada en las portadas de noticias desde el año 2007 hasta 2026.
-                </p>
-                <p>
-                    Cada montaña representa un país, ordenados verticalmente (Argentina, Chile, España y México). Las áreas se superponen suavemente y están coloreadas según el país correspondiente para facilitar su contraste visual.
+                    Este gráfico de tipo <strong>Joyplot (Ridgeline Plot)</strong> muestra la intensidad mensual de cada emoción desde el año 2000 hasta 2026. Las cuatro cordilleras representan a Argentina, Chile, España y México, con curvas suavizadas para evidenciar períodos de calma o convulsión informativa.
                 </p>
             </div>
             
             <div class="step" data-step="2">
                 <span class="step-num">05.2</span>
-                <h3>El negocio de la ansiedad</h3>
+                <h3>La Marea de las Pasiones</h3>
                 <div id="storytelling-insights-emotions">
                     <!-- Dynamic storytelling text will be generated here -->
                 </div>
                 <p>
-                    Utiliza el panel de botones superiores para alternar entre "Alegría", "Miedo", "Ira" y "Tristeza" y observa cómo muta el oleaje emocional en la historia reciente de la prensa.
+                    Utiliza los botones superiores para alternar entre <strong>Alegría</strong>, <strong>Miedo</strong>, <strong>Ira</strong> y <strong>Tristeza</strong>. Observa cómo los picos emocionales coinciden con eventos cruciales y crisis en cada país.
                 </p>
             </div>
         </article>

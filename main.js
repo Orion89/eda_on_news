@@ -1203,15 +1203,40 @@ function generateEmotionsStorytellingText() {
     const container = document.getElementById("storytelling-insights-emotions");
     if (!container) return;
 
+    const countryEmotionStories = {
+        "AR": {
+            desc: (topEm, peakDate) => 
+                `En <strong>Argentina</strong>, la <strong>${topEm.toLowerCase()}</strong> y el desencanto dominan el clima informativo (promedio 11.0%), reflejando los ciclos de crisis e incertidumbre socioeconómica. Su punto más álgido se registró el <strong>${peakDate}</strong>.`
+        },
+        "CL": {
+            desc: (topEm, peakDate) => 
+                `En <strong>Chile</strong>, la <strong>${topEm.toLowerCase()}</strong> (8.0%) y la ira (7.3%) marcan el tono de las portadas, con picos pronunciados durante contingencias y debates nacionales. Su máximo histórico se registró el <strong>${peakDate}</strong>.`
+        },
+        "ES": {
+            desc: (topEm, peakDate) => 
+                `En <strong>España</strong>, la <strong>${topEm.toLowerCase()}</strong> encabeza las emociones (10.9%), impulsada por la polarización y la confrontación política en los medios. Su mayor registro ocurrió el <strong>${peakDate}</strong>.`
+        },
+        "MX": {
+            desc: (topEm, peakDate) => 
+                `En <strong>México</strong>, conviven la <strong>${topEm.toLowerCase()}</strong> (7.2%) y la ira (7.1%), con la mayor tasa relativa de miedo de la región (0.7%) vinculada a noticias de seguridad. Su pico ocurrió el <strong>${peakDate}</strong>.`
+        }
+    };
+
     let html = '<div class="insights-grid">';
     Object.keys(emotionsStorytellingData).forEach(cCode => {
         const d = emotionsStorytellingData[cCode];
+        const story = countryEmotionStories[cCode];
+        const narrative = story ? story.desc(d.topEmotion, d.peakDate) : `En <strong>${d.countryName}</strong>, la emoción predominante es <strong>${d.topEmotion}</strong>.`;
+
         html += `
             <div class="insight-card country-border-${cCode.toLowerCase()}">
                 <h4 class="insight-country">${d.countryName}</h4>
                 <p class="insight-text">
-                    El negocio de la ansiedad: Al observar el año, la emoción predominante que moviliza las portadas en <strong>${d.countryName}</strong> es <strong>${d.topEmotion}</strong>. Notablemente, en <strong>${d.peakDate}</strong>, los índices rompieron récords.
+                    ${narrative}
                 </p>
+                <div class="insight-meta">
+                    Emoción dominante: <strong>${d.topEmotion}</strong> | Registro récord: ${d.peakDate}
+                </div>
             </div>
         `;
     });
