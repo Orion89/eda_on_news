@@ -55,7 +55,7 @@ let posCountryAverages = {};
 let maxAdjectiveMedia = null;
 let maxAdjectiveCountry = "";
 
-const paddingPos = { top: 30, right: 30, bottom: 40, left: 145 };
+const paddingPos = { top: 30, right: 30, bottom: 40, left: 175 };
 
 // --- Globals for Section 5 (Ridgeline Joyplot) ---
 let svgEmotions;
@@ -872,15 +872,25 @@ function calculatePosStorytelling() {
 
 function generatePosStorytellingText() {
     const container = document.getElementById("storytelling-insights-pos");
-    if (!container) return;
+    if (!container || !maxAdjectiveMedia) return;
 
     const countryName = countryNames[maxAdjectiveCountry];
+    const topMedia = maxAdjectiveMedia.media;
+    const topPct = maxAdjectiveMedia.adjetivos.toFixed(1);
+    const avgPct = posCountryAverages[maxAdjectiveCountry] ? posCountryAverages[maxAdjectiveCountry].toFixed(1) : "9.5";
+
     container.innerHTML = `
-        <p>
-            <strong>¿Noticia o Editorial?</strong> En promedio, <strong>${countryName}</strong> lidera la carga de adjetivos en Hispanoamérica. 
-            Destaca el medio <strong>${maxAdjectiveMedia.media}</strong> donde el <strong>${maxAdjectiveMedia.adjetivos.toFixed(1)}%</strong> 
-            del contenido principal son calificaciones de la realidad.
-        </p>
+        <div class="insights-grid" style="grid-template-columns: 1fr; margin-bottom: 1rem;">
+            <div class="insight-card country-border-${maxAdjectiveCountry.toLowerCase()}">
+                <h4 class="insight-country">¿Noticia o Editorial?</h4>
+                <p class="insight-text">
+                    La densidad de adjetivos revela el grado de juicio y valoración en la cobertura periodística. A nivel regional, <strong>${countryName}</strong> lidera la carga calificativa (promedio de <strong>${avgPct}%</strong>), encabezada por <strong>${topMedia}</strong> con un <strong>${topPct}%</strong> de contenido adjetival. En contraste, las redacciones de <strong>México</strong> presentan el perfil más sobrio y fáctico (promedio de 8.9%).
+                </p>
+                <div class="insight-meta">
+                    Mayor carga adjetival: <strong>${topMedia}</strong> (${topPct}%) | País más sobrio: <strong>México</strong> (8.9%)
+                </div>
+            </div>
+        </div>
     `;
 }
 

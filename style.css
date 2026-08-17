@@ -975,7 +975,8 @@ body {
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
 }
 
-.action-btn:hover {
+.action-btn:hover,
+.action-btn.active {
     background-color: var(--color-text-main);
     color: #ffffff;
     border-color: var(--color-text-main);
