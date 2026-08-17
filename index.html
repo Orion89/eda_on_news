@@ -527,10 +527,68 @@
     </section>
 
     <footer class="footer">
-        <div class="container">
-            <p><strong>El Eco de las Palabras</strong> | Proyecto de Análisis Lingüístico y Visual</p>
-            <p class="footer-sub">Creado con ❤️ usando D3.js, Scrollama.js y Vanilla CSS. 2026</p>
-        </div>
+        <div class="container footer-inner">
+
+            <!-- Top bar: title + author -->
+            <div class="footer-top">
+                <div>
+                    <p class="footer-title"><strong>El Eco de las Palabras</strong></p>
+                    <p class="footer-sub">Proyecto de Análisis Lingüístico y Visual &mdash; Creado con D3.js, Scrollama.js y Vanilla CSS &mdash; 2026</p>
+                </div>
+                <div class="footer-author">
+                    <p class="footer-author-name">Leonardo Molina</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/Orion89" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                            GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/leonardo-molina-v-68a601183/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <!-- Three-column content grid -->
+            <div class="footer-grid">
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Fuentes</h3>
+                    <p class="footer-text">
+                        Los datos originales se extrajeron usando la biblioteca
+                        <a href="https://newspaper4k.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer" class="footer-link">newspaper4k</a>
+                        de Python desde los sitios web de los medios de comunicación correspondientes, sin comprometer su normal funcionamiento.
+                        Newspaper4k fue desarrollado originalmente por Lucas Ou-Yang (codelucas). El repositorio original se puede encontrar
+                        <a href="https://github.com/codelucas/newspaper" target="_blank" rel="noopener noreferrer" class="footer-link">aquí</a>.
+                        Newspaper4k está bajo la licencia MIT.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Métodos</h3>
+                    <p class="footer-text">
+                        Las noticias fueron extraídas mediante newspaper4k. Los nombres de los medios se normalizaron combinando extracción de dominios base y agrupamiento difuso (Jaro-Winkler). El análisis lingüístico empleó spaCy y NLTK para calcular métricas como el Type-Token Ratio (TTR) y el índice de legibilidad INFLESZ. Para el análisis de emociones, se aplicaron modelos basados en Transformers (pysentimiento), suavizando las tendencias con promedios móviles. La extracción de entidades (NER) se geolocalizó usando Nominatim, y el foco temporal se calculó mediante conteo vectorizado con diccionarios semánticos.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Referencias</h3>
+                    <ul class="footer-refs">
+                        <li>Jurafsky, D., &amp; Martin, J. H. (2024). <em>Speech and language processing</em> (3rd ed. draft). Stanford University.</li>
+                        <li>Bengfort, B., Bilbro, R. &amp; Ojeda, T. (2018). <em>Applied Text Analysis with Python</em>. O'Reilly Media.</li>
+                        <li>Silge, J., &amp; Robinson, D. (2017). <em>Text mining with R: A tidy approach</em>. O'Reilly Media.</li>
+                        <li>Meeks, E., &amp; Dufour, A. (2024). <em>D3.js in Action</em>. Manning Publications Co.</li>
+                        <li>Asboth, D. (2025). <em>The Well-Grounded Data Analyst</em>. Manning Publications Co.</li>
+                        <li>Nussbaumer Knaflic, C. (2015). <em>Storytelling with data</em>. John Wiley &amp; Sons.</li>
+                    </ul>
+                </div>
+
+            </div><!-- /footer-grid -->
+
+        </div><!-- /container -->
     </footer>
 
     <!-- Libraries CDN -->
