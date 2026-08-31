@@ -41,7 +41,7 @@ let analyticMedia = null;
 let directMedia = null;
 let selectedStyleCountry = "all";
 
-const paddingStyle = { top: 50, right: 40, bottom: 60, left: 65 };
+let paddingStyle = { top: 50, right: 40, bottom: 60, left: 65 };
 
 // --- Globals for Section 3 (100% Stacked Bar Chart) ---
 let svgPos;
@@ -55,7 +55,7 @@ let posCountryAverages = {};
 let maxAdjectiveMedia = null;
 let maxAdjectiveCountry = "";
 
-const paddingPos = { top: 30, right: 30, bottom: 40, left: 175 };
+let paddingPos = { top: 30, right: 30, bottom: 40, left: 175 };
 
 // --- Globals for Section 5 (Ridgeline Joyplot) ---
 let svgEmotions;
@@ -67,7 +67,7 @@ let xScaleEmotions, yScaleIntensityEmotions;
 let selectedEmotion = "alegría";
 let emotionsStorytellingData = {};
 
-const paddingEmotions = { top: 50, right: 30, bottom: 50, left: 100 };
+let paddingEmotions = { top: 50, right: 30, bottom: 50, left: 100 };
 
 // --- Globals for Section 6 (NER Map) ---
 let svgMap;
@@ -106,7 +106,42 @@ let beeswarmMedianByCountry = {};
 let beeswarmStorytellingData = {};
 let yScaleBeeswarm;
 
-const paddingBeeswarm = { top: 55, right: 50, bottom: 55, left: 68 };
+let paddingBeeswarm = { top: 55, right: 50, bottom: 55, left: 68 };
+
+// Responsive padding recalculators
+function updateResponsivePaddings() {
+    if (widthStyle < 500) {
+        paddingStyle = { top: 28, right: 20, bottom: 42, left: 48 };
+    } else if (widthStyle < 800) {
+        paddingStyle = { top: 38, right: 30, bottom: 50, left: 58 };
+    } else {
+        paddingStyle = { top: 50, right: 40, bottom: 60, left: 65 };
+    }
+
+    if (widthPos < 500) {
+        paddingPos = { top: 18, right: 18, bottom: 32, left: 112 };
+    } else if (widthPos < 800) {
+        paddingPos = { top: 24, right: 25, bottom: 36, left: 145 };
+    } else {
+        paddingPos = { top: 30, right: 30, bottom: 40, left: 175 };
+    }
+
+    if (widthEmotions < 500) {
+        paddingEmotions = { top: 22, right: 18, bottom: 32, left: 68 };
+    } else if (widthEmotions < 800) {
+        paddingEmotions = { top: 32, right: 22, bottom: 40, left: 82 };
+    } else {
+        paddingEmotions = { top: 50, right: 30, bottom: 50, left: 100 };
+    }
+
+    if (widthBeeswarm < 500) {
+        paddingBeeswarm = { top: 32, right: 22, bottom: 35, left: 56 };
+    } else if (widthBeeswarm < 800) {
+        paddingBeeswarm = { top: 42, right: 35, bottom: 45, left: 62 };
+    } else {
+        paddingBeeswarm = { top: 55, right: 50, bottom: 55, left: 68 };
+    }
+}
 
 // --- Globals for Section 8 (Sankey) ---
 let svgSankey;
@@ -346,6 +381,8 @@ function drawLabels(bgLayer, fgLayer) {
         { code: "MX", name: "México" }
     ];
 
+    const labelOffsetY = Math.min(height * 0.18, 70);
+
     bgLayer.selectAll(".bg-country-label")
         .data(countriesList, d => d.code)
         .join("text")
@@ -365,14 +402,14 @@ function drawLabels(bgLayer, fgLayer) {
         .attr("class", "country-label")
         .attr("text-anchor", "middle")
         .attr("font-family", "var(--font-sans)")
-        .attr("font-size", "0.75rem")
+        .attr("font-size", width < 500 ? "0.68rem" : "0.75rem")
         .attr("font-weight", "700")
         .attr("letter-spacing", "0.12em")
         .attr("text-transform", "uppercase")
         .attr("fill", "var(--color-text-muted)")
         .text(d => d.name)
         .attr("x", d => countryCenters[d.code].x)
-        .attr("y", d => countryCenters[d.code].y - 85);
+        .attr("y", d => countryCenters[d.code].y - labelOffsetY);
 }
 
 function setupD3Canvas() {
@@ -424,6 +461,26 @@ function setupTooltip() {
         .style("opacity", 0);
 }
 
+function positionTooltip(event) {
+    const tooltipNode = tooltip.node();
+    const tipWidth = tooltipNode ? tooltipNode.offsetWidth : 220;
+    const tipHeight = tooltipNode ? tooltipNode.offsetHeight : 70;
+    
+    let x = (event.pageX || (event.touches && event.touches[0] ? event.touches[0].pageX : 0)) + 15;
+    let y = (event.pageY || (event.touches && event.touches[0] ? event.touches[0].pageY : 0)) - 28;
+    
+    // Prevent overflowing right edge
+    if (x + tipWidth > window.innerWidth - 10) {
+        x = Math.max(10, (event.pageX || (event.touches && event.touches[0] ? event.touches[0].pageX : 0)) - tipWidth - 15);
+    }
+    // Prevent overflowing top
+    if (y < window.scrollY + 10) {
+        y = (event.pageY || (event.touches && event.touches[0] ? event.touches[0].pageY : 0)) + 20;
+    }
+    
+    tooltip.style("left", x + "px").style("top", y + "px");
+}
+
 function handleMouseOver(event, d) {
     tooltip.transition().duration(100).style("opacity", 0.96);
     
@@ -441,15 +498,12 @@ function handleMouseOver(event, d) {
         <div class="tooltip-row"><strong>País:</strong> ${countryNames[d.country]}</div>
         <div class="tooltip-row"><strong>Noticias:</strong> ${d.count.toLocaleString()}</div>
         <div class="tooltip-row"><strong>Porcentaje:</strong> ${d.percentage.toFixed(2)}%</div>
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+    `);
+    positionTooltip(event);
 }
 
 function handleMouseMove(event) {
-    tooltip
-        .style("left", (event.pageX + 15) + "px")
-        .style("top", (event.pageY - 28) + "px");
+    positionTooltip(event);
 }
 
 function handleMouseLeave() {
@@ -610,9 +664,8 @@ function handleStyleMouseOver(event, d) {
         <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.4rem;">
             Artículos analizados: ${parseInt(d.num_samples).toLocaleString()}
         </div>
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+    `);
+    positionTooltip(event);
 }
 
 /**
@@ -625,6 +678,8 @@ function setupD3StyleCanvas() {
     canvas.innerHTML = "";
     widthStyle = canvas.clientWidth;
     heightStyle = canvas.clientHeight;
+
+    updateResponsivePaddings();
 
     svgStyle = d3.select(canvas)
         .append("svg")
@@ -663,20 +718,23 @@ function drawStyleGrid() {
     qGroup.selectAll("*").remove();
     lGroup.selectAll("*").remove();
 
+    const isNarrow = widthStyle < 480;
+
     svgStyle.select(".x-axis")
         .attr("transform", `translate(0, ${heightStyle - paddingStyle.bottom})`)
-        .call(d3.axisBottom(xScaleStyle).ticks(5).tickFormat(d3.format(".2f")));
+        .call(d3.axisBottom(xScaleStyle).ticks(isNarrow ? 4 : 5).tickFormat(d3.format(".2f")));
 
     svgStyle.select(".y-axis")
         .attr("transform", `translate(${paddingStyle.left}, 0)`)
-        .call(d3.axisLeft(yScaleStyle).ticks(5));
+        .call(d3.axisLeft(yScaleStyle).ticks(heightStyle < 380 ? 4 : 5));
 
     svgStyle.select(".x-axis-label").remove();
     svgStyle.append("text")
         .attr("class", "axis-label x-axis-label")
         .attr("text-anchor", "middle")
         .attr("x", paddingStyle.left + (widthStyle - paddingStyle.left - paddingStyle.right) / 2)
-        .attr("y", heightStyle - 15)
+        .attr("y", heightStyle - (isNarrow ? 10 : 15))
+        .style("font-size", isNarrow ? "0.72rem" : "0.8rem")
         .text("Riqueza Léxica (TTR)");
 
     svgStyle.select(".y-axis-label").remove();
@@ -685,8 +743,9 @@ function drawStyleGrid() {
         .attr("text-anchor", "middle")
         .attr("transform", `rotate(-90)`)
         .attr("x", -(paddingStyle.top + (heightStyle - paddingStyle.top - paddingStyle.bottom) / 2))
-        .attr("y", 20)
-        .text("Longitud de Oración Promedio (palabras)");
+        .attr("y", isNarrow ? 14 : 20)
+        .style("font-size", isNarrow ? "0.72rem" : "0.8rem")
+        .text(isNarrow ? "Long. Oración (palabras)" : "Longitud de Oración Promedio (palabras)");
 
     qGroup.append("line")
         .attr("class", "quadrant-line")
@@ -703,10 +762,10 @@ function drawStyleGrid() {
         .attr("y2", heightStyle - paddingStyle.bottom);
 
     const labels = [
-        { text: "Complejo/Analítico", x: widthStyle - paddingStyle.right - 10, y: paddingStyle.top + 20, anchor: "end" },
-        { text: "Simple/Directo", x: paddingStyle.left + 10, y: heightStyle - paddingStyle.bottom - 15, anchor: "start" },
-        { text: "Oraciones Largas", x: paddingStyle.left + 10, y: paddingStyle.top + 20, anchor: "start" },
-        { text: "Vocabulario Rico", x: widthStyle - paddingStyle.right - 10, y: heightStyle - paddingStyle.bottom - 15, anchor: "end" }
+        { text: isNarrow ? "Complejo" : "Complejo/Analítico", x: widthStyle - paddingStyle.right - 8, y: paddingStyle.top + 16, anchor: "end" },
+        { text: isNarrow ? "Directo" : "Simple/Directo", x: paddingStyle.left + 8, y: heightStyle - paddingStyle.bottom - 12, anchor: "start" },
+        { text: isNarrow ? "Largas" : "Oraciones Largas", x: paddingStyle.left + 8, y: paddingStyle.top + 16, anchor: "start" },
+        { text: isNarrow ? "Rico" : "Vocabulario Rico", x: widthStyle - paddingStyle.right - 8, y: heightStyle - paddingStyle.bottom - 12, anchor: "end" }
     ];
 
     lGroup.selectAll(".quadrant-label")
@@ -716,6 +775,7 @@ function drawStyleGrid() {
         .attr("x", d => d.x)
         .attr("y", d => d.y)
         .attr("text-anchor", d => d.anchor)
+        .style("font-size", isNarrow ? "0.62rem" : "0.72rem")
         .text(d => d.text);
 }
 
@@ -728,7 +788,7 @@ function renderStylePlot() {
         .attr("class", "style-dot")
         .attr("cx", d => xScaleStyle(d.ttr))
         .attr("cy", d => yScaleStyle(d.sentLen))
-        .attr("r", 5.5)
+        .attr("r", widthStyle < 500 ? 4.5 : 5.5)
         .attr("fill", d => getStyleColor(d))
         .style("fill-opacity", d => {
             if (selectedStyleCountry === "all") return 0.75;
@@ -740,7 +800,8 @@ function renderStylePlot() {
         })
         .on("mouseover", handleStyleMouseOver)
         .on("mousemove", handleMouseMove)
-        .on("mouseleave", handleMouseLeave);
+        .on("mouseleave", handleMouseLeave)
+        .on("pointerdown", handleStyleMouseOver);
 }
 
 function updateStyleVisualization(stepIndex) {
@@ -934,9 +995,19 @@ function handlePosMouseOver(event, d, key) {
         <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.4rem;">
             País: ${countryNames[d.data.country]} | Total tokens: ${d.data.totalTokens.toLocaleString()}
         </div>
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+    `);
+    positionTooltip(event);
+}
+
+function formatPosMediaName(name) {
+    if (widthPos < 500) {
+        const clean = name.replace(/^www\./, '').split('/')[0];
+        return clean.length > 13 ? clean.slice(0, 12) + '…' : clean;
+    } else if (widthPos < 800) {
+        const clean = name.replace(/^www\./, '');
+        return clean.length > 18 ? clean.slice(0, 17) + '…' : clean;
+    }
+    return name.length > 24 ? name.slice(0, 22) + '…' : name;
 }
 
 /**
@@ -949,6 +1020,8 @@ function setupD3PosCanvas() {
     canvas.innerHTML = "";
     widthPos = canvas.clientWidth;
     heightPos = canvas.clientHeight;
+
+    updateResponsivePaddings();
 
     svgPos = d3.select(canvas)
         .append("svg")
@@ -993,17 +1066,17 @@ function renderPosPlot() {
         .attr("transform", `translate(${paddingPos.left}, 0)`)
         .transition()
         .duration(600)
-        .call(d3.axisLeft(yScalePos))
+        .call(d3.axisLeft(yScalePos).tickFormat(formatPosMediaName))
         .selectAll("text")
         .style("font-family", "var(--font-sans)")
-        .style("font-size", "0.72rem")
+        .style("font-size", widthPos < 500 ? "0.62rem" : "0.72rem")
         .style("fill", "var(--color-text-muted)");
 
     svgPos.select(".x-axis")
         .attr("transform", `translate(0, ${heightPos - paddingPos.bottom})`)
         .transition()
         .duration(600)
-        .call(d3.axisBottom(xScalePos).ticks(5).tickFormat(d => d + "%"));
+        .call(d3.axisBottom(xScalePos).ticks(widthPos < 500 ? 4 : 5).tickFormat(d => d + "%"));
 
     const keys = ["adjetivos", "verbos", "sustantivos", "otros"];
     const stackedData = d3.stack().keys(keys)(visiblePosData);
@@ -1040,7 +1113,11 @@ function renderPosPlot() {
             handlePosMouseOver(event, d, key);
         })
         .on("mousemove", handleMouseMove)
-        .on("mouseleave", handleMouseLeave);
+        .on("mouseleave", handleMouseLeave)
+        .on("pointerdown", function(event, d) {
+            const key = d3.select(this.parentNode).datum().key;
+            handlePosMouseOver(event, d, key);
+        });
 
     rectsEnter.merge(rects)
         .transition()
@@ -1284,6 +1361,8 @@ function setupD3EmotionsCanvas() {
     widthEmotions = canvas.clientWidth;
     heightEmotions = canvas.clientHeight;
 
+    updateResponsivePaddings();
+
     svgEmotions = d3.select(canvas)
         .append("svg")
         .attr("width", widthEmotions)
@@ -1320,7 +1399,7 @@ function renderEmotionsPlot() {
         .range([0, ySpacing * 1.45]); // Overlap factor
 
     // Share X axis only at the bottom baseline (México)
-    const xAxis = d3.axisBottom(xScaleEmotions).ticks(6).tickFormat(d3.timeFormat("%Y"));
+    const xAxis = d3.axisBottom(xScaleEmotions).ticks(widthEmotions < 500 ? 4 : 6).tickFormat(d3.timeFormat("%Y"));
     svgEmotions.select(".x-axis")
         .attr("transform", `translate(0, ${paddingEmotions.top + 3 * ySpacing + ySpacing * 0.7})`)
         .transition()
@@ -1328,7 +1407,7 @@ function renderEmotionsPlot() {
         .call(xAxis)
         .selectAll("text")
         .style("font-family", "var(--font-sans)")
-        .style("font-size", "0.75rem")
+        .style("font-size", widthEmotions < 500 ? "0.68rem" : "0.75rem")
         .style("fill", "var(--color-text-muted)");
 
     const countries = ["AR", "CL", "ES", "MX"];
@@ -1411,9 +1490,10 @@ function renderEmotionsPlot() {
         .data(countries)
         .join("text")
         .attr("class", "ridgeline-country-label")
-        .attr("x", paddingEmotions.left - 15)
+        .attr("x", paddingEmotions.left - (widthEmotions < 500 ? 6 : 15))
         .attr("y", c => countryBaselines[c] - 5)
         .attr("text-anchor", "end")
+        .style("font-size", widthEmotions < 500 ? "0.62rem" : "0.7rem")
         .text(c => countryNamesSpanish[c]);
 }
 
@@ -1587,6 +1667,8 @@ function initScrollamaEmotions() {
  * Handle window resizing to keep all charts responsive
  */
 function handleResize() {
+    updateResponsivePaddings();
+
     // 1. Resize Section 1 (Bubble Chart)
     const canvas = document.getElementById("d3-canvas");
     if (canvas && svg) {
@@ -1882,9 +1964,8 @@ function handleMapMouseOver(event, d) {
         <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.4rem;">
             Coordenadas: ${d.lat.toFixed(2)}, ${d.lon.toFixed(2)}
         </div>
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+    `);
+    positionTooltip(event);
 }
 
 function handleMapMouseLeave() {
@@ -1969,7 +2050,8 @@ function renderMapPlot() {
         })
         .on("mouseover", handleMapMouseOver)
         .on("mousemove", handleMouseMove)
-        .on("mouseleave", handleMapMouseLeave);
+        .on("mouseleave", handleMapMouseLeave)
+        .on("pointerdown", handleMapMouseOver);
 }
 
 function zoomToCountry(countryCode) {
@@ -2219,10 +2301,17 @@ function renderSankeyPlot(countryCode) {
         links: rawData.links.map(d => Object.assign({}, d))
     };
 
+    const isSmall = widthSankey < 500;
+    const padLeft = isSmall ? 16 : 40;
+    const padRight = isSmall ? 16 : 40;
+    const padTop = heightSankey < 360 ? 16 : 30;
+    const padBottom = heightSankey < 360 ? 18 : 35;
+    const nodePadding = heightSankey < 360 ? 12 : 24;
+
     const sankeyLayout = d3.sankey()
-        .nodeWidth(16)
-        .nodePadding(24)
-        .extent([[40, 30], [widthSankey - 40, heightSankey - 35]]);
+        .nodeWidth(isSmall ? 12 : 16)
+        .nodePadding(nodePadding)
+        .extent([[padLeft, padTop], [widthSankey - padRight, heightSankey - padBottom]]);
 
     let nodes, links;
     try {
@@ -2260,7 +2349,8 @@ function renderSankeyPlot(countryCode) {
         .attr("fill", "none")
         .on("mouseover", handleSankeyLinkMouseOver)
         .on("mousemove", handleMouseMove)
-        .on("mouseleave", handleSankeyLinkMouseLeave);
+        .on("mouseleave", handleSankeyLinkMouseLeave)
+        .on("pointerdown", handleSankeyLinkMouseOver);
 
     // Draw nodes
     const nodeGroups = svgSankey.append("g")
@@ -2277,7 +2367,8 @@ function renderSankeyPlot(countryCode) {
         .attr("fill", n => getNodeColor(n.node))
         .on("mouseover", handleSankeyNodeMouseOver)
         .on("mousemove", handleMouseMove)
-        .on("mouseleave", handleSankeyNodeMouseLeave);
+        .on("mouseleave", handleSankeyNodeMouseLeave)
+        .on("pointerdown", handleSankeyNodeMouseOver);
 
     // Draw node labels
     nodeGroups.append("text")
@@ -2286,7 +2377,8 @@ function renderSankeyPlot(countryCode) {
         .attr("y", n => (n.y0 + n.y1) / 2)
         .attr("dy", "0.35em")
         .attr("text-anchor", n => n.x0 < widthSankey / 2 ? "start" : "end")
-        .text(n => `${n.name} (${Math.round(n.value).toLocaleString()})`);
+        .style("font-size", isSmall ? "0.62rem" : "0.7rem")
+        .text(n => isSmall ? n.name : `${n.name} (${Math.round(n.value).toLocaleString()})`);
 }
 
 function handleSankeyLinkMouseOver(event, d) {
@@ -2305,9 +2397,8 @@ function handleSankeyLinkMouseOver(event, d) {
         <div class="tooltip-row"><strong>Destino:</strong> ${d.target.name}</div>
         <div class="tooltip-row"><strong>Volumen:</strong> ${Math.round(d.value).toLocaleString()} noticias</div>
         <div class="tooltip-row"><strong>Proporción:</strong> ${pct}% del origen</div>
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+    `);
+    positionTooltip(event);
 }
 
 function handleSankeyLinkMouseLeave() {
@@ -2317,18 +2408,14 @@ function handleSankeyLinkMouseLeave() {
 
 function handleSankeyNodeMouseOver(event, d) {
     tooltip.transition().duration(100).style("opacity", 0.96);
-    
-    // Find percentage relative to root node (Total Noticias)
-    const rootVal = svgSankey.selectAll(".sankey-node").data().find(n => n.node === 0)?.value || d.value;
-    const pct = (d.value / rootVal * 100).toFixed(1);
-
     tooltip.html(`
         <div class="tooltip-title">${d.name}</div>
-        <div class="tooltip-row"><strong>Total:</strong> ${Math.round(d.value).toLocaleString()} noticias</div>
-        ${d.node !== 0 ? `<div class="tooltip-row"><strong>Proporción del total:</strong> ${pct}%</div>` : ''}
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+        <div class="tooltip-row"><strong>Volumen Total:</strong> ${Math.round(d.value).toLocaleString()} noticias</div>
+        <div class="tooltip-row" style="font-size:0.75rem; color:#b5b0aa; margin-top:0.3rem;">
+            Categoría: ${d.layer === 0 ? "Tipo de Cobertura" : (d.layer === 1 ? "Origen del Contenido" : "Género de la Firma")}
+        </div>
+    `);
+    positionTooltip(event);
 }
 
 function handleSankeyNodeMouseLeave() {
@@ -2537,6 +2624,8 @@ function setupD3BeeswarmCanvas() {
     widthBeeswarm = canvas.clientWidth;
     heightBeeswarm = canvas.clientHeight;
 
+    updateResponsivePaddings();
+
     svgBeeswarm = d3.select(canvas)
         .append("svg")
         .attr("width", widthBeeswarm)
@@ -2571,12 +2660,13 @@ function setupD3BeeswarmCanvas() {
             .attr("x", widthBeeswarm - paddingBeeswarm.right - 4)
             .attr("y", yTop + 14)
             .attr("text-anchor", "end")
+            .style("font-size", widthBeeswarm < 500 ? "0.58rem" : "0.65rem")
             .text(z.label);
     });
 
     // Y Axis
     const yAxis = d3.axisLeft(yScaleBeeswarm)
-        .ticks(8)
+        .ticks(heightBeeswarm < 360 ? 6 : 8)
         .tickFormat(d => `${d} años`);
 
     svgBeeswarm.append("g")
@@ -2589,9 +2679,10 @@ function setupD3BeeswarmCanvas() {
         .attr("class", "beeswarm-zone-label")
         .attr("transform", "rotate(-90)")
         .attr("x", -(heightBeeswarm / 2))
-        .attr("y", 14)
+        .attr("y", widthBeeswarm < 500 ? 12 : 14)
         .attr("text-anchor", "middle")
-        .text("AÑOS DE EDUCACIÓN REQUERIDOS");
+        .style("font-size", widthBeeswarm < 500 ? "0.58rem" : "0.65rem")
+        .text(widthBeeswarm < 500 ? "ESCOLARIDAD EXIGIDA" : "AÑOS DE EDUCACIÓN REQUERIDOS");
 
     renderBeeswarmPlot();
 }
@@ -2612,17 +2703,19 @@ function renderBeeswarmPlot() {
     // Clone nodes to avoid mutating allBeeswarmData
     const nodes = allBeeswarmData.map(d => Object.assign({}, d));
 
+    const r = widthBeeswarm < 500 ? 5.5 : 7;
+    const collideR = widthBeeswarm < 500 ? 6 : 7.5;
+
     // Pre-cool the simulation — 300 ticks before DOM insertion
     const sim = d3.forceSimulation(nodes)
         .force("y", d3.forceY(d => yScaleBeeswarm(d.years_education)).strength(1.0))
         .force("x", d3.forceX(cx).strength(0.04))
-        .force("collide", d3.forceCollide(7.5).strength(1))
+        .force("collide", d3.forceCollide(collideR).strength(1))
         .stop();
 
     for (let i = 0; i < 300; i++) sim.tick();
 
     // Clamp circles within canvas bounds
-    const r = 7;
     nodes.forEach(d => {
         d.x = Math.max(paddingBeeswarm.left + r, Math.min(widthBeeswarm - paddingBeeswarm.right - r, d.x));
         d.y = Math.max(paddingBeeswarm.top + r, Math.min(heightBeeswarm - paddingBeeswarm.bottom - r, d.y));
@@ -2648,7 +2741,8 @@ function renderBeeswarmPlot() {
         .style("opacity", 0.82)
         .on("mouseover", handleBeeswarmMouseOver)
         .on("mousemove", handleMouseMove)
-        .on("mouseleave", handleBeeswarmMouseLeave);
+        .on("mouseleave", handleBeeswarmMouseLeave)
+        .on("pointerdown", handleBeeswarmMouseOver);
 
     // Draw median lines (one per country, hidden by default)
     ["CL", "AR", "ES", "MX"].forEach(code => {
@@ -2695,9 +2789,8 @@ function handleBeeswarmMouseOver(event, d) {
         <div class="tooltip-row"><strong>Años requeridos:</strong> ${d.years_education.toFixed(1)}</div>
         <div class="tooltip-row"><strong>INFLESZ:</strong> ${d.inflesz_score.toFixed(1)}</div>
         ${sampleHtml}
-    `)
-    .style("left", (event.pageX + 15) + "px")
-    .style("top", (event.pageY - 28) + "px");
+    `);
+    positionTooltip(event);
 }
 
 function handleBeeswarmMouseLeave() {

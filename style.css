@@ -168,42 +168,58 @@ body {
 }
 
 /* Scrollytelling Section Layout */
-#scrolly {
+#scrolly,
+#scrolly-style,
+#scrolly-pos,
+#scrolly-emotions,
+#scrolly-map,
+#scrolly-beeswarm,
+#scrolly-sankey {
     position: relative;
     background-color: var(--color-bg);
 }
 
-/* Sticky Figure */
-#scrolly figure.sticky {
+/* Sticky Figure Base (Mobile & Tablet: sticky top compact viewport) */
+#scrolly figure.sticky,
+#scrolly-style figure.sticky,
+#scrolly-pos figure.sticky,
+#scrolly-emotions figure.sticky,
+#scrolly-map figure.sticky,
+#scrolly-beeswarm figure.sticky,
+#scrolly-sankey figure.sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    height: 50vh; /* Responsive height on mobile devices */
+    height: 50vh;
+    min-height: 310px;
+    max-height: 460px;
     margin: 0;
     background-color: var(--color-bg-alt);
-    z-index: 10;
+    z-index: 25;
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .viz-wrapper {
     width: 100%;
     height: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--color-bg-alt);
 }
 
 .viz-canvas {
     width: 100%;
     height: 100%;
     background-color: #ffffff;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: inset 0 2px 8px rgba(0,0,0,0.01), 0 4px 20px rgba(0,0,0,0.02);
     border: 1px solid rgba(0,0,0,0.05);
     display: flex;
@@ -216,103 +232,102 @@ body {
 /* Placeholder inside visualizer */
 .viz-placeholder {
     text-align: center;
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 3px solid rgba(0,0,0,0.06);
     border-top-color: var(--color-accent);
     border-radius: 50%;
-    margin: 0 auto 1.5rem auto;
+    margin: 0 auto 1.25rem auto;
     animation: spin 1.2s infinite linear;
 }
 
 .placeholder-title {
     font-family: var(--font-heading);
-    font-size: 1.35rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
     color: var(--color-text-main);
 }
 
 .placeholder-subtitle {
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
 }
 
 /* Steps narrative container */
 .steps-container {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
     position: relative;
-    z-index: 20;
+    z-index: 10;
     pointer-events: none; /* Let pointer events pass to visual underlay when not interactive */
 }
 
 .step {
     pointer-events: auto; /* Re-enable pointer events inside cards */
-    margin: 0 auto 45vh auto;
-    background-color: rgba(250, 248, 245, 0.97); /* Translucent cream matching var(--color-bg) */
+    margin: 28vh auto 28vh auto;
+    background-color: #faf8f5; /* Solid cream matching var(--color-bg) to prevent text bleeding while scrolling */
     border: 1px solid var(--color-border);
     border-radius: 12px;
-    padding: 2.5rem;
+    padding: 1.75rem 1.35rem;
     max-width: 480px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-    backdrop-filter: blur(8px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.4s ease, 
-                opacity 0.4s ease,
-                box-shadow 0.4s ease;
-    opacity: 0.35; /* Unfocused step opacity */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.35s ease, 
+                opacity 0.35s ease,
+                box-shadow 0.35s ease;
+    opacity: 0.25; /* Unfocused step opacity */
 }
 
 /* Active Step style applied via Scrollama trigger */
 .step.is-active {
     opacity: 1;
-    transform: translateY(-4px) scale(1.01);
+    transform: translateY(-3px);
     border-color: var(--color-text-main);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.1);
 }
 
 .step:first-child {
-    margin-top: 5vh;
+    margin-top: 6vh;
 }
 
 .step:last-child {
-    margin-bottom: 25vh;
+    margin-bottom: 28vh;
 }
 
 .step-num {
     font-family: var(--font-sans);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--color-text-muted);
     border-bottom: 2px solid var(--color-accent);
     padding-bottom: 2px;
     display: inline-block;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     letter-spacing: 0.05em;
 }
 
 .step h3 {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+    font-size: 1.55rem;
+    margin-bottom: 0.85rem;
     line-height: 1.25;
     font-weight: 800;
 }
 
 .step p {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     color: var(--color-text-muted);
-    line-height: 1.7;
+    line-height: 1.65;
 }
 
 .step-badge-group {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
 }
 
 .mini-tag {
@@ -532,20 +547,63 @@ body {
     }
 }
 
-/* Media Queries for Desktop Screen Sizes */
+/* Media Queries for Tablet Screen Sizes (640px to 991px) */
+@media (min-width: 640px) and (max-width: 991px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    #scrolly figure.sticky,
+    #scrolly-style figure.sticky,
+    #scrolly-pos figure.sticky,
+    #scrolly-emotions figure.sticky,
+    #scrolly-map figure.sticky,
+    #scrolly-beeswarm figure.sticky,
+    #scrolly-sankey figure.sticky {
+        height: 48vh;
+        max-height: 460px;
+    }
+
+    .step {
+        padding: 2rem 1.75rem;
+        max-width: 520px;
+        margin: 32vh auto 32vh auto;
+    }
+
+    .filter-container {
+        padding: 0.6rem 1rem;
+        gap: 0.5rem;
+    }
+}
+
+/* Media Queries for Desktop Screen Sizes (>= 992px) */
 @media (min-width: 992px) {
-    #scrolly {
+    #scrolly,
+    #scrolly-style,
+    #scrolly-pos,
+    #scrolly-emotions,
+    #scrolly-map,
+    #scrolly-beeswarm,
+    #scrolly-sankey {
         display: flex;
         flex-direction: row-reverse; /* sticky visualization on right, steps scroll on left */
         justify-content: space-between;
     }
 
-    #scrolly figure.sticky {
+    #scrolly figure.sticky,
+    #scrolly-style figure.sticky,
+    #scrolly-pos figure.sticky,
+    #scrolly-emotions figure.sticky,
+    #scrolly-map figure.sticky,
+    #scrolly-beeswarm figure.sticky,
+    #scrolly-sankey figure.sticky {
         width: 55%; /* Visualization space gets 55% of horizontal space */
         height: 100vh; /* Fills screen height fully */
+        max-height: none;
         top: 0;
         border-bottom: none;
         border-left: 1px solid var(--color-border);
+        box-shadow: none;
     }
 
     .viz-wrapper {
@@ -560,6 +618,7 @@ body {
     .step {
         margin: 55vh auto 55vh auto;
         max-width: 460px;
+        padding: 2.5rem;
     }
 
     .step:first-child {
@@ -882,44 +941,11 @@ body {
     margin: 0 !important;
 }
 
-/* Media Queries for Desktop Screen Sizes (Section 2 Overrides) */
-@media (min-width: 992px) {
-    #scrolly-style {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
-
-    #scrolly-style figure.sticky {
-        width: 55%;
-        height: 100vh;
-        top: 0;
-        border-bottom: none;
-        border-left: 1px solid var(--color-border);
-    }
-}
-
 /* --- Section 3 Container Layout --- */
 #scrolly-pos {
     position: relative;
     background-color: var(--color-bg);
     border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-}
-
-#scrolly-pos figure.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55vh;
-    margin: 0;
-    background-color: var(--color-bg-alt);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -1050,44 +1076,11 @@ body {
     margin: 0 !important;
 }
 
-/* Desktop layout override for Section 3 */
-@media (min-width: 992px) {
-    #scrolly-pos {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
-
-    #scrolly-pos figure.sticky {
-        width: 55%;
-        height: 100vh;
-        top: 0;
-        border-bottom: none;
-        border-left: 1px solid var(--color-border);
-    }
-}
-
 /* --- Section 5 Container Layout --- */
 #scrolly-emotions {
     position: relative;
     background-color: var(--color-bg);
     border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-}
-
-#scrolly-emotions figure.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55vh;
-    margin: 0;
-    background-color: var(--color-bg-alt);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -1165,44 +1158,11 @@ body {
     width: 100%;
 }
 
-/* Desktop layout override for Section 5 */
-@media (min-width: 992px) {
-    #scrolly-emotions {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
-
-    #scrolly-emotions figure.sticky {
-        width: 55%;
-        height: 100vh;
-        top: 0;
-        border-bottom: none;
-        border-left: 1px solid var(--color-border);
-    }
-}
-
 /* --- Section 6 Container Layout --- */
 #scrolly-map {
     position: relative;
     background-color: var(--color-bg);
     border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-}
-
-#scrolly-map figure.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55vh;
-    margin: 0;
-    background-color: var(--color-bg-alt);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -1315,23 +1275,6 @@ body {
     display: none;
 }
 
-/* Desktop layout override for Section 6 */
-@media (min-width: 992px) {
-    #scrolly-map {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
-
-    #scrolly-map figure.sticky {
-        width: 55%;
-        height: 100vh;
-        top: 0;
-        border-bottom: none;
-        border-left: 1px solid var(--color-border);
-    }
-}
-
 /* =======================================
    SECTION 7: LA BARRERA DE CRISTAL (Beeswarm)
    ======================================= */
@@ -1343,27 +1286,11 @@ body {
     border-bottom: 1px solid var(--color-border);
 }
 
-#scrolly-beeswarm figure.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70vh;
-    margin: 0;
-    background-color: var(--color-bg-alt);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid var(--color-border);
-}
-
 #d3-canvas-beeswarm {
     flex-grow: 1;
     width: 100%;
     height: 100%;
-    min-height: 400px;
+    min-height: 250px;
     position: relative;
     overflow: hidden;
 }
@@ -1372,8 +1299,8 @@ body {
 .beeswarm-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    padding: 0.5rem 1rem;
+    gap: 0.4rem 0.8rem;
+    padding: 0.4rem 0.8rem;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-bg);
     flex-shrink: 0;
@@ -1383,7 +1310,7 @@ body {
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
-    padding: 0.25rem 0.65rem;
+    padding: 0.2rem 0.55rem;
     border-radius: 4px;
     color: #555;
 }
@@ -1504,23 +1431,6 @@ body {
     word-break: break-word;
 }
 
-/* Desktop layout override for Section 7 */
-@media (min-width: 992px) {
-    #scrolly-beeswarm {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
-
-    #scrolly-beeswarm figure.sticky {
-        width: 55%;
-        height: 100vh;
-        top: 0;
-        border-bottom: none;
-        border-left: 1px solid var(--color-border);
-    }
-}
-
 /* --- Refinamientos de Tarjetas Beeswarm --- */
 #storytelling-insights-beeswarm {
     margin-top: 1.5rem;
@@ -1557,36 +1467,20 @@ body {
     border-bottom: 1px solid var(--color-border);
 }
 
-#scrolly-sankey figure.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70vh;
-    margin: 0;
-    background-color: var(--color-bg-alt);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid var(--color-border);
-}
-
 #d3-canvas-sankey {
     flex-grow: 1;
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 250px;
 }
 
 .sankey-controls {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-bg);
     width: 100%;
@@ -1601,7 +1495,7 @@ body {
     background-color: transparent;
     border: 1px solid var(--color-border);
     border-radius: 20px;
-    padding: 0.35rem 1rem;
+    padding: 0.35rem 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -1659,18 +1553,165 @@ body {
     width: 100%;
 }
 
-@media (min-width: 992px) {
-    #scrolly-sankey {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
+/* =======================================
+   RESPONSIVE MOBILE REFINEMENTS (< 640px)
+   ======================================= */
+@media (max-width: 639px) {
+    body {
+        font-size: 1rem;
+        line-height: 1.65;
     }
 
-    #scrolly-sankey figure.sticky {
-        width: 55%;
-        height: 100vh;
-        top: 0;
-        border-bottom: none;
-        border-left: 1px solid var(--color-border);
+    .container {
+        padding: 0 1rem;
+    }
+
+    .hero {
+        padding: 3rem 1rem 2rem;
+        min-height: 80vh;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 9vw, 3rem);
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 4.2vw, 1.25rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-countries {
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .country-tag {
+        font-size: 0.72rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    .intro-section {
+        padding: 3.5rem 0;
+    }
+
+    .lead-text {
+        font-size: 1.15rem;
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+    }
+
+    .body-text {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        margin-bottom: 1.2rem;
+    }
+
+    .section-divider {
+        padding: 3.5rem 0 2rem 0;
+    }
+
+    .section-title {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+        margin-bottom: 1rem;
+    }
+
+    .section-intro-text {
+        font-size: 1rem;
+        line-height: 1.55;
+    }
+
+    .section-divider-line {
+        margin: 1.5rem auto 0 auto;
+    }
+
+    .step {
+        padding: 1.35rem 1.1rem;
+        border-radius: 10px;
+        margin: 22vh auto 22vh auto;
+    }
+
+    .step h3 {
+        font-size: 1.35rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .step p {
+        font-size: 0.94rem;
+        line-height: 1.55;
+    }
+
+    .insight-card {
+        padding: 1rem;
+    }
+
+    .insight-text {
+        font-size: 0.88rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .insight-meta {
+        font-size: 0.7rem;
+    }
+
+    .filter-container {
+        padding: 0.35rem 0.4rem;
+        gap: 0.25rem 0.35rem;
+    }
+
+    .filter-label {
+        width: 100%;
+        text-align: center;
+        margin: 0 0 0.15rem 0;
+        font-size: 0.68rem;
+    }
+
+    .filter-separator {
+        display: none;
+    }
+
+    .filter-btn,
+    .pos-filter-btn,
+    .emotion-btn,
+    .map-country-btn,
+    .sankey-country-btn {
+        font-size: 0.72rem;
+        padding: 0.28rem 0.65rem;
+        min-height: 32px;
+    }
+
+    .action-btn {
+        font-size: 0.72rem;
+        padding: 0.28rem 0.65rem;
+        min-height: 32px;
+    }
+
+    .tooltip {
+        max-width: min(270px, 85vw);
+        padding: 0.5rem 0.75rem;
+        font-size: 0.78rem;
+    }
+
+    .tooltip-title {
+        font-size: 0.82rem;
+    }
+
+    .pos-legend {
+        gap: 0.35rem 0.7rem;
+        padding: 0.35rem 0.4rem;
+    }
+
+    .legend-item {
+        font-size: 0.68rem;
+    }
+
+    .beeswarm-legend {
+        gap: 0.3rem 0.6rem;
+        padding: 0.35rem 0.5rem;
+    }
+
+    .beeswarm-legend-item {
+        font-size: 0.68rem;
+        padding: 0.15rem 0.45rem;
     }
 }
