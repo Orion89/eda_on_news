@@ -1859,7 +1859,7 @@ function loadMapData() {
         d3.json("data/NER/world-110m.json"),
         d3.csv("data/NER/LOC/argentina_loc_ents_with_geoloc.csv"),
         d3.csv("data/NER/LOC/chile_loc_ents_with_geoloc.csv"),
-        d3.csv("data/NER/LOC/españa_loc_ents_with_geoloc.csv"),
+        d3.csv("data/NER/LOC/espana_loc_ents_with_geoloc.csv"),
         d3.csv("data/NER/LOC/mexico_loc_ents_with_geoloc.csv")
     ]).then(([worldMap, arCSV, clCSV, esCSV, mxCSV]) => {
         worldGeoData = worldMap;
@@ -1938,19 +1938,49 @@ function updateMapStorytellingHTML() {
     const containerAR = document.getElementById("map-insight-AR");
     const containerMX = document.getElementById("map-insight-MX");
 
-    if (containerCL && mapStorytellingData["CL"]) {
-        const d = mapStorytellingData["CL"];
-        containerCL.innerHTML = `<p>El hiper-centralismo informativo: En <strong>Chile</strong>, de todas las localidades mencionadas, solo <strong>${d.topCity}</strong> acapara el <strong>${d.percentage.toFixed(1)}%</strong> de la pauta. El interior del país es invisible para los principales medios.</p>`;
+    if (containerCL) {
+        containerCL.classList.add("border-cl");
+        containerCL.innerHTML = `
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-cl);">Patrón Territorial: Chile</span>
+            </div>
+            <p>
+                El centralismo metropolitano domina la pauta: <strong>Santiago</strong> y la <strong>Región Metropolitana</strong> acumulan más de <strong>12.580 menciones directas</strong>, superando con holgura a polos regionales como <strong>Valparaíso (6.380)</strong>, <strong>Coquimbo (5.289)</strong> y <strong>Antofagasta (5.046)</strong>. En el plano internacional, <strong>Estados Unidos (8.894)</strong> y <strong>Argentina (7.760)</strong> constituyen los principales focos del radar exterior chileno.
+            </p>
+            <div class="map-insight-meta">
+                Núcleo central: <strong>Santiago / RM</strong> (12.586 menciones) | Región líder: <strong>Valparaíso</strong> (6.380) | Foco exterior: <strong>EE. UU.</strong> (8.894)
+            </div>
+        `;
     }
-    if (containerAR && mapStorytellingData["AR"]) {
-        const d = mapStorytellingData["AR"];
-        containerAR.innerHTML = `<p>El hiper-centralismo informativo: En <strong>Argentina</strong>, de todas las localidades mencionadas, solo <strong>${d.topCity}</strong> acapara el <strong>${d.percentage.toFixed(1)}%</strong> de la pauta. El interior del país es invisible para los principales medios.</p>`;
+    if (containerAR) {
+        containerAR.classList.add("border-ar");
+        containerAR.innerHTML = `
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-ar);">Patrón Territorial: Argentina</span>
+            </div>
+            <p>
+                El eje <strong>Buenos Aires y el conurbano</strong> encabeza la cobertura nacional con más de <strong>20.900 menciones</strong>. No obstante, la vitalidad de las redacciones provinciales consolida un potente polo en el sur: <strong>Neuquén (12.797)</strong>, <strong>Bariloche (9.611)</strong> y <strong>Río Negro (7.443)</strong> superan a centros históricos como <strong>Córdoba (9.182)</strong> y <strong>Mendoza (5.901)</strong>. En el exterior, <strong>EE. UU. (15.708)</strong> y <strong>España (10.606)</strong> lideran la atención.
+            </p>
+            <div class="map-insight-meta">
+                Polo metropolitano: <strong>Buenos Aires</strong> (14.701 menciones) | Polo patagónico: <strong>Neuquén</strong> (12.797) | Foco exterior: <strong>EE. UU.</strong> (15.708)
+            </div>
+        `;
     }
-    if (containerMX && mapStorytellingData["MX"] && mapStorytellingData["ES"]) {
-        const dMX = mapStorytellingData["MX"];
-        const dES = mapStorytellingData["ES"];
+    if (containerMX) {
+        containerMX.classList.add("border-mx");
         containerMX.innerHTML = `
-            <p>El hiper-centralismo informativo: En <strong>México</strong>, la atención en <strong>${dMX.topCity}</strong> representa el <strong>${dMX.percentage.toFixed(1)}%</strong> de la pauta. En <strong>España</strong>, <strong>${dES.topCity}</strong> acapara el <strong>${dES.percentage.toFixed(1)}%</strong>. En ambos casos, las capitales concentran la cobertura noticiosa, atenuando el resto de las regiones.</p>
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-mx);">Comparativa: México y España</span>
+            </div>
+            <p style="margin-bottom: 0.75rem !important;">
+                <strong>México:</strong> La <strong>Ciudad de México y el Edomex</strong> reúnen más de <strong>34.700 menciones</strong>, pero el fenómeno más revelador es geopolítico: <strong>Estados Unidos</strong> es la entidad foránea más citada (<strong>21.277 menciones</strong>), superando individualmente a estados como <strong>Puebla (17.251)</strong>, <strong>Veracruz (13.830)</strong> y <strong>Guanajuato (8.415)</strong>.
+            </p>
+            <p>
+                <strong>España:</strong> La cobertura se organiza bajo un <strong>bicentrismo Madrid (59.165)–Barcelona (24.352)</strong>, escoltado por <strong>Sevilla (19.149)</strong> y <strong>Málaga (14.416)</strong>. A su vez, <strong>Europa (32.464 menciones)</strong> se erige como el segundo referente geográfico más relevante de su prensa.
+            </p>
+            <div class="map-insight-meta">
+                México: <strong>CDMX / Edomex</strong> vs. <strong>EE. UU.</strong> (21.277) | España: <strong>Madrid</strong> (59.165) vs. <strong>Europa</strong> (32.464)
+            </div>
         `;
     }
 }
