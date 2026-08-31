@@ -2,6 +2,7 @@
 # Playwright
 .playwright
 node_modules/
+/notebooks
 /test-results/
 /playwright-report/
 /blob-report/
