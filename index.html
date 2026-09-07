@@ -420,44 +420,57 @@
         <article class="steps-container">
             <div class="step" data-step="1">
                 <span class="step-num">07.1</span>
-                <h3>El Panorama Global</h3>
+                <h3>La Barrera Invisible del Lenguaje</h3>
                 <p>
-                    Cada círculo representa un medio de comunicación. Su posición en el eje vertical indica cuántos años de escolaridad formal exige para ser comprendido. El color identifica el país.
+                    La información pública es un pilar democrático solo si la ciudadanía puede comprenderla. Cuando las redacciones escriben en un formato elitista, denso o burocrático, construyen una <strong>barrera de cristal</strong>: una exclusión silenciosa que separa a millones de personas del acontecer noticioso.
                 </p>
                 <p>
-                    Las tres zonas de fondo revelan el nivel educativo implícito: básica, media y universitaria. ¿Dónde se concentra la prensa de tu país?
+                    En este gráfico de enjambre (<em>Beeswarm Plot</em>), cada esfera representa una redacción periodística. Su altura en el eje vertical señala los <strong>años de escolaridad formal</strong> requeridos para descifrar sus textos, clasificados en tres zonas de dificultad: <strong>Básica</strong> (6–9 años), <strong>Media</strong> (9–12 años) y <strong>Universitaria</strong> (12+ años).
                 </p>
             </div>
 
             <div class="step" data-step="2">
                 <span class="step-num">07.2</span>
-                <h3>Chile vs. Argentina</h3>
+                <h3>Chile y Argentina: La Distancia del Discurso</h3>
                 <p>
-                    Comparamos dos países vecinos. La prensa chilena y argentina difieren en sus exigencias de legibilidad. Observa la distribución de sus medios en el eje educativo.
+                    Al contrastar a los dos vecinos del Cono Sur, el enjambre expone dos filosofías editoriales marcadamente diferentes ante su audiencia.
                 </p>
                 <div id="beeswarm-insight-CL-AR" class="map-insight-text"><!-- JS --></div>
+                <p>
+                    Mientras en <strong>Chile</strong> el <strong>72% de los medios</strong> se atrinchera en la zona universitaria —exigiendo competencias muy por encima de la media de la población—, en <strong>Argentina</strong> el <strong>72% de las redacciones</strong> se ubica en el rango de educación media, con medios populares masivos que logran tender puentes hacia la educación básica.
+                </p>
             </div>
 
             <div class="step" data-step="3">
                 <span class="step-num">07.3</span>
-                <h3>España vs. México</h3>
+                <h3>España vs. México: Claridad vs. Exclusión</h3>
                 <p>
-                    El español ibérico frente al mexicano. ¿Existe diferencia en la complejidad lingüística entre ambas prensas?
+                    El contraste transatlántico revela el abismo educativo más pronunciado de todo el corpus informativo analizado.
                 </p>
                 <div id="beeswarm-insight-ES-MX" class="map-insight-text"><!-- JS --></div>
+                <p>
+                    <strong>España</strong> ofrece la prensa digital más calibrada y directa (mediana de 10.8 años). En el extremo opuesto, <strong>México</strong> presenta la mayor brecha de exclusión: con una escolaridad nacional promedio de apenas 9.7 años, el <strong>76% de sus medios exige educación universitaria</strong> (¡0% en básica!), distanciando la prensa de las mayorías populares.
+                </p>
             </div>
 
             <div class="step" data-step="4">
                 <span class="step-num">07.4</span>
-                <h3>La Zona Universitaria</h3>
+                <h3>La Zona Universitaria y el Índice INFLESZ</h3>
                 <p>
-                    Los medios en la zona roja exigen más de 12 años de escolaridad formal. Pasa el cursor sobre ellos para leer textos reales de sus noticias y experimentar la barrera en primera persona.
+                    Los medios en la zona superior exigen más de 12 años de estudio (e incluso hasta 20 años en publicaciones con prosa administrativa densa). <strong>Pasa el cursor sobre las esferas</strong> para inspeccionar fragmentos reales de sus notas y palpar la complejidad sintáctica en primera persona.
                 </p>
                 <div class="inflesz-explainer">
                     <p class="inflesz-title">¿Qué es el puntaje INFLESZ?</p>
-                    <p>Índice de legibilidad adaptado al español, derivado de la fórmula de Flesch:</p>
-                    <code class="inflesz-formula">INFLESZ = 206.835 − 60 × (sílabas/palabras) − 1.02 × (palabras/frases)</code>
-                    <p>100 = muy fácil · 0 = muy difícil · &lt;40 = nivel especializado</p>
+                    <p>Es la escala estándar de legibilidad para el español, adaptada por Inés Barrio Cantalejo a partir de la ecuación de Flesch-Szigriszt:</p>
+                    <code class="inflesz-formula">INFLESZ = 206.835 − 62.3 × (Sílabas / Palabras) − (Palabras / Frases)</code>
+                    <p>
+                        <strong>Escala de interpretación:</strong><br>
+                        • <strong>&gt; 80</strong>: Muy fácil (Educación Básica, 4–6 años)<br>
+                        • <strong>65 – 80</strong>: Fácil (Primaria completa, 6–8 años)<br>
+                        • <strong>55 – 65</strong>: Normal (Educación Secundaria / Media, 8–12 años)<br>
+                        • <strong>40 – 55</strong>: Algo difícil (Bachillerato / Universidad inicial, 12–16 años)<br>
+                        • <strong>&lt; 40</strong>: Muy difícil (Nivel universitario avanzado / Postgrado, 16–20 años)
+                    </p>
                 </div>
             </div>
         </article>

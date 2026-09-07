@@ -1484,6 +1484,12 @@ body {
     width: 100%;
 }
 
+@media (max-width: 991px) {
+    #storytelling-insights-beeswarm {
+        display: none;
+    }
+}
+
 .insight-stat {
     font-family: var(--font-sans);
     font-size: 1.7rem;

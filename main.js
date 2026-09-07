@@ -2588,7 +2588,8 @@ function loadBeeswarmData() {
  * Generate dynamic storytelling text for each country pair.
  */
 function generateBeeswarmStorytelling() {
-    const avgEducation = { "CL": 9.5, "AR": 9.5, "ES": 9.6, "MX": 9.8 }; // Approx national averages in years
+    // Official adult average formal schooling (CEPAL / OCDE / INEGI / CASEN / INDEC)
+    const avgEducation = { "CL": 11.0, "AR": 10.5, "ES": 10.8, "MX": 9.7 };
 
     ["CL", "AR", "ES", "MX"].forEach(code => {
         const med = beeswarmMedianByCountry[code];
@@ -2596,11 +2597,13 @@ function generateBeeswarmStorytelling() {
         const countryFull = countryNames[code];
         const avg = avgEducation[code];
         const diff = (med - avg).toFixed(1);
+        const sign = med >= avg ? "+" : "";
         beeswarmStorytellingData[code] = {
             median: med.toFixed(1),
             countryFull,
-            diff,
-            text: `Noticias para pocos: La escolaridad promedio en ${countryFull} es de ~${avg} años, pero la prensa exige <strong>${med.toFixed(1)} años</strong> de educación formal para ser comprendida. Eso es <strong>${diff} años más</strong> de los que tiene la mayoría de la población. Una barrera invisible de lenguaje separa la información de quienes más la necesitan.`
+            avg: avg.toFixed(1),
+            diff: `${sign}${diff}`,
+            text: `Noticias para pocos: Mientras la escolaridad promedio en ${countryFull} es de ~${avg.toFixed(1)} años, la prensa exige una mediana de <strong>${med.toFixed(1)} años</strong> de educación formal para ser comprendida. Existe una barrera invisible de lenguaje que impone una brecha de <strong>${sign}${diff} años</strong> frente a la ciudadanía común.`
         };
     });
 
@@ -2609,9 +2612,23 @@ function generateBeeswarmStorytelling() {
     if (elCL && beeswarmStorytellingData["CL"] && beeswarmStorytellingData["AR"]) {
         const cl = beeswarmStorytellingData["CL"];
         const ar = beeswarmStorytellingData["AR"];
+        elCL.classList.add("border-cl");
         elCL.innerHTML = `
-            <p><strong>Chile</strong>: ${cl.text}</p>
-            <p style="margin-top:0.8rem"><strong>Argentina</strong>: ${ar.text}</p>
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-cl);">Patrón: Chile vs. Argentina</span>
+            </div>
+            <p>
+                <strong>Chile (${cl.median} años de mediana):</strong> ${cl.text}
+            </p>
+            <div class="map-insight-meta">
+                Brecha formativa: <strong>${cl.diff} años</strong> | <strong>72%</strong> de redacciones en Zona Universitaria | Más complejo: <em>Las Noticias de Malleco</em> (16.1 años)
+            </div>
+            <p style="margin-top: 1rem !important;">
+                <strong>Argentina (${ar.median} años de mediana):</strong> ${ar.text}
+            </p>
+            <div class="map-insight-meta">
+                Brecha formativa: <strong>${ar.diff} años</strong> | <strong>72%</strong> de redacciones en Zona Media | Más accesible: <em>Clarín</em> (8.5 años)
+            </div>
         `;
     }
 
@@ -2620,9 +2637,23 @@ function generateBeeswarmStorytelling() {
     if (elES && beeswarmStorytellingData["ES"] && beeswarmStorytellingData["MX"]) {
         const es = beeswarmStorytellingData["ES"];
         const mx = beeswarmStorytellingData["MX"];
+        elES.classList.add("border-mx");
         elES.innerHTML = `
-            <p><strong>España</strong>: ${es.text}</p>
-            <p style="margin-top:0.8rem"><strong>México</strong>: ${mx.text}</p>
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-mx);">Patrón: México vs. España</span>
+            </div>
+            <p>
+                <strong>México (${mx.median} años de mediana):</strong> ${mx.text}
+            </p>
+            <div class="map-insight-meta">
+                Brecha formativa: <strong>${mx.diff} años</strong> | <strong>76%</strong> en Zona Universitaria (0% en Básica) | Caso extremo: <em>Al Calor Político</em> (19.9 años)
+            </div>
+            <p style="margin-top: 1rem !important;">
+                <strong>España (${es.median} años de mediana):</strong> ${es.text}
+            </p>
+            <div class="map-insight-meta">
+                Brecha formativa: <strong>${es.diff} años</strong> | <strong>68%</strong> de redacciones en Zona Media | Más accesible: <em>Huffington Post</em> (8.7 años)
+            </div>
         `;
     }
 
@@ -2636,7 +2667,7 @@ function generateBeeswarmStorytelling() {
             return `<div class="insight-card country-border-${code.toLowerCase()}">
                 <div class="insight-country" style="color:${color}">${d.countryFull}</div>
                 <div class="insight-stat">${d.median} años</div>
-                <div class="insight-label">de escolaridad exigidos (mediana)</div>
+                <div class="insight-label">escolaridad requerida (brecha: ${d.diff} años)</div>
             </div>`;
         }).join("");
         panel.innerHTML = `<div class="insights-grid">${cards}</div>`;
@@ -2810,13 +2841,14 @@ function renderBeeswarmPlot() {
 function handleBeeswarmMouseOver(event, d) {
     tooltip.transition().duration(100).style("opacity", 0.96);
     const isUniv = d.years_education >= 12;
-    const sampleHtml = isUniv && d.sample_text
-        ? `<div class="tooltip-sample-text">"${d.sample_text.substring(0, 260)}…"</div>`
+    const cleanText = (d.sample_text || "").replace(/[\ufffd\uFFFD]/g, "").trim();
+    const sampleHtml = isUniv && cleanText
+        ? `<div class="tooltip-sample-text">"${cleanText.substring(0, 260)}…"</div>`
         : "";
     tooltip.html(`
         <div class="tooltip-title">${d.media_name}</div>
         <div class="tooltip-row"><strong>País:</strong> ${countryNames[d.countryCode] || d.country}</div>
-        <div class="tooltip-row"><strong>Años requeridos:</strong> ${d.years_education.toFixed(1)}</div>
+        <div class="tooltip-row"><strong>Años requeridos:</strong> ${d.years_education.toFixed(1)} años</div>
         <div class="tooltip-row"><strong>INFLESZ:</strong> ${d.inflesz_score.toFixed(1)}</div>
         ${sampleHtml}
     `);
