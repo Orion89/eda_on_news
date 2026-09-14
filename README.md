@@ -253,6 +253,13 @@ El Eco de las Palabras
 
 ---
 
+### Capítulo 8: El Foco Temporal (Nostalgia vs. Futuro)
+- **Concepto:** Un análisis semántico y filosófico sobre el *Zeitgeist* (espíritu de la época): ¿hacia dónde mira el periodismo de cada país? Mide si la pauta informativa vive anclada en revisar el pasado o proyectando el futuro.
+- **Visualización en D3.js:** Medidores pendulares (*Gauge Charts*) dinámicos con agujas animadas que basculan entre Pasado (< 0, zona terracota) y Futuro (> 0, zona azul), combinados con una *Línea de Tiempo Divergente* con área sombreada y eje central de equilibrio (0.0).
+- **Interacción:** El scroll recorre hitos clave de la última década (2016–2026). Al entrar a cada hito, las agujas oscilan suavemente hacia el ratio de ese periodo histórico. Incluye selector interactivo por país, tarjeta de conclusiones anuales y exploración táctil/mouse al deslizar sobre el río temporal.
+
+---
+
 ## 📚 Metodología, Fuentes y Referencias
 
 ### Fuentes de Datos
@@ -263,6 +270,7 @@ Los datos originales fueron recolectados utilizando la biblioteca de código abi
 2. **Procesamiento de Lenguaje Natural:** El análisis sintáctico y la extracción de entidades se efectuaron mediante pipelines de `spaCy` y `NLTK`, filtrando *stopwords* y entidades espurias.
 3. **Modelado Afectivo:** La detección de emociones se realizó con modelos basados en arquitecturas Transformer fine-tuned para el idioma español (`pysentimiento`), aplicando remuestreos diarios y filtros de media móvil para aislar tendencias temporales.
 4. **Geolocalización:** Las entidades de ubicación (`LOC`) se normalizaron y geocodificaron utilizando la base de datos de OpenStreetMap mediante Nominatim con control de concurrencia y caché persistente.
+5. **Foco Temporal:** Cálculo del ratio temporal $\left(\frac{\text{futuro} - \text{pasado}}{\text{futuro} + \text{pasado}}\right)$ mediante conteo vectorizado de términos y flexiones temporales, contrastando periodos de crisis, reformas constitucionales, elecciones y conmemoraciones históricas.
 
 ### Referencias Bibliográficas
 - **Jurafsky, D., & Martin, J. H. (2024).** *Speech and Language Processing* (3rd ed. draft). Stanford University.

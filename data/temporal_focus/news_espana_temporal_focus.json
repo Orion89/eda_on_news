@@ -1,778 +1,874 @@
 [
   {
     "country": "Espana",
-    "date": "2016-07",
-    "score": 0.2625,
-    "past_mentions": 59,
-    "future_mentions": 101,
+    "date": "2016-06",
+    "score": 0.3699,
+    "past_mentions": 46,
+    "future_mentions": 100,
     "article_count": 52
   },
   {
     "country": "Espana",
+    "date": "2016-07",
+    "score": 0.2637,
+    "past_mentions": 67,
+    "future_mentions": 115,
+    "article_count": 57
+  },
+  {
+    "country": "Espana",
     "date": "2016-09",
-    "score": -0.0314,
-    "past_mentions": 115,
-    "future_mentions": 108,
-    "article_count": 75
-  },
-  {
-    "country": "Espana",
-    "date": "2016-10",
-    "score": 0.1939,
-    "past_mentions": 79,
-    "future_mentions": 117,
-    "article_count": 71
-  },
-  {
-    "country": "Espana",
-    "date": "2016-11",
-    "score": -0.0543,
-    "past_mentions": 97,
-    "future_mentions": 87,
-    "article_count": 61
-  },
-  {
-    "country": "Espana",
-    "date": "2016-12",
-    "score": 0.2381,
-    "past_mentions": 56,
-    "future_mentions": 91,
-    "article_count": 55
-  },
-  {
-    "country": "Espana",
-    "date": "2017-01",
-    "score": -0.0571,
-    "past_mentions": 74,
-    "future_mentions": 66,
-    "article_count": 57
-  },
-  {
-    "country": "Espana",
-    "date": "2017-03",
-    "score": 0.1128,
-    "past_mentions": 59,
-    "future_mentions": 74,
-    "article_count": 54
-  },
-  {
-    "country": "Espana",
-    "date": "2017-07",
-    "score": 0.0,
-    "past_mentions": 67,
-    "future_mentions": 67,
-    "article_count": 56
-  },
-  {
-    "country": "Espana",
-    "date": "2018-01",
-    "score": 0.0756,
-    "past_mentions": 55,
-    "future_mentions": 64,
-    "article_count": 56
-  },
-  {
-    "country": "Espana",
-    "date": "2018-03",
-    "score": 0.1667,
-    "past_mentions": 70,
-    "future_mentions": 98,
-    "article_count": 60
-  },
-  {
-    "country": "Espana",
-    "date": "2018-04",
-    "score": 0.1342,
-    "past_mentions": 100,
-    "future_mentions": 131,
-    "article_count": 71
-  },
-  {
-    "country": "Espana",
-    "date": "2018-05",
-    "score": 0.0983,
-    "past_mentions": 156,
-    "future_mentions": 190,
-    "article_count": 88
-  },
-  {
-    "country": "Espana",
-    "date": "2018-07",
-    "score": 0.024,
-    "past_mentions": 61,
-    "future_mentions": 64,
-    "article_count": 57
-  },
-  {
-    "country": "Espana",
-    "date": "2018-08",
-    "score": 0.3093,
-    "past_mentions": 67,
-    "future_mentions": 127,
-    "article_count": 53
-  },
-  {
-    "country": "Espana",
-    "date": "2018-10",
-    "score": -0.3077,
-    "past_mentions": 153,
-    "future_mentions": 81,
-    "article_count": 61
-  },
-  {
-    "country": "Espana",
-    "date": "2018-11",
-    "score": 0.1333,
-    "past_mentions": 65,
-    "future_mentions": 85,
-    "article_count": 56
-  },
-  {
-    "country": "Espana",
-    "date": "2018-12",
-    "score": -0.0421,
-    "past_mentions": 99,
-    "future_mentions": 91,
-    "article_count": 58
-  },
-  {
-    "country": "Espana",
-    "date": "2019-04",
-    "score": -0.0857,
-    "past_mentions": 95,
-    "future_mentions": 80,
-    "article_count": 51
-  },
-  {
-    "country": "Espana",
-    "date": "2019-06",
-    "score": 0.1959,
-    "past_mentions": 78,
-    "future_mentions": 116,
-    "article_count": 58
-  },
-  {
-    "country": "Espana",
-    "date": "2019-07",
-    "score": 0.0332,
-    "past_mentions": 131,
-    "future_mentions": 140,
-    "article_count": 63
-  },
-  {
-    "country": "Espana",
-    "date": "2019-08",
-    "score": -0.0681,
-    "past_mentions": 251,
-    "future_mentions": 219,
-    "article_count": 61
-  },
-  {
-    "country": "Espana",
-    "date": "2019-09",
-    "score": -0.056,
-    "past_mentions": 396,
-    "future_mentions": 354,
-    "article_count": 107
-  },
-  {
-    "country": "Espana",
-    "date": "2019-10",
-    "score": 0.1368,
-    "past_mentions": 123,
-    "future_mentions": 162,
-    "article_count": 69
-  },
-  {
-    "country": "Espana",
-    "date": "2019-11",
-    "score": -0.1129,
-    "past_mentions": 621,
-    "future_mentions": 495,
-    "article_count": 107
-  },
-  {
-    "country": "Espana",
-    "date": "2019-12",
-    "score": -0.2093,
-    "past_mentions": 1014,
-    "future_mentions": 663,
-    "article_count": 209
-  },
-  {
-    "country": "Espana",
-    "date": "2020-03",
-    "score": 0.1729,
-    "past_mentions": 110,
-    "future_mentions": 156,
-    "article_count": 66
-  },
-  {
-    "country": "Espana",
-    "date": "2020-04",
-    "score": -0.1206,
-    "past_mentions": 158,
-    "future_mentions": 124,
-    "article_count": 83
-  },
-  {
-    "country": "Espana",
-    "date": "2020-05",
-    "score": 0.0996,
-    "past_mentions": 104,
-    "future_mentions": 127,
-    "article_count": 55
-  },
-  {
-    "country": "Espana",
-    "date": "2020-06",
-    "score": 0.252,
-    "past_mentions": 92,
-    "future_mentions": 154,
-    "article_count": 54
-  },
-  {
-    "country": "Espana",
-    "date": "2020-07",
-    "score": -0.0088,
-    "past_mentions": 115,
-    "future_mentions": 113,
-    "article_count": 65
-  },
-  {
-    "country": "Espana",
-    "date": "2020-08",
-    "score": -0.0261,
-    "past_mentions": 118,
-    "future_mentions": 112,
-    "article_count": 68
-  },
-  {
-    "country": "Espana",
-    "date": "2020-09",
-    "score": 0.0361,
+    "score": -0.039,
     "past_mentions": 120,
-    "future_mentions": 129,
-    "article_count": 56
-  },
-  {
-    "country": "Espana",
-    "date": "2020-10",
-    "score": 0.1429,
-    "past_mentions": 93,
-    "future_mentions": 124,
-    "article_count": 96
-  },
-  {
-    "country": "Espana",
-    "date": "2021-02",
-    "score": -0.1595,
-    "past_mentions": 229,
-    "future_mentions": 166,
-    "article_count": 63
-  },
-  {
-    "country": "Espana",
-    "date": "2021-03",
-    "score": 0.3898,
-    "past_mentions": 90,
-    "future_mentions": 205,
-    "article_count": 66
-  },
-  {
-    "country": "Espana",
-    "date": "2021-04",
-    "score": 0.236,
-    "past_mentions": 123,
-    "future_mentions": 199,
-    "article_count": 81
-  },
-  {
-    "country": "Espana",
-    "date": "2021-05",
-    "score": 0.203,
-    "past_mentions": 108,
-    "future_mentions": 163,
-    "article_count": 62
-  },
-  {
-    "country": "Espana",
-    "date": "2021-06",
-    "score": 0.024,
-    "past_mentions": 183,
-    "future_mentions": 192,
-    "article_count": 83
-  },
-  {
-    "country": "Espana",
-    "date": "2021-07",
-    "score": 0.2542,
-    "past_mentions": 132,
-    "future_mentions": 222,
-    "article_count": 85
-  },
-  {
-    "country": "Espana",
-    "date": "2021-08",
-    "score": 0.3259,
-    "past_mentions": 121,
-    "future_mentions": 238,
+    "future_mentions": 111,
     "article_count": 79
   },
   {
     "country": "Espana",
-    "date": "2021-09",
-    "score": 0.1257,
-    "past_mentions": 167,
-    "future_mentions": 215,
-    "article_count": 105
+    "date": "2016-10",
+    "score": 0.1675,
+    "past_mentions": 87,
+    "future_mentions": 122,
+    "article_count": 75
   },
   {
     "country": "Espana",
-    "date": "2021-10",
-    "score": -0.0036,
-    "past_mentions": 141,
-    "future_mentions": 140,
+    "date": "2016-11",
+    "score": -0.0144,
+    "past_mentions": 106,
+    "future_mentions": 103,
+    "article_count": 66
+  },
+  {
+    "country": "Espana",
+    "date": "2016-12",
+    "score": 0.1975,
+    "past_mentions": 63,
+    "future_mentions": 94,
+    "article_count": 59
+  },
+  {
+    "country": "Espana",
+    "date": "2017-01",
+    "score": -0.0968,
+    "past_mentions": 85,
+    "future_mentions": 70,
+    "article_count": 58
+  },
+  {
+    "country": "Espana",
+    "date": "2017-02",
+    "score": 0.1007,
+    "past_mentions": 67,
+    "future_mentions": 82,
+    "article_count": 55
+  },
+  {
+    "country": "Espana",
+    "date": "2017-03",
+    "score": -0.0184,
+    "past_mentions": 83,
+    "future_mentions": 80,
+    "article_count": 59
+  },
+  {
+    "country": "Espana",
+    "date": "2017-07",
+    "score": 0.0483,
+    "past_mentions": 69,
+    "future_mentions": 76,
+    "article_count": 60
+  },
+  {
+    "country": "Espana",
+    "date": "2017-11",
+    "score": 0.2174,
+    "past_mentions": 54,
+    "future_mentions": 84,
+    "article_count": 51
+  },
+  {
+    "country": "Espana",
+    "date": "2018-01",
+    "score": 0.037,
+    "past_mentions": 65,
+    "future_mentions": 70,
+    "article_count": 62
+  },
+  {
+    "country": "Espana",
+    "date": "2018-03",
+    "score": 0.0806,
+    "past_mentions": 97,
+    "future_mentions": 114,
+    "article_count": 68
+  },
+  {
+    "country": "Espana",
+    "date": "2018-04",
+    "score": 0.104,
+    "past_mentions": 112,
+    "future_mentions": 138,
+    "article_count": 78
+  },
+  {
+    "country": "Espana",
+    "date": "2018-05",
+    "score": 0.1186,
+    "past_mentions": 171,
+    "future_mentions": 217,
+    "article_count": 96
+  },
+  {
+    "country": "Espana",
+    "date": "2018-06",
+    "score": 0.102,
+    "past_mentions": 66,
+    "future_mentions": 81,
+    "article_count": 52
+  },
+  {
+    "country": "Espana",
+    "date": "2018-07",
+    "score": 0.037,
+    "past_mentions": 78,
+    "future_mentions": 84,
+    "article_count": 69
+  },
+  {
+    "country": "Espana",
+    "date": "2018-08",
+    "score": 0.2344,
+    "past_mentions": 80,
+    "future_mentions": 129,
+    "article_count": 57
+  },
+  {
+    "country": "Espana",
+    "date": "2018-10",
+    "score": -0.3125,
+    "past_mentions": 168,
+    "future_mentions": 88,
+    "article_count": 66
+  },
+  {
+    "country": "Espana",
+    "date": "2018-11",
+    "score": 0.1375,
+    "past_mentions": 69,
+    "future_mentions": 91,
+    "article_count": 60
+  },
+  {
+    "country": "Espana",
+    "date": "2018-12",
+    "score": -0.0374,
+    "past_mentions": 111,
+    "future_mentions": 103,
+    "article_count": 69
+  },
+  {
+    "country": "Espana",
+    "date": "2019-01",
+    "score": -0.2994,
+    "past_mentions": 102,
+    "future_mentions": 55,
+    "article_count": 64
+  },
+  {
+    "country": "Espana",
+    "date": "2019-04",
+    "score": -0.1232,
+    "past_mentions": 114,
+    "future_mentions": 89,
+    "article_count": 58
+  },
+  {
+    "country": "Espana",
+    "date": "2019-05",
+    "score": 0.1077,
+    "past_mentions": 116,
+    "future_mentions": 144,
+    "article_count": 53
+  },
+  {
+    "country": "Espana",
+    "date": "2019-06",
+    "score": 0.1962,
+    "past_mentions": 84,
+    "future_mentions": 125,
+    "article_count": 65
+  },
+  {
+    "country": "Espana",
+    "date": "2019-07",
+    "score": -0.0097,
+    "past_mentions": 156,
+    "future_mentions": 153,
+    "article_count": 70
+  },
+  {
+    "country": "Espana",
+    "date": "2019-08",
+    "score": -0.1379,
+    "past_mentions": 363,
+    "future_mentions": 275,
+    "article_count": 70
+  },
+  {
+    "country": "Espana",
+    "date": "2019-09",
+    "score": -0.0784,
+    "past_mentions": 619,
+    "future_mentions": 529,
+    "article_count": 135
+  },
+  {
+    "country": "Espana",
+    "date": "2019-10",
+    "score": 0.1302,
+    "past_mentions": 137,
+    "future_mentions": 178,
     "article_count": 76
   },
   {
     "country": "Espana",
-    "date": "2021-11",
-    "score": 0.1456,
-    "past_mentions": 132,
-    "future_mentions": 177,
+    "date": "2019-11",
+    "score": -0.125,
+    "past_mentions": 783,
+    "future_mentions": 609,
+    "article_count": 122
+  },
+  {
+    "country": "Espana",
+    "date": "2019-12",
+    "score": -0.2089,
+    "past_mentions": 1363,
+    "future_mentions": 892,
+    "article_count": 246
+  },
+  {
+    "country": "Espana",
+    "date": "2020-01",
+    "score": -0.243,
+    "past_mentions": 133,
+    "future_mentions": 81,
+    "article_count": 55
+  },
+  {
+    "country": "Espana",
+    "date": "2020-03",
+    "score": 0.183,
+    "past_mentions": 163,
+    "future_mentions": 236,
+    "article_count": 108
+  },
+  {
+    "country": "Espana",
+    "date": "2020-04",
+    "score": 0.0,
+    "past_mentions": 188,
+    "future_mentions": 188,
+    "article_count": 103
+  },
+  {
+    "country": "Espana",
+    "date": "2020-05",
+    "score": 0.1216,
+    "past_mentions": 112,
+    "future_mentions": 143,
+    "article_count": 63
+  },
+  {
+    "country": "Espana",
+    "date": "2020-06",
+    "score": 0.3782,
+    "past_mentions": 111,
+    "future_mentions": 246,
+    "article_count": 70
+  },
+  {
+    "country": "Espana",
+    "date": "2020-07",
+    "score": -0.0084,
+    "past_mentions": 120,
+    "future_mentions": 118,
+    "article_count": 70
+  },
+  {
+    "country": "Espana",
+    "date": "2020-08",
+    "score": -0.1511,
+    "past_mentions": 160,
+    "future_mentions": 118,
+    "article_count": 92
+  },
+  {
+    "country": "Espana",
+    "date": "2020-09",
+    "score": 0.1166,
+    "past_mentions": 125,
+    "future_mentions": 158,
+    "article_count": 68
+  },
+  {
+    "country": "Espana",
+    "date": "2020-10",
+    "score": 0.0763,
+    "past_mentions": 109,
+    "future_mentions": 127,
+    "article_count": 109
+  },
+  {
+    "country": "Espana",
+    "date": "2020-11",
+    "score": -0.2159,
+    "past_mentions": 138,
+    "future_mentions": 89,
+    "article_count": 83
+  },
+  {
+    "country": "Espana",
+    "date": "2020-12",
+    "score": 0.1386,
+    "past_mentions": 115,
+    "future_mentions": 152,
+    "article_count": 60
+  },
+  {
+    "country": "Espana",
+    "date": "2021-01",
+    "score": 0.1442,
+    "past_mentions": 92,
+    "future_mentions": 123,
+    "article_count": 55
+  },
+  {
+    "country": "Espana",
+    "date": "2021-02",
+    "score": -0.1468,
+    "past_mentions": 289,
+    "future_mentions": 215,
+    "article_count": 121
+  },
+  {
+    "country": "Espana",
+    "date": "2021-03",
+    "score": 0.4409,
+    "past_mentions": 104,
+    "future_mentions": 268,
     "article_count": 81
   },
   {
     "country": "Espana",
-    "date": "2021-12",
-    "score": 0.099,
-    "past_mentions": 182,
-    "future_mentions": 222,
+    "date": "2021-04",
+    "score": 0.241,
+    "past_mentions": 126,
+    "future_mentions": 206,
     "article_count": 90
   },
   {
     "country": "Espana",
-    "date": "2022-01",
-    "score": 0.1839,
-    "past_mentions": 162,
-    "future_mentions": 235,
-    "article_count": 84
-  },
-  {
-    "country": "Espana",
-    "date": "2022-02",
-    "score": 0.2764,
-    "past_mentions": 127,
-    "future_mentions": 224,
-    "article_count": 77
-  },
-  {
-    "country": "Espana",
-    "date": "2022-03",
-    "score": 0.3355,
-    "past_mentions": 100,
+    "date": "2021-05",
+    "score": 0.2294,
+    "past_mentions": 126,
     "future_mentions": 201,
-    "article_count": 81
+    "article_count": 73
   },
   {
     "country": "Espana",
-    "date": "2022-04",
-    "score": 0.1056,
-    "past_mentions": 127,
-    "future_mentions": 157,
-    "article_count": 81
-  },
-  {
-    "country": "Espana",
-    "date": "2022-05",
-    "score": 0.2637,
-    "past_mentions": 201,
-    "future_mentions": 345,
+    "date": "2021-06",
+    "score": 0.0743,
+    "past_mentions": 193,
+    "future_mentions": 224,
     "article_count": 91
   },
   {
     "country": "Espana",
-    "date": "2022-06",
-    "score": 0.2967,
-    "past_mentions": 192,
-    "future_mentions": 354,
-    "article_count": 123
+    "date": "2021-07",
+    "score": 0.2049,
+    "past_mentions": 161,
+    "future_mentions": 244,
+    "article_count": 96
   },
   {
     "country": "Espana",
-    "date": "2022-07",
-    "score": -0.1256,
-    "past_mentions": 381,
-    "future_mentions": 296,
-    "article_count": 128
+    "date": "2021-08",
+    "score": 0.3147,
+    "past_mentions": 147,
+    "future_mentions": 282,
+    "article_count": 91
   },
   {
     "country": "Espana",
-    "date": "2022-08",
-    "score": -0.0233,
-    "past_mentions": 176,
-    "future_mentions": 168,
-    "article_count": 85
-  },
-  {
-    "country": "Espana",
-    "date": "2022-09",
-    "score": -0.0413,
-    "past_mentions": 290,
-    "future_mentions": 267,
-    "article_count": 127
-  },
-  {
-    "country": "Espana",
-    "date": "2022-10",
-    "score": -0.0064,
-    "past_mentions": 395,
-    "future_mentions": 390,
-    "article_count": 164
-  },
-  {
-    "country": "Espana",
-    "date": "2022-11",
-    "score": -0.0514,
-    "past_mentions": 358,
-    "future_mentions": 323,
+    "date": "2021-09",
+    "score": 0.1791,
+    "past_mentions": 181,
+    "future_mentions": 260,
     "article_count": 146
   },
   {
     "country": "Espana",
-    "date": "2022-12",
-    "score": -0.2139,
-    "past_mentions": 383,
-    "future_mentions": 248,
-    "article_count": 150
+    "date": "2021-10",
+    "score": 0.0178,
+    "past_mentions": 166,
+    "future_mentions": 172,
+    "article_count": 84
   },
   {
     "country": "Espana",
-    "date": "2023-01",
-    "score": -0.0513,
+    "date": "2021-11",
+    "score": 0.1378,
+    "past_mentions": 147,
+    "future_mentions": 194,
+    "article_count": 88
+  },
+  {
+    "country": "Espana",
+    "date": "2021-12",
+    "score": -0.0361,
+    "past_mentions": 287,
+    "future_mentions": 267,
+    "article_count": 128
+  },
+  {
+    "country": "Espana",
+    "date": "2022-01",
+    "score": 0.1388,
+    "past_mentions": 183,
+    "future_mentions": 242,
+    "article_count": 96
+  },
+  {
+    "country": "Espana",
+    "date": "2022-02",
+    "score": 0.3091,
+    "past_mentions": 133,
+    "future_mentions": 252,
+    "article_count": 83
+  },
+  {
+    "country": "Espana",
+    "date": "2022-03",
+    "score": 0.3411,
+    "past_mentions": 113,
+    "future_mentions": 230,
+    "article_count": 90
+  },
+  {
+    "country": "Espana",
+    "date": "2022-04",
+    "score": 0.0733,
+    "past_mentions": 139,
+    "future_mentions": 161,
+    "article_count": 84
+  },
+  {
+    "country": "Espana",
+    "date": "2022-05",
+    "score": 0.2667,
+    "past_mentions": 231,
+    "future_mentions": 399,
+    "article_count": 106
+  },
+  {
+    "country": "Espana",
+    "date": "2022-06",
+    "score": 0.2955,
+    "past_mentions": 211,
+    "future_mentions": 388,
+    "article_count": 134
+  },
+  {
+    "country": "Espana",
+    "date": "2022-07",
+    "score": -0.0868,
+    "past_mentions": 413,
+    "future_mentions": 347,
+    "article_count": 151
+  },
+  {
+    "country": "Espana",
+    "date": "2022-08",
+    "score": -0.0082,
+    "past_mentions": 185,
+    "future_mentions": 182,
+    "article_count": 89
+  },
+  {
+    "country": "Espana",
+    "date": "2022-09",
+    "score": 0.0222,
     "past_mentions": 441,
-    "future_mentions": 398,
+    "future_mentions": 461,
+    "article_count": 179
+  },
+  {
+    "country": "Espana",
+    "date": "2022-10",
+    "score": -0.0571,
+    "past_mentions": 491,
+    "future_mentions": 438,
+    "article_count": 184
+  },
+  {
+    "country": "Espana",
+    "date": "2022-11",
+    "score": -0.076,
+    "past_mentions": 474,
+    "future_mentions": 407,
+    "article_count": 185
+  },
+  {
+    "country": "Espana",
+    "date": "2022-12",
+    "score": -0.2045,
+    "past_mentions": 483,
+    "future_mentions": 319,
     "article_count": 182
   },
   {
     "country": "Espana",
+    "date": "2023-01",
+    "score": -0.0464,
+    "past_mentions": 474,
+    "future_mentions": 432,
+    "article_count": 198
+  },
+  {
+    "country": "Espana",
     "date": "2023-02",
-    "score": 0.0673,
-    "past_mentions": 416,
-    "future_mentions": 476,
-    "article_count": 193
+    "score": 0.1146,
+    "past_mentions": 448,
+    "future_mentions": 564,
+    "article_count": 218
   },
   {
     "country": "Espana",
     "date": "2023-03",
-    "score": -0.0179,
-    "past_mentions": 624,
-    "future_mentions": 602,
-    "article_count": 208
+    "score": 0.0412,
+    "past_mentions": 686,
+    "future_mentions": 745,
+    "article_count": 240
   },
   {
     "country": "Espana",
     "date": "2023-04",
-    "score": 0.0182,
-    "past_mentions": 755,
-    "future_mentions": 783,
-    "article_count": 312
+    "score": 0.0292,
+    "past_mentions": 799,
+    "future_mentions": 847,
+    "article_count": 340
   },
   {
     "country": "Espana",
     "date": "2023-05",
-    "score": 0.1372,
-    "past_mentions": 1006,
-    "future_mentions": 1326,
-    "article_count": 358
+    "score": 0.1536,
+    "past_mentions": 1083,
+    "future_mentions": 1476,
+    "article_count": 390
   },
   {
     "country": "Espana",
     "date": "2023-06",
-    "score": 0.1782,
-    "past_mentions": 3383,
-    "future_mentions": 4850,
-    "article_count": 1651
+    "score": 0.1789,
+    "past_mentions": 3434,
+    "future_mentions": 4930,
+    "article_count": 1678
   },
   {
     "country": "Espana",
     "date": "2023-07",
     "score": 0.185,
-    "past_mentions": 82524,
-    "future_mentions": 120001,
-    "article_count": 50671
+    "past_mentions": 82581,
+    "future_mentions": 120077,
+    "article_count": 50701
   },
   {
     "country": "Espana",
     "date": "2023-08",
-    "score": 0.0888,
-    "past_mentions": 42709,
-    "future_mentions": 51029,
-    "article_count": 25377
+    "score": 0.0894,
+    "past_mentions": 42731,
+    "future_mentions": 51123,
+    "article_count": 25395
   },
   {
     "country": "Espana",
     "date": "2023-09",
-    "score": 0.102,
-    "past_mentions": 709,
-    "future_mentions": 870,
-    "article_count": 275
+    "score": 0.054,
+    "past_mentions": 894,
+    "future_mentions": 996,
+    "article_count": 337
   },
   {
     "country": "Espana",
     "date": "2023-10",
-    "score": 0.1695,
-    "past_mentions": 2604,
-    "future_mentions": 3667,
-    "article_count": 1158
+    "score": 0.1667,
+    "past_mentions": 2629,
+    "future_mentions": 3681,
+    "article_count": 1174
   },
   {
     "country": "Espana",
     "date": "2023-11",
-    "score": 0.1989,
-    "past_mentions": 32954,
-    "future_mentions": 49315,
-    "article_count": 19384
+    "score": 0.1986,
+    "past_mentions": 33016,
+    "future_mentions": 49383,
+    "article_count": 19413
   },
   {
     "country": "Espana",
     "date": "2023-12",
-    "score": 0.1666,
-    "past_mentions": 18836,
-    "future_mentions": 26369,
-    "article_count": 9960
+    "score": 0.1663,
+    "past_mentions": 18894,
+    "future_mentions": 26433,
+    "article_count": 9990
   },
   {
     "country": "Espana",
     "date": "2024-01",
-    "score": 0.1508,
-    "past_mentions": 36935,
-    "future_mentions": 50057,
-    "article_count": 20984
+    "score": 0.151,
+    "past_mentions": 36983,
+    "future_mentions": 50138,
+    "article_count": 21020
   },
   {
     "country": "Espana",
     "date": "2024-02",
-    "score": 0.163,
-    "past_mentions": 38614,
-    "future_mentions": 53659,
-    "article_count": 22721
+    "score": 0.1627,
+    "past_mentions": 38704,
+    "future_mentions": 53751,
+    "article_count": 22762
   },
   {
     "country": "Espana",
     "date": "2024-03",
-    "score": 0.1372,
-    "past_mentions": 43469,
-    "future_mentions": 57289,
-    "article_count": 24042
+    "score": 0.1371,
+    "past_mentions": 43543,
+    "future_mentions": 57376,
+    "article_count": 24073
   },
   {
     "country": "Espana",
     "date": "2024-04",
-    "score": 0.1539,
-    "past_mentions": 28108,
-    "future_mentions": 38330,
-    "article_count": 15345
+    "score": 0.1548,
+    "past_mentions": 28200,
+    "future_mentions": 38531,
+    "article_count": 15390
   },
   {
     "country": "Espana",
     "date": "2024-05",
-    "score": 0.1129,
-    "past_mentions": 27174,
-    "future_mentions": 34089,
-    "article_count": 14293
+    "score": 0.1124,
+    "past_mentions": 27307,
+    "future_mentions": 34222,
+    "article_count": 14343
   },
   {
     "country": "Espana",
     "date": "2024-06",
-    "score": 0.116,
-    "past_mentions": 18418,
-    "future_mentions": 23251,
-    "article_count": 9179
+    "score": 0.1186,
+    "past_mentions": 18582,
+    "future_mentions": 23583,
+    "article_count": 9272
   },
   {
     "country": "Espana",
     "date": "2024-07",
-    "score": 0.1281,
-    "past_mentions": 4396,
-    "future_mentions": 5688,
-    "article_count": 2066
+    "score": 0.1258,
+    "past_mentions": 4544,
+    "future_mentions": 5852,
+    "article_count": 2130
   },
   {
     "country": "Espana",
     "date": "2024-08",
-    "score": 0.0736,
-    "past_mentions": 19839,
-    "future_mentions": 22993,
-    "article_count": 11414
+    "score": 0.0763,
+    "past_mentions": 20027,
+    "future_mentions": 23335,
+    "article_count": 11538
   },
   {
     "country": "Espana",
     "date": "2024-09",
-    "score": 0.1313,
-    "past_mentions": 31034,
-    "future_mentions": 40412,
-    "article_count": 17167
+    "score": 0.132,
+    "past_mentions": 31082,
+    "future_mentions": 40534,
+    "article_count": 17214
   },
   {
     "country": "Espana",
     "date": "2024-10",
-    "score": 0.1326,
-    "past_mentions": 33325,
-    "future_mentions": 43514,
-    "article_count": 18535
+    "score": 0.1323,
+    "past_mentions": 33472,
+    "future_mentions": 43675,
+    "article_count": 18595
   },
   {
     "country": "Espana",
     "date": "2024-11",
-    "score": 0.156,
-    "past_mentions": 14398,
-    "future_mentions": 19720,
-    "article_count": 8237
+    "score": 0.1541,
+    "past_mentions": 14585,
+    "future_mentions": 19901,
+    "article_count": 8307
   },
   {
     "country": "Espana",
     "date": "2024-12",
-    "score": 0.1401,
-    "past_mentions": 224,
-    "future_mentions": 297,
-    "article_count": 117
+    "score": 0.1412,
+    "past_mentions": 374,
+    "future_mentions": 497,
+    "article_count": 195
   },
   {
     "country": "Espana",
     "date": "2025-01",
-    "score": 0.1934,
-    "past_mentions": 365,
-    "future_mentions": 540,
-    "article_count": 185
+    "score": 0.2125,
+    "past_mentions": 515,
+    "future_mentions": 793,
+    "article_count": 270
   },
   {
     "country": "Espana",
     "date": "2025-02",
-    "score": 0.2215,
-    "past_mentions": 311,
-    "future_mentions": 488,
-    "article_count": 168
+    "score": 0.1048,
+    "past_mentions": 598,
+    "future_mentions": 738,
+    "article_count": 274
   },
   {
     "country": "Espana",
     "date": "2025-03",
-    "score": 0.1984,
-    "past_mentions": 293,
-    "future_mentions": 438,
-    "article_count": 163
+    "score": 0.2294,
+    "past_mentions": 504,
+    "future_mentions": 804,
+    "article_count": 286
   },
   {
     "country": "Espana",
     "date": "2025-04",
-    "score": 0.074,
-    "past_mentions": 388,
-    "future_mentions": 450,
-    "article_count": 170
+    "score": 0.1355,
+    "past_mentions": 603,
+    "future_mentions": 792,
+    "article_count": 286
   },
   {
     "country": "Espana",
     "date": "2025-05",
-    "score": 0.0218,
-    "past_mentions": 403,
-    "future_mentions": 421,
-    "article_count": 172
+    "score": 0.1593,
+    "past_mentions": 644,
+    "future_mentions": 888,
+    "article_count": 309
   },
   {
     "country": "Espana",
     "date": "2025-06",
-    "score": 0.2672,
-    "past_mentions": 528,
-    "future_mentions": 913,
-    "article_count": 260
+    "score": 0.2315,
+    "past_mentions": 760,
+    "future_mentions": 1218,
+    "article_count": 378
   },
   {
     "country": "Espana",
     "date": "2025-07",
-    "score": 0.1735,
-    "past_mentions": 524,
-    "future_mentions": 744,
-    "article_count": 285
+    "score": 0.14,
+    "past_mentions": 743,
+    "future_mentions": 985,
+    "article_count": 369
   },
   {
     "country": "Espana",
     "date": "2025-08",
-    "score": -0.0486,
-    "past_mentions": 679,
-    "future_mentions": 616,
-    "article_count": 329
+    "score": -0.0121,
+    "past_mentions": 1085,
+    "future_mentions": 1059,
+    "article_count": 524
   },
   {
     "country": "Espana",
     "date": "2025-09",
-    "score": 0.2531,
-    "past_mentions": 689,
-    "future_mentions": 1156,
-    "article_count": 336
+    "score": 0.2573,
+    "past_mentions": 1039,
+    "future_mentions": 1759,
+    "article_count": 508
   },
   {
     "country": "Espana",
     "date": "2025-10",
-    "score": 0.1812,
-    "past_mentions": 1060,
-    "future_mentions": 1529,
-    "article_count": 442
+    "score": 0.1887,
+    "past_mentions": 1548,
+    "future_mentions": 2268,
+    "article_count": 668
   },
   {
     "country": "Espana",
     "date": "2025-11",
-    "score": 0.1958,
-    "past_mentions": 1314,
-    "future_mentions": 1954,
-    "article_count": 566
+    "score": 0.2251,
+    "past_mentions": 1945,
+    "future_mentions": 3075,
+    "article_count": 907
   },
   {
     "country": "Espana",
     "date": "2025-12",
-    "score": 0.19,
-    "past_mentions": 1761,
-    "future_mentions": 2587,
-    "article_count": 820
+    "score": 0.2104,
+    "past_mentions": 2516,
+    "future_mentions": 3857,
+    "article_count": 1216
   },
   {
     "country": "Espana",
     "date": "2026-01",
-    "score": 0.1521,
-    "past_mentions": 1882,
-    "future_mentions": 2557,
-    "article_count": 874
+    "score": 0.2298,
+    "past_mentions": 2582,
+    "future_mentions": 4123,
+    "article_count": 1296
   },
   {
     "country": "Espana",
     "date": "2026-02",
-    "score": 0.2134,
-    "past_mentions": 2558,
-    "future_mentions": 3946,
-    "article_count": 1173
+    "score": 0.2788,
+    "past_mentions": 3581,
+    "future_mentions": 6350,
+    "article_count": 1735
   },
   {
     "country": "Espana",
     "date": "2026-03",
-    "score": 0.2037,
-    "past_mentions": 5565,
-    "future_mentions": 8413,
-    "article_count": 2674
+    "score": 0.1968,
+    "past_mentions": 7340,
+    "future_mentions": 10936,
+    "article_count": 3487
   },
   {
     "country": "Espana",
     "date": "2026-04",
-    "score": 0.201,
-    "past_mentions": 16646,
-    "future_mentions": 25019,
-    "article_count": 8860
+    "score": 0.1955,
+    "past_mentions": 18873,
+    "future_mentions": 28047,
+    "article_count": 9917
   },
   {
     "country": "Espana",
     "date": "2026-05",
-    "score": 0.2233,
-    "past_mentions": 64280,
-    "future_mentions": 101231,
-    "article_count": 39695
+    "score": 0.2108,
+    "past_mentions": 85574,
+    "future_mentions": 131292,
+    "article_count": 50911
+  },
+  {
+    "country": "Espana",
+    "date": "2026-06",
+    "score": 0.2248,
+    "past_mentions": 90505,
+    "future_mentions": 142981,
+    "article_count": 53731
+  },
+  {
+    "country": "Espana",
+    "date": "2026-07",
+    "score": 0.2399,
+    "past_mentions": 77581,
+    "future_mentions": 126565,
+    "article_count": 47296
   }
 ]

@@ -559,7 +559,8 @@ body {
     #scrolly-emotions figure.sticky,
     #scrolly-map figure.sticky,
     #scrolly-beeswarm figure.sticky,
-    #scrolly-sankey figure.sticky {
+    #scrolly-sankey figure.sticky,
+    #scrolly-temporal figure.sticky {
         height: 48vh;
         max-height: 460px;
     }
@@ -584,7 +585,8 @@ body {
     #scrolly-emotions,
     #scrolly-map,
     #scrolly-beeswarm,
-    #scrolly-sankey {
+    #scrolly-sankey,
+    #scrolly-temporal {
         display: flex;
         flex-direction: row-reverse; /* sticky visualization on right, steps scroll on left */
         justify-content: space-between;
@@ -596,7 +598,8 @@ body {
     #scrolly-emotions figure.sticky,
     #scrolly-map figure.sticky,
     #scrolly-beeswarm figure.sticky,
-    #scrolly-sankey figure.sticky {
+    #scrolly-sankey figure.sticky,
+    #scrolly-temporal figure.sticky {
         width: 55%; /* Visualization space gets 55% of horizontal space */
         height: 100vh; /* Fills screen height fully */
         max-height: none;
@@ -1603,6 +1606,198 @@ body {
     margin-top: 1rem;
     margin-bottom: 1rem;
     width: 100%;
+}
+
+/* =======================================
+   SECTION 9: EL FOCO TEMPORAL (Gauge + Timeline)
+   ======================================= */
+
+#scrolly-temporal {
+    position: relative;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+#d3-canvas-temporal {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Temporal Controls --- */
+.temporal-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    flex-shrink: 0;
+}
+
+.temporal-country-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.temporal-country-btn {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.28rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.temporal-country-btn:hover {
+    border-color: var(--color-accent);
+}
+
+.temporal-country-btn.active {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+}
+
+.temporal-date-display {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+}
+
+.temporal-date-label {
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.temporal-date-badge {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.15rem 0.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    letter-spacing: 0.02em;
+}
+
+/* --- Gauge SVG Elements --- */
+.gauge-arc-past {
+    fill: rgba(194, 65, 12, 0.16);
+    stroke: #c2410c;
+    stroke-width: 1px;
+    stroke-opacity: 0.5;
+}
+
+.gauge-arc-future {
+    fill: rgba(2, 132, 199, 0.16);
+    stroke: #0284c7;
+    stroke-width: 1px;
+    stroke-opacity: 0.5;
+}
+
+.gauge-zero-line {
+    stroke: var(--color-text-muted);
+    stroke-width: 1.5px;
+    stroke-dasharray: 2, 2;
+}
+
+.gauge-needle {
+    stroke-linecap: round;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gauge-hub {
+    fill: var(--color-accent);
+    stroke: #ffffff;
+    stroke-width: 1.5px;
+}
+
+.gauge-title {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-anchor: middle;
+}
+
+.gauge-value {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-anchor: middle;
+}
+
+.gauge-status-label {
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-anchor: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- Timeline SVG Elements --- */
+.timeline-zero-line {
+    stroke: var(--color-text-muted);
+    stroke-width: 1.2px;
+    stroke-dasharray: 4, 3;
+    opacity: 0.8;
+}
+
+.timeline-zero-label {
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 600;
+    fill: var(--color-text-muted);
+    text-anchor: end;
+}
+
+.timeline-axis path,
+.timeline-axis line {
+    stroke: var(--color-border);
+}
+
+.timeline-axis text {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    fill: var(--color-text-muted);
+}
+
+.timeline-scrubber-line {
+    stroke: var(--color-accent);
+    stroke-width: 1.5px;
+    stroke-dasharray: 3, 3;
+    pointer-events: none;
+    transition: transform 0.4s ease;
+}
+
+.timeline-hover-overlay {
+    fill: transparent;
+    cursor: crosshair;
+}
+
+#storytelling-insights-temporal {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    #storytelling-insights-temporal {
+        display: none;
+    }
 }
 
 /* =======================================

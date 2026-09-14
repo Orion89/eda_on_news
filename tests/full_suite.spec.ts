@@ -532,5 +532,77 @@ test.describe('El Eco de las Palabras — Suite de Pruebas Completa', () => {
     console.log('✅ Sección 8 OK — Sankey Diagram con 7 nodos y 6 links, Scrollama e interacciones pasando tests');
   });
 
+  // ══════════════════════════════════════════════════
+  test('10. Sección 9 — El Foco Temporal (Nostalgia vs. Futuro)', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', err => {
+      if (!err.message.includes('ResizeObserver')) errors.push(err.message);
+    });
+    page.on('console', msg => {
+      if (msg.type() === 'error' && !msg.text().includes('ResizeObserver')) errors.push(msg.text());
+    });
+
+    await page.goto(BASE_URL);
+    await page.waitForTimeout(4000);
+
+    // Scroll into Section 9
+    await page.evaluate(() => document.querySelector('#scrolly-temporal')?.scrollIntoView({ behavior: 'instant' }));
+    await page.waitForTimeout(1500);
+
+    // 1. Canvas SVG visible
+    const svg = page.locator('#d3-canvas-temporal svg');
+    await expect(svg).toBeVisible();
+
+    // 2. 4 gauges in ALL mode
+    const gauges = await page.locator('#d3-canvas-temporal .temporal-gauge-unit').count();
+    expect(gauges).toBe(4);
+
+    // 3. 4 needles present
+    const needles = await page.locator('#d3-canvas-temporal .gauge-needle-group').count();
+    expect(needles).toBe(4);
+
+    // 4. Timeline elements
+    const zeroLine = await page.locator('#d3-canvas-temporal .timeline-zero-line').count();
+    expect(zeroLine).toBe(1);
+
+    const countryLines = await page.locator('#d3-canvas-temporal .temporal-line').count();
+    expect(countryLines).toBe(4);
+
+    const scrubber = await page.locator('#d3-canvas-temporal .temporal-scrubber-group').count();
+    expect(scrubber).toBe(1);
+
+    // 5. Active date badge shows date
+    const dateBadge = await page.locator('#temporal-active-date-badge').innerText();
+    expect(dateBadge.length).toBeGreaterThan(3);
+
+    // 6. Storytelling insight cards populated
+    const esText = await page.locator('#temporal-insight-ES').innerText();
+    expect(esText).toContain('España');
+
+    const clText = await page.locator('#temporal-insight-CL').innerText();
+    expect(clText).toContain('Chile');
+
+    const arMxText = await page.locator('#temporal-insight-AR-MX').innerText();
+    expect(arMxText).toContain('Argentina');
+
+    const synthText = await page.locator('#temporal-insight-synthesis').innerText();
+    expect(synthText).toContain('El péndulo del tiempo');
+
+    // 7. Click Argentina button to view single gauge
+    await page.locator('.temporal-country-btn[data-country="AR"]').click();
+    await page.waitForTimeout(500);
+    const singleGauge = await page.locator('#d3-canvas-temporal .temporal-gauge-unit').count();
+    expect(singleGauge).toBe(1);
+
+    // 8. Return to ALL
+    await page.locator('.temporal-country-btn[data-country="ALL"]').click();
+    await page.waitForTimeout(400);
+
+    // 9. Check no errors
+    expect(errors.length).toBe(0);
+    console.log('✅ Sección 9 OK — Medidores de péndulo temporal, timeline divergente y storytelling interactivo validados');
+  });
+
 });
+
 

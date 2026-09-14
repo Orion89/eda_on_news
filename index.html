@@ -551,6 +551,116 @@
         </article>
     </section>
 
+    <!-- Section 9: El Foco Temporal (Nostalgia vs. Futuro) -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Horizontes Temporales y Zeitgeist</span>
+            <h2 class="section-title">El Foco Temporal: Nostalgia vs. Futuro</h2>
+            <p class="section-intro-text">
+                ¿Vivimos reescribiendo la historia o imaginando el porvenir? Analizamos la orientación temporal del discurso periodístico mediante un medidor pendular y una línea de tiempo divergente, revelando qué sociedades viven ancladas en la memoria y cuáles proyectan febrilmente hacia el mañana.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <section id="scrolly-temporal">
+        <!-- Sticky temporal canvas -->
+        <figure class="sticky" id="temporal-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Temporal Controls: Country Filter + Active Date Pill -->
+                <div class="temporal-controls">
+                    <div class="temporal-country-btns">
+                        <button class="temporal-country-btn active" data-country="ALL">Todos</button>
+                        <button class="temporal-country-btn" data-country="AR">Argentina</button>
+                        <button class="temporal-country-btn" data-country="CL">Chile</button>
+                        <button class="temporal-country-btn" data-country="ES">España</button>
+                        <button class="temporal-country-btn" data-country="MX">México</button>
+                    </div>
+                    <div class="temporal-date-display">
+                        <span class="temporal-date-label">Mes activo:</span>
+                        <span id="temporal-active-date-badge" class="temporal-date-badge">Noviembre 2021</span>
+                    </div>
+                </div>
+
+                <!-- D3 Canvas: Dual layout with Gauges on top and Diverging Timeline below -->
+                <div id="d3-canvas-temporal" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Calculando foco temporal…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+
+                <!-- Storytelling panel: Yearly averages & Zeitgeist synthesis -->
+                <div id="storytelling-insights-temporal" class="storytelling-insights">
+                    <!-- JS generated content -->
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <div class="step" data-step="1" data-date="2021-11" data-country="ALL">
+                <span class="step-num">09.1</span>
+                <h3>El Péndulo del Tiempo</h3>
+                <p>
+                    Toda sociedad debate entre dos fuerzas: la <strong>memoria</strong> de lo acontecido y la <strong>expectativa</strong> de lo que vendrá. A través del análisis léxico y temporal en millones de oraciones, cuantificamos el <em>Ratio de Foco Temporal</em>, una escala continua entre <strong>-1.0 (máxima nostalgia / pasado)</strong> y <strong>+1.0 (máxima proyección / futuro)</strong>.
+                </p>
+                <p>
+                    Cuando la aguja oscila a la izquierda hacia la zona terracota, la prensa mira retrospectivamente; cuando se inclina a la derecha hacia el azul, anticipa escenarios. Observa cómo cada país responde a sus propios ciclos políticos y sociales.
+                </p>
+            </div>
+
+            <div class="step" data-step="2" data-date="2019-01" data-country="ES">
+                <span class="step-num">09.2</span>
+                <h3>España: El Peso de la Memoria</h3>
+                <p>
+                    De toda la muestra hispanohablante, la prensa española es la que muestra un mayor anclaje estructural en revisar el pasado (promedio histórico de <strong>+0.100</strong>, el más bajo de los cuatro países).
+                </p>
+                <div id="temporal-insight-ES" class="map-insight-text"><!-- JS --></div>
+                <p>
+                    Durante 2018 y 2019, hitos como el debate sobre la exhumación del Valle de los Caídos y el 80 aniversario del final de la Guerra Civil sumieron a los medios en balances retrospectivos, llevando el ratio a valores marcadamente negativos (<strong>-0.312</strong> en octubre de 2018 y <strong>-0.299</strong> en enero de 2019).
+                </p>
+            </div>
+
+            <div class="step" data-step="3" data-date="2020-10" data-country="CL">
+                <span class="step-num">09.3</span>
+                <h3>Chile: La Oscilación Constituyente</h3>
+                <p>
+                    Chile protagoniza la oscilación más dramática del péndulo temporal, reflejando fielmente la convulsión de su ciclo político reciente.
+                </p>
+                <div id="temporal-insight-CL" class="map-insight-text"><!-- JS --></div>
+                <p>
+                    En <strong>octubre de 2020</strong>, coincidiendo con el primer aniversario del Estallido Social del 18-O y el plebiscito de entrada, la pauta retrocedió a terreno nostálgico (<strong>-0.086</strong>), diagnosticando las raíces históricas de la fractura social. Por el contrario, en <strong>diciembre de 2023</strong>, ante el segundo plebiscito constitucional, la prensa se volcó masivamente al futuro alcanzando un récord de <strong>+0.493</strong>.
+                </p>
+            </div>
+
+            <div class="step" data-step="4" data-date="2025-08" data-country="AR">
+                <span class="step-num">09.4</span>
+                <h3>Argentina y México: Urgencia y Proyección</h3>
+                <p>
+                    En sociedades marcadas por la incertidumbre económica y reformas estructurales continuas, la prensa desarrolla un reflejo de anticipación permanente.
+                </p>
+                <div id="temporal-insight-AR-MX" class="map-insight-text"><!-- JS --></div>
+                <p>
+                    En <strong>Argentina</strong> (promedio <strong>+0.301</strong>), la volatilidad cambiaria y las elecciones fuerzan a los medios a especular constantemente sobre el "día después" y los escenarios venideros. En <strong>México</strong> (promedio <strong>+0.223</strong>), el discurso gravita entre la retórica de la transformación histórica y las promesas de proyectos venideros.
+                </p>
+            </div>
+
+            <div class="step" data-step="5" data-date="2026-07" data-country="ALL">
+                <span class="step-num">09.5</span>
+                <h3>El Diagnóstico Final: El Estado Mental</h3>
+                <p>
+                    El péndulo temporal no mide solamente gramática: captura el <em>Zeitgeist</em> o espíritu de la época de nuestros pueblos.
+                </p>
+                <div id="temporal-insight-synthesis" class="map-insight-text"><!-- JS --></div>
+                <p>
+                    Al evaluar el registro histórico, la prensa de <strong>España</strong> vive más anclada en revisar el pasado y saldar cuentas con su historia, mientras que <strong>Chile y Argentina</strong> proyectan sistemáticamente hacia eventos futuros como mecanismo de defensa ante la incertidumbre. Es el reflejo final del estado mental de nuestras sociedades.
+                </p>
+            </div>
+        </article>
+    </section>
+
     <footer class="footer">
         <div class="container footer-inner">
 

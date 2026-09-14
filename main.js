@@ -108,6 +108,20 @@ let yScaleBeeswarm;
 
 let paddingBeeswarm = { top: 55, right: 50, bottom: 55, left: 68 };
 
+// --- Globals for Section 9 (Temporal Focus: Gauge + Timeline) ---
+const scrollerTemporal = scrollama();
+let svgTemporal;
+let widthTemporal = 800;
+let heightTemporal = 600;
+let temporalDataByCountry = {};
+let temporalAllDates = [];
+let temporalGlobalStats = {};
+let selectedTemporalCountry = "ALL";
+let activeTemporalDate = "2021-11";
+let paddingTemporal = { top: 15, right: 35, bottom: 35, left: 45 };
+let xScaleTemporal;
+let yScaleTemporal;
+
 // Responsive padding recalculators
 function updateResponsivePaddings() {
     if (widthStyle < 500) {
@@ -140,6 +154,14 @@ function updateResponsivePaddings() {
         paddingBeeswarm = { top: 42, right: 35, bottom: 45, left: 62 };
     } else {
         paddingBeeswarm = { top: 55, right: 50, bottom: 55, left: 68 };
+    }
+
+    if (widthTemporal < 500) {
+        paddingTemporal = { top: 10, right: 18, bottom: 28, left: 38 };
+    } else if (widthTemporal < 800) {
+        paddingTemporal = { top: 12, right: 25, bottom: 32, left: 42 };
+    } else {
+        paddingTemporal = { top: 15, right: 35, bottom: 35, left: 48 };
     }
 }
 
@@ -1784,7 +1806,18 @@ function handleResize() {
         setupD3SankeyCanvas();
     }
 
-    // 8. Inform Scrollama instances
+    // 8. Resize Section 9 (Temporal Focus)
+    const canvasTemporal = document.getElementById("d3-canvas-temporal");
+    if (canvasTemporal && svgTemporal) {
+        widthTemporal = canvasTemporal.clientWidth;
+        heightTemporal = canvasTemporal.clientHeight || 500;
+        svgTemporal.attr("width", widthTemporal)
+                   .attr("height", heightTemporal)
+                   .attr("viewBox", `0 0 ${widthTemporal} ${heightTemporal}`);
+        setupD3TemporalCanvas();
+    }
+
+    // 9. Inform Scrollama instances
     scroller.resize();
     scrollerStyle.resize();
     scrollerPos.resize();
@@ -1792,6 +1825,7 @@ function handleResize() {
     scrollerMap.resize();
     scrollerBeeswarm.resize();
     scrollerSankey.resize();
+    scrollerTemporal.resize();
 }
 
 /**
@@ -1806,7 +1840,8 @@ function init() {
         loadEmotionsData(),
         loadMapData(),
         loadBeeswarmData(),
-        loadSankeyData()
+        loadSankeyData(),
+        loadTemporalData()
     ]).then(() => {
         // Initialize Section 1
         setupD3Canvas();
@@ -1840,6 +1875,11 @@ function init() {
         setupD3SankeyCanvas();
         bindSankeyEvents();
         initScrollamaSankey();
+
+        // Initialize Section 9 (Temporal Focus)
+        setupD3TemporalCanvas();
+        bindTemporalEvents();
+        initScrollamaTemporal();
 
         // Window resize event handler
         window.addEventListener("resize", handleResize);
@@ -2928,4 +2968,821 @@ function initScrollamaBeeswarm() {
             updateBeeswarmVisualization(stepIndex);
         });
     updateBeeswarmVisualization(0);
+}
+
+// ==========================================
+// SECTION 9: EL FOCO TEMPORAL (Gauge + Timeline)
+// ==========================================
+
+const monthNamesES = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
+function formatTemporalDate(dateStr) {
+    if (!dateStr) return "";
+    const parts = dateStr.split("-");
+    const y = parts[0];
+    const m = parseInt(parts[1], 10) - 1;
+    return `${monthNamesES[m] || parts[1]} ${y}`;
+}
+
+/**
+ * Load temporal focus JSON files for each country.
+ */
+function loadTemporalData() {
+    const files = [
+        { code: "AR", url: "data/temporal_focus/news_argentina_temporal_focus.json" },
+        { code: "CL", url: "data/temporal_focus/news_chile_temporal_focus.json" },
+        { code: "ES", url: "data/temporal_focus/news_espana_temporal_focus.json" },
+        { code: "MX", url: "data/temporal_focus/news_mexico_temporal_focus.json" }
+    ];
+
+    return Promise.all(files.map(f => d3.json(f.url).then(data => ({ code: f.code, data }))))
+        .then(results => {
+            temporalDataByCountry = {};
+            const allDatesSet = new Set();
+
+            results.forEach(res => {
+                const clean = (res.data || []).map(d => ({
+                    country: d.country,
+                    countryCode: res.code,
+                    date: d.date,
+                    score: +d.score,
+                    past_mentions: +d.past_mentions,
+                    future_mentions: +d.future_mentions,
+                    article_count: +d.article_count,
+                    dateObj: new Date(d.date + "-01T00:00:00")
+                })).sort((a, b) => a.date.localeCompare(b.date));
+
+                temporalDataByCountry[res.code] = clean;
+                clean.forEach(d => allDatesSet.add(d.date));
+            });
+
+            temporalAllDates = Array.from(allDatesSet).sort();
+            computeTemporalStats();
+            generateTemporalStorytelling();
+        })
+        .catch(err => {
+            console.error("[Temporal Focus] Error loading data:", err);
+        });
+}
+
+/**
+ * Compute global and yearly metrics per country.
+ */
+function computeTemporalStats() {
+    temporalGlobalStats = {};
+    const codes = ["AR", "CL", "ES", "MX"];
+
+    codes.forEach(code => {
+        const list = temporalDataByCountry[code] || [];
+        if (list.length === 0) return;
+
+        const scores = list.map(d => d.score);
+        const meanScore = d3.mean(scores);
+        const medianScore = d3.median(scores);
+
+        // Sort to find extreme months
+        const sortedPast = [...list].sort((a, b) => a.score - b.score);
+        const sortedFuture = [...list].sort((a, b) => b.score - a.score);
+
+        // Yearly averages
+        const byYear = d3.group(list, d => d.date.substring(0, 4));
+        const yearly = {};
+        byYear.forEach((arr, yr) => {
+            yearly[yr] = d3.mean(arr, d => d.score);
+        });
+
+        temporalGlobalStats[code] = {
+            countryName: countryNames[code],
+            mean: meanScore,
+            median: medianScore,
+            mostPast: sortedPast[0],
+            mostFuture: sortedFuture[0],
+            yearly
+        };
+    });
+}
+
+/**
+ * Generate storytelling cards and insights for Section 9.
+ */
+function generateTemporalStorytelling() {
+    const esStats = temporalGlobalStats["ES"];
+    const clStats = temporalGlobalStats["CL"];
+    const arStats = temporalGlobalStats["AR"];
+    const mxStats = temporalGlobalStats["MX"];
+
+    // 1. España insight
+    const elES = document.getElementById("temporal-insight-ES");
+    if (elES && esStats) {
+        elES.classList.add("border-es");
+        elES.innerHTML = `
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-es);">Foco Temporal: España</span>
+            </div>
+            <p>
+                <strong>España (promedio histórico: +${esStats.mean.toFixed(3)}):</strong> Es el país con mayor carga de memoria histórica de toda la muestra. En 2019 su media fue derechamente nostálgica (<strong>${esStats.yearly["2019"]?.toFixed(3) || "-0.055"}</strong>), alcanzando picos retrospectivos en octubre de 2018 (<strong>${esStats.mostPast.score.toFixed(3)}</strong>) y enero de 2019, motivados por debates en torno a la memoria democrática y balances históricos.
+            </p>
+            <div class="map-insight-meta">
+                Promedio histórico: <strong>+${esStats.mean.toFixed(3)}</strong> | Año más nostálgico: <strong>2019 (-0.055)</strong> | Mes récord pasado: <strong>Octubre 2018 (${esStats.mostPast.score.toFixed(3)})</strong>
+            </div>
+        `;
+    }
+
+    // 2. Chile insight
+    const elCL = document.getElementById("temporal-insight-CL");
+    if (elCL && clStats) {
+        elCL.classList.add("border-cl");
+        elCL.innerHTML = `
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-cl);">Foco Temporal: Chile</span>
+            </div>
+            <p>
+                <strong>Chile (promedio histórico: +${clStats.mean.toFixed(3)}):</strong> Protagoniza la mayor oscilación pendular del estudio. En octubre de 2020, durante el primer aniversario del 18-O y el plebiscito de entrada, la pauta cayó a terreno negativo (<strong>${clStats.mostPast.score.toFixed(3)}</strong>, diagnóstico histórico). Por el contrario, en diciembre de 2023, la cobertura del plebiscito constitucional saltó a un récord de <strong>+${clStats.mostFuture.score.toFixed(3)}</strong> de foco a futuro.
+            </p>
+            <div class="map-insight-meta">
+                Promedio histórico: <strong>+${clStats.mean.toFixed(3)}</strong> | Mes récord pasado: <strong>Octubre 2020 (${clStats.mostPast.score.toFixed(3)})</strong> | Mes récord futuro: <strong>Diciembre 2023 (+${clStats.mostFuture.score.toFixed(3)})</strong>
+            </div>
+        `;
+    }
+
+    // 3. Argentina y México insight
+    const elAR_MX = document.getElementById("temporal-insight-AR-MX");
+    if (elAR_MX && arStats && mxStats) {
+        elAR_MX.classList.add("border-ar");
+        elAR_MX.innerHTML = `
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-ar);">Patrón: Argentina y México</span>
+            </div>
+            <p>
+                <strong>Argentina (promedio histórico: +${arStats.mean.toFixed(3)}):</strong> La incertidumbre inflacionaria y el calendario electoral obligan a la prensa a anticipar escenarios continuamente, alcanzando picos en agosto de 2025 (<strong>+${arStats.mostFuture.score.toFixed(3)}</strong>) y abril de 2023.
+            </p>
+            <div class="map-insight-meta">
+                Promedio histórico: <strong>+${arStats.mean.toFixed(3)}</strong> | Mes récord futuro: <strong>Agosto 2025 (+${arStats.mostFuture.score.toFixed(3)})</strong> | Mínimo: <strong>Noviembre 2021 (+${arStats.mostPast.score.toFixed(3)})</strong>
+            </div>
+            <p style="margin-top: 1rem !important;">
+                <strong>México (promedio histórico: +${mxStats.mean.toFixed(3)}):</strong> Mantiene una meseta orientada a la expectativa de reformas (+${mxStats.mostFuture.score.toFixed(3)} en dic 2020, +0.418 en ene 2025), intercalada con repliegues conmemorativos en febrero de 2023 (<strong>${mxStats.mostPast.score.toFixed(3)}</strong>).
+            </p>
+            <div class="map-insight-meta">
+                Promedio histórico: <strong>+${mxStats.mean.toFixed(3)}</strong> | Mes récord futuro: <strong>Diciembre 2020 (+${mxStats.mostFuture.score.toFixed(3)})</strong> | Mes récord pasado: <strong>Febrero 2023 (${mxStats.mostPast.score.toFixed(3)})</strong>
+            </div>
+        `;
+    }
+
+    // 4. Síntesis final
+    const elSynth = document.getElementById("temporal-insight-synthesis");
+    if (elSynth) {
+        elSynth.classList.add("border-cl");
+        elSynth.innerHTML = `
+            <div class="map-insight-header">
+                <span class="map-insight-badge" style="color: var(--color-accent);">El Péndulo del Tiempo (Conclusión)</span>
+            </div>
+            <p>
+                El péndulo del tiempo: Al evaluar el registro histórico, la prensa de <strong>España</strong> (+${esStats ? esStats.mean.toFixed(2) : "0.10"}) vive más anclada en revisar el pasado y saldar cuentas con su historia, mientras que <strong>Chile</strong> (+${clStats ? clStats.mean.toFixed(2) : "0.31"}) y <strong>Argentina</strong> (+${arStats ? arStats.mean.toFixed(2) : "0.30"}) proyectan sistemáticamente hacia eventos futuros como mecanismo de anticipación ante la incertidumbre. Es el reflejo final del estado mental de nuestras sociedades.
+            </p>
+            <div class="map-insight-meta">
+                España: <strong>Nostalgia y Memoria (+0.10)</strong> | México: <strong>Transformación (+0.22)</strong> | Argentina: <strong>Anticipación (+0.30)</strong> | Chile: <strong>Horizonte (+0.31)</strong>
+            </div>
+        `;
+    }
+
+    // 5. Inject storytelling summary cards in sticky panel
+    const panel = document.getElementById("storytelling-insights-temporal");
+    if (panel) {
+        const cards = ["CL", "AR", "ES", "MX"].map(code => {
+            const st = temporalGlobalStats[code];
+            if (!st) return "";
+            const color = { CL: "var(--color-cl)", AR: "var(--color-ar)", ES: "var(--color-es)", MX: "var(--color-mx)" }[code];
+            const sign = st.mean >= 0 ? "+" : "";
+            const status = st.mean < 0.15 ? "Foco Memoria / Pasado" : "Foco Expectativa / Futuro";
+            return `
+                <div class="insight-card country-border-${code.toLowerCase()}">
+                    <div class="insight-country" style="color:${color}">${st.countryName}</div>
+                    <div class="insight-stat">${sign}${st.mean.toFixed(2)}</div>
+                    <div class="insight-label">${status}</div>
+                </div>
+            `;
+        }).join("");
+        panel.innerHTML = `<div class="insights-grid">${cards}</div>`;
+    }
+}
+
+/**
+ * Setup D3 Canvas for Section 9 (Temporal Focus).
+ */
+function setupD3TemporalCanvas() {
+    const canvas = document.getElementById("d3-canvas-temporal");
+    if (!canvas || temporalAllDates.length === 0) return;
+
+    canvas.innerHTML = "";
+    widthTemporal = canvas.clientWidth || 800;
+    heightTemporal = canvas.clientHeight || 520;
+    updateResponsivePaddings();
+
+    svgTemporal = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthTemporal)
+        .attr("height", heightTemporal)
+        .attr("viewBox", `0 0 ${widthTemporal} ${heightTemporal}`);
+
+    renderTemporalPlot();
+}
+
+/**
+ * Helper to get a record for a specific country and date string.
+ */
+function getTemporalRecord(countryCode, dateStr) {
+    const list = temporalDataByCountry[countryCode] || [];
+    if (list.length === 0) return null;
+    const exact = list.find(d => d.date === dateStr);
+    if (exact) return exact;
+
+    // Fallback to closest date
+    if (dateStr < list[0].date) return list[0];
+    if (dateStr > list[list.length - 1].date) return list[list.length - 1];
+
+    let closest = list[0];
+    let minDiff = Infinity;
+    const targetObj = new Date(dateStr + "-01T00:00:00");
+    list.forEach(d => {
+        const diff = Math.abs(d.dateObj - targetObj);
+        if (diff < minDiff) {
+            minDiff = diff;
+            closest = d;
+        }
+    });
+    return closest;
+}
+
+/**
+ * Render the combined visualizer: Gauges (top) + Diverging Timeline (bottom).
+ */
+function renderTemporalPlot() {
+    if (!svgTemporal || temporalAllDates.length === 0) return;
+
+    svgTemporal.selectAll("*").remove();
+
+    const heightGaugeArea = heightTemporal * 0.44;
+    const heightTimelineArea = heightTemporal * 0.56;
+
+    const gGauges = svgTemporal.append("g")
+        .attr("class", "temporal-gauges-container");
+
+    const gTimeline = svgTemporal.append("g")
+        .attr("class", "temporal-timeline-container")
+        .attr("transform", `translate(0, ${heightGaugeArea})`);
+
+    // ===================================
+    // 1. RENDER GAUGES (Top Half)
+    // ===================================
+    const countryCodes = ["AR", "CL", "ES", "MX"];
+    const countryColors = {
+        AR: "var(--color-ar)",
+        CL: "var(--color-cl)",
+        ES: "var(--color-es)",
+        MX: "var(--color-mx)"
+    };
+
+    if (selectedTemporalCountry === "ALL") {
+        // Render 4 small gauges in a row or 2x2 grid depending on width
+        const isNarrow = widthTemporal < 520;
+        const cols = isNarrow ? 2 : 4;
+        const rows = isNarrow ? 2 : 1;
+        const cellW = widthTemporal / cols;
+        const cellH = heightGaugeArea / rows;
+
+        countryCodes.forEach((code, idx) => {
+            const col = idx % cols;
+            const row = Math.floor(idx / cols);
+            const cx = col * cellW + cellW / 2;
+            const cy = isNarrow ? (row * cellH + cellH * 0.54 + 8) : (row * cellH + cellH * 0.72);
+            const radius = isNarrow ? Math.min(cellW * 0.28, cellH * 0.40, 36) : Math.min(cellW * 0.38, cellH * 0.62, 55);
+
+            const rec = getTemporalRecord(code, activeTemporalDate);
+            const score = rec ? rec.score : 0;
+            const angle = Math.max(-90, Math.min(90, score * 90));
+
+            const gGauge = gGauges.append("g")
+                .attr("class", `temporal-gauge-unit gauge-${code}`)
+                .attr("transform", `translate(${cx}, ${cy})`);
+
+            // Dual arc background
+            const arcGen = d3.arc().innerRadius(radius * 0.62).outerRadius(radius);
+
+            // Past arc (-90 to 0 deg)
+            gGauge.append("path")
+                .attr("class", "gauge-arc-past")
+                .attr("d", arcGen({ startAngle: -Math.PI / 2, endAngle: 0 }));
+
+            // Future arc (0 to +90 deg)
+            gGauge.append("path")
+                .attr("class", "gauge-arc-future")
+                .attr("d", arcGen({ startAngle: 0, endAngle: Math.PI / 2 }));
+
+            // Zero line
+            gGauge.append("line")
+                .attr("class", "gauge-zero-line")
+                .attr("x1", 0).attr("y1", -radius * 0.58)
+                .attr("x2", 0).attr("y2", -radius * 1.05);
+
+            // Country title
+            gGauge.append("text")
+                .attr("class", "gauge-title")
+                .attr("y", -radius - (isNarrow ? 3 : 5))
+                .attr("fill", countryColors[code])
+                .style("font-size", isNarrow ? "0.64rem" : "0.75rem")
+                .text(countryNames[code]);
+
+            // Value label
+            const sign = score >= 0 ? "+" : "";
+            gGauge.append("text")
+                .attr("class", "gauge-value")
+                .attr("y", radius * 0.36)
+                .attr("fill", "var(--color-text-main)")
+                .style("font-size", isNarrow ? "0.72rem" : "0.85rem")
+                .text(`${sign}${score.toFixed(2)}`);
+
+            // Status label (Pasado / Futuro)
+            const statusText = score < -0.05 ? "Pasado" : (score > 0.05 ? "Futuro" : "Equilibrio");
+            gGauge.append("text")
+                .attr("class", "gauge-status-label")
+                .attr("y", radius * 0.62)
+                .attr("fill", score < 0 ? "#c2410c" : (score > 0.05 ? "#0284c7" : "var(--color-text-muted)"))
+                .style("font-size", isNarrow ? "0.55rem" : "0.62rem")
+                .text(statusText);
+
+            // Animated Needle
+            const gNeedle = gGauge.append("g")
+                .attr("class", "gauge-needle-group")
+                .attr("data-country", code)
+                .attr("transform", `rotate(${angle})`);
+
+            gNeedle.append("path")
+                .attr("class", "gauge-needle")
+                .attr("d", `M -2.2 0 L 0 -${radius - 3} L 2.2 0 Z`)
+                .attr("fill", countryColors[code]);
+
+            gNeedle.append("circle")
+                .attr("class", "gauge-hub")
+                .attr("r", isNarrow ? 2.8 : 3.5);
+        });
+
+    } else {
+        // Render 1 large prominent gauge for selected country
+        const code = selectedTemporalCountry;
+        const cx = widthTemporal / 2;
+        const cy = heightGaugeArea * 0.72;
+        const radius = Math.min(widthTemporal * 0.34, heightGaugeArea * 0.62, 95);
+
+        const rec = getTemporalRecord(code, activeTemporalDate);
+        const score = rec ? rec.score : 0;
+        const angle = Math.max(-90, Math.min(90, score * 90));
+
+        const gGauge = gGauges.append("g")
+            .attr("class", `temporal-gauge-unit gauge-${code}`)
+            .attr("transform", `translate(${cx}, ${cy})`);
+
+        // Dual arc
+        const arcGen = d3.arc().innerRadius(radius * 0.68).outerRadius(radius);
+
+        gGauge.append("path")
+            .attr("class", "gauge-arc-past")
+            .attr("d", arcGen({ startAngle: -Math.PI / 2, endAngle: 0 }));
+
+        gGauge.append("path")
+            .attr("class", "gauge-arc-future")
+            .attr("d", arcGen({ startAngle: 0, endAngle: Math.PI / 2 }));
+
+        // Zero line
+        gGauge.append("line")
+            .attr("class", "gauge-zero-line")
+            .attr("x1", 0).attr("y1", -radius * 0.64)
+            .attr("x2", 0).attr("y2", -radius * 1.08);
+
+        // Sub-ticks at -0.5 and +0.5
+        [-0.5, 0.5].forEach(val => {
+            const rad = val * (Math.PI / 2);
+            const x1 = Math.sin(rad) * (radius * 0.68);
+            const y1 = -Math.cos(rad) * (radius * 0.68);
+            const x2 = Math.sin(rad) * radius;
+            const y2 = -Math.cos(rad) * radius;
+            gGauge.append("line")
+                .attr("stroke", "#ccc")
+                .attr("stroke-width", 1)
+                .attr("x1", x1).attr("y1", y1)
+                .attr("x2", x2).attr("y2", y2);
+        });
+
+        // Left / Right zone labels
+        gGauge.append("text")
+            .attr("class", "gauge-status-label")
+            .attr("x", -radius * 0.8)
+            .attr("y", 16)
+            .attr("fill", "#c2410c")
+            .text("◄ PASADO");
+
+        gGauge.append("text")
+            .attr("class", "gauge-status-label")
+            .attr("x", radius * 0.8)
+            .attr("y", 16)
+            .attr("fill", "#0284c7")
+            .text("FUTURO ►");
+
+        // Title
+        gGauge.append("text")
+            .attr("class", "gauge-title")
+            .attr("y", -radius - 10)
+            .attr("fill", countryColors[code])
+            .style("font-size", "0.95rem")
+            .text(countryNames[code]);
+
+        // Numerical value readout
+        const sign = score >= 0 ? "+" : "";
+        gGauge.append("text")
+            .attr("class", "gauge-value")
+            .attr("y", -6)
+            .attr("fill", "var(--color-text-main)")
+            .style("font-size", "1.35rem")
+            .text(`${sign}${score.toFixed(3)}`);
+
+        // Subtext (mentions summary)
+        if (rec) {
+            const totalM = rec.past_mentions + rec.future_mentions;
+            const pctPast = totalM > 0 ? Math.round((rec.past_mentions / totalM) * 100) : 50;
+            const pctFut = 100 - pctPast;
+            gGauge.append("text")
+                .attr("class", "gauge-status-label")
+                .attr("y", radius * 0.35)
+                .attr("fill", "var(--color-text-muted)")
+                .text(`Pasado: ${rec.past_mentions} (${pctPast}%) | Futuro: ${rec.future_mentions} (${pctFut}%)`);
+        }
+
+        // Needle
+        const gNeedle = gGauge.append("g")
+            .attr("class", "gauge-needle-group")
+            .attr("data-country", code)
+            .attr("transform", `rotate(${angle})`);
+
+        gNeedle.append("path")
+            .attr("class", "gauge-needle")
+            .attr("d", `M -3.5 0 L 0 -${radius - 5} L 3.5 0 Z`)
+            .attr("fill", countryColors[code]);
+
+        gNeedle.append("circle")
+            .attr("class", "gauge-hub")
+            .attr("r", 5);
+    }
+
+    // ===================================
+    // 2. RENDER TIMELINE (Bottom Half)
+    // ===================================
+    const tMargin = {
+        top: paddingTemporal.top,
+        right: paddingTemporal.right,
+        bottom: paddingTemporal.bottom,
+        left: paddingTemporal.left
+    };
+    const tWidth = widthTemporal - tMargin.left - tMargin.right;
+    const tHeight = heightTimelineArea - tMargin.top - tMargin.bottom;
+
+    const parseTime = d3.timeParse("%Y-%m");
+    const minDate = parseTime("2016-06");
+    const maxDate = parseTime("2026-12");
+
+    xScaleTemporal = d3.scaleTime()
+        .domain([minDate, maxDate])
+        .range([tMargin.left, tMargin.left + tWidth]);
+
+    yScaleTemporal = d3.scaleLinear()
+        .domain([-0.38, 0.62])
+        .range([tMargin.top + tHeight, tMargin.top]);
+
+    const yZero = yScaleTemporal(0);
+
+    // Subtle background tints
+    gTimeline.append("rect")
+        .attr("x", tMargin.left)
+        .attr("y", tMargin.top)
+        .attr("width", tWidth)
+        .attr("height", Math.max(0, yZero - tMargin.top))
+        .attr("fill", "rgba(2, 132, 199, 0.035)");
+
+    gTimeline.append("rect")
+        .attr("x", tMargin.left)
+        .attr("y", yZero)
+        .attr("width", tWidth)
+        .attr("height", Math.max(0, tMargin.top + tHeight - yZero))
+        .attr("fill", "rgba(194, 65, 12, 0.035)");
+
+    // Zero reference line
+    gTimeline.append("line")
+        .attr("class", "timeline-zero-line")
+        .attr("x1", tMargin.left)
+        .attr("x2", tMargin.left + tWidth)
+        .attr("y1", yZero)
+        .attr("y2", yZero);
+
+    gTimeline.append("text")
+        .attr("class", "timeline-zero-label")
+        .attr("x", tMargin.left + tWidth)
+        .attr("y", yZero - 4)
+        .text("0.0 (Equilibrio)");
+
+    // X Axis
+    const xAxis = d3.axisBottom(xScaleTemporal)
+        .ticks(widthTemporal < 500 ? 5 : 8)
+        .tickFormat(d3.timeFormat("%Y"));
+
+    gTimeline.append("g")
+        .attr("class", "timeline-axis x-axis")
+        .attr("transform", `translate(0, ${tMargin.top + tHeight})`)
+        .call(xAxis);
+
+    // Y Axis
+    const yAxis = d3.axisLeft(yScaleTemporal)
+        .ticks(5)
+        .tickFormat(d => (d > 0 ? `+${d}` : `${d}`));
+
+    gTimeline.append("g")
+        .attr("class", "timeline-axis y-axis")
+        .attr("transform", `translate(${tMargin.left}, 0)`)
+        .call(yAxis);
+
+    // Line and Area generators
+    const lineGen = d3.line()
+        .defined(d => d && !isNaN(d.score))
+        .x(d => xScaleTemporal(d.dateObj))
+        .y(d => yScaleTemporal(d.score))
+        .curve(d3.curveMonotoneX);
+
+    const areaFutureGen = d3.area()
+        .defined(d => d && !isNaN(d.score))
+        .x(d => xScaleTemporal(d.dateObj))
+        .y0(yZero)
+        .y1(d => Math.min(yZero, yScaleTemporal(d.score)))
+        .curve(d3.curveMonotoneX);
+
+    const areaPastGen = d3.area()
+        .defined(d => d && !isNaN(d.score))
+        .x(d => xScaleTemporal(d.dateObj))
+        .y0(yZero)
+        .y1(d => Math.max(yZero, yScaleTemporal(d.score)))
+        .curve(d3.curveMonotoneX);
+
+    // Render country curves
+    const renderCodes = selectedTemporalCountry === "ALL" ? countryCodes : [selectedTemporalCountry];
+
+    renderCodes.forEach(code => {
+        const data = temporalDataByCountry[code] || [];
+        if (data.length === 0) return;
+
+        // If single country, draw diverging shaded areas
+        if (selectedTemporalCountry !== "ALL") {
+            gTimeline.append("path")
+                .datum(data)
+                .attr("fill", "rgba(2, 132, 199, 0.18)")
+                .attr("d", areaFutureGen);
+
+            gTimeline.append("path")
+                .datum(data)
+                .attr("fill", "rgba(194, 65, 12, 0.18)")
+                .attr("d", areaPastGen);
+        }
+
+        // Draw line path
+        gTimeline.append("path")
+            .datum(data)
+            .attr("class", `temporal-line line-${code}`)
+            .attr("fill", "none")
+            .attr("stroke", countryColors[code])
+            .attr("stroke-width", selectedTemporalCountry === "ALL" ? 2.0 : 2.8)
+            .attr("opacity", 0.92)
+            .attr("d", lineGen);
+    });
+
+    // Scrubber vertical line
+    const activeDateObj = parseTime(activeTemporalDate) || minDate;
+    const scrubberX = xScaleTemporal(activeDateObj);
+
+    const gScrubber = gTimeline.append("g")
+        .attr("class", "temporal-scrubber-group")
+        .attr("transform", `translate(${scrubberX}, 0)`);
+
+    gScrubber.append("line")
+        .attr("class", "timeline-scrubber-line")
+        .attr("y1", tMargin.top)
+        .attr("y2", tMargin.top + tHeight);
+
+    // Glowing points for active date
+    countryCodes.forEach(code => {
+        if (selectedTemporalCountry !== "ALL" && selectedTemporalCountry !== code) return;
+        const rec = getTemporalRecord(code, activeTemporalDate);
+        if (!rec) return;
+
+        gScrubber.append("circle")
+            .attr("class", `temporal-scrubber-dot dot-${code}`)
+            .attr("cy", yScaleTemporal(rec.score))
+            .attr("r", selectedTemporalCountry === "ALL" ? 4.5 : 5.5)
+            .attr("fill", countryColors[code])
+            .attr("stroke", "#ffffff")
+            .attr("stroke-width", 1.8);
+    });
+
+    // Invisible interactive hover overlay
+    gTimeline.append("rect")
+        .attr("class", "timeline-hover-overlay")
+        .attr("x", tMargin.left)
+        .attr("y", tMargin.top)
+        .attr("width", tWidth)
+        .attr("height", tHeight)
+        .on("mousemove", handleTimelineMouseMove)
+        .on("mouseleave", handleTimelineMouseLeave);
+
+    // Update active date badge
+    const badge = document.getElementById("temporal-active-date-badge");
+    if (badge) {
+        badge.innerText = formatTemporalDate(activeTemporalDate);
+    }
+}
+
+/**
+ * Handle hover on the timeline overlay to scrub smoothly.
+ */
+function handleTimelineMouseMove(event) {
+    if (!xScaleTemporal || temporalAllDates.length === 0) return;
+
+    const [pointerX] = d3.pointer(event, this);
+    const dateAtPointer = xScaleTemporal.invert(pointerX);
+    const parseTime = d3.timeParse("%Y-%m");
+
+    // Find nearest month
+    let closestDate = temporalAllDates[0];
+    let minDiff = Infinity;
+    temporalAllDates.forEach(dStr => {
+        const dObj = parseTime(dStr);
+        const diff = Math.abs(dObj - dateAtPointer);
+        if (diff < minDiff) {
+            minDiff = diff;
+            closestDate = dStr;
+        }
+    });
+
+    setTemporalDate(closestDate, true);
+
+    // Show tooltip with details
+    tooltip.transition().duration(80).style("opacity", 0.96);
+    let rowsHtml = "";
+    const codes = selectedTemporalCountry === "ALL" ? ["CL", "AR", "ES", "MX"] : [selectedTemporalCountry];
+    codes.forEach(c => {
+        const rec = getTemporalRecord(c, closestDate);
+        if (!rec) return;
+        const sign = rec.score >= 0 ? "+" : "";
+        const cColor = { CL: "var(--color-cl)", AR: "var(--color-ar)", ES: "var(--color-es)", MX: "var(--color-mx)" }[c];
+        rowsHtml += `
+            <div class="tooltip-row" style="margin-top:0.35rem;">
+                <span style="color:${cColor}; font-weight:700;">${countryNames[c]}:</span>
+                <strong>${sign}${rec.score.toFixed(3)}</strong>
+                <span style="font-size:0.75rem; color:#666;">(Pas: ${rec.past_mentions}, Fut: ${rec.future_mentions})</span>
+            </div>
+        `;
+    });
+
+    tooltip.html(`
+        <div class="tooltip-title">${formatTemporalDate(closestDate)}</div>
+        ${rowsHtml}
+    `);
+    positionTooltip(event);
+}
+
+function handleTimelineMouseLeave() {
+    tooltip.transition().duration(100).style("opacity", 0);
+}
+
+/**
+ * Set the active temporal date and update gauges and scrubber smoothly.
+ */
+function setTemporalDate(dateStr, isInteractive = false) {
+    activeTemporalDate = dateStr;
+
+    // Update active date badge
+    const badge = document.getElementById("temporal-active-date-badge");
+    if (badge) {
+        badge.innerText = formatTemporalDate(dateStr);
+    }
+
+    if (!svgTemporal) return;
+
+    // 1. Animate Needles and Values
+    const codes = ["AR", "CL", "ES", "MX"];
+    codes.forEach(code => {
+        const rec = getTemporalRecord(code, dateStr);
+        const score = rec ? rec.score : 0;
+        const angle = Math.max(-90, Math.min(90, score * 90));
+        const sign = score >= 0 ? "+" : "";
+
+        // Rotate needle smoothly
+        svgTemporal.selectAll(`.gauge-${code} .gauge-needle-group`)
+            .transition()
+            .duration(isInteractive ? 150 : 600)
+            .ease(d3.easeCubicOut)
+            .attr("transform", `rotate(${angle})`);
+
+        // Update value text
+        svgTemporal.selectAll(`.gauge-${code} .gauge-value`)
+            .text(selectedTemporalCountry === "ALL" ? `${sign}${score.toFixed(2)}` : `${sign}${score.toFixed(3)}`);
+
+        // Update status text
+        const statusText = score < -0.05 ? "Pasado" : (score > 0.05 ? "Futuro" : "Equilibrio");
+        svgTemporal.selectAll(`.gauge-${code} .gauge-status-label`)
+            .text(statusText)
+            .attr("fill", score < -0.05 ? "#c2410c" : (score > 0.05 ? "#0284c7" : "var(--color-text-muted)"));
+    });
+
+    // 2. Animate Scrubber Line
+    if (xScaleTemporal && yScaleTemporal) {
+        const parseTime = d3.timeParse("%Y-%m");
+        const dObj = parseTime(dateStr);
+        if (dObj) {
+            const sx = xScaleTemporal(dObj);
+            svgTemporal.select(".temporal-scrubber-group")
+                .transition()
+                .duration(isInteractive ? 80 : 500)
+                .ease(d3.easeCubicOut)
+                .attr("transform", `translate(${sx}, 0)`);
+
+            // Reposition dots
+            codes.forEach(code => {
+                const rec = getTemporalRecord(code, dateStr);
+                if (rec) {
+                    svgTemporal.select(`.temporal-scrubber-dot.dot-${code}`)
+                        .transition()
+                        .duration(isInteractive ? 80 : 500)
+                        .attr("cy", yScaleTemporal(rec.score));
+                }
+            });
+        }
+    }
+}
+
+/**
+ * Update temporal visualization state based on scrollama step index.
+ */
+function updateTemporalVisualization(stepIndex) {
+    if (!svgTemporal) return;
+
+    const steps = document.querySelectorAll("#scrolly-temporal article .step");
+    const activeStep = steps[stepIndex];
+    if (!activeStep) return;
+
+    const stepDate = activeStep.getAttribute("data-date");
+    const stepCountry = activeStep.getAttribute("data-country") || "ALL";
+
+    // Set country highlighting/filtering if changed
+    if (stepCountry !== selectedTemporalCountry) {
+        selectedTemporalCountry = stepCountry;
+        document.querySelectorAll(".temporal-country-btn")
+            .forEach(btn => btn.classList.toggle("active", btn.getAttribute("data-country") === stepCountry));
+        renderTemporalPlot();
+    }
+
+    if (stepDate) {
+        setTemporalDate(stepDate, false);
+    }
+}
+
+/**
+ * Bind country filter buttons in Section 9.
+ */
+function bindTemporalEvents() {
+    const btns = document.querySelectorAll(".temporal-country-btn");
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            btns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            selectedTemporalCountry = btn.getAttribute("data-country") || "ALL";
+            renderTemporalPlot();
+        });
+    });
+}
+
+/**
+ * Initialize Scrollama for Section 9 (Temporal Focus).
+ */
+function initScrollamaTemporal() {
+    scrollerTemporal
+        .setup({
+            step: "#scrolly-temporal article .step",
+            offset: 0.55,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            document.querySelectorAll("#scrolly-temporal article .step")
+                .forEach((step, idx) => step.classList.toggle("is-active", idx === stepIndex));
+            updateTemporalVisualization(stepIndex);
+        });
+
+    updateTemporalVisualization(0);
 }
