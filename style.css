@@ -186,7 +186,9 @@ body {
 #scrolly-emotions figure.sticky,
 #scrolly-map figure.sticky,
 #scrolly-beeswarm figure.sticky,
-#scrolly-sankey figure.sticky {
+#scrolly-sankey figure.sticky,
+#scrolly-temporal figure.sticky,
+#scrolly-constellation figure.sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -547,6 +549,48 @@ body {
     }
 }
 
+/* --- Volume Navigation (Hero Bar) --- */
+.volume-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    padding: 0.45rem 1.25rem;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.volume-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a.volume-link:hover {
+    color: var(--color-text-main);
+}
+
+.volume-link.active {
+    color: var(--color-text-main);
+    cursor: default;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 1px;
+}
+
+.volume-sep {
+    color: var(--color-border);
+    font-weight: 300;
+    user-select: none;
+}
+
 /* Media Queries for Tablet Screen Sizes (640px to 991px) */
 @media (min-width: 640px) and (max-width: 991px) {
     .container {
@@ -560,7 +604,8 @@ body {
     #scrolly-map figure.sticky,
     #scrolly-beeswarm figure.sticky,
     #scrolly-sankey figure.sticky,
-    #scrolly-temporal figure.sticky {
+    #scrolly-temporal figure.sticky,
+    #scrolly-constellation figure.sticky {
         height: 48vh;
         max-height: 460px;
     }
@@ -586,7 +631,8 @@ body {
     #scrolly-map,
     #scrolly-beeswarm,
     #scrolly-sankey,
-    #scrolly-temporal {
+    #scrolly-temporal,
+    #scrolly-constellation {
         display: flex;
         flex-direction: row-reverse; /* sticky visualization on right, steps scroll on left */
         justify-content: space-between;
@@ -599,7 +645,8 @@ body {
     #scrolly-map figure.sticky,
     #scrolly-beeswarm figure.sticky,
     #scrolly-sankey figure.sticky,
-    #scrolly-temporal figure.sticky {
+    #scrolly-temporal figure.sticky,
+    #scrolly-constellation figure.sticky {
         width: 55%; /* Visualization space gets 55% of horizontal space */
         height: 100vh; /* Fills screen height fully */
         max-height: none;
@@ -1961,4 +2008,252 @@ body {
         font-size: 0.68rem;
         padding: 0.15rem 0.45rem;
     }
+}
+
+/* ==========================================================================
+   VOLUMEN II: LA GEOMETRÍA DE LA CULTURA — MAPA DE CONSTELACIONES
+   ========================================================================== */
+
+#scrolly-constellation {
+    position: relative;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.flex-column-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    padding: 0.75rem !important;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#d3-canvas-constellation {
+    flex: 1 1 0;
+    width: 100%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+#storytelling-insights-constellation {
+    flex-shrink: 0;
+    margin-top: 0.65rem;
+    width: 100%;
+}
+
+#storytelling-insights-constellation .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+#storytelling-insights-constellation .insight-card {
+    padding: 0.45rem 0.65rem;
+    margin: 0;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+#storytelling-insights-constellation .insight-country {
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.05em;
+}
+
+#storytelling-insights-constellation .insight-stat {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.1;
+}
+
+#storytelling-insights-constellation .insight-label {
+    font-size: 0.64rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+    #storytelling-insights-constellation {
+        display: none !important;
+    }
+}
+
+.constellation-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    flex-shrink: 0;
+}
+
+.constellation-status-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.constellation-dim-badge {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.3rem 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.constellation-avg-badge {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.constellation-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    color: var(--color-text-muted);
+}
+
+.constellation-legend-gradient {
+    display: inline-block;
+    width: 50px;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, rgba(31,30,29,0.15) 0%, rgba(31,30,29,0.85) 100%);
+}
+
+/* Constellation SVG Elements */
+.constellation-link {
+    stroke: #1f1e1d;
+    cursor: pointer;
+    transition: stroke-width 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke-opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.constellation-link:hover {
+    stroke: var(--color-accent) !important;
+    stroke-opacity: 1 !important;
+}
+
+.constellation-link-label-group {
+    pointer-events: none;
+    transition: transform 0.1s linear;
+}
+
+.constellation-link-bg {
+    fill: #ffffff;
+    stroke: var(--color-border);
+    stroke-width: 0.75px;
+    rx: 4px;
+}
+
+.constellation-link-text {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    fill: var(--color-text-main);
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.constellation-node {
+    cursor: grab;
+    transition: filter 0.2s ease;
+}
+
+.constellation-node:active {
+    cursor: grabbing;
+}
+
+.constellation-node-circle {
+    stroke: #ffffff;
+    stroke-width: 3px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
+    transition: r 0.25s ease, filter 0.25s ease;
+}
+
+.constellation-node:hover .constellation-node-circle {
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
+}
+
+.constellation-node-code {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 900;
+    fill: #ffffff;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+    user-select: none;
+}
+
+.constellation-node-name {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 800;
+    fill: var(--color-text-main);
+    text-anchor: middle;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Filter container inside steps */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 1.25rem 0 0.5rem 0;
+}
+
+.filter-btn {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background-color: #ffffff;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-text-main);
+    color: var(--color-text-main);
+}
+
+.filter-btn-active,
+.filter-btn.active {
+    background-color: var(--color-text-main) !important;
+    color: #ffffff !important;
+    border-color: var(--color-text-main) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol. II: La Geometría de la Cultura | El Eco de las Palabras</title>
+    <!-- Google Fonts: Editorial Serif and Clean Sans-Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Header Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <nav class="volume-nav" aria-label="Navegación de volúmenes">
+                <a href="index.html" class="volume-link">Vol. I: El Eco de las Noticias</a>
+                <span class="volume-sep">|</span>
+                <span class="volume-link active">Vol. II: La Geometría de la Cultura</span>
+            </nav>
+            <span class="hero-eyebrow">Embeddings & Semántica Cultural</span>
+            <h1 class="hero-title">La Geometría de la Cultura</h1>
+            <p class="hero-subtitle">Distancias Conceptuales y Constelaciones del Discurso en Hispanoamérica</p>
+            <div class="hero-line"></div>
+            <div class="hero-countries">
+                <span class="country-tag tag-ar">Argentina</span>
+                <span class="country-tag tag-cl">Chile</span>
+                <span class="country-tag tag-es">España</span>
+                <span class="country-tag tag-mx">México</span>
+            </div>
+            <div class="scroll-indicator">
+                <span class="arrow">↓</span> Desliza para explorar
+            </div>
+        </div>
+    </header>
+
+    <!-- Introductory Section -->
+    <section class="intro-section">
+        <div class="container">
+            <p class="lead-text">
+                El idioma es el mismo. El significado no. Cuando leemos noticias en Santiago, Buenos Aires, Ciudad de México o Madrid, compartimos la misma gramática, pero detrás de las palabras que consumimos a diario, las sociedades construyen arquitecturas mentales muy distintas.
+            </p>
+            <p class="body-text">
+                A través del análisis de representaciones vectoriales densas (<em>word embeddings</em>) y similitud coseno en cientos de miles de artículos periodísticos, hemos medido qué tan parecidos son los "moldes" que estructuran nuestra comprensión colectiva. Un valor cercano a <strong>1.0</strong> significa que los medios de ambos países conciben el mundo bajo una estructura semántica idéntica; un valor bajo revela que, aunque empleemos los mismos términos, estamos debatiendo sobre realidades conceptuales profundamente separadas.
+            </p>
+            <p class="body-text">
+                En esta entrega del proyecto, mapeamos los cuatro países como una constelación de cuerpos interconectados por fuerzas gravitatorias de afinidad lingüística. A medida que te desplaces, observa cómo la red se condensa o se fractura dependiendo de la dimensión en disputa.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section Divider: El Mapa de Constelaciones -->
+    <section class="section-divider">
+        <div class="container">
+            <span class="section-eyebrow">Sección 1 &bull; Similitud Coseno en Espacios Latentes</span>
+            <h2 class="section-title">El Mapa de Constelaciones</h2>
+            <p class="section-intro-text">
+                Visualizamos la cercanía conceptual entre Argentina, Chile, España y México mediante un grafo dirigido por fuerzas físicas. Cuanto mayor es la similitud semántica en una dimensión, más corto y grueso es el enlace que une a las naciones; cuanto menor es la coincidencia, mayor es la repulsión gravitatoria.
+            </p>
+            <div class="section-divider-line"></div>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section: Constellation Graph -->
+    <section id="scrolly-constellation">
+        <!-- Sticky Constellation Canvas -->
+        <figure class="sticky" id="constellation-figure">
+            <div class="viz-wrapper flex-column-layout">
+                <!-- Status controls bar -->
+                <div class="constellation-controls">
+                    <div class="constellation-status-box">
+                        <span id="constellation-active-dim-badge" class="constellation-dim-badge">Dimensión: Moral (Bien vs. Mal)</span>
+                        <span id="constellation-avg-similarity" class="constellation-avg-badge">Similitud promedio: 0.832</span>
+                    </div>
+                    <div class="constellation-legend" title="Grosor y opacidad proporcionales a la similitud coseno">
+                        <span>Lejos (0.40)</span>
+                        <span class="constellation-legend-gradient"></span>
+                        <span>Cerca (1.00)</span>
+                    </div>
+                </div>
+
+                <!-- D3 Canvas -->
+                <div id="d3-canvas-constellation" class="viz-canvas">
+                    <div class="viz-placeholder">
+                        <div class="spinner"></div>
+                        <p class="placeholder-title">Calculando geometría semántica…</p>
+                        <p class="placeholder-subtitle">Se renderizará al desplazarse a esta sección</p>
+                    </div>
+                </div>
+
+                <!-- Storytelling summary panel -->
+                <div id="storytelling-insights-constellation" class="storytelling-insights">
+                    <!-- Dynamic content generated by volumen2.js -->
+                </div>
+            </div>
+        </figure>
+
+        <!-- Scrolling narrative steps -->
+        <article class="steps-container">
+            <!-- Step 1: Moral -->
+            <div id="step-moral" class="step is-active" data-step="1" data-dimension="moral">
+                <span class="step-num">01.1</span>
+                <h3>Lo que nos une: El Orden, la Moral y el Género</h3>
+                <p>
+                    Hay pilares en nuestra cultura mediática que son prácticamente inquebrantables. Cuando la prensa habla del espectro <strong>Masculino-Femenino</strong>, de lo <strong>Legal-Ilegal</strong> o del <strong>Bien y el Mal</strong>, las similitudes entre los cuatro países promedian un altísimo <strong>0.84</strong>.
+                </p>
+                <div id="constellation-insight-moral" class="map-insight-text border-cl">
+                    <div class="map-insight-header">
+                        <span class="map-insight-badge" style="color: var(--color-accent);">Afinidad Estructural: Moral</span>
+                    </div>
+                    <p>
+                        Conceptualmente, un lector chileno, argentino, mexicano o español interpreta las nociones de "justicia", "ética" o "corrupción" bajo el mismo marco de referencia geométrico. En este plano normativo, la cultura hispanohablante constituye un bloque homogéneo y cohesionado.
+                    </p>
+                    <div class="map-insight-meta">
+                        Similitud promedio: <strong>0.832</strong> | Máxima coincidencia: <strong>Chile – México (0.864)</strong>
+                    </div>
+                </div>
+                <p>
+                    Observa cómo en la pantalla los cuatro nodos se atraen vigorosamente hacia el centro, unidos por enlaces gruesos y de alta tensión.
+                </p>
+            </div>
+
+            <!-- Step 2: Age -->
+            <div id="step-age" class="step" data-step="2" data-dimension="age">
+                <span class="step-num">01.2</span>
+                <h3>Las primeras grietas: La Juventud y la Cultura</h3>
+                <p>
+                    Sin embargo, a medida que nos adentramos en cómo experimentamos la vida cotidiana y las etapas biológicas, el mapa comienza a estirarse visiblemente.
+                </p>
+                <div id="constellation-insight-age" class="map-insight-text border-es">
+                    <div class="map-insight-header">
+                        <span class="map-insight-badge" style="color: var(--color-es);">Distorsión Generacional: Edad</span>
+                    </div>
+                    <p>
+                        Al examinar la dimensión de la <strong>Edad (Joven vs. Viejo)</strong>, la concordancia semántica decae con fuerza. La distancia conceptual entre <strong>Chile y España</strong> es drástica: apenas un <strong>0.635</strong> de similitud coseno. Lo que la prensa española retrata como juventud o vejez no resuena con los marcos de referencia del Cono Sur.
+                    </p>
+                    <div class="map-insight-meta">
+                        Similitud promedio: <strong>0.669</strong> | Mayor brecha: <strong>Chile – España (0.635)</strong>
+                    </div>
+                </div>
+                <p>
+                    La educación y la cultura siguen un patrón semejante: el concepto de "lo culto" se enmarca de formas localizadas según la trayectoria histórica, educativa y de clase de cada país.
+                </p>
+            </div>
+
+            <!-- Step 3: Nationalism -->
+            <div id="step-nationalism" class="step" data-step="3" data-dimension="nationalism">
+                <span class="step-num">01.3</span>
+                <h3>Mundos paralelos: El Nacionalismo</h3>
+                <p>
+                    Si quieres ver dónde nuestros idiomas se desconectan por completo, mira el <strong>Nacionalismo (Nacional vs. Extranjero)</strong>. Aquí, el significado se fractura de manera definitiva.
+                </p>
+                <div id="constellation-insight-nationalism" class="map-insight-text border-ar">
+                    <div class="map-insight-header">
+                        <span class="map-insight-badge" style="color: var(--color-cl);">Fractura Geopolítica: Nacionalismo</span>
+                    </div>
+                    <p>
+                        La similitud entre cómo las redacciones de <strong>Chile y Argentina</strong> construyen narrativamente lo propio frente a lo foráneo cae a un asombroso <strong>0.470</strong> —el valor más bajo de todo el estudio—. A pesar de compartir cordillera y siglos de vecindad, la geometría de lo "nacional" y lo "ajeno" habita universos mediáticos completamente disjuntos.
+                    </p>
+                    <div class="map-insight-meta">
+                        Similitud promedio: <strong>0.548</strong> | Menor similitud regional: <strong>Chile – Argentina (0.470)</strong>
+                    </div>
+                </div>
+                <p>
+                    La red explota hacia la periferia: los resortes gravitatorios ceden, los enlaces se vuelven delgados y tenues, y los países se repelen al máximo.
+                </p>
+            </div>
+
+            <!-- Step 4: Interactive Explorer -->
+            <div id="step-interactive" class="step" data-step="4" data-dimension="interactive">
+                <span class="step-num">01.4</span>
+                <h3>Explora las distancias</h3>
+                <p>
+                    El lenguaje es el reflejo de nuestras prioridades invisibles. Selecciona cualquiera de las dimensiones culturales a continuación para poner a prueba la elasticidad del discurso periodístico y observar cómo los países se acercan o repelen en tiempo real.
+                </p>
+                <div class="filter-container" id="constellation-filter-buttons">
+                    <!-- Populated dynamically by volumen2.js with all dimensions -->
+                </div>
+                <p class="meta-note" style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-muted);">
+                    Tip: También puedes arrastrar los nodos directamente con el cursor para sentir la tensión elástica de la constelación.
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <!-- Top bar: title + author -->
+            <div class="footer-top">
+                <div>
+                    <p class="footer-title"><strong>El Eco de las Palabras &mdash; Volumen II</strong></p>
+                    <p class="footer-sub">La Geometría de la Cultura &mdash; Embeddings, D3.js, Scrollama.js y CSS Nativo &mdash; 2026</p>
+                </div>
+                <div class="footer-author">
+                    <p class="footer-author-name">Leonardo Molina</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/Orion89" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                            GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/leonardo-molina-v-68a601183/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <!-- Three-column content grid -->
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-heading">Fuentes</h3>
+                    <p class="footer-text">
+                        Los datos originales provienen de un corpus de más de 1.1 millones de noticias en español recolectadas de 100 medios digitales usando la biblioteca <a href="https://newspaper4k.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer" class="footer-link">newspaper4k</a> bajo licencia MIT.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Métodos</h3>
+                    <p class="footer-text">
+                        Las matrices de similitud cultural se obtuvieron proyectando los vectores de palabras (embeddings entrenados con Word2Vec) sobre dimensiones semánticas contrastadas (ej. bien vs. mal, joven vs. viejo, nacional vs. extranjero) y calculando la similitud coseno de las proyecciones resultantes entre países.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Referencias</h3>
+                    <ul class="footer-refs">
+                        <li>Kozlowski, A. C., Taddy, M., &amp; Evans, J. A. (2019). <em>The geometry of culture: Analyzing the meanings of class through word embeddings</em>. American Sociological Review, 84(5), 905-949.</li>
+                        <li>Jurafsky, D., &amp; Martin, J. H. (2024). <em>Speech and language processing</em> (3rd ed. draft). Stanford University.</li>
+                        <li>Meeks, E., &amp; Dufour, A. (2024). <em>D3.js in Action</em>. Manning Publications Co.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
+    
+    <!-- Script Volumen 2 -->
+    <script src="volumen2.js"></script>
+</body>
+</html>
