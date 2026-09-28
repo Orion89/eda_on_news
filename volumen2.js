@@ -44,7 +44,19 @@ const countryMetadata = {
         color: "var(--color-es)",
         hex: "#f59e0b"
     },
+    "españa": {
+        code: "ES",
+        name: "España",
+        color: "var(--color-es)",
+        hex: "#f59e0b"
+    },
     "mexico": {
+        code: "MX",
+        name: "México",
+        color: "var(--color-mx)",
+        hex: "#10b981"
+    },
+    "méxico": {
         code: "MX",
         name: "México",
         color: "var(--color-mx)",
@@ -625,31 +637,564 @@ function initScrollama() {
         });
 }
 
+// ==========================================================================
+// SECCIÓN 2: ARCO DE PROYECCIÓN 1D (LA REGLA DE MEDIR INVISIBLE)
+// ==========================================================================
+
+let rawProjectionData = null;
+let currentProjectionDim = "moral";
+let currentProjectionWord = "manifestante";
+let interactiveProjectionDim = "moral";
+let interactiveProjectionWord = "manifestante";
+
+let svgProjection = null;
+let gProjectionBase = null;
+let gProjectionLines = null;
+let gProjectionNeedles = null;
+let gProjectionMarkers = null;
+let gProjectionNodes = null;
+let gProjectionLabels = null;
+
+let widthProjection = 800;
+let heightProjection = 560;
+const scrollerProjection = scrollama();
+
+const projectionDimensions = [
+    { key: "moral", label: "Moral", icon: "⚖️" },
+    { key: "nationalism", label: "Nacionalismo", icon: "🚩" },
+    { key: "gender", label: "Género", icon: "⚧" },
+    { key: "time_and_change", label: "Tiempo y Cambio", icon: "⏳" }
+];
+
+/**
+ * Setup D3 Projection Arc Canvas
+ */
+function setupD3ProjectionCanvas() {
+    const canvas = document.getElementById("d3-canvas-projection");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    widthProjection = canvas.clientWidth || 800;
+    heightProjection = canvas.clientHeight || 560;
+
+    svgProjection = d3.select(canvas)
+        .append("svg")
+        .attr("id", "svg-projection")
+        .attr("class", "projection-svg")
+        .attr("width", widthProjection)
+        .attr("height", heightProjection)
+        .attr("viewBox", `0 0 ${widthProjection} ${heightProjection}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // Proper z-order layering
+    gProjectionBase = svgProjection.append("g").attr("class", "g-arc-base");
+    gProjectionLines = svgProjection.append("g").attr("class", "g-arc-lines");
+    gProjectionNeedles = svgProjection.append("g").attr("class", "g-arc-needles");
+    gProjectionMarkers = svgProjection.append("g").attr("class", "g-arc-markers");
+    gProjectionNodes = svgProjection.append("g").attr("class", "g-arc-nodes");
+    gProjectionLabels = svgProjection.append("g").attr("class", "g-arc-labels");
+}
+
+/**
+ * Mathematical Semicircular Projection Arc
+ * Animates vectors with d3.transition().duration(800).ease(d3.easeCubicOut)
+ * Handles Enter, Update, Exit for all 4 countries
+ */
+function renderArc(dimension, word) {
+    if (!rawProjectionData || !rawProjectionData[dimension] || !rawProjectionData[dimension][word]) {
+        console.warn(`[Projection Arc] Datos no encontrados para: ${dimension} -> ${word}`);
+        return;
+    }
+
+    currentProjectionDim = dimension;
+    currentProjectionWord = word;
+
+    const items = rawProjectionData[dimension][word];
+    const polesStr = items[0]?.poles || "Negativo <-> Positivo";
+    const [poleNeg, polePos] = polesStr.split(" <-> ");
+
+    const canvas = document.getElementById("d3-canvas-projection");
+    if (!canvas || !svgProjection) return;
+
+    widthProjection = canvas.clientWidth || 800;
+    heightProjection = canvas.clientHeight || 560;
+
+    svgProjection
+        .attr("width", widthProjection)
+        .attr("height", heightProjection)
+        .attr("viewBox", `0 0 ${widthProjection} ${heightProjection}`);
+
+    const cx = widthProjection / 2;
+    const cy = heightProjection - 65;
+    const R = Math.max(90, Math.min(widthProjection * 0.42, cy - 50));
+
+    // Mathematical linear mapping to arc
+    const xScale = d3.scaleLinear()
+        .domain([-0.5, 0.5])
+        .range([-R, R])
+        .clamp(true);
+
+    // 1. Render Base Geometry (Baseline, Arc, Neutral Guide, Pivot Hub, Pole Labels)
+    gProjectionBase.selectAll("*").remove();
+
+    // Semicircular arc path (from left to right clockwise through upper half)
+    const arcPathString = `M ${cx - R},${cy} A ${R},${R} 0 0,1 ${cx + R},${cy}`;
+    gProjectionBase.append("path")
+        .attr("class", "arc-path")
+        .attr("d", arcPathString);
+
+    // Baseline (thick consensus axis)
+    gProjectionBase.append("line")
+        .attr("class", "arc-axis-line")
+        .attr("x1", cx - R - 10)
+        .attr("y1", cy)
+        .attr("x2", cx + R + 10)
+        .attr("y2", cy);
+
+    // Neutral vertical dashed line (at 0.0)
+    gProjectionBase.append("line")
+        .attr("class", "arc-neutral-line")
+        .attr("x1", cx)
+        .attr("y1", cy)
+        .attr("x2", cx)
+        .attr("y2", cy - R);
+
+    // Neutral center tick mark on baseline
+    gProjectionBase.append("line")
+        .attr("class", "arc-neutral-line")
+        .attr("x1", cx)
+        .attr("y1", cy - 6)
+        .attr("x2", cx)
+        .attr("y2", cy + 6)
+        .attr("stroke", "var(--color-text-main)");
+
+    // Pivot center hub circle
+    gProjectionBase.append("circle")
+        .attr("class", "arc-center-hub")
+        .attr("cx", cx)
+        .attr("cy", cy)
+        .attr("r", 5.5);
+
+    // Pole labels & neutral label
+    gProjectionBase.append("text")
+        .attr("class", "arc-pole-label")
+        .attr("x", cx - R)
+        .attr("y", cy + 24)
+        .attr("text-anchor", "start")
+        .text(`← ${poleNeg} (-0.50)`);
+
+    gProjectionBase.append("text")
+        .attr("class", "arc-neutral-label")
+        .attr("x", cx)
+        .attr("y", cy + 24)
+        .attr("text-anchor", "middle")
+        .text(`0.0 (Neutro)`);
+
+    gProjectionBase.append("text")
+        .attr("class", "arc-pole-label")
+        .attr("x", cx + R)
+        .attr("y", cy + 24)
+        .attr("text-anchor", "end")
+        .text(`${polePos} (+0.50) →`);
+
+    // 2. Prepare Country Geometry Data
+    const countryPoints = items.map(d => {
+        const normKey = d.country.toLowerCase();
+        const meta = countryMetadata[normKey] || {
+            code: d.country.slice(0, 2).toUpperCase(),
+            name: d.country,
+            color: "#666",
+            hex: "#666"
+        };
+        const val = d.projection;
+        const dx = xScale(val);
+        const dy = -Math.sqrt(Math.max(0, R * R - dx * dx));
+        return {
+            id: d.country,
+            country: d.country,
+            name: meta.name,
+            code: meta.code,
+            color: meta.color,
+            hex: meta.hex,
+            value: val,
+            poles: d.poles,
+            poleNeg,
+            polePos,
+            word,
+            dimension,
+            xArc: cx + dx,
+            yArc: cy + dy,
+            xBase: cx + dx,
+            yBase: cy
+        };
+    });
+
+    const t = d3.transition().duration(800).ease(d3.easeCubicOut);
+
+    // 3. Dotted Perpendicular Projection Lines
+    gProjectionLines.selectAll(".arc-proj-line")
+        .data(countryPoints, d => d.id)
+        .join(
+            enter => enter.append("line")
+                .attr("class", "arc-proj-line")
+                .attr("x1", d => d.xArc)
+                .attr("y1", d => d.yArc)
+                .attr("x2", d => d.xBase)
+                .attr("y2", d => d.yBase)
+                .attr("stroke", d => d.color),
+            update => update.call(u => u.transition(t)
+                .attr("x1", d => d.xArc)
+                .attr("y1", d => d.yArc)
+                .attr("x2", d => d.xBase)
+                .attr("y2", d => d.yBase)
+                .attr("stroke", d => d.color)),
+            exit => exit.transition(t).style("opacity", 0).remove()
+        );
+
+    // 4. Solid Needle Vectors
+    gProjectionNeedles.selectAll(".arc-vector")
+        .data(countryPoints, d => d.id)
+        .join(
+            enter => enter.append("line")
+                .attr("class", "arc-vector")
+                .attr("x1", cx)
+                .attr("y1", cy)
+                .attr("x2", d => d.xArc)
+                .attr("y2", d => d.yArc)
+                .attr("stroke", d => d.color)
+                .on("mouseover", handleArcItemMouseOver)
+                .on("mousemove", positionTooltip)
+                .on("mouseleave", handleArcItemMouseLeave),
+            update => update.call(u => u.transition(t)
+                .attr("x1", cx)
+                .attr("y1", cy)
+                .attr("x2", d => d.xArc)
+                .attr("y2", d => d.yArc)
+                .attr("stroke", d => d.color)),
+            exit => exit.transition(t).style("opacity", 0).remove()
+        );
+
+    // 5. Markers on Baseline
+    gProjectionMarkers.selectAll(".arc-proj-marker")
+        .data(countryPoints, d => d.id)
+        .join(
+            enter => enter.append("circle")
+                .attr("class", "arc-proj-marker")
+                .attr("cx", d => d.xBase)
+                .attr("cy", d => d.yBase)
+                .attr("r", 5)
+                .attr("fill", d => d.color)
+                .on("mouseover", handleArcItemMouseOver)
+                .on("mousemove", positionTooltip)
+                .on("mouseleave", handleArcItemMouseLeave),
+            update => update.call(u => u.transition(t)
+                .attr("cx", d => d.xBase)
+                .attr("cy", d => d.yBase)
+                .attr("fill", d => d.color)),
+            exit => exit.transition(t).style("opacity", 0).remove()
+        );
+
+    // 6. Arc Tip Nodes
+    gProjectionNodes.selectAll(".arc-node")
+        .data(countryPoints, d => d.id)
+        .join(
+            enter => enter.append("circle")
+                .attr("class", "arc-node")
+                .attr("cx", d => d.xArc)
+                .attr("cy", d => d.yArc)
+                .attr("r", 9.5)
+                .attr("fill", d => d.color)
+                .on("mouseover", handleArcItemMouseOver)
+                .on("mousemove", positionTooltip)
+                .on("mouseleave", handleArcItemMouseLeave),
+            update => update.call(u => u.transition(t)
+                .attr("cx", d => d.xArc)
+                .attr("cy", d => d.yArc)
+                .attr("fill", d => d.color)),
+            exit => exit.transition(t).style("opacity", 0).remove()
+        );
+
+    // 7. Node Country Code Labels above Arc
+    gProjectionLabels.selectAll(".arc-node-label-group")
+        .data(countryPoints, d => d.id)
+        .join(
+            enter => {
+                const g = enter.append("g")
+                    .attr("class", "arc-node-label-group")
+                    .attr("transform", d => `translate(${d.xArc}, ${d.yArc - 17})`);
+                g.append("rect")
+                    .attr("class", "arc-node-bg")
+                    .attr("x", -15)
+                    .attr("y", -8)
+                    .attr("width", 30)
+                    .attr("height", 16);
+                g.append("text")
+                    .attr("class", "arc-node-text")
+                    .attr("fill", d => d.color)
+                    .text(d => d.code);
+                return g;
+            },
+            update => {
+                update.transition(t)
+                    .attr("transform", d => `translate(${d.xArc}, ${d.yArc - 17})`);
+                update.select(".arc-node-text")
+                    .attr("fill", d => d.color)
+                    .text(d => d.code);
+                return update;
+            },
+            exit => exit.transition(t).style("opacity", 0).remove()
+        );
+
+    // 8. Update UI Badges & Storytelling Insight Cards
+    updateProjectionBadgesAndCards(dimension, word, countryPoints, poleNeg, polePos);
+}
+
+/**
+ * Projection Arc Tooltip Handlers
+ */
+function handleArcItemMouseOver(event, d) {
+    tooltip.transition().duration(100).style("opacity", 0.98);
+    const sign = d.value >= 0 ? "+" : "";
+    const poleOrientation = d.value < 0 ? d.poleNeg : (d.value > 0 ? d.polePos : "Neutro");
+    const diffPct = Math.abs(d.value / 0.5 * 100).toFixed(1);
+
+    tooltip.html(`
+        <div class="tooltip-title" style="color:${d.color}">${d.name} (${d.code})</div>
+        <div style="font-size:0.85rem; margin: 0.25rem 0; font-weight:700;">Palabra: &ldquo;${d.word}&rdquo;</div>
+        <div class="tooltip-row" style="margin-top:0.25rem;">
+            <span>Proyección:</span>
+            <strong style="color:${d.color}">${sign}${d.value.toFixed(3)}</strong>
+        </div>
+        <div class="tooltip-row" style="margin-top:0.2rem;">
+            <span>Polo dominante:</span>
+            <strong>${poleOrientation}</strong>
+        </div>
+        <div class="tooltip-row" style="margin-top:0.2rem; font-size:0.75rem; color:#b5b0aa;">
+            <span>Intensidad: ${diffPct}% hacia el extremo</span>
+        </div>
+    `);
+    positionTooltip(event);
+}
+
+function handleArcItemMouseLeave() {
+    tooltip.transition().duration(150).style("opacity", 0);
+}
+
+/**
+ * Updates status bar badges & country cards below projection canvas
+ */
+function updateProjectionBadgesAndCards(dimKey, word, points, poleNeg, polePos) {
+    const dim = dimensionInfo[dimKey] || { label: dimKey };
+
+    const activeBadge = document.getElementById("projection-active-badge");
+    if (activeBadge) {
+        activeBadge.innerHTML = `Palabra: <strong>${word}</strong>`;
+    }
+
+    const dimBadge = document.getElementById("projection-dim-badge");
+    if (dimBadge) {
+        dimBadge.innerText = `Dimensión: ${dim.label}`;
+    }
+
+    const polesBadge = document.getElementById("projection-poles-badge");
+    if (polesBadge) {
+        polesBadge.innerText = `${poleNeg} ← Neutro (0.0) → ${polePos}`;
+    }
+
+    const cardsContainer = document.getElementById("storytelling-insights-projection");
+    if (cardsContainer) {
+        const cardsHtml = points.map(d => {
+            const sign = d.value >= 0 ? "+" : "";
+            const poleTarget = d.value < 0 ? poleNeg : (d.value > 0 ? polePos : "Neutro");
+            return `
+                <div class="insight-card country-border-${d.code.toLowerCase()}" 
+                     data-country="${d.id}"
+                     title="Ver proyección de ${d.name}">
+                    <div class="insight-country" style="color:${d.color}">${d.name}</div>
+                    <div class="insight-stat" style="color:${d.color}">${sign}${d.value.toFixed(3)}</div>
+                    <div class="insight-label">${poleTarget}</div>
+                </div>
+            `;
+        }).join("");
+
+        cardsContainer.innerHTML = `<div class="insights-grid">${cardsHtml}</div>`;
+
+        // Highlight needle/marker when hovering card
+        cardsContainer.querySelectorAll(".insight-card").forEach(card => {
+            const cId = card.getAttribute("data-country");
+            card.addEventListener("mouseenter", () => {
+                gProjectionNeedles.selectAll(".arc-vector")
+                    .transition().duration(150)
+                    .attr("stroke-width", d => d.id === cId ? 6 : 1.5)
+                    .style("opacity", d => d.id === cId ? 1 : 0.35);
+                gProjectionNodes.selectAll(".arc-node")
+                    .transition().duration(150)
+                    .attr("r", d => d.id === cId ? 13 : 7);
+            });
+            card.addEventListener("mouseleave", () => {
+                gProjectionNeedles.selectAll(".arc-vector")
+                    .transition().duration(150)
+                    .attr("stroke-width", 3.5)
+                    .style("opacity", 1);
+                gProjectionNodes.selectAll(".arc-node")
+                    .transition().duration(150)
+                    .attr("r", 9.5);
+            });
+        });
+    }
+}
+
+/**
+ * Setup interactive UI for Step 5: Dimension buttons & Word pills
+ */
+function setupProjectionInteractiveUI() {
+    const dimContainer = document.getElementById("projection-dim-filters");
+    const wordContainer = document.getElementById("projection-word-pills");
+    if (!dimContainer || !wordContainer || !rawProjectionData) return;
+
+    dimContainer.innerHTML = "";
+
+    // 1. Create Dimension Buttons
+    projectionDimensions.forEach(dim => {
+        const btn = document.createElement("button");
+        btn.className = `filter-btn ${dim.key === interactiveProjectionDim ? "filter-btn-active active" : ""}`;
+        btn.setAttribute("data-dim", dim.key);
+        btn.innerHTML = `<span>${dim.icon}</span> <span>${dim.label}</span>`;
+
+        btn.addEventListener("click", () => {
+            dimContainer.querySelectorAll(".filter-btn").forEach(b => {
+                b.classList.remove("filter-btn-active", "active");
+            });
+            btn.classList.add("filter-btn-active", "active");
+            interactiveProjectionDim = dim.key;
+
+            // Re-populate words for this dimension
+            populateWordPills(dim.key);
+
+            // Select first word or keep current
+            const words = Object.keys(rawProjectionData[dim.key] || {});
+            if (!words.includes(interactiveProjectionWord)) {
+                interactiveProjectionWord = words[0] || "manifestante";
+            }
+            updateActiveWordPill();
+            renderArc(interactiveProjectionDim, interactiveProjectionWord);
+        });
+
+        dimContainer.appendChild(btn);
+    });
+
+    // 2. Populate Word Pills for Initial Dimension
+    populateWordPills(interactiveProjectionDim);
+}
+
+function populateWordPills(dimKey) {
+    const wordContainer = document.getElementById("projection-word-pills");
+    if (!wordContainer || !rawProjectionData || !rawProjectionData[dimKey]) return;
+
+    wordContainer.innerHTML = "";
+    const words = Object.keys(rawProjectionData[dimKey]);
+
+    words.forEach(word => {
+        const btn = document.createElement("button");
+        btn.className = `action-btn ${word === interactiveProjectionWord ? "action-btn-active active" : ""}`;
+        btn.setAttribute("data-word", word);
+        btn.textContent = word;
+
+        btn.addEventListener("click", () => {
+            wordContainer.querySelectorAll(".action-btn").forEach(b => {
+                b.classList.remove("action-btn-active", "active");
+            });
+            btn.classList.add("action-btn-active", "active");
+            interactiveProjectionWord = word;
+            renderArc(interactiveProjectionDim, interactiveProjectionWord);
+        });
+
+        wordContainer.appendChild(btn);
+    });
+}
+
+function updateActiveWordPill() {
+    const wordContainer = document.getElementById("projection-word-pills");
+    if (!wordContainer) return;
+    wordContainer.querySelectorAll(".action-btn").forEach(btn => {
+        const w = btn.getAttribute("data-word");
+        btn.classList.toggle("action-btn-active", w === interactiveProjectionWord);
+        btn.classList.toggle("active", w === interactiveProjectionWord);
+    });
+}
+
+/**
+ * Initialize Scrollama for Section 2 (Arco de Proyección 1D)
+ */
+function initScrollamaProjection() {
+    scrollerProjection
+        .setup({
+            step: "#scrolly-projection article .step",
+            offset: 0.52,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const stepEl = response.element;
+
+            document.querySelectorAll("#scrolly-projection article .step")
+                .forEach((el, idx) => el.classList.toggle("is-active", idx === stepIndex));
+
+            const stepNum = parseInt(stepEl.getAttribute("data-step"), 10);
+            const uiContainer = document.getElementById("projection-interactive-ui");
+
+            if (stepNum === 1) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderArc("moral", "manifestante");
+            } else if (stepNum === 2) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderArc("moral", "carabineros");
+            } else if (stepNum === 3) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderArc("nationalism", "inmigrante");
+            } else if (stepNum === 4) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderArc("gender", "enfermería");
+            } else if (stepNum === 5) {
+                if (uiContainer) uiContainer.classList.add("is-visible");
+                renderArc(interactiveProjectionDim, interactiveProjectionWord);
+            }
+        });
+}
+
 /**
  * Window resize handler
  */
 function handleResize() {
-    const canvas = document.getElementById("d3-canvas-constellation");
-    if (!canvas || !svgConstellation) return;
+    // 1. Constellation resize
+    const canvasConstellation = document.getElementById("d3-canvas-constellation");
+    if (canvasConstellation && svgConstellation) {
+        widthConstellation = canvasConstellation.clientWidth || 800;
+        heightConstellation = canvasConstellation.clientHeight || 560;
 
-    widthConstellation = canvas.clientWidth || 800;
-    heightConstellation = canvas.clientHeight || 560;
+        svgConstellation
+            .attr("width", widthConstellation)
+            .attr("height", heightConstellation)
+            .attr("viewBox", `0 0 ${widthConstellation} ${heightConstellation}`);
 
-    svgConstellation
-        .attr("width", widthConstellation)
-        .attr("height", heightConstellation)
-        .attr("viewBox", `0 0 ${widthConstellation} ${heightConstellation}`);
+        if (simulation) {
+            simulation.force("center", d3.forceCenter(widthConstellation / 2, heightConstellation / 2));
+            simulation.force("x", d3.forceX(widthConstellation / 2).strength(0.09));
+            simulation.force("y", d3.forceY(heightConstellation / 2).strength(0.09));
+            simulation.force("link")
+                .distance(d => getTargetLinkDistance(d.value, widthConstellation, heightConstellation));
+            simulation.alpha(0.6).restart();
+        }
 
-    if (simulation) {
-        simulation.force("center", d3.forceCenter(widthConstellation / 2, heightConstellation / 2));
-        simulation.force("x", d3.forceX(widthConstellation / 2).strength(0.09));
-        simulation.force("y", d3.forceY(heightConstellation / 2).strength(0.09));
-        simulation.force("link")
-            .distance(d => getTargetLinkDistance(d.value, widthConstellation, heightConstellation));
-        simulation.alpha(0.6).restart();
+        scrollerConstellation.resize();
     }
 
-    scrollerConstellation.resize();
+    // 2. Projection Arc resize
+    const canvasProjection = document.getElementById("d3-canvas-projection");
+    if (canvasProjection && svgProjection && rawProjectionData) {
+        renderArc(currentProjectionDim, currentProjectionWord);
+        scrollerProjection.resize();
+    }
 }
 
 /**
@@ -658,19 +1203,32 @@ function handleResize() {
 function initVolumen2() {
     setupTooltip();
 
-    d3.json("./data/embeddings/similarity_matrices_per_cultural_dimensions_between_countries.json")
-        .then(data => {
-            rawSimilarityData = data;
-            setupD3ConstellationCanvas();
-            setupInteractiveFilterButtons();
-            initScrollama();
+    Promise.all([
+        d3.json("./data/embeddings/similarity_matrices_per_cultural_dimensions_between_countries.json"),
+        d3.json("./data/embeddings/proyecciones_optimizadas.json")
+    ])
+    .then(([similarityData, projectionData]) => {
+        // Init Section 1: Constellation
+        rawSimilarityData = similarityData;
+        setupD3ConstellationCanvas();
+        setupInteractiveFilterButtons();
+        initScrollama();
 
-            window.addEventListener("resize", handleResize);
-            console.log("[Volumen II] Constellation Graph initialized successfully.");
-        })
-        .catch(err => {
-            console.error("[Volumen II Error] Failed to load similarity data:", err);
-        });
+        // Init Section 2: Projection Arc
+        rawProjectionData = projectionData;
+        setupD3ProjectionCanvas();
+        setupProjectionInteractiveUI();
+        initScrollamaProjection();
+
+        // Initial render for Section 2
+        renderArc("moral", "manifestante");
+
+        window.addEventListener("resize", handleResize);
+        console.log("[Volumen II] Constellation Graph & Projection Arc initialized successfully.");
+    })
+    .catch(err => {
+        console.error("[Volumen II Error] Failed to load dataset:", err);
+    });
 }
 
 // Launch on DOM ready

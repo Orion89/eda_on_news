@@ -188,7 +188,8 @@ body {
 #scrolly-beeswarm figure.sticky,
 #scrolly-sankey figure.sticky,
 #scrolly-temporal figure.sticky,
-#scrolly-constellation figure.sticky {
+#scrolly-constellation figure.sticky,
+#scrolly-projection figure.sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -605,7 +606,8 @@ a.volume-link:hover {
     #scrolly-beeswarm figure.sticky,
     #scrolly-sankey figure.sticky,
     #scrolly-temporal figure.sticky,
-    #scrolly-constellation figure.sticky {
+    #scrolly-constellation figure.sticky,
+    #scrolly-projection figure.sticky {
         height: 48vh;
         max-height: 460px;
     }
@@ -632,7 +634,8 @@ a.volume-link:hover {
     #scrolly-beeswarm,
     #scrolly-sankey,
     #scrolly-temporal,
-    #scrolly-constellation {
+    #scrolly-constellation,
+    #scrolly-projection {
         display: flex;
         flex-direction: row-reverse; /* sticky visualization on right, steps scroll on left */
         justify-content: space-between;
@@ -646,7 +649,8 @@ a.volume-link:hover {
     #scrolly-beeswarm figure.sticky,
     #scrolly-sankey figure.sticky,
     #scrolly-temporal figure.sticky,
-    #scrolly-constellation figure.sticky {
+    #scrolly-constellation figure.sticky,
+    #scrolly-projection figure.sticky {
         width: 55%; /* Visualization space gets 55% of horizontal space */
         height: 100vh; /* Fills screen height fully */
         max-height: none;
@@ -2257,3 +2261,294 @@ a.volume-link:hover {
     border-color: var(--color-text-main) !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
+
+/* ==========================================================================
+   VOLUMEN II: SECCIÓN 2 — ARCO DE PROYECCIÓN 1D (LA REGLA DE MEDIR INVISIBLE)
+   ========================================================================== */
+
+#scrolly-projection {
+    position: relative;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+#d3-canvas-projection {
+    flex: 1 1 0;
+    width: 100%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.projection-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    flex-shrink: 0;
+}
+
+.projection-status-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.projection-active-badge {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.3rem 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.projection-dim-badge {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.projection-poles-box {
+    display: flex;
+    align-items: center;
+}
+
+.projection-poles-badge {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: rgba(0,0,0,0.04);
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    border: 1px dashed var(--color-border);
+}
+
+/* Interactive UI in Step 5 (Hidden during steps 1-4) */
+.projection-interactive-ui {
+    background: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.65rem 1rem;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.projection-interactive-ui.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.word-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.action-btn {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #f0ede8;
+    border-color: var(--color-text-main);
+}
+
+.action-btn.action-btn-active,
+.action-btn-active {
+    background-color: var(--color-accent) !important;
+    color: #ffffff !important;
+    border-color: var(--color-accent) !important;
+    box-shadow: 0 1px 4px rgba(230, 57, 70, 0.3);
+}
+
+/* Storytelling Country Insights Grid for Projection Arc */
+#storytelling-insights-projection {
+    flex-shrink: 0;
+    margin-top: 0.65rem;
+    width: 100%;
+}
+
+#storytelling-insights-projection .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+#storytelling-insights-projection .insight-card {
+    padding: 0.45rem 0.65rem;
+    margin: 0;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#storytelling-insights-projection .insight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+#storytelling-insights-projection .insight-country {
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.05em;
+}
+
+#storytelling-insights-projection .insight-stat {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.1;
+}
+
+#storytelling-insights-projection .insight-label {
+    font-size: 0.64rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+    #storytelling-insights-projection {
+        display: none !important;
+    }
+}
+
+/* SVG Projection Arc Elements */
+.arc-path {
+    fill: none;
+    stroke: rgba(31, 30, 29, 0.22);
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+}
+
+.arc-axis-line {
+    stroke: var(--color-text-main);
+    stroke-width: 3px;
+    stroke-linecap: round;
+}
+
+.arc-neutral-line {
+    stroke: rgba(31, 30, 29, 0.2);
+    stroke-width: 1.5px;
+    stroke-dasharray: 4,4;
+}
+
+.arc-vector {
+    stroke-width: 3.5px;
+    stroke-linecap: round;
+    cursor: pointer;
+    transition: stroke-width 0.2s ease;
+}
+
+.arc-vector:hover {
+    stroke-width: 5px;
+}
+
+.arc-node {
+    stroke: #ffffff;
+    stroke-width: 2.5px;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+    transition: r 0.2s ease, filter 0.2s ease;
+}
+
+.arc-node:hover {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+.arc-node-label-group {
+    pointer-events: none;
+    user-select: none;
+}
+
+.arc-node-bg {
+    fill: #ffffff;
+    stroke: var(--color-border);
+    stroke-width: 0.75px;
+    rx: 4px;
+}
+
+.arc-node-text {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.arc-proj-line {
+    stroke-dasharray: 4,4;
+    stroke-width: 1.75px;
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.arc-proj-marker {
+    stroke: #ffffff;
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: r 0.2s ease;
+}
+
+.arc-proj-marker:hover {
+    r: 6.5px;
+}
+
+.arc-center-hub {
+    fill: var(--color-text-main);
+    stroke: #ffffff;
+    stroke-width: 2px;
+}
+
+.arc-pole-label {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 700;
+    fill: var(--color-text-main);
+    letter-spacing: 0.02em;
+}
+
+.arc-neutral-label {
+    font-family: var(--font-sans);
+    font-size: 0.70rem;
+    font-weight: 600;
+    fill: var(--color-text-muted);
+    text-anchor: middle;
+}
+

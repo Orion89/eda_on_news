@@ -38,7 +38,7 @@ test.describe('Volumen II - La Geometría de la Cultura (Mapa de Constelaciones)
     await page.waitForTimeout(2000);
 
     // 1. Check Section divider and layout
-    const divider = page.locator('.section-divider');
+    const divider = page.locator('.section-divider').first();
     await expect(divider).toBeVisible();
     await expect(divider).toContainText('Sección 1');
 
