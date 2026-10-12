@@ -8,95 +8,95 @@
       },
       {
         "country": "chile",
-        "projection": 0.1367060062246395,
+        "projection": 0.13670600622463952,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": 0.1233862553712864,
+        "projection": 0.12338625537128649,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.0875899187049435,
+        "projection": 0.08758991870494356,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "banco": [
       {
         "country": "argentina",
-        "projection": 0.0186627178258557,
+        "projection": 0.018662717825855744,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": 0.0331930847671793,
+        "projection": 0.033193084767179346,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": 0.0331360947114013,
+        "projection": 0.033136094711401345,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.0572615910381263,
+        "projection": 0.05726159103812634,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "campesino": [
       {
         "country": "argentina",
-        "projection": 0.0015543951549261,
+        "projection": 0.0015543951549261848,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": 0.0604851769549949,
+        "projection": 0.06048517695499498,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": -0.0397413507147881,
+        "projection": -0.03974135071478815,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.0090131443832379,
+        "projection": 0.009013144383237921,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "deuda": [
       {
         "country": "argentina",
-        "projection": -0.1488813792281857,
+        "projection": -0.14888137922818578,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": -0.1665551890902777,
+        "projection": -0.16655518909027778,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": -0.0828083974845485,
+        "projection": -0.08280839748454852,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": -0.110000797289461,
+        "projection": -0.11000079728946106,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "inflación": [
       {
         "country": "argentina",
-        "projection": -0.1731023034795016,
+        "projection": -0.17310230347950165,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": -0.2171979235534384,
+        "projection": -0.21719792355343842,
         "poles": "Pobreza <-> Riqueza"
       },
       {
@@ -106,117 +106,117 @@
       },
       {
         "country": "españa",
-        "projection": -0.1702040864733364,
+        "projection": -0.17020408647333649,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "metro": [
       {
         "country": "argentina",
-        "projection": 0.0321497188654594,
+        "projection": 0.03214971886545946,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": 0.0381085094456346,
+        "projection": 0.03810850944563467,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": -0.0350757623126988,
+        "projection": -0.03507576231269883,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.0066009690195788,
+        "projection": 0.006600969019578854,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "periferia": [
       {
         "country": "argentina",
-        "projection": 0.0056761901354876,
+        "projection": 0.005676190135487648,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": -0.0183328917941731,
+        "projection": -0.018332891794173148,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": -0.0112746405439657,
+        "projection": -0.011274640543965753,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": -0.0238086738197578,
+        "projection": -0.023808673819757882,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "tecnología": [
       {
         "country": "argentina",
-        "projection": 0.0854962292033307,
+        "projection": 0.08549622920333078,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": 0.0674270974910935,
+        "projection": 0.06742709749109357,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": 0.0916536609469249,
+        "projection": 0.09165366094692498,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.1056618057435098,
+        "projection": 0.10566180574350986,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "universidad": [
       {
         "country": "argentina",
-        "projection": 0.0207508181787546,
+        "projection": 0.020750818178754682,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": -0.042799643440652,
+        "projection": -0.04279964344065204,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": 0.0622435453100005,
+        "projection": 0.06224354531000053,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.0432979964696774,
+        "projection": 0.04329799646967746,
         "poles": "Pobreza <-> Riqueza"
       }
     ],
     "vacaciones": [
       {
         "country": "argentina",
-        "projection": 0.1101181625394044,
+        "projection": 0.11011816253940442,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "chile",
-        "projection": 0.0654270342857065,
+        "projection": 0.06542703428570654,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "mexico",
-        "projection": 0.1294655559310294,
+        "projection": 0.12946555593102949,
         "poles": "Pobreza <-> Riqueza"
       },
       {
         "country": "españa",
-        "projection": 0.1154334203545166,
+        "projection": 0.11543342035451665,
         "poles": "Pobreza <-> Riqueza"
       }
     ]
@@ -225,22 +225,22 @@
     "emprendedor": [
       {
         "country": "argentina",
-        "projection": 0.1539878311187984,
+        "projection": 0.15398783111879846,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": 0.2122681968366218,
+        "projection": 0.21226819683662182,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": 0.1700975545160291,
+        "projection": 0.17009755451602915,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "españa",
-        "projection": 0.1811305738303659,
+        "projection": 0.18113057383036596,
         "poles": "Vejez <-> Juventud"
       }
     ],
@@ -252,7 +252,7 @@
       },
       {
         "country": "chile",
-        "projection": 0.0802001635759091,
+        "projection": 0.08020016357590914,
         "poles": "Vejez <-> Juventud"
       },
       {
@@ -262,7 +262,7 @@
       },
       {
         "country": "españa",
-        "projection": 0.0681594222485627,
+        "projection": 0.06815942224856275,
         "poles": "Vejez <-> Juventud"
       }
     ],
@@ -279,7 +279,7 @@
       },
       {
         "country": "mexico",
-        "projection": 0.2911554274113124,
+        "projection": 0.29115542741131245,
         "poles": "Vejez <-> Juventud"
       },
       {
@@ -291,17 +291,17 @@
     "internet": [
       {
         "country": "argentina",
-        "projection": 0.1023835310801202,
+        "projection": 0.10238353108012022,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": 0.1754282321836635,
+        "projection": 0.17542823218366355,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": 0.1523723879715861,
+        "projection": 0.15237238797158614,
         "poles": "Vejez <-> Juventud"
       },
       {
@@ -313,51 +313,51 @@
     "jubilación": [
       {
         "country": "argentina",
-        "projection": -0.1106579001786229,
+        "projection": -0.11065790017862298,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": -0.0826153689976599,
+        "projection": -0.08261536899765999,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": -0.1013506023430698,
+        "projection": -0.10135060234306988,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "españa",
-        "projection": -0.0337443909392219,
+        "projection": -0.03374439093922192,
         "poles": "Vejez <-> Juventud"
       }
     ],
     "memoria": [
       {
         "country": "argentina",
-        "projection": -0.0395231350590636,
+        "projection": -0.03952313505906369,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": -0.1109187715853346,
+        "projection": -0.11091877158533466,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": -0.1005260231241042,
+        "projection": -0.10052602312410423,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "españa",
-        "projection": -0.0458291027050309,
+        "projection": -0.04582910270503094,
         "poles": "Vejez <-> Juventud"
       }
     ],
     "pensión": [
       {
         "country": "argentina",
-        "projection": -0.1511648807437464,
+        "projection": -0.15116488074374645,
         "poles": "Vejez <-> Juventud"
       },
       {
@@ -367,73 +367,73 @@
       },
       {
         "country": "mexico",
-        "projection": -0.0927195271945061,
+        "projection": -0.09271952719450613,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "españa",
-        "projection": -0.1163541091597133,
+        "projection": -0.11635410915971335,
         "poles": "Vejez <-> Juventud"
       }
     ],
     "rebeldía": [
       {
         "country": "argentina",
-        "projection": -0.0222850370429775,
+        "projection": -0.02228503704297755,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": -0.0316823008954436,
+        "projection": -0.031682300895443674,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": -0.0137714892668974,
+        "projection": -0.013771489266897405,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "españa",
-        "projection": 0.0211163446222344,
+        "projection": 0.021116344622234405,
         "poles": "Vejez <-> Juventud"
       }
     ],
     "sabiduría": [
       {
         "country": "argentina",
-        "projection": -0.0898990515578109,
+        "projection": -0.08989905155781094,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": -0.0759940117419958,
+        "projection": -0.07599401174199585,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": -0.1215049736359936,
+        "projection": -0.12150497363599362,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "españa",
-        "projection": -0.1501876219803917,
+        "projection": -0.15018762198039173,
         "poles": "Vejez <-> Juventud"
       }
     ],
     "tradición": [
       {
         "country": "argentina",
-        "projection": -0.0554530674557116,
+        "projection": -0.055453067455711616,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "chile",
-        "projection": -0.0751933866417224,
+        "projection": -0.07519338664172248,
         "poles": "Vejez <-> Juventud"
       },
       {
         "country": "mexico",
-        "projection": -0.0237627553160538,
+        "projection": -0.023762755316053846,
         "poles": "Vejez <-> Juventud"
       },
       {
@@ -447,61 +447,61 @@
     "ciencia": [
       {
         "country": "argentina",
-        "projection": 0.0801933089472217,
+        "projection": 0.08019330894722174,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": 0.1516846425642143,
+        "projection": 0.15168464256421435,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": 0.1163510370304196,
+        "projection": 0.11635103703041966,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "españa",
-        "projection": 0.1177810776148589,
+        "projection": 0.11778107761485898,
         "poles": "Vulgaridad <-> Cultura"
       }
     ],
     "debate": [
       {
         "country": "argentina",
-        "projection": -0.0931887159789878,
+        "projection": -0.09318871597898784,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": -0.0920025814977326,
+        "projection": -0.09200258149773263,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": -0.1328615137899571,
+        "projection": -0.13286151378995711,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "españa",
-        "projection": -0.1162352624946898,
+        "projection": -0.11623526249468988,
         "poles": "Vulgaridad <-> Cultura"
       }
     ],
     "estadio": [
       {
         "country": "argentina",
-        "projection": -0.0824192431357171,
+        "projection": -0.08241924313571712,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": -0.1009302807553835,
+        "projection": -0.10093028075538357,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": -0.0837918120807482,
+        "projection": -0.08379181208074829,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
@@ -513,61 +513,61 @@
     "internet": [
       {
         "country": "argentina",
-        "projection": 0.010638627809742,
+        "projection": 0.010638627809742014,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": -0.0292755591234618,
+        "projection": -0.029275559123461803,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": -0.0456558718865835,
+        "projection": -0.04565587188658357,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "españa",
-        "projection": -0.0651673908368411,
+        "projection": -0.06516739083684114,
         "poles": "Vulgaridad <-> Cultura"
       }
     ],
     "libro": [
       {
         "country": "argentina",
-        "projection": 0.0491633997181015,
+        "projection": 0.049163399718101554,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": 0.0604030888236814,
+        "projection": 0.06040308882368148,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": 0.0070304405796842,
+        "projection": 0.007030440579684268,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "españa",
-        "projection": -0.0149568292340145,
+        "projection": -0.014956829234014563,
         "poles": "Vulgaridad <-> Cultura"
       }
     ],
     "museo": [
       {
         "country": "argentina",
-        "projection": 0.1076872003123333,
+        "projection": 0.10768720031233336,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": 0.1318343031541155,
+        "projection": 0.13183430315411554,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": 0.1372115959521213,
+        "projection": 0.13721159595212135,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
@@ -579,17 +579,17 @@
     "reguetón": [
       {
         "country": "argentina",
-        "projection": -0.1287971655536945,
+        "projection": -0.12879716555369455,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": -0.0817399761485304,
+        "projection": -0.08173997614853049,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": -0.088353747707345,
+        "projection": -0.08835374770734505,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
@@ -601,12 +601,12 @@
     "superstición": [
       {
         "country": "argentina",
-        "projection": -0.1378253944884017,
+        "projection": -0.13782539448840178,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": -0.2628812642832164,
+        "projection": -0.26288126428321645,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
@@ -616,51 +616,51 @@
       },
       {
         "country": "españa",
-        "projection": -0.2372779335336294,
+        "projection": -0.23727793353362941,
         "poles": "Vulgaridad <-> Cultura"
       }
     ],
     "televisión": [
       {
         "country": "argentina",
-        "projection": -0.0897563131175476,
+        "projection": -0.08975631311754764,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": -0.1174738179772377,
+        "projection": -0.11747381797723778,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": -0.1083228952390708,
+        "projection": -0.10832289523907082,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "españa",
-        "projection": -0.150625571391926,
+        "projection": -0.15062557139192603,
         "poles": "Vulgaridad <-> Cultura"
       }
     ],
     "ópera": [
       {
         "country": "argentina",
-        "projection": -0.0247270584064512,
+        "projection": -0.024727058406451282,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "chile",
-        "projection": 0.0956184029208573,
+        "projection": 0.09561840292085735,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "mexico",
-        "projection": 0.014965000744185,
+        "projection": 0.014965000744185093,
         "poles": "Vulgaridad <-> Cultura"
       },
       {
         "country": "españa",
-        "projection": 0.0313349246964746,
+        "projection": 0.031334924696474635,
         "poles": "Vulgaridad <-> Cultura"
       }
     ]
@@ -669,44 +669,44 @@
     "cuidado": [
       {
         "country": "argentina",
-        "projection": -0.1036391395237051,
+        "projection": -0.10363913952370515,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": -0.1380468828483651,
+        "projection": -0.13804688284836514,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": -0.0891543178916069,
+        "projection": -0.08915431789160694,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": -0.0643849767487692,
+        "projection": -0.06438497674876927,
         "poles": "Femenino <-> Masculino"
       }
     ],
     "danza": [
       {
         "country": "argentina",
-        "projection": -0.1421712859391973,
+        "projection": -0.14217128593919737,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": -0.1854186989379231,
+        "projection": -0.18541869893792315,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": -0.0965425056665102,
+        "projection": -0.09654250566651029,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": -0.1396247623330316,
+        "projection": -0.13962476233303164,
         "poles": "Femenino <-> Masculino"
       }
     ],
@@ -718,17 +718,17 @@
       },
       {
         "country": "chile",
-        "projection": -0.0485121828895918,
+        "projection": -0.04851218288959182,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": -0.0327845446717873,
+        "projection": -0.03278454467178731,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": -0.0770324150062454,
+        "projection": -0.07703241500624548,
         "poles": "Femenino <-> Masculino"
       }
     ],
@@ -740,83 +740,83 @@
       },
       {
         "country": "chile",
-        "projection": -0.2122828906250391,
+        "projection": -0.21228289062503913,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": -0.1639012730880058,
+        "projection": -0.16390127308800587,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": -0.0882836687755243,
+        "projection": -0.08828366877552435,
         "poles": "Femenino <-> Masculino"
       }
     ],
     "fútbol": [
       {
         "country": "argentina",
-        "projection": 0.1563944883859835,
+        "projection": 0.15639448838598352,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": 0.1674041482486498,
+        "projection": 0.16740414824864985,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": 0.1821554660697101,
+        "projection": 0.18215546606971017,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": 0.1134022827488357,
+        "projection": 0.11340228274883579,
         "poles": "Femenino <-> Masculino"
       }
     ],
     "hogar": [
       {
         "country": "argentina",
-        "projection": -0.0778275424109112,
+        "projection": -0.07782754241091122,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": -0.1220341352855281,
+        "projection": -0.12203413528552817,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": -0.087502177059885,
+        "projection": -0.08750217705988501,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": -0.0506997326924152,
+        "projection": -0.05069973269241521,
         "poles": "Femenino <-> Masculino"
       }
     ],
     "ingeniería": [
       {
         "country": "argentina",
-        "projection": -0.0188931337741804,
+        "projection": -0.01889313377418042,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": 0.0123759854655604,
+        "projection": 0.012375985465560402,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": -0.0018465678407498,
+        "projection": -0.0018465678407498312,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": 0.0234873460597248,
+        "projection": 0.023487346059724894,
         "poles": "Femenino <-> Masculino"
       }
     ],
@@ -828,61 +828,61 @@
       },
       {
         "country": "chile",
-        "projection": 0.0762576264906294,
+        "projection": 0.07625762649062942,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": 0.1072293039713385,
+        "projection": 0.10722930397133854,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": 0.1043570971226772,
+        "projection": 0.10435709712267724,
         "poles": "Femenino <-> Masculino"
       }
     ],
     "oficina": [
       {
         "country": "argentina",
-        "projection": -0.0402342802019346,
+        "projection": -0.040234280201934605,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": -0.0016053650930524,
+        "projection": -0.001605365093052433,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": 0.0419013319752748,
+        "projection": 0.04190133197527482,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": -0.069448990471869,
+        "projection": -0.06944899047186906,
         "poles": "Femenino <-> Masculino"
       }
     ],
     "razón": [
       {
         "country": "argentina",
-        "projection": 0.0279991293064002,
+        "projection": 0.02799912930640021,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "chile",
-        "projection": 0.0514367178353554,
+        "projection": 0.05143671783535546,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "mexico",
-        "projection": 0.0204672338919193,
+        "projection": 0.020467233891919397,
         "poles": "Femenino <-> Masculino"
       },
       {
         "country": "españa",
-        "projection": 0.0218310050867116,
+        "projection": 0.021831005086711625,
         "poles": "Femenino <-> Masculino"
       }
     ]
@@ -891,12 +891,12 @@
     "aborto": [
       {
         "country": "argentina",
-        "projection": -0.2423483242340772,
+        "projection": -0.24234832423407726,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "chile",
-        "projection": -0.2211701013775655,
+        "projection": -0.22117010137756557,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -906,36 +906,36 @@
       },
       {
         "country": "españa",
-        "projection": -0.2346899377901387,
+        "projection": -0.23468993779013878,
         "poles": "Malo <-> Bueno"
       }
     ],
     "carabineros": [
       {
         "country": "argentina",
-        "projection": -0.0936423563414846,
+        "projection": -0.09364235634148466,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "chile",
-        "projection": -0.0292435198707444,
+        "projection": -0.02924351987074448,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "mexico",
-        "projection": -0.19380586576573,
+        "projection": -0.19380586576573006,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "españa",
-        "projection": -0.0600436271215608,
+        "projection": -0.060043627121560805,
         "poles": "Malo <-> Bueno"
       }
     ],
     "empresario": [
       {
         "country": "argentina",
-        "projection": -0.0728156813662712,
+        "projection": -0.07281568136627126,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -950,24 +950,24 @@
       },
       {
         "country": "españa",
-        "projection": -0.0693833899705992,
+        "projection": -0.06938338997059923,
         "poles": "Malo <-> Bueno"
       }
     ],
     "huelga": [
       {
         "country": "argentina",
-        "projection": -0.1960527742450626,
+        "projection": -0.19605277424506268,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "chile",
-        "projection": -0.1667887014742598,
+        "projection": -0.16678870147425984,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "mexico",
-        "projection": -0.1403393276173632,
+        "projection": -0.14033932761736329,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -984,7 +984,7 @@
       },
       {
         "country": "chile",
-        "projection": -0.1799367700859997,
+        "projection": -0.17993677008599973,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -994,7 +994,7 @@
       },
       {
         "country": "españa",
-        "projection": -0.2315295627491471,
+        "projection": -0.23152956274914718,
         "poles": "Malo <-> Bueno"
       }
     ],
@@ -1006,7 +1006,7 @@
       },
       {
         "country": "chile",
-        "projection": -0.334058982974512,
+        "projection": -0.33405898297451203,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -1028,7 +1028,7 @@
       },
       {
         "country": "chile",
-        "projection": -0.3345319367662149,
+        "projection": -0.33453193676621495,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -1045,7 +1045,7 @@
     "privatización": [
       {
         "country": "argentina",
-        "projection": -0.1707150279655418,
+        "projection": -0.17071502796554186,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -1067,17 +1067,17 @@
     "sindicato": [
       {
         "country": "argentina",
-        "projection": -0.1065003948152061,
+        "projection": -0.10650039481520619,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "chile",
-        "projection": -0.075278454989399,
+        "projection": -0.07527845498939903,
         "poles": "Malo <-> Bueno"
       },
       {
         "country": "mexico",
-        "projection": -0.0895053978816812,
+        "projection": -0.08950539788168124,
         "poles": "Malo <-> Bueno"
       },
       {
@@ -1091,34 +1091,34 @@
     "bandera": [
       {
         "country": "argentina",
-        "projection": -0.0242174640903105,
+        "projection": -0.024217464090310514,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.0184359522003655,
+        "projection": -0.01843595220036557,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "mexico",
-        "projection": 0.0406341640723816,
+        "projection": 0.04063416407238169,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "españa",
-        "projection": -0.0035850741062239,
+        "projection": -0.0035850741062239313,
         "poles": "Extranjero <-> Nacional"
       }
     ],
     "exportación": [
       {
         "country": "argentina",
-        "projection": -0.1752146246608631,
+        "projection": -0.17521462466086313,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.2027885138869128,
+        "projection": -0.20278851388691288,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1128,19 +1128,19 @@
       },
       {
         "country": "españa",
-        "projection": -0.1927920837391906,
+        "projection": -0.19279208373919066,
         "poles": "Extranjero <-> Nacional"
       }
     ],
     "folclore": [
       {
         "country": "argentina",
-        "projection": -0.0240410994143742,
+        "projection": -0.024041099414374274,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.1141514955167884,
+        "projection": -0.11415149551678845,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1150,41 +1150,41 @@
       },
       {
         "country": "españa",
-        "projection": -0.0253595737773107,
+        "projection": -0.025359573777310705,
         "poles": "Extranjero <-> Nacional"
       }
     ],
     "frontera": [
       {
         "country": "argentina",
-        "projection": -0.0607958019076242,
+        "projection": -0.06079580190762422,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.1110742220329226,
+        "projection": -0.11107422203292264,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "mexico",
-        "projection": -0.1108996301192289,
+        "projection": -0.11089963011922893,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "españa",
-        "projection": -0.0307701706347075,
+        "projection": -0.030770170634707574,
         "poles": "Extranjero <-> Nacional"
       }
     ],
     "identidad": [
       {
         "country": "argentina",
-        "projection": -0.0858558326910852,
+        "projection": -0.08585583269108524,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.1040661915704877,
+        "projection": -0.10406619157048774,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1194,19 +1194,19 @@
       },
       {
         "country": "españa",
-        "projection": -0.0908265875431661,
+        "projection": -0.09082658754316617,
         "poles": "Extranjero <-> Nacional"
       }
     ],
     "inmigrante": [
       {
         "country": "argentina",
-        "projection": -0.04202628673205,
+        "projection": -0.042026286732050076,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.1970238534326599,
+        "projection": -0.19702385343265993,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1223,22 +1223,22 @@
     "inversión": [
       {
         "country": "argentina",
-        "projection": -0.2258031785485685,
+        "projection": -0.22580317854856852,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.208198747592897,
+        "projection": -0.20819874759289708,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "mexico",
-        "projection": -0.1920507017419865,
+        "projection": -0.19205070174198657,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "españa",
-        "projection": -0.236213372273068,
+        "projection": -0.23621337227306807,
         "poles": "Extranjero <-> Nacional"
       }
     ],
@@ -1250,7 +1250,7 @@
       },
       {
         "country": "chile",
-        "projection": -0.25738454694368,
+        "projection": -0.25738454694368007,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1267,29 +1267,29 @@
     "soberanía": [
       {
         "country": "argentina",
-        "projection": 0.0651806218825157,
+        "projection": 0.06518062188251574,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "chile",
-        "projection": -0.0212363508456556,
+        "projection": -0.021236350845655668,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "mexico",
-        "projection": -0.0301527396508283,
+        "projection": -0.03015273965082839,
         "poles": "Extranjero <-> Nacional"
       },
       {
         "country": "españa",
-        "projection": 0.043833433572205,
+        "projection": 0.04383343357220507,
         "poles": "Extranjero <-> Nacional"
       }
     ],
     "turista": [
       {
         "country": "argentina",
-        "projection": -0.1565665352547558,
+        "projection": -0.15656653525475583,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1299,7 +1299,7 @@
       },
       {
         "country": "mexico",
-        "projection": -0.153290304328005,
+        "projection": -0.15329030432800506,
         "poles": "Extranjero <-> Nacional"
       },
       {
@@ -1313,44 +1313,44 @@
     "carabineros": [
       {
         "country": "argentina",
-        "projection": -0.13144223397962,
+        "projection": -0.13144223397962007,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": -0.0615334778456051,
+        "projection": -0.06153347784560512,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": -0.0871213719319288,
+        "projection": -0.08712137193192884,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": -0.0650803800272669,
+        "projection": -0.06508038002726697,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
     "censura": [
       {
         "country": "argentina",
-        "projection": -0.1576666752521882,
+        "projection": -0.15766667525218825,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": -0.0979361974737281,
+        "projection": -0.09793619747372814,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": -0.1562399559481006,
+        "projection": -0.15623995594810064,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": -0.0821946474157446,
+        "projection": -0.08219464741574468,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
@@ -1384,7 +1384,7 @@
       },
       {
         "country": "chile",
-        "projection": -0.2132219434680644,
+        "projection": -0.21322194346806442,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
@@ -1394,95 +1394,95 @@
       },
       {
         "country": "españa",
-        "projection": -0.2084650466291017,
+        "projection": -0.20846504662910173,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
     "grafiti": [
       {
         "country": "argentina",
-        "projection": -0.1399188698867378,
+        "projection": -0.13991886988673782,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": -0.0900727755010076,
+        "projection": -0.09007277550100766,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": -0.1280098481836427,
+        "projection": -0.12800984818364275,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": -0.1145625672063619,
+        "projection": -0.11456256720636199,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
     "huelga": [
       {
         "country": "argentina",
-        "projection": 0.0150171277683926,
+        "projection": 0.015017127768392695,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": -0.0368006674679187,
+        "projection": -0.036800667467918796,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": 0.032714254033816,
+        "projection": 0.03271425403381605,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": 0.0256525633097328,
+        "projection": 0.025652563309732826,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
     "manifestación": [
       {
         "country": "argentina",
-        "projection": -0.0191108113115709,
+        "projection": -0.019110811311570983,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": -0.0658039417870937,
+        "projection": -0.06580394178709373,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": 0.0015813891724255,
+        "projection": 0.0015813891724255156,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": -0.0681064098367382,
+        "projection": -0.06810640983673827,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
     "protesta": [
       {
         "country": "argentina",
-        "projection": -0.0689185880844746,
+        "projection": -0.06891858808447468,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": -0.0833463444402463,
+        "projection": -0.08334634444024631,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": 0.01296812049172,
+        "projection": 0.012968120491720057,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": -0.0985808871652329,
+        "projection": -0.09858088716523296,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
@@ -1499,34 +1499,34 @@
       },
       {
         "country": "mexico",
-        "projection": -0.1980678155390529,
+        "projection": -0.19806781553905298,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": -0.2395140218122286,
+        "projection": -0.23951402181222864,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ],
     "tribunal": [
       {
         "country": "argentina",
-        "projection": 0.0009216860072123,
+        "projection": 0.0009216860072123606,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "chile",
-        "projection": 0.0143748088771745,
+        "projection": 0.014374808877174503,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "mexico",
-        "projection": 0.067568139477494,
+        "projection": 0.06756813947749402,
         "poles": "Ilegalidad <-> Legalidad"
       },
       {
         "country": "españa",
-        "projection": 0.0073877223112879,
+        "projection": 0.007387722311287981,
         "poles": "Ilegalidad <-> Legalidad"
       }
     ]
@@ -1536,176 +1536,176 @@
       {
         "country": "argentina",
         "projection": -0.1788828235772203,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
-        "projection": -0.2002060951927457,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.20020609519274576,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
         "projection": -0.1403217138529299,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
         "projection": -0.1338446935000313,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "empresa": [
       {
         "country": "argentina",
-        "projection": -0.0659421153961477,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.06594211539614775,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
-        "projection": -0.0770012155392432,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.07700121553924322,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
-        "projection": 0.0061907922767562,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.006190792276756271,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
-        "projection": -0.0148564562877652,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.014856456287765225,
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "familia": [
       {
         "country": "argentina",
-        "projection": 0.0025697366797415,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.00256973667974157,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
-        "projection": -0.0245311698943248,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.024531169894324807,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
-        "projection": -0.0594605007993619,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.05946050079936198,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
-        "projection": 0.0165843186113166,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.016584318611316665,
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "feminismo": [
       {
         "country": "argentina",
         "projection": -0.2289081914827442,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
         "projection": -0.2306894415445696,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
-        "projection": -0.2437047265952183,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.24370472659521833,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
         "projection": -0.3059228752109109,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "iglesia": [
       {
         "country": "argentina",
-        "projection": -0.0608387860285296,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.060838786028529615,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
         "projection": -0.0943348613973424,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
-        "projection": -0.0679945462616189,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.06799454626161892,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
-        "projection": -0.0665836176140129,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.06658361761401291,
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "mercado": [
       {
         "country": "argentina",
-        "projection": 0.0909032451345804,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.09090324513458041,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
-        "projection": 0.0980131626852268,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.09801316268522682,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
-        "projection": 0.1229706688354506,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.12297066883545063,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
-        "projection": 0.1270119343735346,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.12701193437353464,
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "militar": [
       {
         "country": "argentina",
-        "projection": -0.0506911864913818,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.050691186491381816,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
-        "projection": -0.0449186282061053,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.04491862820610536,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
-        "projection": -0.0378634545233925,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.03786345452339255,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
-        "projection": 0.0138855281844779,
-        "poles": "Derecha <-> Izquierda"
+        "projection": 0.013885528184477918,
+        "poles": "Izquierda <-> Derecha"
       }
     ],
     "subsidio": [
       {
         "country": "argentina",
-        "projection": -0.1160333937274324,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.11603339372743249,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "chile",
-        "projection": -0.1130001299436623,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.11300012994366233,
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "mexico",
         "projection": -0.0171185598734448,
-        "poles": "Derecha <-> Izquierda"
+        "poles": "Izquierda <-> Derecha"
       },
       {
         "country": "españa",
-        "projection": -0.1076267331860366,
-        "poles": "Derecha <-> Izquierda"
+        "projection": -0.10762673318603663,
+        "poles": "Izquierda <-> Derecha"
       }
     ]
   },
@@ -1713,17 +1713,17 @@
     "algoritmo": [
       {
         "country": "argentina",
-        "projection": -0.1551488244609172,
+        "projection": -0.15514882446091727,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "chile",
-        "projection": -0.1598334618370169,
+        "projection": -0.15983346183701697,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "mexico",
-        "projection": -0.1508122334682886,
+        "projection": -0.15081223346828862,
         "poles": "Futuro <-> Pasado"
       },
       {
@@ -1735,44 +1735,44 @@
     "campo": [
       {
         "country": "argentina",
-        "projection": 0.0903894294680904,
+        "projection": 0.09038942946809041,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "chile",
-        "projection": 0.0291598229000651,
+        "projection": 0.029159822900065163,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "mexico",
-        "projection": 0.0509684505723124,
+        "projection": 0.05096845057231248,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": 0.0076876453773031,
+        "projection": 0.007687645377303126,
         "poles": "Futuro <-> Pasado"
       }
     ],
     "clima": [
       {
         "country": "argentina",
-        "projection": 0.0516905042669104,
+        "projection": 0.051690504266910436,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "chile",
-        "projection": -0.0056239789291682,
+        "projection": -0.005623978929168227,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "mexico",
-        "projection": -0.0210479060480911,
+        "projection": -0.021047906048091123,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": -0.0371588512905262,
+        "projection": -0.03715885129052625,
         "poles": "Futuro <-> Pasado"
       }
     ],
@@ -1789,7 +1789,7 @@
       },
       {
         "country": "mexico",
-        "projection": 0.3465369409393034,
+        "projection": 0.34653694093930343,
         "poles": "Futuro <-> Pasado"
       },
       {
@@ -1801,7 +1801,7 @@
     "industria": [
       {
         "country": "argentina",
-        "projection": -0.1505413571871729,
+        "projection": -0.15054135718717296,
         "poles": "Futuro <-> Pasado"
       },
       {
@@ -1811,34 +1811,34 @@
       },
       {
         "country": "mexico",
-        "projection": -0.1548926581343345,
+        "projection": -0.15489265813433453,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": -0.1884648489384442,
+        "projection": -0.18846484893844428,
         "poles": "Futuro <-> Pasado"
       }
     ],
     "matrimonio": [
       {
         "country": "argentina",
-        "projection": 0.1345700222027622,
+        "projection": 0.13457002220276224,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "chile",
-        "projection": 0.1181959722818082,
+        "projection": 0.11819597228180827,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "mexico",
-        "projection": 0.0910791023302086,
+        "projection": 0.09107910233020862,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": 0.1397871503682153,
+        "projection": 0.13978715036821537,
         "poles": "Futuro <-> Pasado"
       }
     ],
@@ -1855,63 +1855,63 @@
       },
       {
         "country": "mexico",
-        "projection": -0.1348605093498099,
+        "projection": -0.13486050934980995,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": -0.1848906462230432,
+        "projection": -0.18489064622304324,
         "poles": "Futuro <-> Pasado"
       }
     ],
     "reforma": [
       {
         "country": "argentina",
-        "projection": 0.0207428996291819,
+        "projection": 0.02074289962918191,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "chile",
-        "projection": 0.0331548474604515,
+        "projection": 0.03315484746045158,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "mexico",
-        "projection": 0.022775777773071,
+        "projection": 0.022775777773071097,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": 0.0167074927132337,
+        "projection": 0.016707492713233713,
         "poles": "Futuro <-> Pasado"
       }
     ],
     "religión": [
       {
         "country": "argentina",
-        "projection": 0.177394245548674,
+        "projection": 0.17739424554867403,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "chile",
-        "projection": 0.1438642471234923,
+        "projection": 0.14386424712349233,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "mexico",
-        "projection": 0.1517408468922718,
+        "projection": 0.15174084689227185,
         "poles": "Futuro <-> Pasado"
       },
       {
         "country": "españa",
-        "projection": 0.1760177753268675,
+        "projection": 0.17601777532686752,
         "poles": "Futuro <-> Pasado"
       }
     ],
     "tecnología": [
       {
         "country": "argentina",
-        "projection": -0.3599256192265687,
+        "projection": -0.35992561922656874,
         "poles": "Futuro <-> Pasado"
       },
       {
@@ -1921,7 +1921,7 @@
       },
       {
         "country": "mexico",
-        "projection": -0.3474159020244697,
+        "projection": -0.34741590202446976,
         "poles": "Futuro <-> Pasado"
       },
       {

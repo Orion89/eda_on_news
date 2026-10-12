@@ -663,6 +663,7 @@ const projectionDimensions = [
     { key: "moral", label: "Moral", icon: "⚖️" },
     { key: "nationalism", label: "Nacionalismo", icon: "🚩" },
     { key: "gender", label: "Género", icon: "⚧" },
+    { key: "political_ideology", label: "Ideología Política", icon: "🏛️" },
     { key: "time_and_change", label: "Tiempo y Cambio", icon: "⏳" }
 ];
 

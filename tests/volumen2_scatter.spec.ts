@@ -73,11 +73,22 @@ test.describe('Volumen II - Sección 3: El Mapa Cartesiano (Cuadrantes 2D)', () 
     await expect(activeBadge).toContainText('universidad');
     await expect(activeBadge).toContainText('sindicato');
     await expect(pairBadge).toContainText('Ideología Política');
-    await expect(polesXBadge).toContainText('Derecha');
     await expect(polesXBadge).toContainText('Izquierda');
+    await expect(polesXBadge).toContainText('Derecha');
     await expect(polesYBadge).toContainText('Pobreza');
     await expect(polesYBadge).toContainText('Riqueza');
     await expect(interactiveUI).not.toHaveClass(/is-visible/);
+
+    // Verify storytelling insight cards reflect corrected poles
+    const cards = page.locator('#storytelling-insights-scatter .insight-card');
+    await expect(cards).toHaveCount(3);
+    const eliteCard = cards.filter({ hasText: 'élite' });
+    await expect(eliteCard).toContainText('Derecha');
+    await expect(eliteCard).toContainText('Riqueza');
+
+    const sindicatoCard = cards.filter({ hasText: 'sindicato' });
+    await expect(sindicatoCard).toContainText('Izquierda');
+    await expect(sindicatoCard).toContainText('Pobreza');
 
     await page.screenshot({ path: path.join(SCREENSHOTS_DIR, 'vol2_sec3_step2_ideology.png') });
 

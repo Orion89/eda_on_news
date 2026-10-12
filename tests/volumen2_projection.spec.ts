@@ -93,11 +93,20 @@ test.describe('Volumen II - Sección 2: La regla de medir invisible (Arco de Pro
     await expect(interactiveUI).toHaveClass(/is-visible/);
 
     const dimButtons = page.locator('#projection-dim-filters .filter-btn');
-    await expect(dimButtons).toHaveCount(4);
+    await expect(dimButtons).toHaveCount(5);
 
     const wordPills = page.locator('#projection-word-pills .action-btn');
     const wordCount = await wordPills.count();
     expect(wordCount).toBeGreaterThan(5);
+
+    // Test "Ideología Política" dimension poles (Izquierda <-> Derecha)
+    const ideoBtn = page.locator('#projection-dim-filters .filter-btn', { hasText: 'Ideología Política' });
+    await expect(ideoBtn).toBeVisible();
+    await ideoBtn.click();
+    await page.waitForTimeout(800);
+    await expect(dimBadge).toContainText('Ideología Política');
+    await expect(polesBadge).toContainText('Izquierda');
+    await expect(polesBadge).toContainText('Derecha');
 
     // Click on "Tiempo y Cambio" dimension
     const timeBtn = page.locator('#projection-dim-filters .filter-btn', { hasText: 'Tiempo y Cambio' });
