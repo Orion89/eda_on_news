@@ -1,0 +1,1604 @@
+{
+  "moral - order_and_legality": {
+    "protesta": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1693097208738422,
+        "projection_on_cultural_dim_2": -0.0689185880844746,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.238855405050935,
+        "projection_on_cultural_dim_2": -0.0833463444402463,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0932910673121671,
+        "projection_on_cultural_dim_2": 0.01296812049172,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.2010873739584356,
+        "projection_on_cultural_dim_2": -0.0985808871652329,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "carabineros": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0936423563414846,
+        "projection_on_cultural_dim_2": -0.13144223397962,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0292435198707444,
+        "projection_on_cultural_dim_2": -0.0615334778456051,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.19380586576573,
+        "projection_on_cultural_dim_2": -0.0871213719319288,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0600436271215608,
+        "projection_on_cultural_dim_2": -0.0650803800272669,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "evasión": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3257081685926137,
+        "projection_on_cultural_dim_2": -0.283544078783172,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3498956685214269,
+        "projection_on_cultural_dim_2": -0.2593863777915287,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3652411928607408,
+        "projection_on_cultural_dim_2": -0.2707179475726412,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3089101258670707,
+        "projection_on_cultural_dim_2": -0.2172556249573627,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "huelga": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1960527742450626,
+        "projection_on_cultural_dim_2": 0.0150171277683926,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1667887014742598,
+        "projection_on_cultural_dim_2": -0.0368006674679187,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1403393276173632,
+        "projection_on_cultural_dim_2": 0.032714254033816,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1419236560821357,
+        "projection_on_cultural_dim_2": 0.0256525633097328,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "banco": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0498416575712198,
+        "projection_on_cultural_dim_2": 0.0472187511355432,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0342683910363224,
+        "projection_on_cultural_dim_2": 0.1143733965855077,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0209243516596318,
+        "projection_on_cultural_dim_2": 0.0553004610349238,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0457951346687729,
+        "projection_on_cultural_dim_2": 0.0512546827414701,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "político": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1373169417218446,
+        "projection_on_cultural_dim_2": -0.0369750501314342,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1740616509001666,
+        "projection_on_cultural_dim_2": -0.0398998551687468,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.1208841768717037,
+        "projection_on_cultural_dim_2": 0.0009597363860193,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.2173909902574106,
+        "projection_on_cultural_dim_2": -0.08069504312202,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "manifestante": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3608932750840775,
+        "projection_on_cultural_dim_2": -0.2114426020282835,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3345319367662149,
+        "projection_on_cultural_dim_2": -0.2370978527593433,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3892901062359095,
+        "projection_on_cultural_dim_2": -0.2024561036157389,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3869698097388762,
+        "projection_on_cultural_dim_2": -0.2509413801956188,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "barricada": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.2895593113667129,
+        "projection_on_cultural_dim_2": -0.0731916498960051,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3023094510980469,
+        "projection_on_cultural_dim_2": -0.223847689833243,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3229380357019387,
+        "projection_on_cultural_dim_2": -0.1331459065840821,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3413233540626703,
+        "projection_on_cultural_dim_2": -0.232582754924622,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "indulto": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3087408681075433,
+        "projection_on_cultural_dim_2": -0.0425454133847478,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.2661357041227817,
+        "projection_on_cultural_dim_2": -0.0008894486333039,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.3157045226606185,
+        "projection_on_cultural_dim_2": -0.034491579709009,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.2099849949554987,
+        "projection_on_cultural_dim_2": -0.0042897373324394,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "constitución": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0116060500365475,
+        "projection_on_cultural_dim_2": 0.1745404377619083,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.04570828500555,
+        "projection_on_cultural_dim_2": 0.1093109030249185,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0593825111209478,
+        "projection_on_cultural_dim_2": 0.1448552226452988,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0258706623631954,
+        "projection_on_cultural_dim_2": 0.1755920915724482,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ],
+    "empresario": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0728156813662712,
+        "projection_on_cultural_dim_2": -0.0539696882346078,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0833669143251453,
+        "projection_on_cultural_dim_2": -0.1104911176445616,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0499073028299122,
+        "projection_on_cultural_dim_2": -0.0856455301404666,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "moral",
+        "cultural_dim_2": "order_and_legality",
+        "projection_on_cultural_dim_1": -0.0693833899705992,
+        "projection_on_cultural_dim_2": -0.1055169141854552,
+        "poles_cultural_dim_1": "Malo <-> Bueno",
+        "poles_cultural_dim_2": "Ilegalidad <-> Legalidad"
+      }
+    ]
+  },
+  "political_ideology - affluence": {
+    "universidad": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1531994837798135,
+        "projection_on_cultural_dim_2": 0.0207508181787546,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1253406820221653,
+        "projection_on_cultural_dim_2": -0.042799643440652,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0890014473175479,
+        "projection_on_cultural_dim_2": 0.0622435453100005,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1033976577415553,
+        "projection_on_cultural_dim_2": 0.0432979964696774,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "sindicato": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1823769878844607,
+        "projection_on_cultural_dim_2": -0.0296653230766963,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.3462535014182108,
+        "projection_on_cultural_dim_2": 0.0015952190746723,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.2108374180597035,
+        "projection_on_cultural_dim_2": -0.0447146999537568,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.2619830605968717,
+        "projection_on_cultural_dim_2": -0.0928152879968677,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "feminismo": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.2289081914827442,
+        "projection_on_cultural_dim_2": -0.2187524563651432,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.2306894415445696,
+        "projection_on_cultural_dim_2": -0.2032134293836459,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.2437047265952183,
+        "projection_on_cultural_dim_2": -0.1940584125128992,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.3059228752109109,
+        "projection_on_cultural_dim_2": -0.2029094921196583,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "iglesia": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0608387860285296,
+        "projection_on_cultural_dim_2": 0.0235351160116698,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0943348613973424,
+        "projection_on_cultural_dim_2": -0.009785003113509,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0679945462616189,
+        "projection_on_cultural_dim_2": 0.0186292279509261,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0665836176140129,
+        "projection_on_cultural_dim_2": 0.0727999404674412,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "mercado": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0909032451345804,
+        "projection_on_cultural_dim_2": 6.340541412613171e-06,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0980131626852268,
+        "projection_on_cultural_dim_2": 0.00393611343348,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1229706688354506,
+        "projection_on_cultural_dim_2": 0.089187244562342,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1270119343735346,
+        "projection_on_cultural_dim_2": 0.0428582910078812,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "subsidio": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1160333937274324,
+        "projection_on_cultural_dim_2": -0.1323000984249744,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1130001299436623,
+        "projection_on_cultural_dim_2": -0.0980119691369389,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0171185598734448,
+        "projection_on_cultural_dim_2": -0.0230074852586345,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1076267331860366,
+        "projection_on_cultural_dim_2": -0.129173228150629,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "seguridad": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0061922450059275,
+        "projection_on_cultural_dim_2": 0.0390001824600613,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.02167807707503,
+        "projection_on_cultural_dim_2": 0.0083239257125013,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0439673243728403,
+        "projection_on_cultural_dim_2": 0.0108223384980452,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0131814885874831,
+        "projection_on_cultural_dim_2": 0.0220375937577209,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "élite": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1373592378026129,
+        "projection_on_cultural_dim_2": 0.063991559208537,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1903911866166919,
+        "projection_on_cultural_dim_2": -0.0084468371672409,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1829433239513171,
+        "projection_on_cultural_dim_2": 0.0047110862979027,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1315608281335921,
+        "projection_on_cultural_dim_2": 0.0468142606742268,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "pueblo": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.10792741370288,
+        "projection_on_cultural_dim_2": -0.0172533990893865,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1350678440478521,
+        "projection_on_cultural_dim_2": -0.1578230955285259,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0878542944697507,
+        "projection_on_cultural_dim_2": -0.0025480859176461,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.105128526951169,
+        "projection_on_cultural_dim_2": 0.0327675339982551,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "inflación": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.07627831986115,
+        "projection_on_cultural_dim_2": -0.1731023034795016,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0840765585444928,
+        "projection_on_cultural_dim_2": -0.2171979235534384,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0391105717799152,
+        "projection_on_cultural_dim_2": -0.1878523061366194,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0749197843734127,
+        "projection_on_cultural_dim_2": -0.1702040864733364,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "impuestos": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0012379110684806,
+        "projection_on_cultural_dim_2": 0.0108789709985862,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0471674215642268,
+        "projection_on_cultural_dim_2": -0.0330594956227827,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0101693069116468,
+        "projection_on_cultural_dim_2": -0.0062365126315571,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "political_ideology",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0210999195777277,
+        "projection_on_cultural_dim_2": -0.0060607679715879,
+        "poles_cultural_dim_1": "Derecha <-> Izquierda",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ]
+  },
+  "time_and_change - moral": {
+    "matrimonio": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1345700222027622,
+        "projection_on_cultural_dim_2": -0.0711556517981408,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1181959722818082,
+        "projection_on_cultural_dim_2": -0.0780539664996437,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.0910791023302086,
+        "projection_on_cultural_dim_2": -0.1137803711757291,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1397871503682153,
+        "projection_on_cultural_dim_2": -0.1131010706059454,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "religión": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.177394245548674,
+        "projection_on_cultural_dim_2": -0.144849094340441,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1438642471234923,
+        "projection_on_cultural_dim_2": -0.1409141823993737,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1517408468922718,
+        "projection_on_cultural_dim_2": -0.1456827339885492,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1760177753268675,
+        "projection_on_cultural_dim_2": -0.1270329211009999,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "globalización": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.0863211297796441,
+        "projection_on_cultural_dim_2": -0.2567073661609758,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.0812538932122099,
+        "projection_on_cultural_dim_2": -0.2410981527785116,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1355282667796518,
+        "projection_on_cultural_dim_2": -0.140274109547652,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.09157630370037,
+        "projection_on_cultural_dim_2": -0.2227849404540652,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "algoritmo": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1551488244609172,
+        "projection_on_cultural_dim_2": -0.1683262221235256,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1551488244609172,
+        "projection_on_cultural_dim_2": -0.1683262221235256,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1598334618370169,
+        "projection_on_cultural_dim_2": -0.1446056029864245,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1598334618370169,
+        "projection_on_cultural_dim_2": -0.1446056029864245,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1508122334682886,
+        "projection_on_cultural_dim_2": -0.216214109329838,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1508122334682886,
+        "projection_on_cultural_dim_2": -0.216214109329838,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1301140060333459,
+        "projection_on_cultural_dim_2": -0.1345567239405785,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1301140060333459,
+        "projection_on_cultural_dim_2": -0.1345567239405785,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "familia": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.100560654351596,
+        "projection_on_cultural_dim_2": 0.0345263265282576,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1059154489172201,
+        "projection_on_cultural_dim_2": -0.024929831173064,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1361807436407247,
+        "projection_on_cultural_dim_2": -0.0434752197538899,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.0640198725245614,
+        "projection_on_cultural_dim_2": 0.0144843688756286,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "diversidad": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1029320153423826,
+        "projection_on_cultural_dim_2": 0.0315834687916423,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1529282174898817,
+        "projection_on_cultural_dim_2": 0.0367416692552474,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1216239382775651,
+        "projection_on_cultural_dim_2": 0.0352836576724363,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1528895121909801,
+        "projection_on_cultural_dim_2": 0.013828333061626,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "censura": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.0919121543191813,
+        "projection_on_cultural_dim_2": -0.3896597046095914,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.1308368701197525,
+        "projection_on_cultural_dim_2": -0.343011129826074,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.0987780292194037,
+        "projection_on_cultural_dim_2": -0.4071971310048089,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.0864527880829593,
+        "projection_on_cultural_dim_2": -0.3065392124953205,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ],
+    "revolución": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.0932676062239825,
+        "projection_on_cultural_dim_2": -0.0512161577497034,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.0294298514441397,
+        "projection_on_cultural_dim_2": -0.1084239096700374,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": 0.0275481020979601,
+        "projection_on_cultural_dim_2": -0.0196759797161364,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "time_and_change",
+        "cultural_dim_2": "moral",
+        "projection_on_cultural_dim_1": -0.1139894624785399,
+        "projection_on_cultural_dim_2": -0.1082729417722457,
+        "poles_cultural_dim_1": "Futuro <-> Pasado",
+        "poles_cultural_dim_2": "Malo <-> Bueno"
+      }
+    ]
+  },
+  "gender - affluence": {
+    "cuidados": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1349772069798659,
+        "projection_on_cultural_dim_2": -0.0824303859170396,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1411457641641419,
+        "projection_on_cultural_dim_2": -0.113060727955169,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1646312515124823,
+        "projection_on_cultural_dim_2": -0.0708099884249634,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1660806376971367,
+        "projection_on_cultural_dim_2": -0.0859056169133393,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "limpieza": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0707613398836643,
+        "projection_on_cultural_dim_2": 0.0069996398185811,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1150687593536235,
+        "projection_on_cultural_dim_2": -0.0565925908137949,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1056349531846764,
+        "projection_on_cultural_dim_2": -0.0268361500190269,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0868959519534853,
+        "projection_on_cultural_dim_2": -0.0464187840729392,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "directorio": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.087652106766234,
+        "projection_on_cultural_dim_2": -0.0150360705348225,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0941751858123146,
+        "projection_on_cultural_dim_2": 0.0452532881221047,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0222671386708597,
+        "projection_on_cultural_dim_2": 0.0681029527564957,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.1278129139098212,
+        "projection_on_cultural_dim_2": 0.1459277772929182,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "ingeniería": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0188931337741804,
+        "projection_on_cultural_dim_2": 0.0502649028188507,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0123759854655604,
+        "projection_on_cultural_dim_2": 0.0268284370197007,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0018465678407498,
+        "projection_on_cultural_dim_2": 0.0802587729712226,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0234873460597248,
+        "projection_on_cultural_dim_2": 0.0729097523516001,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "enfermería": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1801714430847418,
+        "projection_on_cultural_dim_2": -0.0592590393988977,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.2122828906250391,
+        "projection_on_cultural_dim_2": -0.0831352882562041,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1639012730880058,
+        "projection_on_cultural_dim_2": 0.0005779660586376,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0882836687755243,
+        "projection_on_cultural_dim_2": -0.1162774380933525,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "inversión": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0358227609909615,
+        "projection_on_cultural_dim_2": 0.0635621263138005,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0264160863484284,
+        "projection_on_cultural_dim_2": 0.0374247418053245,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0210793785503792,
+        "projection_on_cultural_dim_2": 0.0587860224061723,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": 0.0369276734907187,
+        "projection_on_cultural_dim_2": 0.0808353100206291,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "pensión": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0854365636909925,
+        "projection_on_cultural_dim_2": 0.0182513722312583,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1062152400853713,
+        "projection_on_cultural_dim_2": -0.0535148945160404,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0613200601579447,
+        "projection_on_cultural_dim_2": -0.0372239108011589,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0410493343269032,
+        "projection_on_cultural_dim_2": 0.0306980539698127,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "hogar": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0778275424109112,
+        "projection_on_cultural_dim_2": 0.1305280843914651,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.1220341352855281,
+        "projection_on_cultural_dim_2": 0.1029456482390787,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.087502177059885,
+        "projection_on_cultural_dim_2": 0.1636798988240639,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0506997326924152,
+        "projection_on_cultural_dim_2": 0.1522333400825578,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "tecnología": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.031607709316223,
+        "projection_on_cultural_dim_2": 0.0854962292033307,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0179677319704081,
+        "projection_on_cultural_dim_2": 0.0674270974910935,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0251731749708216,
+        "projection_on_cultural_dim_2": 0.0916536609469249,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.034877329005724,
+        "projection_on_cultural_dim_2": 0.1056618057435098,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "emprendimiento": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0053622976123636,
+        "projection_on_cultural_dim_2": 0.2127269774277686,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0826108160795552,
+        "projection_on_cultural_dim_2": 0.1695549076714152,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0370128957979804,
+        "projection_on_cultural_dim_2": 0.1294049211317321,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0318486652963611,
+        "projection_on_cultural_dim_2": 0.0739657566806435,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ],
+    "ciencia": [
+      {
+        "country": "argentina",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0358129186069067,
+        "projection_on_cultural_dim_2": -0.0498761085323279,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "chile",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0374415981061947,
+        "projection_on_cultural_dim_2": -0.0043165876705709,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "mexico",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0222239461844735,
+        "projection_on_cultural_dim_2": -0.0118078529792074,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      },
+      {
+        "country": "españa",
+        "cultural_dim_1": "gender",
+        "cultural_dim_2": "affluence",
+        "projection_on_cultural_dim_1": -0.0056241260529197,
+        "projection_on_cultural_dim_2": -0.0046005471560526,
+        "poles_cultural_dim_1": "Femenino <-> Masculino",
+        "poles_cultural_dim_2": "Pobreza <-> Riqueza"
+      }
+    ]
+  }
+}

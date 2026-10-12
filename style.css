@@ -189,7 +189,8 @@ body {
 #scrolly-sankey figure.sticky,
 #scrolly-temporal figure.sticky,
 #scrolly-constellation figure.sticky,
-#scrolly-projection figure.sticky {
+#scrolly-projection figure.sticky,
+#scrolly-scatter figure.sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -607,7 +608,8 @@ a.volume-link:hover {
     #scrolly-sankey figure.sticky,
     #scrolly-temporal figure.sticky,
     #scrolly-constellation figure.sticky,
-    #scrolly-projection figure.sticky {
+    #scrolly-projection figure.sticky,
+    #scrolly-scatter figure.sticky {
         height: 48vh;
         max-height: 460px;
     }
@@ -635,7 +637,8 @@ a.volume-link:hover {
     #scrolly-sankey,
     #scrolly-temporal,
     #scrolly-constellation,
-    #scrolly-projection {
+    #scrolly-projection,
+    #scrolly-scatter {
         display: flex;
         flex-direction: row-reverse; /* sticky visualization on right, steps scroll on left */
         justify-content: space-between;
@@ -650,7 +653,8 @@ a.volume-link:hover {
     #scrolly-sankey figure.sticky,
     #scrolly-temporal figure.sticky,
     #scrolly-constellation figure.sticky,
-    #scrolly-projection figure.sticky {
+    #scrolly-projection figure.sticky,
+    #scrolly-scatter figure.sticky {
         width: 55%; /* Visualization space gets 55% of horizontal space */
         height: 100vh; /* Fills screen height fully */
         max-height: none;
@@ -2551,4 +2555,260 @@ a.volume-link:hover {
     fill: var(--color-text-muted);
     text-anchor: middle;
 }
+
+/* ==========================================================================
+   Volumen II - Sección 3: Gráfico de Dispersión de Cuadrantes 2D (Scatterplot)
+   ========================================================================== */
+#scrolly-scatter {
+    position: relative;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+#d3-canvas-scatter {
+    flex: 1 1 0;
+    width: 100%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.scatter-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.45rem 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.scatter-status-box,
+.scatter-poles-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.scatter-active-badge {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-main);
+    background-color: var(--color-bg);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+}
+
+.scatter-dim-badge {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+}
+
+.scatter-poles-badge {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Interactive UI container in Step 4 */
+.scatter-interactive-ui {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+    background-color: #ffffff;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.scatter-interactive-ui.is-visible {
+    display: flex;
+}
+
+.scatter-interactive-ui .filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.scatter-select-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.scatter-select {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scatter-select:focus,
+.scatter-select:hover {
+    border-color: var(--color-accent);
+}
+
+/* SVG Cartesian 2D Scatter Elements */
+.quadrant-line {
+    stroke: rgba(31, 30, 29, 0.45);
+    stroke-dasharray: 4, 4;
+    stroke-width: 1.5px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.quadrant-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    fill: var(--color-text-main);
+    opacity: 0.35;
+    letter-spacing: 0.08em;
+    pointer-events: none;
+    user-select: none;
+}
+
+.style-dot {
+    stroke: #ffffff;
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: r 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.style-dot:hover {
+    stroke-width: 2.5px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+}
+
+.centroid-line {
+    stroke: var(--color-text-main);
+    stroke-width: 1.25px;
+    opacity: 0.15;
+    stroke-dasharray: 2, 2;
+    pointer-events: none;
+}
+
+.centroid-dot {
+    fill: var(--color-text-muted);
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.centroid-text {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 700;
+    fill: var(--color-text-main);
+    text-anchor: middle;
+    opacity: 0.85;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.95));
+}
+
+/* Country dot fill colors */
+.dot-cl { fill: var(--color-cl); }
+.dot-ar { fill: var(--color-ar); }
+.dot-mx { fill: var(--color-mx); }
+.dot-es { fill: var(--color-es); }
+
+/* Storytelling Country Insights Grid for 2D Scatterplot */
+#storytelling-insights-scatter {
+    flex-shrink: 0;
+    margin-top: 0.65rem;
+    width: 100%;
+}
+
+#storytelling-insights-scatter .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.5rem;
+}
+
+#storytelling-insights-scatter .insight-card {
+    padding: 0.45rem 0.65rem;
+    margin: 0;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#storytelling-insights-scatter .insight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+#storytelling-insights-scatter .insight-country {
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.04em;
+    color: var(--color-accent);
+}
+
+#storytelling-insights-scatter .insight-stat {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.2;
+}
+
+#storytelling-insights-scatter .insight-label {
+    font-size: 0.64rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+    #storytelling-insights-scatter {
+        display: none !important;
+    }
+}
+
+
 

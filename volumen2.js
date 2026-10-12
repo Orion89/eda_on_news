@@ -1195,6 +1195,524 @@ function handleResize() {
         renderArc(currentProjectionDim, currentProjectionWord);
         scrollerProjection.resize();
     }
+
+    // 3. Scatterplot Quadrants resize
+    const canvasScatter = document.getElementById("d3-canvas-scatter");
+    if (canvasScatter && svgScatter && rawScatterData) {
+        widthScatter = canvasScatter.clientWidth || 800;
+        heightScatter = canvasScatter.clientHeight || 560;
+        svgScatter
+            .attr("width", widthScatter)
+            .attr("height", heightScatter)
+            .attr("viewBox", `0 0 ${widthScatter} ${heightScatter}`);
+        renderScatter(currentScatterPair, currentScatterWords);
+        scrollerScatter.resize();
+    }
+}
+
+// ==========================================================================
+// SECCIÓN 3: GRÁFICO DE DISPERSIÓN DE CUADRANTES 2D (EL MAPA CARTESIANO)
+// ==========================================================================
+
+let rawScatterData = null;
+let currentScatterPair = "moral - order_and_legality";
+let currentScatterWords = ["manifestante", "evasión", "carabineros"];
+let interactiveScatterPair = "gender - affluence";
+let interactiveScatterWords = ["cuidados", "enfermería", "directorio"];
+
+let svgScatter = null;
+let gScatter = null;
+let gQuadrantAxes = null;
+let gCentroidLines = null;
+let gCountryDots = null;
+let gCentroids = null;
+
+let widthScatter = 800;
+let heightScatter = 560;
+const scrollerScatter = scrollama();
+
+const scatterPairsConfig = {
+    "moral - order_and_legality": {
+        dimX: "moral",
+        dimY: "order_and_legality",
+        label: "Moral × Orden y Legalidad",
+        defaultWords: ["manifestante", "evasión", "carabineros"]
+    },
+    "political_ideology - affluence": {
+        dimX: "political_ideology",
+        dimY: "affluence",
+        label: "Ideología Política × Afluencia",
+        defaultWords: ["élite", "universidad", "sindicato"]
+    },
+    "gender - affluence": {
+        dimX: "gender",
+        dimY: "affluence",
+        label: "Género × Afluencia",
+        defaultWords: ["cuidados", "enfermería", "directorio"]
+    },
+    "time_and_change - moral": {
+        dimX: "time_and_change",
+        dimY: "moral",
+        label: "Tiempo y Cambio × Moral",
+        defaultWords: ["revolución", "matrimonio", "algoritmo"]
+    }
+};
+
+/**
+ * Setup D3 Scatterplot Canvas
+ */
+function setupD3ScatterCanvas() {
+    const canvas = document.getElementById("d3-canvas-scatter");
+    if (!canvas) return;
+
+    canvas.innerHTML = "";
+    widthScatter = canvas.clientWidth || 800;
+    heightScatter = canvas.clientHeight || 560;
+
+    svgScatter = d3.select(canvas)
+        .append("svg")
+        .attr("width", widthScatter)
+        .attr("height", heightScatter)
+        .attr("viewBox", `0 0 ${widthScatter} ${heightScatter}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    gScatter = svgScatter.append("g").attr("class", "scatter-root-group");
+    gQuadrantAxes = gScatter.append("g").attr("class", "scatter-axes-layer");
+    gCentroidLines = gScatter.append("g").attr("class", "scatter-centroid-lines-layer");
+    gCountryDots = gScatter.append("g").attr("class", "scatter-country-dots-layer");
+    gCentroids = gScatter.append("g").attr("class", "scatter-centroids-layer");
+}
+
+/**
+ * Main render function for the 2D Quadrant Scatterplot
+ */
+function renderScatter(pairKey, wordsArray) {
+    if (!rawScatterData || !svgScatter) return;
+
+    if (!rawScatterData[pairKey]) {
+        pairKey = "moral - order_and_legality";
+    }
+    currentScatterPair = pairKey;
+    currentScatterWords = [...wordsArray];
+
+    const pad = 52;
+    const xScale = d3.scaleLinear().domain([-0.45, 0.45]).range([pad, widthScatter - pad]);
+    const yScale = d3.scaleLinear().domain([-0.45, 0.45]).range([heightScatter - pad, pad]);
+
+    const cx0 = xScale(0);
+    const cy0 = yScale(0);
+
+    // Extract poles from dataset for current pair
+    let negX = "Negativo", posX = "Positivo";
+    let negY = "Negativo", posY = "Positivo";
+    const availableWords = Object.keys(rawScatterData[pairKey] || {});
+    const firstWord = availableWords[0];
+    if (firstWord && rawScatterData[pairKey][firstWord][0]) {
+        const sample = rawScatterData[pairKey][firstWord][0];
+        if (sample.poles_cultural_dim_1) {
+            const partsX = sample.poles_cultural_dim_1.split("<->").map(s => s.trim());
+            if (partsX.length === 2) { negX = partsX[0]; posX = partsX[1]; }
+        }
+        if (sample.poles_cultural_dim_2) {
+            const partsY = sample.poles_cultural_dim_2.split("<->").map(s => s.trim());
+            if (partsY.length === 2) { negY = partsY[0]; posY = partsY[1]; }
+        }
+    }
+
+    // Central axes
+    gQuadrantAxes.selectAll(".quadrant-line-h")
+        .data([cy0])
+        .join("line")
+        .attr("class", "quadrant-line quadrant-line-h")
+        .attr("x1", pad)
+        .attr("y1", d => d)
+        .attr("x2", widthScatter - pad)
+        .attr("y2", d => d);
+
+    gQuadrantAxes.selectAll(".quadrant-line-v")
+        .data([cx0])
+        .join("line")
+        .attr("class", "quadrant-line quadrant-line-v")
+        .attr("x1", d => d)
+        .attr("y1", pad)
+        .attr("x2", d => d)
+        .attr("y2", heightScatter - pad);
+
+    // Extrema quadrant labels
+    const labelsData = [
+        { id: "x-neg", x: pad + 4, y: cy0 - 8, anchor: "start", text: `← ${negX}` },
+        { id: "x-pos", x: widthScatter - pad - 4, y: cy0 - 8, anchor: "end", text: `${posX} →` },
+        { id: "y-neg", x: cx0 + 8, y: heightScatter - pad - 8, anchor: "start", text: `↓ ${negY}` },
+        { id: "y-pos", x: cx0 + 8, y: pad + 16, anchor: "start", text: `↑ ${posY}` }
+    ];
+
+    gQuadrantAxes.selectAll(".quadrant-label")
+        .data(labelsData, d => d.id)
+        .join("text")
+        .attr("class", "quadrant-label")
+        .attr("x", d => d.x)
+        .attr("y", d => d.y)
+        .attr("text-anchor", d => d.anchor)
+        .text(d => d.text);
+
+    // Prepare data structures
+    const pairData = rawScatterData[pairKey] || {};
+    const centroidsData = [];
+    const dotsData = [];
+    const linesData = [];
+
+    wordsArray.forEach(w => {
+        const list = pairData[w];
+        if (!list || !list.length) return;
+
+        const avgX = d3.mean(list, d => d.projection_on_cultural_dim_1);
+        const avgY = d3.mean(list, d => d.projection_on_cultural_dim_2);
+
+        centroidsData.push({
+            id: w,
+            word: w,
+            avgX: avgX,
+            avgY: avgY
+        });
+
+        list.forEach(c => {
+            const meta = countryMetadata[c.country] || { name: c.country, color: "#d9383a", code: "CL", hex: "#d9383a" };
+            const dotId = `${w}__${c.country}`;
+            dotsData.push({
+                id: dotId,
+                word: w,
+                country: c.country,
+                countryName: meta.name,
+                countryCode: meta.code,
+                color: meta.color,
+                hex: meta.hex,
+                x: c.projection_on_cultural_dim_1,
+                y: c.projection_on_cultural_dim_2,
+                avgX: avgX,
+                avgY: avgY,
+                poles1: c.poles_cultural_dim_1 || `${negX} <-> ${posX}`,
+                poles2: c.poles_cultural_dim_2 || `${negY} <-> ${posY}`
+            });
+
+            linesData.push({
+                id: `${dotId}__line`,
+                word: w,
+                country: c.country,
+                x: c.projection_on_cultural_dim_1,
+                y: c.projection_on_cultural_dim_2,
+                avgX: avgX,
+                avgY: avgY
+            });
+        });
+    });
+
+    // 1. Centroid faint connecting lines (opacity 0.15)
+    gCentroidLines.selectAll(".centroid-line")
+        .data(linesData, d => d.id)
+        .join(
+            enter => enter.append("line")
+                .attr("class", "centroid-line")
+                .attr("x1", cx0)
+                .attr("y1", cy0)
+                .attr("x2", cx0)
+                .attr("y2", cy0)
+                .attr("opacity", 0)
+                .call(enter => enter.transition().duration(1000).ease(d3.easeCubicOut)
+                    .attr("x1", d => xScale(d.avgX))
+                    .attr("y1", d => yScale(d.avgY))
+                    .attr("x2", d => xScale(d.x))
+                    .attr("y2", d => yScale(d.y))
+                    .attr("opacity", 0.15)),
+            update => update.call(update => update.transition().duration(1000).ease(d3.easeCubicOut)
+                .attr("x1", d => xScale(d.avgX))
+                .attr("y1", d => yScale(d.avgY))
+                .attr("x2", d => xScale(d.x))
+                .attr("y2", d => yScale(d.y))
+                .attr("opacity", 0.15)),
+            exit => exit.call(exit => exit.transition().duration(1000).ease(d3.easeCubicOut)
+                .attr("x1", cx0)
+                .attr("y1", cy0)
+                .attr("x2", cx0)
+                .attr("y2", cy0)
+                .attr("opacity", 0)
+                .remove())
+        );
+
+    // 2. Country dots (.style-dot)
+    gCountryDots.selectAll(".style-dot")
+        .data(dotsData, d => d.id)
+        .join(
+            enter => enter.append("circle")
+                .attr("class", d => `style-dot dot-${(d.countryCode || 'cl').toLowerCase()}`)
+                .attr("cx", cx0)
+                .attr("cy", cy0)
+                .attr("r", 0)
+                .attr("fill", d => d.color)
+                .attr("opacity", 0)
+                .on("mouseover", handleScatterDotMouseOver)
+                .on("mousemove", positionTooltip)
+                .on("mouseleave", handleScatterDotMouseLeave)
+                .call(enter => enter.transition().duration(1000).ease(d3.easeCubicOut)
+                    .attr("cx", d => xScale(d.x))
+                    .attr("cy", d => yScale(d.y))
+                    .attr("r", 6)
+                    .attr("opacity", 0.95)),
+            update => update
+                .attr("fill", d => d.color)
+                .call(update => update.transition().duration(1000).ease(d3.easeCubicOut)
+                    .attr("cx", d => xScale(d.x))
+                    .attr("cy", d => yScale(d.y))
+                    .attr("r", 6)
+                    .attr("opacity", 0.95)),
+            exit => exit.call(exit => exit.transition().duration(1000).ease(d3.easeCubicOut)
+                .attr("cx", cx0)
+                .attr("cy", cy0)
+                .attr("r", 0)
+                .attr("opacity", 0)
+                .remove())
+        );
+
+    // 3. Centroid markers and word label text
+    gCentroids.selectAll(".centroid-group")
+        .data(centroidsData, d => d.id)
+        .join(
+            enter => {
+                const g = enter.append("g")
+                    .attr("class", "centroid-group")
+                    .attr("transform", `translate(${cx0}, ${cy0})`)
+                    .attr("opacity", 0);
+                g.append("circle")
+                    .attr("class", "centroid-dot")
+                    .attr("r", 3.5);
+                g.append("text")
+                    .attr("class", "centroid-text")
+                    .attr("dy", -9)
+                    .text(d => d.word);
+                g.transition().duration(1000).ease(d3.easeCubicOut)
+                    .attr("transform", d => `translate(${xScale(d.avgX)}, ${yScale(d.avgY)})`)
+                    .attr("opacity", 1);
+                return g;
+            },
+            update => {
+                update.select(".centroid-text").text(d => d.word);
+                update.call(update => update.transition().duration(1000).ease(d3.easeCubicOut)
+                    .attr("transform", d => `translate(${xScale(d.avgX)}, ${yScale(d.avgY)})`)
+                    .attr("opacity", 1));
+                return update;
+            },
+            exit => exit.call(exit => exit.transition().duration(1000).ease(d3.easeCubicOut)
+                .attr("transform", `translate(${cx0}, ${cy0})`)
+                .attr("opacity", 0)
+                .remove())
+        );
+
+    // Update status badges and storytelling insight cards
+    updateScatterBadgesAndCards(pairKey, wordsArray, centroidsData, negX, posX, negY, posY);
+}
+
+/**
+ * Tooltip handlers for scatter dots
+ */
+function handleScatterDotMouseOver(event, d) {
+    d3.select(this).transition().duration(150).attr("r", 8.5);
+    tooltip.transition().duration(100).style("opacity", 0.98);
+    const signX = d.x >= 0 ? "+" : "";
+    const signY = d.y >= 0 ? "+" : "";
+    tooltip.html(`
+        <div class="tooltip-title" style="color:${d.color}">${d.countryName} (${d.countryCode})</div>
+        <div style="font-size:0.85rem; margin: 0.25rem 0; font-weight:700;">Palabra: &ldquo;${d.word}&rdquo;</div>
+        <div class="tooltip-row" style="margin-top:0.25rem;">
+            <span>Eje X (${d.poles1}):</span>
+            <strong style="color:${d.color}">${signX}${d.x.toFixed(3)}</strong>
+        </div>
+        <div class="tooltip-row" style="margin-top:0.2rem;">
+            <span>Eje Y (${d.poles2}):</span>
+            <strong style="color:${d.color}">${signY}${d.y.toFixed(3)}</strong>
+        </div>
+        <div class="tooltip-row" style="margin-top:0.2rem; font-size:0.75rem; color:#b5b0aa;">
+            <span>Centroide (X̄, Ȳ): (${d.avgX >= 0 ? '+' : ''}${d.avgX.toFixed(3)}, ${d.avgY >= 0 ? '+' : ''}${d.avgY.toFixed(3)})</span>
+        </div>
+    `);
+    positionTooltip(event);
+}
+
+function handleScatterDotMouseLeave(event, d) {
+    d3.select(this).transition().duration(150).attr("r", 6);
+    tooltip.transition().duration(150).style("opacity", 0);
+}
+
+/**
+ * Updates status bar badges & cluster cards below scatter canvas
+ */
+function updateScatterBadgesAndCards(pairKey, wordsArray, centroidsData, negX, posX, negY, posY) {
+    const pairConfig = scatterPairsConfig[pairKey] || { label: pairKey };
+
+    const activeBadge = document.getElementById("scatter-active-badge");
+    if (activeBadge) {
+        activeBadge.innerHTML = `Palabras: <strong>${wordsArray.join(", ")}</strong>`;
+    }
+
+    const pairBadge = document.getElementById("scatter-pair-badge");
+    if (pairBadge) {
+        pairBadge.innerText = `Espacio: ${pairConfig.label}`;
+    }
+
+    const polesXBadge = document.getElementById("scatter-poles-x-badge");
+    if (polesXBadge) {
+        polesXBadge.innerText = `X: ${negX} ↔ ${posX}`;
+    }
+
+    const polesYBadge = document.getElementById("scatter-poles-y-badge");
+    if (polesYBadge) {
+        polesYBadge.innerText = `Y: ${negY} ↔ ${posY}`;
+    }
+
+    const cardsContainer = document.getElementById("storytelling-insights-scatter");
+    if (cardsContainer) {
+        const cardsHtml = centroidsData.map(c => {
+            const sx = c.avgX >= 0 ? "+" : "";
+            const sy = c.avgY >= 0 ? "+" : "";
+            const qX = c.avgX < 0 ? negX : posX;
+            const qY = c.avgY < 0 ? negY : posY;
+            return `
+                <div class="insight-card" title="Centroide de ${c.word}">
+                    <div class="insight-country">&ldquo;${c.word}&rdquo;</div>
+                    <div class="insight-stat" style="font-size:0.95rem;">X: ${sx}${c.avgX.toFixed(2)} | Y: ${sy}${c.avgY.toFixed(2)}</div>
+                    <div class="insight-label">${qX} &bull; ${qY}</div>
+                </div>
+            `;
+        }).join("");
+
+        cardsContainer.innerHTML = `<div class="insights-grid">${cardsHtml}</div>`;
+    }
+}
+
+/**
+ * Interactive exploration UI setup (Step 4)
+ */
+function setupScatterInteractiveUI() {
+    const selectX = document.getElementById("scatter-select-dim-x");
+    const selectY = document.getElementById("scatter-select-dim-y");
+
+    if (selectX) {
+        selectX.addEventListener("change", () => {
+            const valX = selectX.value;
+            let matchingKey = Object.keys(scatterPairsConfig).find(k => scatterPairsConfig[k].dimX === valX);
+            if (!matchingKey) matchingKey = "moral - order_and_legality";
+            interactiveScatterPair = matchingKey;
+            if (selectY) selectY.value = scatterPairsConfig[matchingKey].dimY;
+            interactiveScatterWords = [...scatterPairsConfig[matchingKey].defaultWords];
+            populateScatterWordPills();
+            renderScatter(interactiveScatterPair, interactiveScatterWords);
+        });
+    }
+
+    if (selectY) {
+        selectY.addEventListener("change", () => {
+            const valY = selectY.value;
+            let matchingKey = Object.keys(scatterPairsConfig).find(k => {
+                return scatterPairsConfig[k].dimY === valY && scatterPairsConfig[k].dimX === (selectX ? selectX.value : "");
+            });
+            if (!matchingKey) {
+                matchingKey = Object.keys(scatterPairsConfig).find(k => scatterPairsConfig[k].dimY === valY);
+            }
+            if (!matchingKey) matchingKey = "moral - order_and_legality";
+            interactiveScatterPair = matchingKey;
+            if (selectX) selectX.value = scatterPairsConfig[matchingKey].dimX;
+            interactiveScatterWords = [...scatterPairsConfig[matchingKey].defaultWords];
+            populateScatterWordPills();
+            renderScatter(interactiveScatterPair, interactiveScatterWords);
+        });
+    }
+
+    populateScatterWordPills();
+}
+
+/**
+ * Populates word pills (.action-btn / .action-btn-active) for current interactive pair
+ */
+function populateScatterWordPills() {
+    const pillsContainer = document.getElementById("scatter-word-pills");
+    if (!pillsContainer || !rawScatterData || !rawScatterData[interactiveScatterPair]) return;
+
+    pillsContainer.innerHTML = "";
+    const words = Object.keys(rawScatterData[interactiveScatterPair]);
+
+    words.forEach(word => {
+        const btn = document.createElement("button");
+        const isActive = interactiveScatterWords.includes(word);
+        btn.className = `action-btn ${isActive ? "action-btn-active active" : ""}`;
+        btn.setAttribute("data-word", word);
+        btn.textContent = word;
+
+        btn.addEventListener("click", () => {
+            if (interactiveScatterWords.includes(word)) {
+                if (interactiveScatterWords.length > 1) {
+                    interactiveScatterWords = interactiveScatterWords.filter(w => w !== word);
+                    btn.classList.remove("action-btn-active", "active");
+                    renderScatter(interactiveScatterPair, interactiveScatterWords);
+                }
+            } else {
+                interactiveScatterWords.push(word);
+                btn.classList.add("action-btn-active", "active");
+                renderScatter(interactiveScatterPair, interactiveScatterWords);
+            }
+        });
+
+        pillsContainer.appendChild(btn);
+    });
+}
+
+/**
+ * Synchronize dropdown selects and pill states to current interactive settings
+ */
+function syncScatterControlsToState() {
+    const selectX = document.getElementById("scatter-select-dim-x");
+    const selectY = document.getElementById("scatter-select-dim-y");
+    if (selectX && scatterPairsConfig[interactiveScatterPair]) {
+        selectX.value = scatterPairsConfig[interactiveScatterPair].dimX;
+    }
+    if (selectY && scatterPairsConfig[interactiveScatterPair]) {
+        selectY.value = scatterPairsConfig[interactiveScatterPair].dimY;
+    }
+    populateScatterWordPills();
+}
+
+/**
+ * Initialize Scrollama for Section 3 (Cuadrantes 2D)
+ */
+function initScrollamaScatter() {
+    scrollerScatter
+        .setup({
+            step: "#scrolly-scatter article .step",
+            offset: 0.52,
+            debug: false
+        })
+        .onStepEnter(response => {
+            const stepIndex = response.index;
+            const stepEl = response.element;
+
+            document.querySelectorAll("#scrolly-scatter article .step")
+                .forEach((el, idx) => el.classList.toggle("is-active", idx === stepIndex));
+
+            const stepNum = parseInt(stepEl.getAttribute("data-step"), 10);
+            const uiContainer = document.getElementById("scatter-interactive-ui");
+
+            if (stepNum === 1) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderScatter("moral - order_and_legality", ["manifestante", "evasión", "carabineros"]);
+            } else if (stepNum === 2) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderScatter("political_ideology - affluence", ["élite", "universidad", "sindicato"]);
+            } else if (stepNum === 3) {
+                if (uiContainer) uiContainer.classList.remove("is-visible");
+                renderScatter("gender - affluence", ["cuidados", "enfermería", "directorio"]);
+            } else if (stepNum === 4) {
+                if (uiContainer) uiContainer.classList.add("is-visible");
+                syncScatterControlsToState();
+                renderScatter(interactiveScatterPair, interactiveScatterWords);
+            }
+        });
 }
 
 /**
@@ -1205,9 +1723,10 @@ function initVolumen2() {
 
     Promise.all([
         d3.json("./data/embeddings/similarity_matrices_per_cultural_dimensions_between_countries.json"),
-        d3.json("./data/embeddings/proyecciones_optimizadas.json")
+        d3.json("./data/embeddings/proyecciones_optimizadas.json"),
+        d3.json("./data/embeddings/proyecciones_en_2_dim_culturales.json")
     ])
-    .then(([similarityData, projectionData]) => {
+    .then(([similarityData, projectionData, scatterData]) => {
         // Init Section 1: Constellation
         rawSimilarityData = similarityData;
         setupD3ConstellationCanvas();
@@ -1223,8 +1742,17 @@ function initVolumen2() {
         // Initial render for Section 2
         renderArc("moral", "manifestante");
 
+        // Init Section 3: Scatterplot 2D
+        rawScatterData = scatterData;
+        setupD3ScatterCanvas();
+        setupScatterInteractiveUI();
+        initScrollamaScatter();
+
+        // Initial render for Section 3
+        renderScatter("moral - order_and_legality", ["manifestante", "evasión", "carabineros"]);
+
         window.addEventListener("resize", handleResize);
-        console.log("[Volumen II] Constellation Graph & Projection Arc initialized successfully.");
+        console.log("[Volumen II] Constellations, Projection Arc & 2D Scatterplot initialized successfully.");
     })
     .catch(err => {
         console.error("[Volumen II Error] Failed to load dataset:", err);
