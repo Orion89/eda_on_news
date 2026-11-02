@@ -167,19 +167,26 @@ body {
     color: var(--color-text-main);
 }
 
-/* Scrollytelling Section Layout */
+/* Scrollytelling Section Layout (Mobile & Tablet: stacked column layout) */
 #scrolly,
 #scrolly-style,
 #scrolly-pos,
 #scrolly-emotions,
 #scrolly-map,
 #scrolly-beeswarm,
-#scrolly-sankey {
+#scrolly-sankey,
+#scrolly-temporal,
+#scrolly-constellation,
+#scrolly-projection,
+#scrolly-scatter,
+.scrolly-container {
+    display: flex;
+    flex-direction: column;
     position: relative;
     background-color: var(--color-bg);
 }
 
-/* Sticky Figure Base (Mobile & Tablet: sticky top compact viewport) */
+/* Sticky Figure Base (Mobile & Tablet: sticky top compact viewport between 50vh and 60vh) */
 #scrolly figure.sticky,
 #scrolly-style figure.sticky,
 #scrolly-pos figure.sticky,
@@ -190,15 +197,16 @@ body {
 #scrolly-temporal figure.sticky,
 #scrolly-constellation figure.sticky,
 #scrolly-projection figure.sticky,
-#scrolly-scatter figure.sticky {
+#scrolly-scatter figure.sticky,
+.scrolly-container figure.sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    height: 50vh;
-    min-height: 310px;
-    max-height: 460px;
+    height: 55vh;
+    min-height: 320px;
+    max-height: 520px;
     margin: 0;
     background-color: var(--color-bg-alt);
     z-index: 25;
@@ -295,11 +303,11 @@ body {
 }
 
 .step:first-child {
-    margin-top: 6vh;
+    margin-top: 10vh;
 }
 
 .step:last-child {
-    margin-bottom: 28vh;
+    margin-bottom: 50vh;
 }
 
 .step-num {
@@ -609,20 +617,24 @@ a.volume-link:hover {
     #scrolly-temporal figure.sticky,
     #scrolly-constellation figure.sticky,
     #scrolly-projection figure.sticky,
-    #scrolly-scatter figure.sticky {
-        height: 48vh;
-        max-height: 460px;
+    #scrolly-scatter figure.sticky,
+    .scrolly-container figure.sticky {
+        height: 55vh;
+        min-height: 320px;
+        max-height: 520px;
     }
 
     .step {
         padding: 2rem 1.75rem;
         max-width: 520px;
-        margin: 32vh auto 32vh auto;
+        margin: 28vh auto 28vh auto;
     }
 
     .filter-container {
         padding: 0.6rem 1rem;
         gap: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -638,7 +650,8 @@ a.volume-link:hover {
     #scrolly-temporal,
     #scrolly-constellation,
     #scrolly-projection,
-    #scrolly-scatter {
+    #scrolly-scatter,
+    .scrolly-container {
         display: flex;
         flex-direction: row-reverse; /* sticky visualization on right, steps scroll on left */
         justify-content: space-between;
@@ -654,7 +667,8 @@ a.volume-link:hover {
     #scrolly-temporal figure.sticky,
     #scrolly-constellation figure.sticky,
     #scrolly-projection figure.sticky,
-    #scrolly-scatter figure.sticky {
+    #scrolly-scatter figure.sticky,
+    .scrolly-container figure.sticky {
         width: 55%; /* Visualization space gets 55% of horizontal space */
         height: 100vh; /* Fills screen height fully */
         max-height: none;
@@ -894,7 +908,13 @@ a.volume-link:hover {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.35rem 0.9rem;
+    padding: 0.45rem 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     border-radius: 50px;
     border: 1px solid var(--color-border);
     background-color: #ffffff;
@@ -1018,7 +1038,13 @@ a.volume-link:hover {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.35rem 0.9rem;
+    padding: 0.45rem 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     border-radius: 50px;
     border: 1px solid var(--color-border);
     background-color: #ffffff;
@@ -1050,7 +1076,13 @@ a.volume-link:hover {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.35rem 1rem;
+    padding: 0.45rem 1rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     border-radius: 4px;
     border: 1px solid var(--color-text-muted);
     background-color: transparent;
@@ -1153,7 +1185,13 @@ a.volume-link:hover {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.35rem 0.9rem;
+    padding: 0.45rem 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     border-radius: 50px;
     border: 1px solid var(--color-border);
     background-color: #ffffff;
@@ -1237,7 +1275,13 @@ a.volume-link:hover {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.35rem 0.9rem;
+    padding: 0.45rem 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     border-radius: 50px;
     border: 1px solid var(--color-border);
     background-color: #ffffff;
@@ -1605,7 +1649,13 @@ a.volume-link:hover {
     background-color: transparent;
     border: 1px solid var(--color-border);
     border-radius: 20px;
-    padding: 0.35rem 0.9rem;
+    padding: 0.45rem 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -1706,7 +1756,13 @@ a.volume-link:hover {
     font-family: var(--font-sans);
     font-size: 0.76rem;
     font-weight: 600;
-    padding: 0.28rem 0.65rem;
+    padding: 0.45rem 0.85rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
     border: 1px solid var(--color-border);
     border-radius: 999px;
     background: #ffffff;
@@ -1959,6 +2015,8 @@ a.volume-link:hover {
     .filter-container {
         padding: 0.35rem 0.4rem;
         gap: 0.25rem 0.35rem;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .filter-label {
@@ -1976,22 +2034,34 @@ a.volume-link:hover {
     .pos-filter-btn,
     .emotion-btn,
     .map-country-btn,
-    .sankey-country-btn {
-        font-size: 0.72rem;
-        padding: 0.28rem 0.65rem;
-        min-height: 32px;
+    .sankey-country-btn,
+    .temporal-country-btn {
+        font-size: 0.78rem;
+        padding: 0.45rem 0.8rem;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
     }
 
     .action-btn {
-        font-size: 0.72rem;
-        padding: 0.28rem 0.65rem;
-        min-height: 32px;
+        font-size: 0.78rem;
+        padding: 0.45rem 0.8rem;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
     }
 
     .tooltip {
-        max-width: min(270px, 85vw);
-        padding: 0.5rem 0.75rem;
-        font-size: 0.78rem;
+        max-width: calc(100vw - 24px);
+        padding: 0.65rem 0.85rem;
+        font-size: 0.8rem;
+        box-sizing: border-box;
     }
 
     .tooltip-title {
@@ -2239,17 +2309,21 @@ a.volume-link:hover {
 
 .filter-btn {
     font-family: var(--font-sans);
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    padding: 0.4rem 0.85rem;
+    padding: 0.5rem 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
     border-radius: 999px;
     border: 1px solid var(--color-border);
     background-color: #ffffff;
     color: var(--color-text-muted);
     cursor: pointer;
+    touch-action: manipulation;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.35rem;
 }
 
@@ -2371,15 +2445,21 @@ a.volume-link:hover {
 
 .action-btn {
     font-family: var(--font-sans);
-    font-size: 0.74rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.25rem 0.65rem;
-    border-radius: 4px;
+    padding: 0.45rem 0.85rem;
+    min-height: 44px;
+    min-width: 44px;
+    border-radius: 6px;
     border: 1px solid var(--color-border);
     background-color: var(--color-bg);
     color: var(--color-text-main);
     cursor: pointer;
+    touch-action: manipulation;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .action-btn:hover {
@@ -2672,13 +2752,15 @@ a.volume-link:hover {
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: 6px;
-    padding: 0.3rem 0.6rem;
+    padding: 0.45rem 0.8rem;
+    min-height: 44px;
     font-family: var(--font-sans);
     font-size: 0.82rem;
     font-weight: 600;
     color: var(--color-text-main);
     cursor: pointer;
     outline: none;
+    touch-action: manipulation;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 

@@ -105,7 +105,7 @@ test.describe('Volumen II - La Geometría de la Cultura (Mapa de Constelaciones)
 
     // 7. Verify Tooltip on Node Hover
     const firstNode = nodes.first();
-    await firstNode.hover();
+    await firstNode.hover({ force: true });
     await page.waitForTimeout(400);
     const tooltip = page.locator('.tooltip');
     await expect(tooltip).toBeVisible();

@@ -160,6 +160,21 @@ function getTargetLinkDistance(similarity, w, h) {
 }
 
 /**
+ * Debounce helper for resize and scroll performance
+ */
+function debounce(func, wait = 250) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+/**
  * Setup Tooltip element
  */
 function setupTooltip() {
@@ -172,22 +187,70 @@ function setupTooltip() {
         .style("z-index", "1000")
         .style("pointer-events", "none")
         .style("opacity", 0);
+
+    // Dismiss tooltip on tap outside for mobile devices
+    document.addEventListener("touchstart", (e) => {
+        if (!e.target.closest(".constellation-node, .constellation-link, .arc-vector, .arc-node, .arc-proj-marker, .style-dot, .insight-card, .filter-btn, .action-btn")) {
+            if (tooltip) {
+                tooltip.transition().duration(120).style("opacity", 0);
+            }
+        }
+    }, { passive: true });
 }
 
 function positionTooltip(event) {
+    if (!tooltip) return;
     const tipNode = tooltip.node();
-    const tipW = tipNode ? tipNode.offsetWidth : 200;
-    const pageX = event.pageX || (event.touches && event.touches[0] ? event.touches[0].pageX : 0);
-    const pageY = event.pageY || (event.touches && event.touches[0] ? event.touches[0].pageY : 0);
+    const tipW = tipNode ? tipNode.offsetWidth : 220;
+    const tipH = tipNode ? tipNode.offsetHeight : 80;
 
-    let x = pageX + 16;
-    let y = pageY - 24;
+    let pageX = 0;
+    let pageY = 0;
+    let isTouch = false;
 
-    if (x + tipW > window.innerWidth - 15) {
-        x = Math.max(10, pageX - tipW - 16);
+    if (event.touches && event.touches.length > 0) {
+        pageX = event.touches[0].pageX;
+        pageY = event.touches[0].pageY;
+        isTouch = true;
+    } else if (event.changedTouches && event.changedTouches.length > 0) {
+        pageX = event.changedTouches[0].pageX;
+        pageY = event.changedTouches[0].pageY;
+        isTouch = true;
+    } else if (event.pageX !== undefined && event.pageY !== undefined) {
+        pageX = event.pageX;
+        pageY = event.pageY;
+    } else if (event.clientX !== undefined && event.clientY !== undefined) {
+        pageX = event.clientX + window.scrollX;
+        pageY = event.clientY + window.scrollY;
     }
-    if (y < window.scrollY + 10) {
-        y = pageY + 20;
+
+    const winW = window.innerWidth;
+    const isMobile = winW < 768 || isTouch;
+
+    let x, y;
+
+    if (isMobile) {
+        // Center horizontally around touch, strictly clamped in viewport
+        x = pageX - tipW / 2;
+        if (x < 12) x = 12;
+        if (x + tipW > winW - 12) x = Math.max(12, winW - tipW - 12);
+
+        // Position slightly above finger touch so the hand does not cover the tooltip
+        y = pageY - tipH - 22;
+        // If overflowing top, flip below finger
+        if (y < window.scrollY + 10) {
+            y = pageY + 28;
+        }
+    } else {
+        x = pageX + 16;
+        y = pageY - 24;
+
+        if (x + tipW > winW - 15) {
+            x = Math.max(10, pageX - tipW - 16);
+        }
+        if (y < window.scrollY + 10) {
+            y = pageY + 20;
+        }
     }
 
     tooltip.style("left", `${x}px`).style("top", `${y}px`);
@@ -334,7 +397,11 @@ function renderGraphElements() {
         .attr("stroke-opacity", d => strokeOpacityScale(d.value))
         .on("mouseover", handleLinkMouseOver)
         .on("mousemove", positionTooltip)
-        .on("mouseleave", handleMouseLeave);
+        .on("mouseleave", handleMouseLeave)
+        .on("touchstart", function(event, d) {
+            event.stopPropagation();
+            handleLinkMouseOver.call(this, event, d);
+        });
 
     // Midpoint link labels (badge with similarity)
     const labelSel = gLinks.selectAll(".constellation-link-label-group")
@@ -369,7 +436,11 @@ function renderGraphElements() {
                     .on("end", dragEnded))
                 .on("mouseover", handleNodeMouseOver)
                 .on("mousemove", positionTooltip)
-                .on("mouseleave", handleMouseLeave);
+                .on("mouseleave", handleMouseLeave)
+                .on("touchstart", function(event, d) {
+                    event.stopPropagation();
+                    handleNodeMouseOver.call(this, event, d);
+                });
 
             // Node Circle
             g.append("circle")
@@ -701,7 +772,7 @@ function setupD3ProjectionCanvas() {
  * Animates vectors with d3.transition().duration(800).ease(d3.easeCubicOut)
  * Handles Enter, Update, Exit for all 4 countries
  */
-function renderArc(dimension, word) {
+function renderArc(dimension, word, isResize = false) {
     if (!rawProjectionData || !rawProjectionData[dimension] || !rawProjectionData[dimension][word]) {
         console.warn(`[Projection Arc] Datos no encontrados para: ${dimension} -> ${word}`);
         return;
@@ -776,10 +847,10 @@ function renderArc(dimension, word) {
         .attr("cy", cy)
         .attr("r", 5.5);
 
-    // Pole labels & neutral label
+    // Pole labels & neutral label (clamped to prevent overflow on mobile)
     gProjectionBase.append("text")
         .attr("class", "arc-pole-label")
-        .attr("x", cx - R)
+        .attr("x", Math.max(12, cx - R))
         .attr("y", cy + 24)
         .attr("text-anchor", "start")
         .text(`← ${poleNeg} (-0.50)`);
@@ -793,7 +864,7 @@ function renderArc(dimension, word) {
 
     gProjectionBase.append("text")
         .attr("class", "arc-pole-label")
-        .attr("x", cx + R)
+        .attr("x", Math.min(widthProjection - 12, cx + R))
         .attr("y", cy + 24)
         .attr("text-anchor", "end")
         .text(`${polePos} (+0.50) →`);
@@ -830,7 +901,7 @@ function renderArc(dimension, word) {
         };
     });
 
-    const t = d3.transition().duration(800).ease(d3.easeCubicOut);
+    const t = isResize ? d3.transition().duration(0) : d3.transition().duration(800).ease(d3.easeCubicOut);
 
     // 3. Dotted Perpendicular Projection Lines
     gProjectionLines.selectAll(".arc-proj-line")
@@ -865,7 +936,11 @@ function renderArc(dimension, word) {
                 .attr("stroke", d => d.color)
                 .on("mouseover", handleArcItemMouseOver)
                 .on("mousemove", positionTooltip)
-                .on("mouseleave", handleArcItemMouseLeave),
+                .on("mouseleave", handleArcItemMouseLeave)
+                .on("touchstart", function(event, d) {
+                    event.stopPropagation();
+                    handleArcItemMouseOver.call(this, event, d);
+                }),
             update => update.call(u => u.transition(t)
                 .attr("x1", cx)
                 .attr("y1", cy)
@@ -887,7 +962,11 @@ function renderArc(dimension, word) {
                 .attr("fill", d => d.color)
                 .on("mouseover", handleArcItemMouseOver)
                 .on("mousemove", positionTooltip)
-                .on("mouseleave", handleArcItemMouseLeave),
+                .on("mouseleave", handleArcItemMouseLeave)
+                .on("touchstart", function(event, d) {
+                    event.stopPropagation();
+                    handleArcItemMouseOver.call(this, event, d);
+                }),
             update => update.call(u => u.transition(t)
                 .attr("cx", d => d.xBase)
                 .attr("cy", d => d.yBase)
@@ -907,7 +986,11 @@ function renderArc(dimension, word) {
                 .attr("fill", d => d.color)
                 .on("mouseover", handleArcItemMouseOver)
                 .on("mousemove", positionTooltip)
-                .on("mouseleave", handleArcItemMouseLeave),
+                .on("mouseleave", handleArcItemMouseLeave)
+                .on("touchstart", function(event, d) {
+                    event.stopPropagation();
+                    handleArcItemMouseOver.call(this, event, d);
+                }),
             update => update.call(u => u.transition(t)
                 .attr("cx", d => d.xArc)
                 .attr("cy", d => d.yArc)
@@ -1287,7 +1370,7 @@ function setupD3ScatterCanvas() {
 /**
  * Main render function for the 2D Quadrant Scatterplot
  */
-function renderScatter(pairKey, wordsArray) {
+function renderScatter(pairKey, wordsArray, isResize = false) {
     if (!rawScatterData || !svgScatter) return;
 
     if (!rawScatterData[pairKey]) {
@@ -1296,7 +1379,18 @@ function renderScatter(pairKey, wordsArray) {
     currentScatterPair = pairKey;
     currentScatterWords = [...wordsArray];
 
-    const pad = 52;
+    const canvas = document.getElementById("d3-canvas-scatter");
+    if (canvas) {
+        widthScatter = canvas.clientWidth || 800;
+        heightScatter = canvas.clientHeight || 560;
+        svgScatter
+            .attr("width", widthScatter)
+            .attr("height", heightScatter)
+            .attr("viewBox", `0 0 ${widthScatter} ${heightScatter}`);
+    }
+
+    const pad = Math.max(30, Math.min(52, widthScatter * 0.08));
+    const animDuration = isResize ? 0 : 1000;
     const xScale = d3.scaleLinear().domain([-0.45, 0.45]).range([pad, widthScatter - pad]);
     const yScale = d3.scaleLinear().domain([-0.45, 0.45]).range([heightScatter - pad, pad]);
 
@@ -1343,8 +1437,8 @@ function renderScatter(pairKey, wordsArray) {
     const labelsData = [
         { id: "x-neg", x: pad + 4, y: cy0 - 8, anchor: "start", text: `← ${negX}` },
         { id: "x-pos", x: widthScatter - pad - 4, y: cy0 - 8, anchor: "end", text: `${posX} →` },
-        { id: "y-neg", x: cx0 + 8, y: heightScatter - pad - 8, anchor: "start", text: `↓ ${negY}` },
-        { id: "y-pos", x: cx0 + 8, y: pad + 16, anchor: "start", text: `↑ ${posY}` }
+        { id: "y-neg", x: Math.min(cx0 + 8, widthScatter - pad - 50), y: heightScatter - pad - 8, anchor: "start", text: `↓ ${negY}` },
+        { id: "y-pos", x: Math.min(cx0 + 8, widthScatter - pad - 50), y: pad + 16, anchor: "start", text: `↑ ${posY}` }
     ];
 
     gQuadrantAxes.selectAll(".quadrant-label")
@@ -1418,19 +1512,19 @@ function renderScatter(pairKey, wordsArray) {
                 .attr("x2", cx0)
                 .attr("y2", cy0)
                 .attr("opacity", 0)
-                .call(enter => enter.transition().duration(1000).ease(d3.easeCubicOut)
+                .call(enter => enter.transition().duration(animDuration).ease(d3.easeCubicOut)
                     .attr("x1", d => xScale(d.avgX))
                     .attr("y1", d => yScale(d.avgY))
                     .attr("x2", d => xScale(d.x))
                     .attr("y2", d => yScale(d.y))
                     .attr("opacity", 0.15)),
-            update => update.call(update => update.transition().duration(1000).ease(d3.easeCubicOut)
+            update => update.call(update => update.transition().duration(animDuration).ease(d3.easeCubicOut)
                 .attr("x1", d => xScale(d.avgX))
                 .attr("y1", d => yScale(d.avgY))
                 .attr("x2", d => xScale(d.x))
                 .attr("y2", d => yScale(d.y))
                 .attr("opacity", 0.15)),
-            exit => exit.call(exit => exit.transition().duration(1000).ease(d3.easeCubicOut)
+            exit => exit.call(exit => exit.transition().duration(animDuration).ease(d3.easeCubicOut)
                 .attr("x1", cx0)
                 .attr("y1", cy0)
                 .attr("x2", cx0)
@@ -1453,19 +1547,23 @@ function renderScatter(pairKey, wordsArray) {
                 .on("mouseover", handleScatterDotMouseOver)
                 .on("mousemove", positionTooltip)
                 .on("mouseleave", handleScatterDotMouseLeave)
-                .call(enter => enter.transition().duration(1000).ease(d3.easeCubicOut)
+                .on("touchstart", function(event, d) {
+                    event.stopPropagation();
+                    handleScatterDotMouseOver.call(this, event, d);
+                })
+                .call(enter => enter.transition().duration(animDuration).ease(d3.easeCubicOut)
                     .attr("cx", d => xScale(d.x))
                     .attr("cy", d => yScale(d.y))
                     .attr("r", 6)
                     .attr("opacity", 0.95)),
             update => update
                 .attr("fill", d => d.color)
-                .call(update => update.transition().duration(1000).ease(d3.easeCubicOut)
+                .call(update => update.transition().duration(animDuration).ease(d3.easeCubicOut)
                     .attr("cx", d => xScale(d.x))
                     .attr("cy", d => yScale(d.y))
                     .attr("r", 6)
                     .attr("opacity", 0.95)),
-            exit => exit.call(exit => exit.transition().duration(1000).ease(d3.easeCubicOut)
+            exit => exit.call(exit => exit.transition().duration(animDuration).ease(d3.easeCubicOut)
                 .attr("cx", cx0)
                 .attr("cy", cy0)
                 .attr("r", 0)
@@ -1489,19 +1587,19 @@ function renderScatter(pairKey, wordsArray) {
                     .attr("class", "centroid-text")
                     .attr("dy", -9)
                     .text(d => d.word);
-                g.transition().duration(1000).ease(d3.easeCubicOut)
+                g.transition().duration(animDuration).ease(d3.easeCubicOut)
                     .attr("transform", d => `translate(${xScale(d.avgX)}, ${yScale(d.avgY)})`)
                     .attr("opacity", 1);
                 return g;
             },
             update => {
                 update.select(".centroid-text").text(d => d.word);
-                update.call(update => update.transition().duration(1000).ease(d3.easeCubicOut)
+                update.call(update => update.transition().duration(animDuration).ease(d3.easeCubicOut)
                     .attr("transform", d => `translate(${xScale(d.avgX)}, ${yScale(d.avgY)})`)
                     .attr("opacity", 1));
                 return update;
             },
-            exit => exit.call(exit => exit.transition().duration(1000).ease(d3.easeCubicOut)
+            exit => exit.call(exit => exit.transition().duration(animDuration).ease(d3.easeCubicOut)
                 .attr("transform", `translate(${cx0}, ${cy0})`)
                 .attr("opacity", 0)
                 .remove())
@@ -1717,6 +1815,46 @@ function initScrollamaScatter() {
 }
 
 /**
+ * Handle responsive window resize for all visualizations in Volumen II
+ */
+function handleResize() {
+    // 1. Constellation Graph
+    const canvasConstellation = document.getElementById("d3-canvas-constellation");
+    if (canvasConstellation && svgConstellation) {
+        widthConstellation = canvasConstellation.clientWidth || 800;
+        heightConstellation = canvasConstellation.clientHeight || 560;
+        svgConstellation
+            .attr("width", widthConstellation)
+            .attr("height", heightConstellation)
+            .attr("viewBox", `0 0 ${widthConstellation} ${heightConstellation}`);
+
+        if (simulation) {
+            simulation.force("center", d3.forceCenter(widthConstellation / 2, heightConstellation / 2));
+            simulation.force("x", d3.forceX(widthConstellation / 2).strength(0.09));
+            simulation.force("y", d3.forceY(heightConstellation / 2).strength(0.09));
+            simulation.force("link").distance(d => getTargetLinkDistance(d.value, widthConstellation, heightConstellation));
+            simulation.alpha(0.3).restart();
+            ticked();
+        }
+    }
+
+    // 2. Projection Arc (instant snap, duration 0)
+    if (svgProjection && rawProjectionData) {
+        renderArc(currentProjectionDim, currentProjectionWord, true);
+    }
+
+    // 3. 2D Scatterplot (instant snap, duration 0)
+    if (svgScatter && rawScatterData) {
+        renderScatter(currentScatterPair, currentScatterWords, true);
+    }
+
+    // 4. Update Scrollama instances
+    if (scrollerConstellation && scrollerConstellation.resize) scrollerConstellation.resize();
+    if (scrollerProjection && scrollerProjection.resize) scrollerProjection.resize();
+    if (scrollerScatter && scrollerScatter.resize) scrollerScatter.resize();
+}
+
+/**
  * Main bootstrapper for Volumen II
  */
 function initVolumen2() {
@@ -1752,7 +1890,17 @@ function initVolumen2() {
         // Initial render for Section 3
         renderScatter("moral - order_and_legality", ["manifestante", "evasión", "carabineros"]);
 
-        window.addEventListener("resize", handleResize);
+        const debouncedResize = debounce(handleResize, 250);
+        window.addEventListener("resize", debouncedResize);
+
+        if (window.ResizeObserver) {
+            const ro = new ResizeObserver(debouncedResize);
+            ["d3-canvas-constellation", "d3-canvas-projection", "d3-canvas-scatter"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) ro.observe(el);
+            });
+        }
+
         console.log("[Volumen II] Constellations, Projection Arc & 2D Scatterplot initialized successfully.");
     })
     .catch(err => {

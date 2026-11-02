@@ -471,6 +471,21 @@ function ticked() {
         .attr("cy", d => d.y);
 }
 
+/**
+ * Debounce helper for resize handling
+ */
+function debounce(func, wait = 250) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 function setupTooltip() {
     tooltip = d3.select("body")
         .selectAll(".tooltip")
@@ -481,23 +496,67 @@ function setupTooltip() {
         .style("z-index", "1000")
         .style("pointer-events", "none")
         .style("opacity", 0);
+
+    // Dismiss tooltip on tap outside for mobile devices
+    document.addEventListener("touchstart", (e) => {
+        if (!e.target.closest(".bubble, .style-dot, .pos-rect, .bee-circle, .sankey-link, .sankey-node, .temporal-scrubber-dot, .insight-card, .filter-btn, .action-btn")) {
+            if (tooltip) {
+                tooltip.transition().duration(120).style("opacity", 0);
+            }
+        }
+    }, { passive: true });
 }
 
 function positionTooltip(event) {
+    if (!tooltip) return;
     const tooltipNode = tooltip.node();
     const tipWidth = tooltipNode ? tooltipNode.offsetWidth : 220;
     const tipHeight = tooltipNode ? tooltipNode.offsetHeight : 70;
     
-    let x = (event.pageX || (event.touches && event.touches[0] ? event.touches[0].pageX : 0)) + 15;
-    let y = (event.pageY || (event.touches && event.touches[0] ? event.touches[0].pageY : 0)) - 28;
-    
-    // Prevent overflowing right edge
-    if (x + tipWidth > window.innerWidth - 10) {
-        x = Math.max(10, (event.pageX || (event.touches && event.touches[0] ? event.touches[0].pageX : 0)) - tipWidth - 15);
+    let pageX = 0;
+    let pageY = 0;
+    let isTouch = false;
+
+    if (event.touches && event.touches.length > 0) {
+        pageX = event.touches[0].pageX;
+        pageY = event.touches[0].pageY;
+        isTouch = true;
+    } else if (event.changedTouches && event.changedTouches.length > 0) {
+        pageX = event.changedTouches[0].pageX;
+        pageY = event.changedTouches[0].pageY;
+        isTouch = true;
+    } else if (event.pageX !== undefined && event.pageY !== undefined) {
+        pageX = event.pageX;
+        pageY = event.pageY;
+    } else if (event.clientX !== undefined && event.clientY !== undefined) {
+        pageX = event.clientX + window.scrollX;
+        pageY = event.clientY + window.scrollY;
     }
-    // Prevent overflowing top
-    if (y < window.scrollY + 10) {
-        y = (event.pageY || (event.touches && event.touches[0] ? event.touches[0].pageY : 0)) + 20;
+
+    const winW = window.innerWidth;
+    const isMobile = winW < 768 || isTouch;
+
+    let x, y;
+
+    if (isMobile) {
+        x = pageX - tipWidth / 2;
+        if (x < 12) x = 12;
+        if (x + tipWidth > winW - 12) x = Math.max(12, winW - tipWidth - 12);
+
+        y = pageY - tipHeight - 22;
+        if (y < window.scrollY + 10) {
+            y = pageY + 28;
+        }
+    } else {
+        x = pageX + 15;
+        y = pageY - 28;
+
+        if (x + tipWidth > winW - 15) {
+            x = Math.max(10, pageX - tipWidth - 15);
+        }
+        if (y < window.scrollY + 10) {
+            y = pageY + 20;
+        }
     }
     
     tooltip.style("left", x + "px").style("top", y + "px");
@@ -581,6 +640,11 @@ function updateVisualization(stepIndex) {
         .on("mouseover", handleMouseOver)
         .on("mousemove", handleMouseMove)
         .on("mouseleave", handleMouseLeave)
+        .on("touchstart", function(event, d) {
+            event.stopPropagation();
+            handleMouseOver.call(this, event, d);
+        })
+        .on("pointerdown", handleMouseOver)
         .transition()
         .duration(600)
         .attr("r", d => d.radius)
@@ -1708,7 +1772,8 @@ function handleResize() {
         if (simulation) {
             simulation.force("x", d3.forceX(d => countryCenters[d.country].x).strength(0.18));
             simulation.force("y", d3.forceY(d => countryCenters[d.country].y).strength(0.18));
-            simulation.alpha(0.5).restart();
+            simulation.alpha(0.3).restart();
+            ticked();
         }
     }
 
@@ -1881,8 +1946,26 @@ function init() {
         bindTemporalEvents();
         initScrollamaTemporal();
 
-        // Window resize event handler
-        window.addEventListener("resize", handleResize);
+        // Window resize event handler with debounce (250ms) and ResizeObserver
+        const debouncedResize = debounce(handleResize, 250);
+        window.addEventListener("resize", debouncedResize);
+
+        if (window.ResizeObserver) {
+            const ro = new ResizeObserver(debouncedResize);
+            [
+                "d3-canvas",
+                "d3-canvas-style",
+                "d3-canvas-pos",
+                "d3-canvas-emotions",
+                "d3-canvas-map",
+                "d3-canvas-beeswarm",
+                "d3-canvas-sankey",
+                "d3-canvas-temporal"
+            ].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) ro.observe(el);
+            });
+        }
 
         console.log("[Init] Scrollytelling visualizers fully initialized.");
     }).catch(error => {
@@ -3598,7 +3681,12 @@ function renderTemporalPlot() {
         .attr("width", tWidth)
         .attr("height", tHeight)
         .on("mousemove", handleTimelineMouseMove)
-        .on("mouseleave", handleTimelineMouseLeave);
+        .on("mouseleave", handleTimelineMouseLeave)
+        .on("touchstart touchmove", function(event) {
+            event.preventDefault();
+            handleTimelineMouseMove.call(this, event);
+        })
+        .on("touchend", handleTimelineMouseLeave);
 
     // Update active date badge
     const badge = document.getElementById("temporal-active-date-badge");
